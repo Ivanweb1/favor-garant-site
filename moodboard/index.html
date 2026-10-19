@@ -2,163 +2,95 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;900&display=swap">
 <style>
-  /* Layout: Figma-like canvas — grey board, one band per style direction, shots in a grid, caption with font + palette dots under each band */
+  /* Layout: Figma-like board — grey section, one row of frames per style, caption with font + brand palette under each row */
   :root {
-    --canvas: #f4f4f5;
-    --board: #d9d9db;
+    --canvas: #f5f5f6;
+    --board: #d4d4d6;
     --frame: #ffffff;
-    --ink: #1d1c22;
-    --muted: #5f5e68;
-    --line: rgba(29, 28, 34, .12);
-    --chip: #e9e9eb;
-    --brand-navy: #2A2560;
-    --brand-red: #CB0404;
-    --brand-warm: #DEDBD2;
-    --brand-light: #EEF0F2;
-    --font-display: "Montserrat", "Segoe UI", Arial, sans-serif;
-    --font-body: "Montserrat", "Segoe UI", Arial, sans-serif;
-    --font-mono: "JetBrains Mono", Consolas, "Courier New", monospace;
+    --ink: #1c1b21;
+    --muted: #55545e;
+    --line: rgba(28, 27, 33, .14);
+    --chip: #e4e4e6;
+    --font: "Montserrat", "Segoe UI", Arial, sans-serif;
+    --row-h: clamp(130px, 13vw, 200px);
   }
   @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      --canvas: #1b1b1e; --board: #2a2a2f; --frame: #34343a; --ink: #ededf0; --muted: #a3a2ad;
-      --line: rgba(237, 237, 240, .14); --chip: #34343a; color-scheme: dark;
-    }
+    :root:not([data-theme="light"]) { --canvas: #1a1a1d; --board: #2b2b30; --frame: #3a3a40; --ink: #ececef; --muted: #a6a5af; --line: rgba(236,236,239,.16); --chip: #34343a; color-scheme: dark; }
   }
-  :root[data-theme="dark"] {
-    --canvas: #1b1b1e; --board: #2a2a2f; --frame: #34343a; --ink: #ededf0; --muted: #a3a2ad;
-    --line: rgba(237, 237, 240, .14); --chip: #34343a; color-scheme: dark;
-  }
+  :root[data-theme="dark"] { --canvas: #1a1a1d; --board: #2b2b30; --frame: #3a3a40; --ink: #ececef; --muted: #a6a5af; --line: rgba(236,236,239,.16); --chip: #34343a; color-scheme: dark; }
 
-  body { background: var(--canvas); color: var(--ink); font-family: var(--font-body); font-size: 15px; line-height: 1.5; }
-  .wrap { max-width: 1600px; margin: 0 auto; padding-block: 32px 64px;
-    padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+  body { background: var(--canvas); color: var(--ink); font-family: var(--font); font-size: 14px; line-height: 1.45; }
+  .wrap { padding-block: 24px 56px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
 
-  header { display: grid; gap: 10px; margin-bottom: 28px; }
-  .eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
-  h1 { font-family: var(--font-display); font-weight: 900; font-size: clamp(26px, 3.2vw, 40px); line-height: 1.1; margin: 0; text-wrap: balance; }
-  .lead { max-width: 68ch; color: var(--muted); margin: 0; }
+  .chip { display: inline-block; font-weight: 700; font-size: 14px; padding: 6px 10px; border-radius: 6px; background: var(--chip); border: 1px solid var(--line); margin-bottom: 10px; }
+  .board { background: var(--board); padding: clamp(14px, 1.6vw, 24px); display: grid; gap: clamp(28px, 3vw, 44px); }
 
-  .chip { display: inline-block; justify-self: start; font-weight: 700; font-size: 13px; padding: 5px 10px; border-radius: 6px;
-    background: var(--chip); border: 1px solid var(--line); }
+  .row { display: grid; gap: 12px; }
+  .frames { display: flex; flex-wrap: wrap; gap: clamp(8px, 1vw, 14px); align-items: flex-start; }
+  .frames a { display: block; height: var(--row-h); max-width: 100%; box-shadow: 0 1px 2px rgba(0,0,0,.14); background: var(--frame); }
+  .frames a:focus-visible { outline: 3px solid #CB0404; outline-offset: 2px; }
+  .frames img { display: block; height: 100%; width: auto; max-width: 100%; object-fit: cover; object-position: top; }
 
-  .board { background: var(--board); border-radius: 4px; padding: clamp(14px, 2vw, 28px); display: grid; gap: clamp(28px, 3vw, 44px); }
+  .caption { display: grid; gap: 6px; }
+  .caption h2 { font-size: 13px; font-weight: 500; margin: 0; }
+  .caption .font { font-size: 13px; color: var(--muted); }
+  .dots { display: flex; gap: 6px; }
+  .dot { width: 20px; height: 20px; border-radius: 50%; border: 1px solid var(--line); }
 
-  .style { display: grid; gap: 16px; }
-  .shots { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(10px, 1.4vw, 18px); }
-  .shot { display: grid; gap: 6px; margin: 0; min-width: 0; }
-  .shot a { display: block; background: var(--frame); padding: 6px; box-shadow: 0 1px 2px rgba(0,0,0,.12); }
-  .shot a:focus-visible { outline: 3px solid var(--brand-red); outline-offset: 2px; }
-  .shot img { display: block; width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; }
-  .shot figcaption { font-size: 12px; line-height: 1.4; color: var(--muted); }
-  .shot figcaption b { color: var(--ink); font-weight: 700; }
+  .sample { display: inline-block; justify-self: start; padding: 10px 14px; text-transform: uppercase; font-size: 13px; line-height: 1.2; margin-top: 4px; }
+  .sample .note { display: block; text-transform: none; font-size: 11px; margin-top: 6px; }
+  .s1 { background: #EEF0F2; color: #2A2560; font-weight: 500; letter-spacing: .01em; }
+  .s1 b { font-weight: 700; }
+  .s1 .note { color: #4b4778; font-weight: 400; }
+  .s2 { background: #2A2560; color: #EEF0F2; font-weight: 900; }
+  .s2 b { color: #ffffff; }
+  .s2 em { font-style: normal; color: #ff5a5a; }
+  .s2 .note { color: #c3c0e6; font-weight: 400; }
 
-  .caption { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px 32px; align-items: end; }
-  .caption h2 { font-family: var(--font-display); font-weight: 700; font-size: 16px; margin: 0; }
-  .caption p { margin: 2px 0 0; font-size: 13px; color: var(--muted); max-width: 80ch; }
-  .meta { display: grid; gap: 6px; justify-items: start; }
-  .font-line { font-size: 13px; }
-  .dots { display: flex; gap: 6px; align-items: center; }
-  .dot { width: 22px; height: 22px; border-radius: 50%; border: 1px solid var(--line); }
-
-  .sample { display: inline-block; padding: 10px 14px; font-family: var(--font-display); font-size: 13px; line-height: 1.2; text-transform: uppercase; }
-  .sample b { font-weight: 900; display: block; }
-  .sample span { font-weight: 700; }
-  .sample.light { background: var(--brand-light); color: var(--brand-navy); }
-  .sample.dark { background: var(--brand-navy); color: var(--brand-light); }
-  .sample.dark .mono { font-family: var(--font-mono); text-transform: none; font-size: 11px; font-weight: 400; color: #b9b6dd; display: block; margin-top: 6px; }
-  .sample.light .mono { font-family: var(--font-body); text-transform: none; font-size: 11px; font-weight: 400; display: block; margin-top: 6px; color: #4b4778; }
-
-  footer { margin-top: 28px; display: grid; gap: 8px; max-width: 80ch; }
-  footer h3 { font-size: 15px; margin: 0; }
-  footer p, footer li { font-size: 13px; color: var(--muted); margin: 0; }
-  footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
-
-  @media (max-width: 900px) { .shots { grid-template-columns: repeat(2, minmax(0, 1fr)); } .caption { grid-template-columns: minmax(0, 1fr); } }
-  @media (max-width: 520px) { .shots { grid-template-columns: minmax(0, 1fr); } }
+  @media (max-width: 520px) { :root { --row-h: 120px; } }
 </style>
 
 <div class="wrap">
-  <header>
-    <div class="eyebrow">ФАВОР-ГАРАНТ · редизайн favor-garant.ru</div>
-    <h1>Два направления визуального стиля</h1>
-    <p class="lead">Оба варианта собраны по брифу: современный, технологичный, промышленный и солидный сайт, с опорой на брендбук и преемственностью с текущим сайтом. Цвета и шрифт в обоих фирменные. Варианты различаются подачей: светлой и спокойной или тёмной и инженерной. Клик по экрану открывает его целиком.</p>
-  </header>
-
   <span class="chip">Мудборд</span>
   <div class="board">
 
-    <section class="style" aria-labelledby="s1">
-      <div class="shots">
-        <figure class="shot"><a href="img/escofet_0.jpg" target="_blank" rel="noopener"><img src="img/escofet_0.jpg" alt="Escofet — первый экран с фотографией уличной мебели" loading="lazy"></a>
-          <figcaption><b>Escofet</b> · первый экран: один сильный кадр продукции в городе</figcaption></figure>
-        <figure class="shot"><a href="img/escofet_1.jpg" target="_blank" rel="noopener"><img src="img/escofet_1.jpg" alt="Escofet — направления каталога плитками" loading="lazy"></a>
-          <figcaption><b>Escofet</b> · разделы каталога плитками с фото: вход в нужный раздел в 1 клик</figcaption></figure>
-        <figure class="shot"><a href="img/escofet_2.jpg" target="_blank" rel="noopener"><img src="img/escofet_2.jpg" alt="Escofet — разделы с фото и описанием" loading="lazy"></a>
-          <figcaption><b>Escofet</b> · раздел = фото + заголовок + короткий текст, без перегруза</figcaption></figure>
-        <figure class="shot"><a href="img/vestre_1.jpg" target="_blank" rel="noopener"><img src="img/vestre_1.jpg" alt="Vestre — сетка товаров и баннер серии" loading="lazy"></a>
-          <figcaption><b>Vestre</b> · карточки товаров на светлом фоне + баннер новинки</figcaption></figure>
-        <figure class="shot"><a href="img/vestre_4.jpg" target="_blank" rel="noopener"><img src="img/vestre_4.jpg" alt="Vestre — реализованные объекты" loading="lazy"></a>
-          <figcaption><b>Vestre</b> · реализованные объекты: фото, город, название — подача для «Наших работ»</figcaption></figure>
-        <figure class="shot"><a href="img/landscapeforms_0.jpg" target="_blank" rel="noopener"><img src="img/landscapeforms_0.jpg" alt="Landscape Forms — объект в городе вечером" loading="lazy"></a>
-          <figcaption><b>Landscape Forms</b> · атмосферный кадр объекта: для павильонов с подсветкой и SMART</figcaption></figure>
+    <section class="row" aria-labelledby="r1">
+      <div class="frames">
+        <a href="img-v2/a1.jpg" target="_blank" rel="noopener"><img src="img-v2/a1.jpg" alt="Строгий B2B: первый экран с крупным фото и навигацией"></a>
+        <a href="img-v2/a2.jpg" target="_blank" rel="noopener"><img src="img-v2/a2.jpg" alt="Строгий B2B: набор экранов в одной сетке"></a>
+        <a href="img-v2/a3.jpg" target="_blank" rel="noopener"><img src="img-v2/a3.jpg" alt="Строгий B2B: блок цифр компании"></a>
+        <a href="img-v2/a4.jpg" target="_blank" rel="noopener"><img src="img-v2/a4.jpg" alt="Строгий B2B: фото и текстовый блок"></a>
+        <a href="img-v2/a5.jpg" target="_blank" rel="noopener"><img src="img-v2/a5.jpg" alt="Строгий B2B: список статей"></a>
+        <a href="img-v2/a6.jpg" target="_blank" rel="noopener"><img src="img-v2/a6.jpg" alt="Строгий B2B: заголовок и фото производства"></a>
+        <a href="img-v2/a7.jpg" target="_blank" rel="noopener"><img src="img-v2/a7.jpg" alt="Строгий B2B: преимущества карточками"></a>
+        <a href="img-v2/a8.jpg" target="_blank" rel="noopener"><img src="img-v2/a8.jpg" alt="Строгий B2B: услуги с фото"></a>
       </div>
       <div class="caption">
-        <div>
-          <h2 id="s1">1. Строгий городской: спокойный B2B, светлый, много воздуха</h2>
-          <p>Светлый фон, крупные фото конструкций в городской среде, каталог плитками. Фирменный синий для текста и плашек, красный точечно на кнопках. Отвечает критерию из брифа «нет ощущения перегруженности».</p>
-        </div>
-        <div class="meta">
-          <span class="sample light"><b>Остановочный павильон</b><span>«Стандарт»</span><span class="mono">Каркас из алюминиевых профилей</span></span>
-          <span class="font-line">Шрифт — Montserrat (по брендбуку)</span>
-          <div class="dots" aria-label="Палитра: светлый, белый, тёплый серый, синий, красный">
-            <span class="dot" style="background:#EEF0F2"></span><span class="dot" style="background:#FFFFFF"></span><span class="dot" style="background:#DEDBD2"></span><span class="dot" style="background:#2A2560"></span><span class="dot" style="background:#CB0404"></span>
-          </div>
-        </div>
+        <h2 id="r1">1. Более строгий — спокойный минималистичный B2B, больше воздуха</h2>
+        <span class="font">Шрифт — Montserrat Regular / Bold</span>
+        <div class="dots" aria-label="Палитра брендбука"><span class="dot" style="background:#FFFFFF"></span><span class="dot" style="background:#EEF0F2"></span><span class="dot" style="background:#DEDBD2"></span><span class="dot" style="background:#2A2560"></span><span class="dot" style="background:#CB0404"></span></div>
+        <span class="sample s1">Остановочный павильон <b>«Стандарт»</b><span class="note">Каркас из алюминиевых профилей</span></span>
       </div>
     </section>
 
-    <section class="style" aria-labelledby="s2">
-      <div class="shots">
-        <figure class="shot"><a href="img/hadrian_2.jpg" target="_blank" rel="noopener"><img src="img/hadrian_2.jpg" alt="Hadrian — синий фон, фото цеха, три колонки услуг" loading="lazy"></a>
-          <figcaption><b>Hadrian</b> · синий фон + фото цеха, услуги в три колонки</figcaption></figure>
-        <figure class="shot"><a href="img/hadrian_3.jpg" target="_blank" rel="noopener"><img src="img/hadrian_3.jpg" alt="Hadrian — чертёжная графика и тонкие рамки" loading="lazy"></a>
-          <figcaption><b>Hadrian</b> · чертёжная графика и тонкие линии, акцент вместо жёлтого — фирменный красный</figcaption></figure>
-        <figure class="shot"><a href="img/machina_1.jpg" target="_blank" rel="noopener"><img src="img/machina_1.jpg" alt="Machina Labs — карточки отраслей" loading="lazy"></a>
-          <figcaption><b>Machina Labs</b> · карточки направлений с моно-подписями</figcaption></figure>
-        <figure class="shot"><a href="img/machina_3.jpg" target="_blank" rel="noopener"><img src="img/machina_3.jpg" alt="Machina Labs — форма заявки на фоне производства" loading="lazy"></a>
-          <figcaption><b>Machina Labs</b> · заявка на фоне производства: форма и контакты в одном экране</figcaption></figure>
-        <figure class="shot"><a href="img/vulcan_3.jpg" target="_blank" rel="noopener"><img src="img/vulcan_3.jpg" alt="VulcanForms — макро-кадр металла" loading="lazy"></a>
-          <figcaption><b>VulcanForms</b> · макро-кадр металла и короткий заголовок: для нестандартных конструкций</figcaption></figure>
-        <figure class="shot"><a href="img/anduril_0.jpg" target="_blank" rel="noopener"><img src="img/anduril_0.jpg" alt="Anduril — каталог продукции на тёмном фоне" loading="lazy"></a>
-          <figcaption><b>Anduril</b> · каталог на тёмном фоне: плитки разного размера, фото и название</figcaption></figure>
+    <section class="row" aria-labelledby="r2">
+      <div class="frames">
+        <a href="img-v2/b1.jpg" target="_blank" rel="noopener"><img src="img-v2/b1.jpg" alt="Выразительный: главная с крупными заголовками капсом"></a>
+        <a href="img-v2/b2.jpg" target="_blank" rel="noopener"><img src="img-v2/b2.jpg" alt="Выразительный: баннер на синем фоне"></a>
+        <a href="img-v2/b3.jpg" target="_blank" rel="noopener"><img src="img-v2/b3.jpg" alt="Выразительный: услуги карточками"></a>
+        <a href="img-v2/b4.jpg" target="_blank" rel="noopener"><img src="img-v2/b4.jpg" alt="Выразительный: цифры и фото в карточках"></a>
+        <a href="img-v2/b5.jpg" target="_blank" rel="noopener"><img src="img-v2/b5.jpg" alt="Выразительный: тёмный блок с карточками"></a>
+        <a href="img-v2/b6.jpg" target="_blank" rel="noopener"><img src="img-v2/b6.jpg" alt="Выразительный: первый экран с фото-коллажем"></a>
       </div>
       <div class="caption">
-        <div>
-          <h2 id="s2">2. Инженерный: технологичный, выразительный, тёмный</h2>
-          <p>Фирменный тёмно-синий как основной фон, тонкие технические линии и чертёжная графика, подписи характеристик моноширинным шрифтом, фото производства и станков. Работает на акценты брифа: собственное производство, свои мощности, нестандартные конструкции.</p>
-        </div>
-        <div class="meta">
-          <span class="sample dark"><b>Остановочный павильон</b><span>«Стандарт»</span><span class="mono">Стекло: триплекс / калёное 6 или 8 мм</span></span>
-          <span class="font-line">Шрифт — Montserrat Black + моноширинный для характеристик</span>
-          <div class="dots" aria-label="Палитра: синий, тёмно-синий, светлый, красный">
-            <span class="dot" style="background:#2A2560"></span><span class="dot" style="background:#17143A"></span><span class="dot" style="background:#EEF0F2"></span><span class="dot" style="background:#CB0404"></span>
-          </div>
-        </div>
+        <h2 id="r2">2. Более современный — выразительное позиционирование блоков, карточек</h2>
+        <span class="font">Шрифт — Montserrat Black капсом</span>
+        <div class="dots" aria-label="Палитра брендбука"><span class="dot" style="background:#FFFFFF"></span><span class="dot" style="background:#EEF0F2"></span><span class="dot" style="background:#DEDBD2"></span><span class="dot" style="background:#2A2560"></span><span class="dot" style="background:#CB0404"></span></div>
+        <span class="sample s2">Остановочный павильон <b>«Стандарт»</b><span class="note">Каркас из алюминиевых профилей</span></span>
       </div>
     </section>
 
   </div>
-
-  <footer>
-    <h3>Что общее в обоих вариантах</h3>
-    <ul>
-      <li>Логотип, фирменные цвета и Montserrat из брендбука. Меняется подача, а не айдентика.</li>
-      <li>Каталог в 2–3 клика: меню → раздел → карточка товара (п. 03 брифа).</li>
-      <li>Направления можно сочетать: например, светлый каталог из первого варианта и тёмный блок «Производство» из второго.</li>
-    </ul>
-    <p>Скриншоты — референсы подачи с сайтов из разных отраслей. Тексты, цвета и фото будут свои.</p>
-  </footer>
 </div>
