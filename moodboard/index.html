@@ -32,13 +32,15 @@
 
   .row { display: grid; gap: 12px; }
   .frames { display: flex; flex-wrap: wrap; gap: clamp(8px, 1vw, 14px); align-items: flex-start; }
-  .frames a { display: block; height: var(--row-h); max-width: 100%; box-shadow: 0 1px 2px rgba(0,0,0,.14); background: var(--frame); }
-  .frames a:focus-visible { outline: 3px solid #CB0404; outline-offset: 2px; }
+  .frames > a { display: block; height: var(--row-h); max-width: 100%; box-shadow: 0 1px 2px rgba(0,0,0,.14); background: var(--frame); }
+  .frames > a:focus-visible { outline: 3px solid #CB0404; outline-offset: 2px; }
   .frames img { display: block; height: 100%; width: auto; max-width: 100%; object-fit: cover; object-position: top; }
 
   .sticky { height: var(--row-h); width: clamp(130px, 11vw, 170px); box-sizing: border-box; padding: 10px 11px; background: #EEF0F2; color: #3d3a5c; border-left: 3px solid #2A2560;
     font-size: 11.5px; line-height: 1.35; box-shadow: 0 1px 3px rgba(0,0,0,.16); overflow: auto; }
   .sticky b { display: block; font-size: 12px; margin-bottom: 4px; color: #2A2560; }
+  .sticky .src { display: block; margin-top: 6px; color: #CB0404; font-weight: 700; text-decoration: underline; text-underline-offset: 2px; }
+  .sticky .src:focus-visible { outline: 2px solid #CB0404; outline-offset: 2px; }
 
   .caption { display: grid; gap: 6px; }
   .caption h2 { font-size: 13px; font-weight: 500; margin: 0; }
@@ -66,7 +68,7 @@
     <section class="row" aria-labelledby="r1">
       <div class="frames">
         <a href="img-v2/a1.jpg" target="_blank" rel="noopener"><img src="img-v2/a1.jpg" alt="Строгий B2B: первый экран с крупным фото и навигацией"></a>
-        <div class="sticky"><b>Первый экран</b>Одно крупное фото продукции, короткий заголовок и одна кнопка. У нас — павильон в городской среде.</div>
+        <div class="sticky"><b>Первый экран</b>Одно крупное фото продукции, короткий заголовок и одна кнопка. У нас — павильон в городской среде.<a class="src" href="https://dribbble.com/shots/25708252-Logistics-Company-Web-Design-Landing-Page" target="_blank" rel="noopener">AXION — Dribbble ↗</a></div>
         <a href="img-v2/a2.jpg" target="_blank" rel="noopener"><img src="img-v2/a2.jpg" alt="Строгий B2B: набор экранов в одной сетке"></a>
         <a href="img-v2/a3.jpg" target="_blank" rel="noopener"><img src="img-v2/a3.jpg" alt="Строгий B2B: блок цифр компании"></a>
         <div class="sticky"><b>Цифры компании</b>Крупные цифры без украшений, подпись мелко. Подходит под «собственное производство» и опыт (п. 04 брифа).</div>
@@ -74,12 +76,12 @@
         <a href="img-v2/a5.jpg" target="_blank" rel="noopener"><img src="img-v2/a5.jpg" alt="Строгий B2B: список статей"></a>
         <a href="img-v2/a6.jpg" target="_blank" rel="noopener"><img src="img-v2/a6.jpg" alt="Строгий B2B: заголовок и фото производства"></a>
         <a href="img-v2/a7.jpg" target="_blank" rel="noopener"><img src="img-v2/a7.jpg" alt="Строгий B2B: преимущества карточками"></a>
-        <div class="sticky"><b>Преимущества</b>Белые карточки с линейными иконками и много воздуха. Иконки конструкций уже есть в брендбуке (п. 9.2).</div>
+        <div class="sticky"><b>Преимущества</b>Белые карточки с линейными иконками и много воздуха. Иконки конструкций уже есть в брендбуке (п. 9.2).<a class="src" href="https://dribbble.com/shots/26694797-Sendify-Cargo-Logistic-Landing-Page" target="_blank" rel="noopener">Sendify — Dribbble ↗</a></div>
         <a href="img-v2/a8.jpg" target="_blank" rel="noopener"><img src="img-v2/a8.jpg" alt="Строгий B2B: услуги с фото"></a>
         <a href="img-v2/a12.jpg" target="_blank" rel="noopener"><img src="img-v2/a12.jpg" alt="Строгий B2B: строительная компания, первый экран, проекты и команда"></a>
-        <div class="sticky"><b>Наши работы</b>Проекты карточками: фото, название объекта, теги. Так можно подать раздел «Наши работы».</div>
+        <div class="sticky"><b>Наши работы</b>Проекты карточками: фото, название объекта, теги. Так можно подать раздел «Наши работы».<a class="src" href="https://dribbble.com/shots/25279166-Construction-Agency" target="_blank" rel="noopener">CONS — Dribbble ↗</a></div>
         <a href="img-v2/a13.jpg" target="_blank" rel="noopener"><img src="img-v2/a13.jpg" alt="Строгий B2B: первый экран с поиском и блок цифр"></a>
-        <div class="sticky"><b>Этапы и цифры</b>Этапы работы в одну строку — под «полный цикл от идеи до реализации» (п. 04). И блок цифр, где главная выделена тёмной карточкой.</div>
+        <div class="sticky"><b>Этапы и цифры</b>Этапы работы в одну строку — под «полный цикл от идеи до реализации» (п. 04). И блок цифр, где главная выделена тёмной карточкой.<a class="src" href="https://dribbble.com/shots/26886438-HiveLoop-Hiring-Platform-Landing-Page" target="_blank" rel="noopener">HiveLoop — Dribbble ↗</a></div>
       </div>
       <div class="caption">
         <h2 id="r1">1. Более строгий — спокойный минималистичный B2B, больше воздуха</h2>
@@ -92,20 +94,21 @@
     <section class="row" aria-labelledby="r2">
       <div class="frames">
         <a href="img-v2/b1.jpg" target="_blank" rel="noopener"><img src="img-v2/b1.jpg" alt="Выразительный: главная с крупными заголовками капсом"></a>
-        <div class="sticky"><b>Заголовки капсом</b>Крупный жирный капс и плотная сетка блоков. У нас — Montserrat Black, как в брендбуке.</div>
+        <div class="sticky"><b>Заголовки капсом</b>Крупный жирный капс и плотная сетка блоков. У нас — Montserrat Black, как в брендбуке.<a class="src" href="https://dribbble.com/shots/26446849-Movexa-Logistics-and-Cargo-Transportation-Website" target="_blank" rel="noopener">MOVEXA — Dribbble ↗</a></div>
         <a href="img-v2/b2.jpg" target="_blank" rel="noopener"><img src="img-v2/b2.jpg" alt="Выразительный: баннер на синем фоне"></a>
         <a href="img-v2/b3.jpg" target="_blank" rel="noopener"><img src="img-v2/b3.jpg" alt="Выразительный: услуги карточками"></a>
         <a href="img-v2/b4.jpg" target="_blank" rel="noopener"><img src="img-v2/b4.jpg" alt="Выразительный: цифры и фото в карточках"></a>
         <div class="sticky"><b>Карточки разной высоты</b>Фото, цифры и кнопки собраны в одну композицию, а не отдельными строками.</div>
         <a href="img-v2/b5.jpg" target="_blank" rel="noopener"><img src="img-v2/b5.jpg" alt="Выразительный: тёмный блок с карточками"></a>
         <a href="img-v2/b6.jpg" target="_blank" rel="noopener"><img src="img-v2/b6.jpg" alt="Выразительный: первый экран с фото-коллажем"></a>
+        <div class="sticky"><b>Тёмный блок и коллаж</b>Тёмная секция с карточками разного размера и первый экран с фото-коллажем.<a class="src" href="https://dribbble.com/shots/25603740-Logistic-Company-Website" target="_blank" rel="noopener">Swift Logix — Dribbble ↗</a></div>
         <a href="img-v2/b7.jpg" target="_blank" rel="noopener"><img src="img-v2/b7.jpg" alt="Выразительный: крупный гротеск капсом и фото стройки"></a>
         <a href="img-v2/b8.jpg" target="_blank" rel="noopener"><img src="img-v2/b8.jpg" alt="Выразительный: калькулятор стоимости, видео и блок о компании"></a>
-        <div class="sticky"><b>Расчёт стоимости</b>Форма-калькулятор прямо на сайте. Под цель брифа «запросить расчёт» (п. 06): тип конструкции, количество, город.</div>
+        <div class="sticky"><b>Расчёт стоимости</b>Форма-калькулятор прямо на сайте. Под цель брифа «запросить расчёт» (п. 06): тип конструкции, количество, город.<a class="src" href="https://dribbble.com/shots/21656715-UNILUS-Constructor-Landingpage-Animation" target="_blank" rel="noopener">UNILUS — Dribbble ↗</a></div>
         <a href="img-v2/b9.jpg" target="_blank" rel="noopener"><img src="img-v2/b9.jpg" alt="Выразительный светлый: двухцветный заголовок капсом и фото во всю ширину"></a>
         <a href="img-v2/b10.jpg" target="_blank" rel="noopener"><img src="img-v2/b10.jpg" alt="Выразительный светлый: о компании и крупные цифры"></a>
         <a href="img-v2/b11.jpg" target="_blank" rel="noopener"><img src="img-v2/b11.jpg" alt="Выразительный светлый: миссия и галерея объектов"></a>
-        <div class="sticky"><b>Двухцветные заголовки</b>Первая строка тёмная, вторая серая — у нас синяя и серая. Выразительность за счёт шрифта, а фон остаётся светлым. Цифры в том же приёме: «12 лет».</div>
+        <div class="sticky"><b>Двухцветные заголовки</b>Первая строка тёмная, вторая серая — у нас синяя и серая. Выразительность за счёт шрифта, а фон остаётся светлым. Цифры в том же приёме: «12 лет».<a class="src" href="https://dribbble.com/shots/26641290-Iteloogs-Logistic-Corporate-Website" target="_blank" rel="noopener">Iteloogs — Dribbble ↗</a></div>
       </div>
       <div class="caption">
         <h2 id="r2">2. Более современный — выразительное позиционирование блоков, карточек</h2>
