@@ -288,6 +288,7 @@
   const fileName = document.querySelector('.file__name');
   fileInput.addEventListener('change', () => {
     fileName.textContent = fileInput.files.length ? fileInput.files[0].name : 'Файл не выбран';
+    fileInput.closest('.file').classList.toggle('has-file', fileInput.files.length > 0);
   });
 
   // Форма: проверка обязательных полей. Отправки на сервер в прототипе нет.
