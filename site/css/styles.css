@@ -270,9 +270,9 @@ button, input, select, textarea { font: inherit; color: inherit; }
 
 /* Преимущества под галереей — как в референсе Sendify: белые карточки на светлой полосе,
    маленькая иконка в контурном круге сверху, заголовок и текст прижаты к низу */
-.usp-band { border-bottom: 1px solid var(--line); background: var(--white); }
-.usp { display: grid; grid-template-columns: repeat(4, 1fr); }
-.usp__item { display: flex; flex-direction: column; min-height: 230px; padding: 28px 28px 32px; }
+.usp-band { background: var(--white); }
+.usp { display: grid; grid-template-columns: repeat(4, 1fr); padding-top: 20px; }
+.usp__item { display: flex; flex-direction: column; min-height: 210px; padding: 8px 28px 32px; }
 .usp__item + .usp__item { border-left: 1px solid var(--line); }
 .usp__item:first-child { padding-left: 0; }
 .usp__item:last-child { padding-right: 0; }
@@ -632,7 +632,7 @@ select.field__input { appearance: none; padding-right: 40px; background: var(--w
   .gallery__caption { max-width: none; padding: 9px 14px; font-size: 13px; }
   .gallery__controls { display: none; }
   .gallery__progress { bottom: 10px; }
-  .usp { grid-template-columns: 1fr; }
+  .usp { grid-template-columns: 1fr; padding-top: 0; }
   .usp__item, .usp__item:nth-child(n) { min-height: 0; padding: 22px 0; border-left: 0; }
   .usp__item + .usp__item { border-top: 1px solid var(--line); }
   .usp__title { margin-top: 16px; }
