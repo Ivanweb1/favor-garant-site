@@ -346,7 +346,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .showcase__cta-text { margin-bottom: 6px; font-size: 13px; color: var(--muted); }
 .showcase__cta:hover .showcase__cta-title { color: var(--red); }
 .showcase__panel {
-  display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); min-height: 540px;
+  display: grid; grid-template-columns: minmax(0, 1.75fr) minmax(320px, 1fr); min-height: 500px;
   overflow: hidden; border: 1px solid var(--line); border-radius: var(--radius);
   animation: showcase-in .4s ease;
 }
@@ -356,7 +356,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 /* кадры и точки кадрирования те же, что в меню «Продукция» */
 .showcase__media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: var(--pos, 50% 50%); transition: transform .6s ease; }
 .showcase__media:hover img { transform: scale(1.03); }
-.showcase__body { display: grid; gap: 14px; align-content: center; justify-items: start; padding: clamp(24px, 3vw, 44px); }
+.showcase__body { display: grid; gap: 14px; align-content: center; justify-items: start; padding: clamp(24px, 2.6vw, 36px); }
 .showcase__kicker { font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--grey); }
 .showcase__title { font-size: clamp(24px, 2.4vw, 32px); line-height: 1.15; font-weight: 700; color: var(--navy); }
 .showcase__text { max-width: 520px; font-size: 15px; color: var(--muted); }
