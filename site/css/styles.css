@@ -511,11 +511,13 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .work:hover .work__title { color: var(--red); }
 .work__text { max-width: 480px; font-size: 14px; color: var(--muted); }
 
-.works__bar { display: flex; align-items: center; gap: 28px; margin-top: 32px; }
-.works__progress { position: relative; flex: 1; height: 2px; overflow: hidden; border-radius: 2px; background: var(--line); }
-.works__progress span { position: absolute; top: 0; bottom: 0; left: 0; width: 30%; background: var(--navy); transition: left .15s linear, width .15s linear; }
-.works__count { font-size: 14px; font-weight: 500; color: var(--grey); white-space: nowrap; font-variant-numeric: tabular-nums; }
-.works__count b { font-weight: 700; color: var(--navy); }
+/* под лентой — сегмент на каждую работу: видимые на экране закрашены, по клику лента едет к работе */
+.works__dots { display: flex; gap: 8px; margin-top: 28px; }
+.works__dot { flex: 1; height: 20px; padding: 0; border: 0; background: none; cursor: pointer; }
+.works__dot::before { content: ""; display: block; height: 3px; border-radius: 2px; background: var(--line); transition: background-color .3s ease; }
+.works__dot:hover::before { background: rgba(42, 37, 96, .3); }
+.works__dot.is-visible::before { background: var(--navy); }
+.section-head__side { display: flex; flex: none; align-items: center; gap: 24px; }
 .works__nav { display: flex; gap: 10px; }
 .works__btn {
   display: grid; place-items: center; width: 52px; height: 52px; padding: 0;
@@ -724,7 +726,7 @@ select.field__input { appearance: none; padding-right: 40px; background: var(--w
   .work__top { top: 14px; left: 14px; right: 64px; }
   .work__go { top: 14px; }
   .work__go { right: 14px; width: 40px; height: 40px; }
-  .works__bar { gap: 18px; margin-top: 22px; }
+  .works__dots { margin-top: 20px; }
   .works__nav { display: none; }
   .cta-band { grid-template-columns: 1fr; }
   .cta-band__actions { justify-items: start; }

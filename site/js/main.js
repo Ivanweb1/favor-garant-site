@@ -166,27 +166,39 @@
     show(0);
   }
 
-  // Слайдер «Наши работы»: стрелки, счётчик, полоска прогресса, перетаскивание мышью
+  // Слайдер «Наши работы»: стрелки, сегменты под лентой, перетаскивание мышью
   const worksTrack = document.querySelector('.works__track');
   if (worksTrack) {
     const cards = [...worksTrack.querySelectorAll('.work')];
     const prevBtn = document.querySelector('.works__btn--prev');
     const nextBtn = document.querySelector('.works__btn--next');
-    const countNow = document.querySelector('.works__count b');
-    const bar = document.querySelector('.works__progress span');
+    const dotsBox = document.querySelector('.works__dots');
 
     const step = () => cards[1].offsetLeft - cards[0].offsetLeft;
     const maxScroll = () => worksTrack.scrollWidth - worksTrack.clientWidth;
 
+    const dots = cards.map((card, i) => {
+      const dot = document.createElement('button');
+      dot.type = 'button';
+      dot.className = 'works__dot';
+      dot.setAttribute('aria-label', 'Работа ' + (i + 1) + ': ' + card.querySelector('.work__title').textContent);
+      dot.addEventListener('click', () => {
+        worksTrack.scrollTo({ left: Math.min(maxScroll(), card.offsetLeft - cards[0].offsetLeft), behavior: 'smooth' });
+      });
+      dotsBox.appendChild(dot);
+      return dot;
+    });
+
     function update() {
       const max = maxScroll();
       const left = worksTrack.scrollLeft;
-      // у конца ленты последние карточки не встают к краю — считаем, что показана последняя
-      const index = left >= max - 4 ? cards.length - 1 : Math.round(left / step());
-      countNow.textContent = String(index + 1).padStart(2, '0');
-      const visible = worksTrack.clientWidth / worksTrack.scrollWidth;
-      bar.style.width = visible * 100 + '%';
-      bar.style.left = (max ? left / max : 0) * (1 - visible) * 100 + '%';
+      // закрашиваем работы, которые видны на экране хотя бы наполовину
+      const view = worksTrack.getBoundingClientRect();
+      cards.forEach((card, i) => {
+        const r = card.getBoundingClientRect();
+        const shown = Math.min(r.right, view.right) - Math.max(r.left, view.left);
+        dots[i].classList.toggle('is-visible', shown > r.width / 2);
+      });
       prevBtn.disabled = left <= 4;
       nextBtn.disabled = left >= max - 4;
     }
