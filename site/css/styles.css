@@ -645,9 +645,7 @@ select.field__input, .select__btn { appearance: none; padding-right: 40px; backg
 }
 .footer__brand { display: flex; align-items: center; gap: 28px; }
 .footer__brand img { width: 170px; }
-.footer__slogan { position: relative; max-width: 170px; padding-left: 28px; color: var(--white); font-weight: 600; line-height: 1.4; }
-/* разделитель — силуэт полоски из знака логотипа в его пропорциях: прямо 43%, скос 43% со сдвигом ~12% высоты, прямо; высота как у логотипа */
-.footer__slogan::before { content: ""; position: absolute; top: 50%; left: 0; width: 8px; height: 58px; transform: translateY(-50%); background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 58'%3E%3Cpath d='M7.25 0V25L.75 50V58' fill='none' stroke='%23fff' stroke-opacity='.35' stroke-width='1.5'/%3E%3C/svg%3E") center / 8px 58px no-repeat; }
+.footer__slogan { max-width: 160px; padding-left: 28px; border-left: 1px solid rgba(255, 255, 255, .2); color: var(--white); font-weight: 600; line-height: 1.4; }
 .footer__reach { display: flex; flex-wrap: wrap; align-items: center; gap: 24px 48px; }
 .footer__contact { display: grid; gap: 4px; }
 .footer__phone { font-size: 22px; font-weight: 700; color: var(--white); white-space: nowrap; }
@@ -754,8 +752,7 @@ select.field__input, .select__btn { appearance: none; padding-right: 40px; backg
   .file:not(.has-file) .file__name { display: none; }
   .footer__grid { grid-template-columns: 1fr 1fr; }
   .footer__brand { flex-direction: column; align-items: flex-start; gap: 16px; }
-  .footer__slogan { max-width: none; padding-left: 0; }
-  .footer__slogan::before { content: none; }
+  .footer__slogan { max-width: none; padding-left: 0; border-left: 0; }
   .footer__reach { flex-direction: column; align-items: flex-start; gap: 20px; }
 }
 
