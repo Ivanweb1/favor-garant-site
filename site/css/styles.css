@@ -352,13 +352,16 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .showcase__media:hover img { transform: scale(1.03); }
 .showcase__body {
   display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 6px 40px;
-  grid-template-areas: "kicker actions" "title actions" "text actions" "chips actions";
+  grid-template-areas: "title actions" "text actions" "chips actions";
   padding: 24px clamp(24px, 2.6vw, 32px) 26px;
 }
 .showcase__body > .card__models { grid-area: chips; margin: 8px 0 0; }
+/* на десктопе подразделы одной строкой, лишние JS прячет в «Ещё N» — витрина не выше колонки разделов */
+.showcase__body > .card__models { flex-wrap: nowrap; overflow: hidden; }
+.showcase__body > .card__models li { flex: none; }
+.card__models .models__more a { border-style: dashed; color: var(--muted); white-space: nowrap; }
 /* кнопка прижата к низу — на одной линии с чипами */
 .showcase__body > .card__actions { grid-area: actions; align-self: end; flex-direction: column; align-items: flex-start; gap: 12px; margin: 0; }
-.showcase__kicker { grid-area: kicker; font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--grey); }
 .showcase__title { grid-area: title; font-size: clamp(22px, 2vw, 28px); line-height: 1.15; font-weight: 700; color: var(--navy); }
 .showcase__text { grid-area: text; max-width: 640px; font-size: 14px; color: var(--muted); }
 .card__models { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
@@ -687,8 +690,8 @@ select.field__input { appearance: none; padding-right: 40px; background: var(--w
   .showcase__icon img { width: 20px; }
   .showcase__name { font-size: 14px; white-space: nowrap; }
   .showcase__media { flex: none; min-height: 0; }
-  .showcase__body { grid-template-columns: minmax(0, 1fr); grid-template-areas: "kicker" "title" "text" "chips" "actions"; gap: 10px; }
-  .showcase__body > .card__models { margin-top: 4px; }
+  .showcase__body { grid-template-columns: minmax(0, 1fr); grid-template-areas: "title" "text" "chips" "actions"; gap: 10px; }
+  .showcase__body > .card__models { flex-wrap: wrap; margin-top: 4px; }
   .showcase__body > .card__actions { flex-direction: row; align-items: center; margin-top: 8px; }
   .showcase__media img { position: static; height: auto; aspect-ratio: 16 / 9; }
   .aud { grid-template-columns: 1fr; }

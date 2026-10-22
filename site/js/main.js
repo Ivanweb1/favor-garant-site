@@ -44,6 +44,33 @@
     cat.addEventListener('focus', () => showCat(cat.dataset.cat));
   });
 
+  // Подразделы в витрине каталога — одной строкой: что не влезло, прячем в чип «Ещё N»
+  function fitModels(panel) {
+    const list = panel.querySelector('.showcase__body > .card__models');
+    if (!list) return;
+    list.querySelectorAll('.models__more').forEach((el) => el.remove());
+    const items = [...list.children];
+    items.forEach((li) => { li.hidden = false; });
+    // на узких экранах строка переносится — прятать нечего
+    if (getComputedStyle(list).flexWrap !== 'nowrap' || list.scrollWidth <= list.clientWidth) return;
+    const more = document.createElement('li');
+    more.className = 'models__more';
+    const link = document.createElement('a');
+    link.href = '#catalog';
+    more.appendChild(link);
+    list.appendChild(more);
+    for (let i = items.length - 1; i > 0; i--) {
+      items[i].hidden = true;
+      link.textContent = 'Ещё ' + (items.length - i);
+      if (list.scrollWidth <= list.clientWidth) return;
+    }
+  }
+  const fitVisibleModels = () => document.querySelectorAll('.showcase__panel:not([hidden])').forEach(fitModels);
+  fitVisibleModels();
+  document.fonts && document.fonts.ready.then(fitVisibleModels);
+  let fitTimer;
+  window.addEventListener('resize', () => { clearTimeout(fitTimer); fitTimer = setTimeout(fitVisibleModels, 150); });
+
   // Вкладки: «Каталог» и «Решения для заказчиков» — каждый список вкладок переключается сам по себе
   const hoverMedia = window.matchMedia('(hover: hover) and (min-width: 1081px)');
   document.querySelectorAll('[role="tablist"]').forEach((list) => {
@@ -51,9 +78,11 @@
     function selectTab(tab) {
       tabs.forEach((t) => {
         const on = t === tab;
+        const panel = document.getElementById(t.getAttribute('aria-controls'));
         t.setAttribute('aria-selected', String(on));
         t.tabIndex = on ? 0 : -1;
-        document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
+        panel.hidden = !on;
+        if (on) fitModels(panel);
       });
     }
     tabs.forEach((tab, i) => {
