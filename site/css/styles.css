@@ -669,13 +669,6 @@ select.field__input, .select__btn { appearance: none; padding-right: 40px; backg
   margin-top: 56px; padding-top: 24px; border-top: 1px solid rgba(255, 255, 255, .14);
   font-size: 13px;
 }
-/* полоски знака логотипа — акцентом перед копирайтом */
-.footer__copy { display: inline-flex; align-items: center; gap: 12px; }
-.footer__copy::before {
-  content: ""; flex: none; width: 22px; height: 12px; background: var(--red);
-  -webkit-mask: url("../img/brand/bars.svg") center / contain no-repeat;
-          mask: url("../img/brand/bars.svg") center / contain no-repeat;
-}
 .footer__bottom a:hover { color: var(--white); }
 
 /* ---------- Адаптив ---------- */
