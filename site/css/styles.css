@@ -386,7 +386,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 /* заголовки в две строки у всех колонок — тексты и ссылки начинаются на одной линии */
 .route__title { min-height: 2.5em; font-size: 20px; line-height: 1.25; font-weight: 700; color: var(--white); }
 .route__text { font-size: 14px; color: #C9C7E6; }
-.route__links { align-self: stretch; margin-top: 6px; border-top: 1px solid rgba(255, 255, 255, .14); }
+.route__links { align-self: stretch; margin: 6px 0 14px; border-top: 1px solid rgba(255, 255, 255, .14); }
 .route__links a {
   display: flex; align-items: center; justify-content: space-between; gap: 16px;
   padding: 12px 0; border-bottom: 1px solid rgba(255, 255, 255, .14);
@@ -395,7 +395,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .route__links a::after { content: ""; width: 9px; height: 10px; flex: none; background: currentColor; -webkit-mask: var(--arrow) center / contain no-repeat; mask: var(--arrow) center / contain no-repeat; color: #A9A6D6; transition: transform .2s ease, color .2s ease; }
 .route__links a:hover, .route__links a:hover::after { color: #C9C7E6; }
 .route__links a:hover::after { transform: rotate(-45deg); }
-.route__cta { margin-top: auto; padding-top: 10px; }
+.route__cta { margin-top: auto; }
 
 /* ---------- 4. Производство и услуги ---------- */
 
