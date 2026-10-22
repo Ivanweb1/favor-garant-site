@@ -269,19 +269,19 @@ button, input, select, textarea { font: inherit; color: inherit; }
 
 /* Преимущества под галереей — как в референсе Sendify: белые карточки на светлой полосе,
    маленькая иконка в контурном круге сверху, заголовок и текст прижаты к низу */
-.usp-band { padding: 20px 0; background: var(--light); }
-.usp { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.usp-band { padding: 24px 0; background: var(--light); }
+.usp { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
 .usp__item {
-  display: flex; flex-direction: column; min-height: 220px;
-  padding: 22px 24px 26px; border-radius: var(--radius); background: var(--white);
+  display: flex; flex-direction: column; min-height: 260px;
+  padding: 18px 18px 22px; border: 1px solid rgba(42, 37, 96, .08); border-radius: 12px; background: var(--white);
 }
 .usp__icon {
-  display: grid; place-items: center; width: 40px; height: 40px; margin-bottom: auto;
-  border: 1px solid var(--line); border-radius: 50%; color: var(--navy);
+  display: grid; place-items: center; width: 42px; height: 42px; margin-bottom: auto;
+  border-radius: 50%; background: var(--light); color: var(--ink);
 }
-.usp__icon svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linejoin: round; stroke-linecap: round; }
-.usp__title { margin: 32px 0 8px; font-size: 16px; line-height: 1.3; font-weight: 700; color: var(--navy); }
-.usp__text { font-size: 14px; line-height: 1.55; color: var(--muted); }
+.usp__icon svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linejoin: round; stroke-linecap: round; }
+.usp__title { margin: 28px 0 6px; font-size: 16px; line-height: 1.3; font-weight: 600; color: var(--ink); }
+.usp__text { font-size: 13px; line-height: 1.55; color: var(--muted); }
 
 /* ---------- Секции ---------- */
 
@@ -318,6 +318,16 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .card__body { display: grid; gap: 6px; align-content: start; padding: 16px 20px 20px; }
 .card__title { font-size: 17px; line-height: 1.3; font-weight: 700; color: var(--navy); }
 .card__text { font-size: 13px; color: var(--muted); }
+/* малые карточки каталога: стрелка справа от заголовка, ниже подразделы чипами */
+.card:not(.card--big):not(.card--cta) .card__body { grid-template-columns: minmax(0, 1fr) auto; column-gap: 12px; }
+.card:not(.card--big):not(.card--cta) .card__title { grid-column: 1; grid-row: 1; align-self: center; }
+.card .chips { grid-column: 1 / -1; align-self: start; margin-top: 6px; }
+.card__go {
+  grid-column: 2; grid-row: 1; display: grid; place-items: center; width: 34px; height: 34px;
+  border: 1px solid var(--line); border-radius: 50%; font-size: 15px; color: var(--navy);
+  transition: background-color .2s ease, color .2s ease, border-color .2s ease;
+}
+.card:hover .card__go { background: var(--navy); border-color: var(--navy); color: var(--white); }
 
 .card--big { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
 .card--big:hover { box-shadow: none; }
