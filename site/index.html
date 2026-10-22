@@ -495,81 +495,6 @@
     </div>
   </section>
 
-  <!-- 3. Для кого: вкладки по типу заказчика -->
-  <section class="section" id="clients">
-    <div class="container">
-      <div class="section-head">
-        <div>
-          <p class="eyebrow">Заказчикам</p>
-          <h2 class="h2 duo">
-            <span>Решения</span>
-            <span class="duo__second">для каждого заказчика</span>
-          </h2>
-        </div>
-      </div>
-
-      <div class="aud">
-        <div class="aud__tabs" role="tablist" aria-label="Тип заказчика">
-          <button class="aud__tab" type="button" role="tab" id="tab-gov" aria-controls="panel-gov" aria-selected="true">
-            <span class="aud__tab-icon"><img src="img/icons/line-pavilion.svg" alt="" width="36" height="20"></span>
-            <span class="aud__tab-text"><span class="aud__tab-title">Государственным и&nbsp;муниципальным заказчикам</span><span class="aud__tab-sub">Остановки, навигация, МАФ, монтаж</span></span>
-          </button>
-          <button class="aud__tab" type="button" role="tab" id="tab-arch" aria-controls="panel-arch" aria-selected="false" tabindex="-1">
-            <span class="aud__tab-icon"><img src="img/icons/line-custom.svg" alt="" width="36" height="20"></span>
-            <span class="aud__tab-text"><span class="aud__tab-title">Архитекторам и&nbsp;проектировщикам</span><span class="aud__tab-sub">Проектирование, документация, экспертиза</span></span>
-          </button>
-          <button class="aud__tab" type="button" role="tab" id="tab-biz" aria-controls="panel-biz" aria-selected="false" tabindex="-1">
-            <span class="aud__tab-icon"><img src="img/icons/line-billboard.svg" alt="" width="36" height="20"></span>
-            <span class="aud__tab-text"><span class="aud__tab-title">Рекламным операторам и&nbsp;бизнесу</span><span class="aud__tab-sub">Рекламные конструкции, торги, согласование</span></span>
-          </button>
-        </div>
-
-        <article class="aud__panel" role="tabpanel" id="panel-gov" aria-labelledby="tab-gov">
-          <div class="aud__media"><img src="img/photos/30-work-smart-stops.jpg" alt="Остановочный павильон SMART на городской площади" loading="lazy" width="1400" height="933"></div>
-          <div class="aud__body">
-            <h3 class="aud__title">Для государственных и&nbsp;муниципальных заказчиков</h3>
-            <p class="aud__text">Участвуем в&nbsp;программах благоустройства городов России и&nbsp;в&nbsp;федеральной программе «Формирование комфортной городской среды».</p>
-            <ul class="aud__links">
-              <li><a href="#catalog">Остановочные павильоны</a></li>
-              <li><a href="#services">Монтаж остановочных павильонов</a></li>
-              <li><a href="#catalog">Навигация и&nbsp;стелы</a></li>
-              <li><a href="#catalog">Малые архитектурные формы</a></li>
-            </ul>
-            <a class="btn btn--primary" href="#request">Обсудить проект</a>
-          </div>
-        </article>
-        <article class="aud__panel" role="tabpanel" id="panel-arch" aria-labelledby="tab-arch" hidden>
-          <div class="aud__media"><img src="img/photos/23-prod-kb.jpg" alt="Инженеры обсуждают чертёж конструкции" loading="lazy" width="1400" height="1050"></div>
-          <div class="aud__body">
-            <h3 class="aud__title">Для архитекторов и&nbsp;проектировщиков</h3>
-            <p class="aud__text">Разработаем конструкторскую документацию по&nbsp;вашему эскизу, выполним прочностной расчёт и&nbsp;авторский надзор.</p>
-            <ul class="aud__links">
-              <li><a href="#services">Конструкторское бюро</a></li>
-              <li><a href="#services">Дизайн-бюро</a></li>
-              <li><a href="#services">Документация для согласования</a></li>
-              <li><a href="#services">Экспертиза проектов</a></li>
-            </ul>
-            <a class="btn btn--primary" href="#request">Отправить эскиз</a>
-          </div>
-        </article>
-        <article class="aud__panel" role="tabpanel" id="panel-biz" aria-labelledby="tab-biz" hidden>
-          <div class="aud__media"><img src="img/photos/13-cat-billboards.jpg" alt="Рекламный щит на городской улице" loading="lazy" width="1400" height="1050"></div>
-          <div class="aud__body">
-            <h3 class="aud__title">Для рекламных операторов и&nbsp;бизнеса</h3>
-            <p class="aud__text">Изготовим рекламные и&nbsp;нестандартные конструкции, подготовим документы для торгов и&nbsp;согласования размещения.</p>
-            <ul class="aud__links">
-              <li><a href="#catalog">Рекламные щиты и&nbsp;тумбы</a></li>
-              <li><a href="#services">Документация для участия в&nbsp;торгах</a></li>
-              <li><a href="#services">Расчёт коридора безопасности</a></li>
-              <li><a href="#services">Ремонт и&nbsp;модернизация конструкций</a></li>
-            </ul>
-            <a class="btn btn--primary" href="#request">Запросить расчёт</a>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-
   <!-- 4. Производство и услуги: фото без подложек и затемнения, подписи под фото -->
   <section class="section section--dark" id="services">
     <div class="container">
@@ -799,6 +724,59 @@
         <li><img src="img/clients/tyuz.png" alt="ТЮЗ" loading="lazy"></li>
         <li><img src="img/clients/soyuz-dizaynerov-spb.png" alt="Санкт-Петербургский Союз дизайнеров" loading="lazy"></li>
       </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Заказчикам: тёмная полоса, три колонки по группам посетителей из брифа -->
+  <section class="section section--dark" id="clients">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Заказчикам</p>
+          <h2 class="h2 duo duo--light">
+            <span>Решения</span>
+            <span class="duo__second">для каждого заказчика</span>
+          </h2>
+        </div>
+      </div>
+      <div class="routes">
+        <div class="route">
+          <span class="route__num">01</span>
+          <h3 class="route__title">Государственным и&nbsp;муниципальным заказчикам</h3>
+          <p class="route__text">Участвуем в&nbsp;программах благоустройства городов России и&nbsp;в&nbsp;федеральной программе «Формирование комфортной городской среды».</p>
+          <ul class="route__links">
+            <li><a href="#catalog">Остановочные павильоны</a></li>
+            <li><a href="#services">Монтаж остановочных павильонов</a></li>
+            <li><a href="#catalog">Навигация и&nbsp;стелы</a></li>
+            <li><a href="#catalog">Малые архитектурные формы</a></li>
+          </ul>
+          <a class="link-arrow link-arrow--light route__cta" href="#request-form">Обсудить проект</a>
+        </div>
+        <div class="route">
+          <span class="route__num">02</span>
+          <h3 class="route__title">Архитекторам и&nbsp;проектировщикам</h3>
+          <p class="route__text">Разработаем конструкторскую документацию по&nbsp;вашему эскизу, выполним прочностной расчёт и&nbsp;авторский надзор.</p>
+          <ul class="route__links">
+            <li><a href="#services">Конструкторское бюро</a></li>
+            <li><a href="#services">Дизайн-бюро</a></li>
+            <li><a href="#services">Документация для согласования</a></li>
+            <li><a href="#services">Экспертиза проектов</a></li>
+          </ul>
+          <a class="link-arrow link-arrow--light route__cta" href="#request-form">Отправить эскиз</a>
+        </div>
+        <div class="route">
+          <span class="route__num">03</span>
+          <h3 class="route__title">Коммерческим организациям</h3>
+          <p class="route__text">Изготовим рекламные и&nbsp;нестандартные конструкции, подготовим документы для торгов и&nbsp;согласования размещения.</p>
+          <ul class="route__links">
+            <li><a href="#catalog">Рекламные щиты и&nbsp;тумбы</a></li>
+            <li><a href="#services">Документация для участия в&nbsp;торгах</a></li>
+            <li><a href="#services">Расчёт коридора безопасности</a></li>
+            <li><a href="#services">Ремонт и&nbsp;модернизация конструкций</a></li>
+          </ul>
+          <a class="link-arrow link-arrow--light route__cta" href="#request-form">Запросить расчёт</a>
+        </div>
       </div>
     </div>
   </section>
