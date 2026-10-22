@@ -492,24 +492,21 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .arr--next { transform: rotate(-45deg); }
 .arr--prev { transform: rotate(135deg); }
 
-/* Полоса «Запросить расчёт» после слайдера работ: синяя панель, справа — полоски знака крупно */
+/* Полоса «Запросить расчёт» после слайдера работ: слева текст и действия, справа вечерний кадр павильонов вставкой */
 .cta-band {
-  position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 24px 48px;
-  margin-top: var(--sub-gap); padding: clamp(28px, 4vw, 56px);
-  overflow: hidden; border-radius: var(--radius); background: var(--navy); color: var(--white);
+  display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 12px;
+  margin-top: var(--sub-gap); padding: 12px; border-radius: var(--radius); background: var(--navy); color: var(--white);
 }
-.cta-band::before {
-  content: ""; position: absolute; top: 50%; right: -40px; width: 420px; height: 230px; transform: translateY(-50%);
-  background: rgba(255, 255, 255, .05);
-  -webkit-mask: url("../img/brand/bars.svg") center / contain no-repeat;
-          mask: url("../img/brand/bars.svg") center / contain no-repeat;
-}
-.cta-band__text, .cta-band__actions { position: relative; }
-.cta-band__title { max-width: 620px; font-size: clamp(24px, 2.6vw, 34px); line-height: 1.15; font-weight: 700; }
-.cta-band__lead { max-width: 560px; margin-top: 12px; font-size: 15px; color: #C9C7E6; }
-.cta-band__actions { display: grid; justify-items: center; gap: 12px; }
+.cta-band__text { padding: clamp(16px, 3vw, 44px); }
+.cta-band__title { max-width: 560px; font-size: clamp(24px, 2.6vw, 34px); line-height: 1.15; font-weight: 700; }
+.cta-band__lead { max-width: 520px; margin-top: 12px; font-size: 15px; color: #C9C7E6; }
+.cta-band__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 28px; margin-top: 28px; }
+.cta-band__call { display: grid; gap: 2px; }
+.cta-band__hint { font-size: 12px; color: #A9A6D6; }
 .cta-band__phone { font-size: 18px; font-weight: 700; color: var(--white); white-space: nowrap; }
 .cta-band__phone:hover { color: #C9C7E6; }
+.cta-band__media { position: relative; min-height: 240px; overflow: hidden; border-radius: calc(var(--radius) - 6px); }
+.cta-band__media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 60% 50%; }
 
 /* ---------- 6. О компании ---------- */
 
@@ -746,8 +743,7 @@ select.field__input, .select__btn { appearance: none; padding-right: 40px; backg
   .works__dots { margin-top: 20px; }
   .works__nav { display: none; }
   .cta-band { grid-template-columns: 1fr; }
-  .cta-band__actions { justify-items: start; }
-  .cta-band::before { width: 260px; height: 140px; top: auto; bottom: -30px; right: -60px; transform: none; }
+  .cta-band__media { order: -1; min-height: 180px; }
   .clients { gap: 40px; padding-right: 40px; }
   .clients img { max-width: 130px; max-height: 32px; }
   .news__card { grid-template-columns: 1fr; }
