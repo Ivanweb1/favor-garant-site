@@ -336,7 +336,12 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .card__models a:hover { border-color: var(--navy); background: var(--light); }
 .card__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 28px; margin-top: 10px; }
 
-.card--cta { background: var(--navy) url("../img/brand/pattern-dark.jpg") center / cover; border-color: var(--navy); justify-content: flex-end; }
+.card--cta { background: var(--navy); border-color: var(--navy); justify-content: space-between; }
+.card__icon {
+  display: grid; place-items: center; width: 48px; height: 48px; margin: 22px 22px 0;
+  border: 1px solid rgba(255, 255, 255, .3); border-radius: 50%; color: var(--white);
+}
+.card__icon svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linejoin: round; stroke-linecap: round; }
 .card--cta .card__body { gap: 10px; padding: 22px 22px; margin-top: auto; }
 .card--cta .card__title { color: var(--white); font-size: 19px; }
 .card--cta .card__text { color: #C9C7E6; }
