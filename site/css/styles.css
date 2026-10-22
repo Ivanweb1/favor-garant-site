@@ -586,7 +586,28 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .field__input:focus { outline: none; border-color: var(--navy); background-color: var(--white); }
 .field__input--area { min-height: 120px; resize: vertical; }
 .field__input.is-invalid { border-color: var(--red); }
-select.field__input { appearance: none; padding-right: 40px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%232A2560' stroke-width='1.5'/%3E%3C/svg%3E"); background-position: right 16px center; background-repeat: no-repeat; }
+/* свой выпадающий список: кнопка как поле, список — белая карточка с тенью */
+.select { position: relative; }
+.select__btn { display: flex; align-items: center; text-align: left; cursor: pointer; }
+.select__btn.is-placeholder { color: var(--muted); }
+.select__btn[aria-expanded="true"] { border-color: var(--navy); background-color: var(--white); }
+.select__list {
+  position: absolute; top: calc(100% + 6px); left: 0; right: 0; z-index: 20;
+  max-height: 440px; padding: 6px; overflow-y: auto;
+  border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--white);
+  box-shadow: 0 22px 44px -22px rgba(23, 22, 43, .4);
+}
+.select__option {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 10px 12px; border-radius: 8px; font-size: 14px; line-height: 1.35; color: var(--navy); cursor: pointer;
+}
+.select__option.is-active { background: #F5F6F8; }
+.select__option[aria-selected="true"] { font-weight: 600; }
+.select__option[aria-selected="true"]::after {
+  content: ""; flex: none; width: 9px; height: 10px; background: var(--red); transform: rotate(-45deg);
+  -webkit-mask: var(--arrow) center / contain no-repeat; mask: var(--arrow) center / contain no-repeat;
+}
+select.field__input, .select__btn { appearance: none; padding-right: 40px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%232A2560' stroke-width='1.5'/%3E%3C/svg%3E"); background-position: right 16px center; background-repeat: no-repeat; }
 
 /* файл — полноширинная зона: скрепка, подпись, имя выбранного файла справа */
 .file {

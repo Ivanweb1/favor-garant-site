@@ -875,9 +875,9 @@
             <span class="field__label">Email</span>
             <input class="field__input" type="email" name="email" autocomplete="email">
           </label>
-          <label class="field">
-            <span class="field__label">Что нужно изготовить</span>
-            <select class="field__input" name="product">
+          <div class="field">
+            <span class="field__label" id="product-label">Что нужно изготовить</span>
+            <select class="field__input" name="product" aria-labelledby="product-label">
               <option value="">Выберите вариант</option>
               <option>Остановочный павильон</option>
               <option>Рекламная тумба</option>
@@ -890,7 +890,7 @@
               <option>Услуги: проектирование, металлообработка, монтаж</option>
               <option>Другое</option>
             </select>
-          </label>
+          </div>
         </div>
         <label class="field">
           <span class="field__label">Комментарий</span>

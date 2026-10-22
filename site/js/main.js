@@ -291,6 +291,92 @@
     fileInput.closest('.file').classList.toggle('has-file', fileInput.files.length > 0);
   });
 
+  // Выпадающий список в стилистике сайта поверх обычного select: select скрыт и хранит значение для формы
+  document.querySelectorAll('select.field__input').forEach((select) => {
+    const options = [...select.options].filter((o) => o.value !== '' || o.index > 0);
+    const placeholder = select.options[0].value === '' ? select.options[0].textContent : '';
+    const wrap = document.createElement('div');
+    wrap.className = 'select';
+    select.parentNode.insertBefore(wrap, select);
+    wrap.appendChild(select);
+    select.hidden = true;
+
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'field__input select__btn';
+    btn.id = select.name + '-button';
+    btn.setAttribute('aria-haspopup', 'listbox');
+    btn.setAttribute('aria-expanded', 'false');
+    btn.setAttribute('aria-labelledby', select.getAttribute('aria-labelledby') + ' ' + btn.id);
+    const list = document.createElement('ul');
+    list.className = 'select__list';
+    list.setAttribute('role', 'listbox');
+    list.setAttribute('aria-labelledby', select.getAttribute('aria-labelledby'));
+    list.hidden = true;
+    const items = options.map((opt, i) => {
+      const li = document.createElement('li');
+      li.className = 'select__option';
+      li.id = select.name + '-option-' + i;
+      li.setAttribute('role', 'option');
+      li.textContent = opt.textContent;
+      li.addEventListener('mousedown', (e) => e.preventDefault()); // фокус остаётся на кнопке
+      li.addEventListener('click', () => choose(i));
+      li.addEventListener('mousemove', () => setActive(i));
+      list.appendChild(li);
+      return li;
+    });
+    wrap.append(btn, list);
+
+    let active = -1;
+    const selectedIndex = () => options.indexOf(select.selectedOptions[0]);
+    function render() {
+      const i = selectedIndex();
+      btn.textContent = i >= 0 ? options[i].textContent : placeholder;
+      btn.classList.toggle('is-placeholder', i < 0);
+      items.forEach((li, n) => li.setAttribute('aria-selected', String(n === i)));
+    }
+    function setActive(i) {
+      active = Math.max(0, Math.min(items.length - 1, i));
+      items.forEach((li, n) => li.classList.toggle('is-active', n === active));
+      btn.setAttribute('aria-activedescendant', items[active].id);
+      items[active].scrollIntoView({ block: 'nearest' });
+    }
+    function open() {
+      list.hidden = false;
+      btn.setAttribute('aria-expanded', 'true');
+      setActive(Math.max(0, selectedIndex()));
+    }
+    function close() {
+      list.hidden = true;
+      btn.setAttribute('aria-expanded', 'false');
+      btn.removeAttribute('aria-activedescendant');
+    }
+    function choose(i) {
+      options[i].selected = true;
+      select.dispatchEvent(new Event('change', { bubbles: true }));
+      render();
+      close();
+    }
+
+    btn.addEventListener('click', () => (list.hidden ? open() : close()));
+    btn.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+        e.preventDefault();
+        if (list.hidden) open();
+        else setActive(active + (e.key === 'ArrowDown' ? 1 : -1));
+      } else if ((e.key === 'Enter' || e.key === ' ') && !list.hidden) {
+        e.preventDefault();
+        choose(active);
+      } else if (e.key === 'Escape' || e.key === 'Tab') {
+        close();
+      }
+    });
+    btn.addEventListener('blur', close);
+    // после сброса формы показываем заглушку снова
+    select.form.addEventListener('reset', () => setTimeout(render));
+    render();
+  });
+
   // Форма: проверка обязательных полей. Отправки на сервер в прототипе нет.
   const form = document.getElementById('request-form');
   const status = form.querySelector('.form__status');
@@ -311,6 +397,7 @@
     if (valid) {
       form.reset();
       fileName.textContent = 'Файл не выбран';
+      fileInput.closest('.file').classList.remove('has-file');
     }
   });
 
