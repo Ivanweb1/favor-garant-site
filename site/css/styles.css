@@ -266,7 +266,6 @@ button, input, select, textarea { font: inherit; color: inherit; }
 
 .section { padding: var(--section) 0; }
 .section--light { background: var(--light); }
-.section--warm { background: var(--warm); }
 
 .section-head {
   display: flex; align-items: flex-end; justify-content: space-between; gap: 24px 48px;
@@ -327,13 +326,13 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .aud__tab[aria-selected="true"] .aud__tab-sub { color: #C9C7E6; }
 .aud__panel {
   display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  overflow: hidden; border-radius: var(--radius); background: var(--white);
+  overflow: hidden; border-radius: var(--radius); background: var(--light);
 }
 .aud__panel[hidden] { display: none; }
 .aud__media img { width: 100%; height: 100%; min-height: 360px; object-fit: cover; }
 .aud__body { display: flex; flex-direction: column; align-items: flex-start; gap: 22px; padding: clamp(24px, 3vw, 40px); }
 .aud__text { font-size: 16px; color: var(--muted); }
-.aud__links { align-self: stretch; border-top: 1px solid var(--line); }
+.aud__links { align-self: stretch; border-top: 1px solid rgba(42, 37, 96, .14); }
 .aud__links a {
   display: flex; align-items: center; justify-content: space-between; gap: 16px;
   padding: 12px 0; border-bottom: 1px solid var(--line);
