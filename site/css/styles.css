@@ -633,22 +633,41 @@ select.field__input, .select__btn { appearance: none; padding-right: 40px; backg
 /* ---------- Подвал ---------- */
 
 .footer { padding: clamp(56px, 7vw, 88px) 0 32px; background: var(--navy-deep); color: #C9C7E6; font-size: 14px; }
-.footer__grid { display: grid; grid-template-columns: 1.2fr 1fr 1fr .8fr 1.4fr; gap: 40px 32px; }
+/* верх: логотип слева, телефоны, почта и кнопка — одной строкой справа */
+.footer__top {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 32px 48px;
+  padding-bottom: 44px; margin-bottom: 44px; border-bottom: 1px solid rgba(255, 255, 255, .14);
+}
+.footer__brand { display: flex; align-items: center; gap: 28px; }
 .footer__brand img { width: 170px; }
-.footer__slogan { margin-top: 18px; color: var(--white); font-weight: 600; }
+.footer__slogan { max-width: 160px; padding-left: 28px; border-left: 1px solid rgba(255, 255, 255, .2); color: var(--white); font-weight: 600; line-height: 1.4; }
+.footer__reach { display: flex; flex-wrap: wrap; align-items: center; gap: 24px 48px; }
+.footer__contact { display: grid; gap: 4px; }
+.footer__phone { font-size: 22px; font-weight: 700; color: var(--white); white-space: nowrap; }
+.footer__phone:hover { color: #C9C7E6; }
+.footer__hint { font-size: 13px; }
+.footer__mail:hover { color: var(--white); }
+/* низ: пять колонок — меню и адреса */
+.footer__grid { display: grid; grid-template-columns: 1.2fr 1.15fr .8fr 1.45fr; gap: 40px 48px; }
 .footer__title { margin-bottom: 16px; font-size: 13px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--white); }
-.footer__col ul { display: grid; gap: 9px; }
+.footer__col ul { display: grid; gap: 10px; }
 .footer__col a:hover { color: var(--white); }
-.footer__contacts { display: flex; flex-direction: column; gap: 4px; }
-.footer__phone { font-size: 20px; font-weight: 700; color: var(--white); }
-.footer__phone--sm { margin-top: 10px; font-size: 16px; }
-.footer__hint { font-size: 12px; }
-.footer__address { margin-top: 14px; line-height: 1.5; }
-.footer__address b { color: var(--white); font-weight: 600; }
+/* два адреса друг под другом, между ними линия */
+.footer__place + .footer__place { margin-top: 18px; padding-top: 18px; border-top: 1px solid rgba(255, 255, 255, .14); }
+.footer__place-name { margin-bottom: 6px; font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: #A9A6D6; }
+.footer__address { color: var(--white); line-height: 1.5; }
+.footer__hours { margin-top: 6px; }
 .footer__bottom {
-  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 24px;
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px;
   margin-top: 56px; padding-top: 24px; border-top: 1px solid rgba(255, 255, 255, .14);
   font-size: 13px;
+}
+/* полоски знака логотипа — акцентом перед копирайтом */
+.footer__copy { display: inline-flex; align-items: center; gap: 12px; }
+.footer__copy::before {
+  content: ""; flex: none; width: 22px; height: 12px; background: var(--red);
+  -webkit-mask: url("../img/brand/bars.svg") center / contain no-repeat;
+          mask: url("../img/brand/bars.svg") center / contain no-repeat;
 }
 .footer__bottom a:hover { color: var(--white); }
 
@@ -657,7 +676,7 @@ select.field__input, .select__btn { appearance: none; padding-right: 40px; backg
 @media (max-width: 1240px) {
   .header__contacts { display: none; }
   .footer__grid { grid-template-columns: repeat(3, 1fr); }
-  .footer__brand { grid-column: 1 / -1; }
+  .footer__grid > :last-child { grid-column: 1 / -1; }
 }
 
 @media (max-width: 1080px) {
@@ -735,7 +754,9 @@ select.field__input, .select__btn { appearance: none; padding-right: 40px; backg
   /* на телефоне «Файл не выбран» не помещается — показываем только имя выбранного файла */
   .file:not(.has-file) .file__name { display: none; }
   .footer__grid { grid-template-columns: 1fr 1fr; }
-  .footer__contacts { grid-column: 1 / -1; }
+  .footer__brand { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .footer__slogan { max-width: none; padding-left: 0; border-left: 0; }
+  .footer__reach { flex-direction: column; align-items: flex-start; gap: 20px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

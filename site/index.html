@@ -916,11 +916,26 @@
 <!-- Подвал -->
 <footer class="footer" id="contacts">
   <div class="container">
-    <div class="footer__grid">
+    <!-- верх: логотип со слоганом и все способы связи в одну строку -->
+    <div class="footer__top">
       <div class="footer__brand">
         <img src="img/brand/logo-white.svg" alt="FAVOR GARANT" width="180" height="62">
         <p class="footer__slogan">Создаём стиль Вашего города!</p>
       </div>
+      <div class="footer__reach">
+        <div class="footer__contact">
+          <a class="footer__phone" href="tel:+78003332227">8 (800) 333-222-7</a>
+          <span class="footer__hint">бесплатный звонок по&nbsp;России</span>
+        </div>
+        <div class="footer__contact">
+          <a class="footer__phone" href="tel:+78126402227">8 (812) 640-222-7</a>
+          <a class="footer__hint footer__mail" href="mailto:info@favor-garant.ru">info@favor-garant.ru</a>
+        </div>
+        <a class="btn btn--light" href="#request-form">Запросить расчёт</a>
+      </div>
+    </div>
+    <!-- низ: три колонки меню и колонка адресов — близкой высоты -->
+    <div class="footer__grid">
       <nav class="footer__col" aria-label="Продукция">
         <p class="footer__title">Продукция</p>
         <ul>
@@ -956,18 +971,22 @@
           <li><a href="#contacts">Вакансии</a></li>
         </ul>
       </nav>
-      <div class="footer__col footer__contacts">
-        <p class="footer__title">Контакты</p>
-        <a class="footer__phone" href="tel:+78003332227">8 (800) 333-222-7</a>
-        <span class="footer__hint">бесплатный звонок по&nbsp;России</span>
-        <a class="footer__phone footer__phone--sm" href="tel:+78126402227">8 (812) 640-222-7</a>
-        <a href="mailto:info@favor-garant.ru">info@favor-garant.ru</a>
-        <p class="footer__address"><b>Офис:</b> Санкт-Петербург, ул.&nbsp;Цветочная, д.&nbsp;7, лит.&nbsp;Б, пом.&nbsp;6 (м.&nbsp;«Московские ворота»)<br>Пн–Чт 8:00–17:00, Пт 8:00–16:00</p>
-        <p class="footer__address"><b>Производство:</b> Санкт-Петербург, 3-й Рыбацкий пр., д.&nbsp;3, лит.&nbsp;Е (м.&nbsp;«Рыбацкое»)<br>Пн–Пт 8:00–17:00</p>
+      <div class="footer__col">
+        <p class="footer__title">Адреса</p>
+        <div class="footer__place">
+          <p class="footer__place-name">Офис</p>
+          <p class="footer__address">Санкт-Петербург, ул.&nbsp;Цветочная, д.&nbsp;7, лит.&nbsp;Б, пом.&nbsp;6, м.&nbsp;«Московские ворота»</p>
+          <p class="footer__hours">Пн–Чт 8:00–17:00, Пт 8:00–16:00</p>
+        </div>
+        <div class="footer__place">
+          <p class="footer__place-name">Производство</p>
+          <p class="footer__address">Санкт-Петербург, 3-й Рыбацкий пр., д.&nbsp;3, лит.&nbsp;Е, м.&nbsp;«Рыбацкое»</p>
+          <p class="footer__hours">Пн–Пт 8:00–17:00</p>
+        </div>
       </div>
     </div>
     <div class="footer__bottom">
-      <span>© <span id="year">2026</span> ООО «ФАВОР-ГАРАНТ». Все права защищены.</span>
+      <span class="footer__copy"><span>© <span id="year">2026</span> ООО «ФАВОР-ГАРАНТ». Все права защищены.</span></span>
       <a href="#">Политика конфиденциальности</a>
     </div>
   </div>
