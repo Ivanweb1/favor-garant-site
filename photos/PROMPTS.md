@@ -423,3 +423,100 @@ Style: photorealistic, not CGI, natural colors, slightly cool neutral grade, sha
 ```
 
 Павильоны (10) и щиты (13) в меню помещаются, но впритык. Если после трёх новых кадров они будут выделяться, по тому же принципу сделаем `10-menu-pavilions` и `13-menu-billboards`.
+
+---
+
+## 8. Каталог на главной — широкие кадры (21:9)
+
+В каталоге фото стоит над полосой с текстом, кадр примерно 2,6:1 (около 980×375 на экране 1440). Кадры 4:3 там теряют половину высоты: у тумбы, лайтпостера, щита, вышки и пилона срезается верх или низ. Нужны широкие версии.
+
+Исходник — нынешний ИИ-кадр из `site/img/photos/`, чтобы конструкция совпадала с остальным сайтом. Готовый файл кладём в `photos/ai/` под новым именем `NN-wide-….jpg`.
+
+Безопасная зона: рамка срезает до 10% сверху и снизу, поэтому конструкция целиком в центральных 70% высоты и не выше 65% кадра; по горизонтали — в центре, примерно 35–45% ширины, остальное — спокойное окружение.
+
+Общий хвост для всех восьми промптов (добавить в конец каждого):
+
+```
+Composition: wide horizontal frame. The whole structure is fully visible from top to bottom, standing in the center, about 60% of the frame height, with at least 15% of calm space above it (sky, facade or trees) and 15% below it (paving or grass). Nothing of the structure touches the frame edges. Calm surroundings extend to the left and right.
+Style: photorealistic, not CGI, natural colors, slightly cool neutral grade, sharp, straight verticals. No people unless stated, no text or logos.
+```
+
+### 10-wide-pavilions — Остановочные павильоны (21:9)
+Исходник: `site/img/photos/10-cat-pavilions.jpg`.
+
+```
+Aspect ratio 21:9.
+Edit the attached photo and extend it to a wide frame. Keep the bus shelter exactly as it is: same dark steel frame, glass roof, side glass panels, yellow safety stripe, bench and the two ad panels with the navy-and-grey abstract graphic — do not redesign it.
+Setting: a city park sidewalk, trees behind, softly out of focus. Light: late-summer day, soft sun.
+[общий хвост]
+```
+
+### 11-wide-tumby — Рекламные тумбы (21:9)
+Исходник: `site/img/photos/11-cat-tumby.jpg`.
+
+```
+Aspect ratio 21:9.
+Edit the attached photo and extend it to a wide frame. Keep the round advertising column exactly as it is: same dark dome top, dark base and the navy-and-grey abstract graphic — do not redesign it. Step back so the dome and the base are both in frame.
+Setting: the paved square in front of the historic yellow building with arches, softly out of focus; a few distant passers-by are fine. Light: late-summer day.
+[общий хвост]
+```
+
+### 12-wide-lightposters — Лайтпостеры (21:9)
+Исходник: `site/img/photos/12-cat-lightposters.jpg`.
+
+```
+Aspect ratio 21:9.
+Edit the attached photo and extend it to a wide frame. Keep the city-format lightposter exactly as it is: same dark frame, rust-red leg and the navy-and-grey abstract graphic — do not redesign it. Step back so the top of the frame and the foot are both in frame.
+Setting: paving in front of the red-brick historic building with steps, softly out of focus. Light: late-summer day. No people.
+[общий хвост]
+```
+
+### 13-wide-billboards — Рекламные щиты (21:9)
+Исходник: `site/img/photos/13-cat-billboards.jpg`.
+
+```
+Aspect ratio 21:9.
+Edit the attached photo and extend it to a wide frame. Keep the billboard exactly as it is: same single pole, frame, lamps and the navy-and-grey abstract graphic — do not redesign it. Step back so the whole billboard and the base of the pole are in frame.
+Setting: a residential street with trees and apartment buildings, clear blue sky above. Light: late-summer day. No people.
+[общий хвост]
+```
+
+### 14-wide-shooting — Оборудование для стрельбищ (21:9)
+Исходник: `site/img/photos/14-cat-shooting.jpg`.
+
+```
+Aspect ratio 21:9.
+Edit the attached photo and extend it to a wide frame. Keep the steel trap tower, the throwing machine inside it and the platform roof exactly as they are — do not redesign them. Step back so the whole tower is in frame, from the roof to the ground.
+Setting: a shooting ground at the edge of a birch forest, golden early-autumn leaves, grass in the foreground. Light: soft early-autumn sun. No people.
+[общий хвост]
+```
+
+### 15-wide-custom — Нестандартные конструкции (21:9)
+Исходник: `site/img/photos/15-cat-custom.jpg`.
+
+```
+Aspect ratio 21:9.
+Edit the attached photo and extend it to a wide frame. Keep the fan-shaped motorcycle shelter exactly as it is: same amber polycarbonate shell, dark steel ribs, base platform and the motorcycle inside — do not redesign it.
+Setting: clean paving in front of a modern low house with a neat garden, softly out of focus. Light: late-summer afternoon, warm low sun through the amber shell.
+[общий хвост]
+```
+
+### 16-wide-maf — Малые архитектурные формы (21:9)
+Исходник: `site/img/photos/16-cat-maf.jpg`.
+
+```
+Aspect ratio 21:9.
+Edit the attached photo and extend it to a wide frame. Keep the bench exactly as it is: same wooden slats, dark steel legs and armrests — do not redesign it. The whole bench with all legs is in frame.
+Setting: a wooden deck on a park embankment, the pond, trees and a small bridge behind, softly out of focus. Light: late-summer morning. No people.
+[общий хвост]
+```
+
+### 17-wide-navigation — Навигация (21:9)
+Исходник: `site/img/photos/17-cat-navigation.jpg`.
+
+```
+Aspect ratio 21:9.
+Edit the attached photo and extend it to a wide frame. Keep the information pylon exactly as it is: same tall slim shape, brushed metal finish and the tree illustration; the text panels show soft, unreadable lines — do not redesign it. Step back so the whole pylon, from top to base, is in frame.
+Setting: a square with lawn and flowers in front of a historic Stalin-era building, softly out of focus. Light: late-summer day. No people, no cars.
+[общий хвост]
+```
