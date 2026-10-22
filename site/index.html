@@ -67,49 +67,131 @@
     </button>
   </div>
 
-  <!-- Выпадающее меню «Продукция» -->
+  <!-- Выпадающее меню «Продукция»: слева разделы, как в примере клиента, справа подразделы выбранного -->
   <div class="mega" id="mega" hidden>
     <div class="container mega__grid">
-      <a class="mega__item" href="#catalog">
-        <img src="img/icons/pavilion.svg" alt="" width="48" height="26">
-        <span class="mega__title">Остановочные павильоны</span>
-        <span class="mega__sub">Открытые, закрытые, SMART, для маломобильных групп</span>
-      </a>
-      <a class="mega__item" href="#catalog">
-        <img src="img/icons/tumba.svg" alt="" width="48" height="26">
-        <span class="mega__title">Рекламные тумбы</span>
-        <span class="mega__sub">Круглая, плоская, вогнутая</span>
-      </a>
-      <a class="mega__item" href="#catalog">
-        <img src="img/icons/lightbox.svg" alt="" width="48" height="26">
-        <span class="mega__title">Лайтпостеры</span>
-        <span class="mega__sub">Конструкции сити-формата</span>
-      </a>
-      <a class="mega__item" href="#catalog">
-        <img src="img/icons/billboard.svg" alt="" width="48" height="26">
-        <span class="mega__title">Рекламные щиты</span>
-        <span class="mega__sub">Крупный городской формат</span>
-      </a>
-      <a class="mega__item" href="#catalog">
-        <img src="img/icons/shooting.svg" alt="" width="48" height="26">
-        <span class="mega__title">Оборудование для стрельбищ</span>
-        <span class="mega__sub">Пирамиды для ружей, ракушки для метательных машинок</span>
-      </a>
-      <a class="mega__item" href="#catalog">
-        <img src="img/icons/custom.svg" alt="" width="48" height="26">
-        <span class="mega__title">Нестандартные конструкции</span>
-        <span class="mega__sub">По эскизам и чертежам заказчика</span>
-      </a>
-      <a class="mega__item" href="#catalog">
-        <img src="img/icons/modular.svg" alt="" width="48" height="26">
-        <span class="mega__title">Малые архитектурные формы</span>
-        <span class="mega__sub">Павильоны, кабинки, скамьи, книжные шкафы</span>
-      </a>
-      <a class="mega__item" href="#catalog">
-        <img src="img/icons/maf.svg" alt="" width="48" height="26">
-        <span class="mega__title">Навигация</span>
-        <span class="mega__sub">Пилоны, указатели, афишные стенды, стелы</span>
-      </a>
+      <ul class="mega__cats">
+        <li><a class="mega__cat is-active" href="#catalog" data-cat="pav"><img src="img/icons/pavilion.svg" alt="" width="40" height="22"><span>Остановочные павильоны</span></a></li>
+        <li><a class="mega__cat" href="#catalog" data-cat="tumb"><img src="img/icons/tumba.svg" alt="" width="40" height="22"><span>Рекламные тумбы</span></a></li>
+        <li><a class="mega__cat" href="#catalog" data-cat="light"><img src="img/icons/lightbox.svg" alt="" width="40" height="22"><span>Лайтпостеры</span></a></li>
+        <li><a class="mega__cat" href="#catalog" data-cat="bill"><img src="img/icons/billboard.svg" alt="" width="40" height="22"><span>Рекламные щиты</span></a></li>
+        <li><a class="mega__cat" href="#catalog" data-cat="shoot"><img src="img/icons/shooting.svg" alt="" width="40" height="22"><span>Оборудование для стрельбищ</span></a></li>
+        <li><a class="mega__cat" href="#catalog" data-cat="custom"><img src="img/icons/custom.svg" alt="" width="40" height="22"><span>Нестандартные конструкции</span></a></li>
+        <li><a class="mega__cat" href="#catalog" data-cat="maf"><img src="img/icons/modular.svg" alt="" width="40" height="22"><span>Малые архитектурные формы</span></a></li>
+        <li><a class="mega__cat" href="#catalog" data-cat="nav"><img src="img/icons/maf.svg" alt="" width="40" height="22"><span>Навигация</span></a></li>
+      </ul>
+      <div class="mega__panel" data-panel="pav">
+        <div class="mega__info">
+          <p class="mega__title">Остановочные павильоны</p>
+          <p class="mega__text">Умные павильоны с современным дизайном для ожидания общественного транспорта.</p>
+          <ul class="mega__subs mega__subs--cols">
+            <li><a href="#catalog">Элегант</a></li>
+            <li><a href="#catalog">Элегант П</a></li>
+            <li><a href="#catalog">Стандарт</a></li>
+            <li><a href="#catalog">Галант</a></li>
+            <li><a href="#catalog">Атлант</a></li>
+            <li><a href="#catalog">Атлант SMART</a></li>
+            <li><a href="#catalog">Компакт</a></li>
+            <li><a href="#catalog">Городской</a></li>
+            <li><a href="#catalog">Городской SMART</a></li>
+            <li><a href="#catalog">Чайка</a></li>
+            <li><a href="#catalog">Альбатрос</a></li>
+            <li><a href="#catalog">Регион</a></li>
+            <li><a href="#catalog">Закрытый</a></li>
+            <li><a href="#catalog">Закрытый Регион</a></li>
+            <li><a href="#catalog">Закрытый для МГН</a></li>
+          </ul>
+          <a class="btn btn--outline" href="#catalog">Смотреть раздел</a>
+        </div>
+        <img class="mega__photo" src="img/photos/10-cat-pavilions.jpg" alt="" loading="lazy" width="1400" height="1050">
+      </div>
+      <div class="mega__panel" data-panel="tumb" hidden>
+        <div class="mega__info">
+          <p class="mega__title">Рекламные тумбы</p>
+          <p class="mega__text">Тумбы с внутренней светодиодной подсветкой.</p>
+          <ul class="mega__subs">
+            <li><a href="#catalog">Круглая рекламная тумба</a></li>
+            <li><a href="#catalog">Плоская рекламная тумба</a></li>
+            <li><a href="#catalog">Вогнутая рекламная тумба</a></li>
+          </ul>
+          <a class="btn btn--outline" href="#catalog">Смотреть раздел</a>
+        </div>
+        <img class="mega__photo" src="img/photos/11-cat-tumby.jpg" alt="" loading="lazy" width="1400" height="1050">
+      </div>
+      <div class="mega__panel" data-panel="light" hidden>
+        <div class="mega__info">
+          <p class="mega__title">Лайтпостеры</p>
+          <p class="mega__text">Конструкции сити-формата с двумя информационными поверхностями и подсветкой.</p>
+          <a class="btn btn--outline" href="#catalog">Смотреть раздел</a>
+        </div>
+        <img class="mega__photo" src="img/photos/12-cat-lightposters.jpg" alt="" loading="lazy" width="1400" height="1050">
+      </div>
+      <div class="mega__panel" data-panel="bill" hidden>
+        <div class="mega__info">
+          <p class="mega__title">Рекламные щиты</p>
+          <p class="mega__text">Несущие конструкции для рекламы и городской информации.</p>
+          <ul class="mega__subs">
+            <li><a href="#catalog">Рекламный щит</a></li>
+            <li><a href="#catalog">Триборд</a></li>
+            <li><a href="#catalog">Тривижн®</a></li>
+            <li><a href="#catalog">Скроллер</a></li>
+          </ul>
+          <a class="btn btn--outline" href="#catalog">Смотреть раздел</a>
+        </div>
+        <img class="mega__photo" src="img/photos/13-cat-billboards.jpg" alt="" loading="lazy" width="1400" height="1050">
+      </div>
+      <div class="mega__panel" data-panel="shoot" hidden>
+        <div class="mega__info">
+          <p class="mega__title">Оборудование для стрельбищ</p>
+          <p class="mega__text">Конструкции для стендовой стрельбы по требованиям международной федерации.</p>
+          <ul class="mega__subs">
+            <li><a href="#catalog">Пирамиды для ружей</a></li>
+            <li><a href="#catalog">Ракушки для метательных машинок</a></li>
+          </ul>
+          <a class="btn btn--outline" href="#catalog">Смотреть раздел</a>
+        </div>
+        <img class="mega__photo" src="img/photos/14-cat-shooting.jpg" alt="" loading="lazy" width="1400" height="1050">
+      </div>
+      <div class="mega__panel" data-panel="custom" hidden>
+        <div class="mega__info">
+          <p class="mega__title">Нестандартные конструкции</p>
+          <p class="mega__text">Металлоконструкции по эскизам и чертежам заказчика — от деталей до сборки готовых изделий.</p>
+          <a class="btn btn--outline" href="#catalog">Смотреть раздел</a>
+        </div>
+        <img class="mega__photo" src="img/photos/15-cat-custom.jpg" alt="" loading="lazy" width="1400" height="1050">
+      </div>
+      <div class="mega__panel" data-panel="maf" hidden>
+        <div class="mega__info">
+          <p class="mega__title">Малые архитектурные формы</p>
+          <p class="mega__text">Элементы городской среды.</p>
+          <ul class="mega__subs">
+            <li><a href="#catalog">Кабинка для таксофона</a></li>
+            <li><a href="#catalog">Кабинка для банкомата</a></li>
+            <li><a href="#catalog">Павильон для курения</a></li>
+            <li><a href="#catalog">Павильон для мусорных баков</a></li>
+            <li><a href="#catalog">Торговый павильон</a></li>
+            <li><a href="#catalog">Книжный шкаф</a></li>
+            <li><a href="#catalog">Скамья</a></li>
+          </ul>
+          <a class="btn btn--outline" href="#catalog">Смотреть раздел</a>
+        </div>
+        <img class="mega__photo" src="img/photos/16-cat-maf.jpg" alt="" loading="lazy" width="1400" height="1050">
+      </div>
+      <div class="mega__panel" data-panel="nav" hidden>
+        <div class="mega__info">
+          <p class="mega__title">Навигация</p>
+          <p class="mega__text">Информационные указатели и стелы для городской среды.</p>
+          <ul class="mega__subs">
+            <li><a href="#catalog">Пилон</a></li>
+            <li><a href="#catalog">Указатель</a></li>
+            <li><a href="#catalog">Афишный стенд</a></li>
+            <li><a href="#catalog">Бренд-стела</a></li>
+            <li><a href="#catalog">Въездная стела</a></li>
+          </ul>
+          <a class="btn btn--outline" href="#catalog">Смотреть раздел</a>
+        </div>
+        <img class="mega__photo" src="img/photos/17-cat-navigation.jpg" alt="" loading="lazy" width="1400" height="1050">
+      </div>
     </div>
   </div>
 
@@ -233,7 +315,7 @@
             <span class="duo__second">для городской инфраструктуры</span>
           </h2>
         </div>
-        <a class="link-arrow section-head__link" href="#catalog">Весь каталог</a>
+        <a class="btn btn--outline section-head__link" href="#catalog">Весь каталог</a>
       </div>
 
       <div class="catalog">
@@ -307,7 +389,7 @@
     </div>
   </section>
 
-  <!-- 3. Для кого -->
+  <!-- 3. Для кого: вкладки по типу заказчика -->
   <section class="section section--light" id="clients">
     <div class="container">
       <div class="section-head">
@@ -319,48 +401,73 @@
           </h2>
         </div>
       </div>
-      <div class="audience">
-        <article class="audience__card">
-          <h3 class="audience__title">Государственным и&nbsp;муниципальным заказчикам</h3>
-          <p class="audience__text">Участвуем в&nbsp;программах благоустройства городов России и&nbsp;в&nbsp;федеральной программе «Формирование комфортной городской среды».</p>
-          <ul class="audience__links">
-            <li><a href="#catalog">Остановочные павильоны</a></li>
-            <li><a href="#services">Монтаж остановочных павильонов</a></li>
-            <li><a href="#catalog">Навигация и&nbsp;стелы</a></li>
-            <li><a href="#catalog">Малые архитектурные формы</a></li>
-          </ul>
+
+      <div class="aud">
+        <div class="aud__tabs" role="tablist" aria-label="Тип заказчика">
+          <button class="aud__tab" type="button" role="tab" id="tab-gov" aria-controls="panel-gov" aria-selected="true">
+            <span class="aud__tab-title">Государственным и&nbsp;муниципальным заказчикам</span>
+            <span class="aud__tab-sub">Остановки, навигация, МАФ, монтаж</span>
+          </button>
+          <button class="aud__tab" type="button" role="tab" id="tab-arch" aria-controls="panel-arch" aria-selected="false" tabindex="-1">
+            <span class="aud__tab-title">Архитекторам и&nbsp;проектировщикам</span>
+            <span class="aud__tab-sub">Проектирование, документация, экспертиза</span>
+          </button>
+          <button class="aud__tab" type="button" role="tab" id="tab-biz" aria-controls="panel-biz" aria-selected="false" tabindex="-1">
+            <span class="aud__tab-title">Рекламным операторам и&nbsp;бизнесу</span>
+            <span class="aud__tab-sub">Рекламные конструкции, торги, согласование</span>
+          </button>
+        </div>
+
+        <article class="aud__panel" role="tabpanel" id="panel-gov" aria-labelledby="tab-gov">
+          <div class="aud__media"><img src="img/photos/30-work-smart-stops.jpg" alt="Остановочный павильон SMART на городской площади" loading="lazy" width="1400" height="933"></div>
+          <div class="aud__body">
+            <p class="aud__text">Участвуем в&nbsp;программах благоустройства городов России и&nbsp;в&nbsp;федеральной программе «Формирование комфортной городской среды».</p>
+            <ul class="aud__links">
+              <li><a href="#catalog">Остановочные павильоны</a></li>
+              <li><a href="#services">Монтаж остановочных павильонов</a></li>
+              <li><a href="#catalog">Навигация и&nbsp;стелы</a></li>
+              <li><a href="#catalog">Малые архитектурные формы</a></li>
+            </ul>
+            <a class="btn btn--primary" href="#request">Обсудить проект</a>
+          </div>
         </article>
-        <article class="audience__card">
-          <h3 class="audience__title">Архитекторам и&nbsp;проектировщикам</h3>
-          <p class="audience__text">Разработаем конструкторскую документацию по&nbsp;вашему эскизу, выполним прочностной расчёт и&nbsp;авторский надзор.</p>
-          <ul class="audience__links">
-            <li><a href="#services">Конструкторское бюро</a></li>
-            <li><a href="#services">Дизайн-бюро</a></li>
-            <li><a href="#services">Документация для согласования</a></li>
-            <li><a href="#services">Экспертиза проектов</a></li>
-          </ul>
+        <article class="aud__panel" role="tabpanel" id="panel-arch" aria-labelledby="tab-arch" hidden>
+          <div class="aud__media"><img src="img/photos/23-prod-kb.jpg" alt="Инженеры обсуждают чертёж конструкции" loading="lazy" width="1400" height="1050"></div>
+          <div class="aud__body">
+            <p class="aud__text">Разработаем конструкторскую документацию по&nbsp;вашему эскизу, выполним прочностной расчёт и&nbsp;авторский надзор.</p>
+            <ul class="aud__links">
+              <li><a href="#services">Конструкторское бюро</a></li>
+              <li><a href="#services">Дизайн-бюро</a></li>
+              <li><a href="#services">Документация для согласования</a></li>
+              <li><a href="#services">Экспертиза проектов</a></li>
+            </ul>
+            <a class="btn btn--primary" href="#request">Отправить эскиз</a>
+          </div>
         </article>
-        <article class="audience__card">
-          <h3 class="audience__title">Рекламным операторам и&nbsp;бизнесу</h3>
-          <p class="audience__text">Изготовим рекламные и&nbsp;нестандартные конструкции, подготовим документы для торгов и&nbsp;согласования размещения.</p>
-          <ul class="audience__links">
-            <li><a href="#catalog">Рекламные щиты и&nbsp;тумбы</a></li>
-            <li><a href="#services">Документация для участия в&nbsp;торгах</a></li>
-            <li><a href="#services">Расчёт коридора безопасности</a></li>
-            <li><a href="#services">Ремонт и&nbsp;модернизация конструкций</a></li>
-          </ul>
+        <article class="aud__panel" role="tabpanel" id="panel-biz" aria-labelledby="tab-biz" hidden>
+          <div class="aud__media"><img src="img/photos/13-cat-billboards.jpg" alt="Рекламный щит на городской улице" loading="lazy" width="1400" height="1050"></div>
+          <div class="aud__body">
+            <p class="aud__text">Изготовим рекламные и&nbsp;нестандартные конструкции, подготовим документы для торгов и&nbsp;согласования размещения.</p>
+            <ul class="aud__links">
+              <li><a href="#catalog">Рекламные щиты и&nbsp;тумбы</a></li>
+              <li><a href="#services">Документация для участия в&nbsp;торгах</a></li>
+              <li><a href="#services">Расчёт коридора безопасности</a></li>
+              <li><a href="#services">Ремонт и&nbsp;модернизация конструкций</a></li>
+            </ul>
+            <a class="btn btn--primary" href="#request">Запросить расчёт</a>
+          </div>
         </article>
       </div>
     </div>
   </section>
 
-  <!-- 4. Производство и услуги -->
-  <section class="section section--dark" id="services">
+  <!-- 4. Производство и услуги: фото без подложек и затемнения, подписи под фото -->
+  <section class="section section--warm" id="services">
     <div class="container">
-      <div class="section-head section-head--dark">
+      <div class="section-head">
         <div>
-          <p class="eyebrow eyebrow--light">Производство и&nbsp;услуги</p>
-          <h2 class="h2 duo duo--light">
+          <p class="eyebrow">Производство и&nbsp;услуги</p>
+          <h2 class="h2 duo">
             <span>Собственное производство</span>
             <span class="duo__second">и&nbsp;полный цикл работ</span>
           </h2>
@@ -370,63 +477,59 @@
 
       <div class="bento">
         <a class="tile tile--tall" href="#services">
-          <img src="img/photos/20-prod-hall.jpg" alt="Цех производственного комплекса" loading="lazy" width="1200" height="800">
-          <div class="tile__body">
-            <h3 class="tile__title">Производственный комплекс</h3>
-            <p class="tile__text">Сборочно-сварочный участок, покраска и&nbsp;транспортный узел для приёмки и&nbsp;отправки изделий.</p>
-          </div>
+          <div class="tile__media"><img src="img/photos/20-prod-hall.jpg" alt="Цех производственного комплекса" loading="lazy" width="1122" height="1402"></div>
+          <h3 class="tile__title">Производственный комплекс</h3>
+          <p class="tile__text">Сборочно-сварочный участок, покраска и&nbsp;транспортный узел для приёмки и&nbsp;отправки изделий.</p>
         </a>
         <a class="tile" href="#services">
-          <img src="img/photos/21-prod-metalworking.jpg" alt="Резка металла на станке с ЧПУ" loading="lazy" width="1200" height="786">
-          <div class="tile__body">
-            <h3 class="tile__title">Металлообработка</h3>
-            <p class="tile__text">Лазерная и&nbsp;плазменная резка, гибка, вальцовка, сварка и&nbsp;покраска.</p>
-          </div>
+          <div class="tile__media"><img src="img/photos/21-prod-metalworking.jpg" alt="Резка металла на станке с ЧПУ" loading="lazy" width="1400" height="1050"></div>
+          <h3 class="tile__title">Металлообработка</h3>
+          <p class="tile__text">Лазерная и&nbsp;плазменная резка, гибка, вальцовка, сварка и&nbsp;покраска.</p>
         </a>
         <a class="tile" href="#services">
-          <img src="img/photos/22-prod-bending.jpg" alt="Листогибочный пресс" loading="lazy" width="1200" height="732">
-          <div class="tile__body">
-            <h3 class="tile__title">Станочный парк</h3>
-            <p class="tile__text">Оборудование с&nbsp;ЧПУ: HYPERTHERM, Senfeng, ERMAKSAN, PERTICI, COMET.</p>
-          </div>
+          <div class="tile__media"><img src="img/photos/22-prod-bending.jpg" alt="Листогибочный пресс" loading="lazy" width="1400" height="1050"></div>
+          <h3 class="tile__title">Станочный парк</h3>
+          <p class="tile__text">Оборудование с&nbsp;ЧПУ: HYPERTHERM, Senfeng, ERMAKSAN, PERTICI, COMET.</p>
         </a>
         <a class="tile" href="#services">
-          <img src="img/photos/23-prod-kb.jpg" alt="Инженеры обсуждают чертёж конструкции" loading="lazy" width="700" height="933">
-          <div class="tile__body">
-            <h3 class="tile__title">Конструкторское и&nbsp;дизайн-бюро</h3>
-            <p class="tile__text">3D-модели и&nbsp;визуализации, конструкторская документация, прочностной расчёт.</p>
-          </div>
+          <div class="tile__media"><img src="img/photos/23-prod-kb.jpg" alt="Инженеры обсуждают чертёж конструкции" loading="lazy" width="1400" height="1050"></div>
+          <h3 class="tile__title">Конструкторское и&nbsp;дизайн-бюро</h3>
+          <p class="tile__text">3D-модели и&nbsp;визуализации, конструкторская документация, прочностной расчёт.</p>
         </a>
         <a class="tile" href="#services">
-          <img src="img/photos/24-prod-installation.jpg" alt="Бригада монтирует остановочный павильон" loading="lazy" width="1200" height="798">
-          <div class="tile__body">
-            <h3 class="tile__title">Монтаж и&nbsp;шеф-монтаж</h3>
-            <p class="tile__text">Монтаж остановочных павильонов под ключ и&nbsp;контроль монтажа на&nbsp;объекте.</p>
-          </div>
+          <div class="tile__media"><img src="img/photos/24-prod-installation.jpg" alt="Бригада монтирует остановочный павильон" loading="lazy" width="1400" height="1050"></div>
+          <h3 class="tile__title">Монтаж и&nbsp;шеф-монтаж</h3>
+          <p class="tile__text">Монтаж остановочных павильонов под ключ и&nbsp;контроль монтажа на&nbsp;объекте.</p>
         </a>
       </div>
 
       <div class="steps">
-        <h3 class="steps__title">От&nbsp;идеи до&nbsp;монтажа</h3>
+        <div class="steps__head">
+          <h3 class="steps__title">От&nbsp;идеи до&nbsp;монтажа</h3>
+          <a class="btn btn--primary" href="#request">Отправить ТЗ или эскиз</a>
+        </div>
         <ol class="steps__list">
           <li class="steps__item">
+            <svg class="steps__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M4 7.5l8 4.5 8-4.5M12 12v9"/></svg>
             <span class="steps__name">Дизайн</span>
             <span class="steps__text">Эскиз, 3D-модель и&nbsp;визуализация объекта</span>
           </li>
           <li class="steps__item">
+            <svg class="steps__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h14v18H5z"/><path d="M9 8h6M9 12h6M9 16h3"/></svg>
             <span class="steps__name">Проектирование</span>
             <span class="steps__text">Конструкторская документация и&nbsp;прочностной расчёт</span>
           </li>
           <li class="steps__item">
+            <svg class="steps__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21h18M4 21V11l5 3v-3l5 3v-3l5 3V4h2v17"/></svg>
             <span class="steps__name">Производство</span>
             <span class="steps__text">Изготовление на&nbsp;собственном производственном комплексе</span>
           </li>
           <li class="steps__item">
+            <svg class="steps__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 21V4h2v17M8 5h12l-3 3M17 5v6"/><path d="M3 21h8M15 11h4v3h-4z"/></svg>
             <span class="steps__name">Монтаж</span>
             <span class="steps__text">Монтаж или шеф-монтаж на&nbsp;объекте заказчика</span>
           </li>
         </ol>
-        <a class="btn btn--light" href="#request">Отправить ТЗ или эскиз</a>
       </div>
     </div>
   </section>
@@ -442,7 +545,7 @@
             <span class="duo__second">в&nbsp;городах России</span>
           </h2>
         </div>
-        <a class="link-arrow section-head__link" href="#works">Все работы</a>
+        <a class="btn btn--outline section-head__link" href="#works">Все работы</a>
       </div>
       <div class="works">
         <a class="work" href="#works">
@@ -487,17 +590,20 @@
           <p class="eyebrow">О компании</p>
           <h2 class="h2 duo">
             <span>ФАВОР-ГАРАНТ</span>
-            <span class="duo__second">создаём стиль вашего города</span>
+            <span class="duo__second">создаём стиль<br>вашего города</span>
           </h2>
         </div>
         <div class="about__text">
           <p>«ФАВОР-ГАРАНТ»&nbsp;— ведущий российский производитель металлоконструкций для благоустройства городской среды.</p>
           <p>Выполняем комплекс работ по&nbsp;проектированию, производству, дизайну, экспертизе и&nbsp;монтажу объектов городской инфраструктуры, рекламоносителей, уличной мебели и&nbsp;других металлоконструкций.</p>
-          <a class="link-arrow" href="#about">Подробнее о&nbsp;компании</a>
+          <a class="btn btn--outline" href="#about">Подробнее о&nbsp;компании</a>
         </div>
       </div>
 
       <h3 class="clients__title">Нам доверяют</h3>
+    </div>
+    <div class="marquee" aria-label="Заказчики">
+      <div class="marquee__track">
       <ul class="clients">
         <li><img src="img/clients/komitet-blagoustroystva-spb.png" alt="Комитет по благоустройству Санкт-Петербурга" loading="lazy"></li>
         <li><img src="img/clients/agentstvo-vneshnego-transporta.png" alt="Агентство внешнего транспорта" loading="lazy"></li>
@@ -518,6 +624,7 @@
         <li><img src="img/clients/tyuz.png" alt="ТЮЗ" loading="lazy"></li>
         <li><img src="img/clients/soyuz-dizaynerov-spb.png" alt="Санкт-Петербургский Союз дизайнеров" loading="lazy"></li>
       </ul>
+      </div>
     </div>
   </section>
 
@@ -527,26 +634,31 @@
       <div class="section-head">
         <div>
           <p class="eyebrow">Новости</p>
-          <h2 class="h2 duo">
+          <h2 class="h2 duo duo--inline">
             <span>Проекты</span>
             <span class="duo__second">и&nbsp;события</span>
           </h2>
         </div>
+        <a class="btn btn--outline section-head__link" href="#news">Все новости</a>
       </div>
       <div class="news">
         <a class="news__card" href="#news">
           <div class="news__media"><img src="img/news/transport-reform.jpg" alt="Новые остановочные павильоны в Санкт-Петербурге" loading="lazy" width="1015" height="677"></div>
-          <span class="news__tag">Проекты</span>
-          <h3 class="news__title">Транспортная реформа в&nbsp;Санкт-Петербурге</h3>
+          <div class="news__body">
+            <span class="news__tag">Проекты</span>
+            <h3 class="news__title">Транспортная реформа в&nbsp;Санкт-Петербурге</h3>
+            <p class="news__text">Новые остановочные павильоны по&nbsp;адресной программе благоустройства Санкт-Петербурга.</p>
+            <span class="link-arrow">Читать</span>
+          </div>
         </a>
         <a class="news__card" href="#news">
           <div class="news__media"><img src="img/news/smarttransport.jpg" alt="Стенд на форуме SmartTransport" loading="lazy" width="933" height="623"></div>
-          <span class="news__tag">События</span>
-          <h3 class="news__title">Международный форум транспортной инфраструктуры «SmartTransport»</h3>
-        </a>
-        <a class="news__card news__card--all" href="#news">
-          <span class="news__all-title">Все новости</span>
-          <span class="link-arrow">Перейти в&nbsp;раздел</span>
+          <div class="news__body">
+            <span class="news__tag">События</span>
+            <h3 class="news__title">Международный форум транспортной инфраструктуры «SmartTransport»</h3>
+            <p class="news__text">Отраслевое мероприятие, на&nbsp;котором демонстрируют технологии для транспортной инфраструктуры.</p>
+            <span class="link-arrow">Читать</span>
+          </div>
         </a>
       </div>
     </div>

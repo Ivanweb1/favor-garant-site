@@ -32,6 +32,49 @@
     if (e.target.closest('a')) setMega(false);
   });
 
+  // Слева разделы — справа подразделы выбранного: переключение наведением и фокусом
+  const megaCats = [...mega.querySelectorAll('.mega__cat')];
+  const megaPanels = [...mega.querySelectorAll('.mega__panel')];
+  function showCat(key) {
+    megaCats.forEach((cat) => cat.classList.toggle('is-active', cat.dataset.cat === key));
+    megaPanels.forEach((panel) => { panel.hidden = panel.dataset.panel !== key; });
+  }
+  megaCats.forEach((cat) => {
+    cat.addEventListener('mouseenter', () => showCat(cat.dataset.cat));
+    cat.addEventListener('focus', () => showCat(cat.dataset.cat));
+  });
+
+  // Вкладки «Решения для заказчиков»
+  const tabs = [...document.querySelectorAll('.aud__tab')];
+  function selectTab(tab) {
+    tabs.forEach((t) => {
+      const on = t === tab;
+      t.setAttribute('aria-selected', String(on));
+      t.tabIndex = on ? 0 : -1;
+      document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
+    });
+  }
+  tabs.forEach((tab, i) => {
+    tab.addEventListener('click', () => selectTab(tab));
+    tab.addEventListener('keydown', (e) => {
+      const step = { ArrowDown: 1, ArrowRight: 1, ArrowUp: -1, ArrowLeft: -1 }[e.key];
+      if (!step) return;
+      e.preventDefault();
+      const next = tabs[(i + step + tabs.length) % tabs.length];
+      selectTab(next);
+      next.focus();
+    });
+  });
+
+  // Бегущая строка логотипов: вторая копия списка для бесшовной прокрутки
+  const marqueeTrack = document.querySelector('.marquee__track');
+  if (marqueeTrack) {
+    const copy = marqueeTrack.firstElementChild.cloneNode(true);
+    copy.setAttribute('aria-hidden', 'true');
+    copy.querySelectorAll('img').forEach((img) => { img.alt = ''; });
+    marqueeTrack.appendChild(copy);
+  }
+
   // Мобильное меню
   const burger = document.querySelector('.burger');
   const mobileMenu = document.getElementById('mobile-menu');
