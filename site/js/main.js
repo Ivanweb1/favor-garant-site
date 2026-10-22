@@ -45,6 +45,7 @@
   });
 
   // Вкладки: «Каталог» и «Решения для заказчиков» — каждый список вкладок переключается сам по себе
+  const hoverMedia = window.matchMedia('(hover: hover) and (min-width: 1081px)');
   document.querySelectorAll('[role="tablist"]').forEach((list) => {
     const tabs = [...list.querySelectorAll('[role="tab"]')];
     function selectTab(tab) {
@@ -61,6 +62,12 @@
         // на телефоне вкладки каталога листаются строкой — подтягиваем выбранную в зону видимости
         tab.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'smooth' });
       });
+      // разделы каталога на десктопе переключаются наведением, как в меню «Продукция»
+      if (list.classList.contains('showcase__tabs')) {
+        tab.addEventListener('mouseenter', () => {
+          if (hoverMedia.matches && tab.getAttribute('aria-selected') !== 'true') selectTab(tab);
+        });
+      }
       tab.addEventListener('keydown', (e) => {
         const step = { ArrowDown: 1, ArrowRight: 1, ArrowUp: -1, ArrowLeft: -1 }[e.key];
         if (!step) return;
