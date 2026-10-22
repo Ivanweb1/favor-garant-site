@@ -344,3 +344,37 @@ Composition: step back to a wider, less dramatic angle so the whole stele and th
 Light: bright late-summer day.
 Style: unretouched documentary photo, not CGI, true-to-life colors, no HDR, straight vertical lines.
 ```
+
+---
+
+## 6. Новости — 2 карточки
+
+Кадр: на десктопе фото слева в карточке, квадрат 1:1. На телефоне фото сверху 16:10 — от квадрата остаётся средняя полоса примерно 62% высоты.
+Значит: **главный объект целиком в средней полосе от 19% до 81% по высоте**, верх и низ — спокойные небо и асфальт или пол, их можно срезать. Текст на фото не кладём.
+
+Исходники — обложки новостей со старого сайта, на них вшит текст и рамка. Их надо убрать.
+Готовые файлы класть в `photos/ai/` под именами ниже.
+
+### 50-news-transport-reform — «Транспортная реформа в Санкт-Петербурге»
+Исходник: `source/50-news-transport-reform.jpg`.
+
+```
+Aspect ratio 1:1.
+Edit the attached image: use only the photo part on the right — the trolleybus at a bus stop with a glass shelter. Remove the white frame, all text, logos and graphic elements; extend the photo naturally to a square.
+Keep the scene as it is: the same modern trolleybus with its livery and the same glass bus shelter, city street with residential high-rise buildings. Make the shelter look clean and brand-new. Destination signs and route numbers become soft and unreadable.
+Composition: the shelter and the front half of the trolleybus are fully inside the middle band of the frame — between 20% and 80% of the height; the shelter is slightly right of center. The top 18% is calm sky with light clouds, the bottom 18% is clean asphalt and sidewalk with nothing important — these strips may be cropped.
+Light: clear late-summer day, soft sun.
+Style: unretouched documentary street photo, not CGI, true-to-life colors, no HDR glow, straight verticals, 35 mm lens.
+```
+
+### 51-news-smarttransport — «Форум SmartTransport»
+Исходник: `source/51-news-smarttransport.jpg`.
+
+```
+Aspect ratio 1:1.
+Edit the attached image: use only the photo part — the red-and-white tram on display at an exhibition hall. Remove the white frame, all text, logos and graphic elements; extend the photo naturally to a square.
+Keep the tram exactly as it is: same shape, red-and-white livery, lighting and the route display (make the display text soft and unreadable). Keep one or two visitors looking at the tram, the rest of the hall calm.
+Composition: step back so the front of the tram and its first doors are fully visible, inside the middle band of the frame — between 20% and 80% of the height; the tram nose slightly left of center. The top 18% is the calm, dimly lit exhibition ceiling, the bottom 18% is the clean floor of the stand with soft blue light — these strips may be cropped.
+Light: exhibition lighting, soft and even, no harsh glare.
+Style: unretouched documentary event photo, not CGI, true-to-life colors, no HDR glow, 35 mm lens.
+```
