@@ -593,9 +593,14 @@
         </div>
         <a class="btn btn--outline section-head__link" href="#works">Все работы</a>
       </div>
-      <div class="works">
-        <a class="work work--wide" href="#works">
-          <div class="work__media"><img src="img/photos/30-work-smart-stops.jpg" alt="Остановочный павильон SMART с картой города" loading="lazy" width="1400" height="933"></div>
+    </div>
+    <!-- Слайдер работ: лента выходит за правый край контейнера, листается стрелками, свайпом и перетаскиванием -->
+    <div class="works" aria-roledescription="карусель" aria-label="Наши работы">
+      <div class="works__track" tabindex="0">
+        <a class="work" href="#works">
+          <img class="work__img" src="img/photos/30-work-smart-stops.jpg" alt="Остановочный павильон SMART с картой города" loading="lazy" width="1400" height="933">
+          <span class="work__num">01</span>
+          <span class="work__go" aria-hidden="true"></span>
           <div class="work__body">
             <h3 class="work__title">Остановочные павильоны SMART</h3>
             <p class="work__text">Павильон с&nbsp;картой города и&nbsp;информационными экранами.</p>
@@ -603,7 +608,9 @@
           </div>
         </a>
         <a class="work" href="#works">
-          <div class="work__media"><img src="img/photos/31-work-stele-gatchina.jpg" alt="Въездная стела «Гатчина — город воинской славы»" loading="lazy" width="1400" height="933"></div>
+          <img class="work__img" src="img/photos/31-work-stele-gatchina.jpg" alt="Въездная стела «Гатчина — город воинской славы»" loading="lazy" width="1400" height="933">
+          <span class="work__num">02</span>
+          <span class="work__go" aria-hidden="true"></span>
           <div class="work__body">
             <h3 class="work__title">Въездная стела «Гатчина»</h3>
             <p class="work__text">Стела на&nbsp;въезде в&nbsp;город с&nbsp;гербами.</p>
@@ -611,7 +618,9 @@
           </div>
         </a>
         <a class="work" href="#works">
-          <div class="work__media"><img src="img/photos/32-work-stele-ponsse.jpg" alt="Монтаж бренд-стелы PONSSE" loading="lazy" width="1400" height="933"></div>
+          <img class="work__img" src="img/photos/32-work-stele-ponsse.jpg" alt="Монтаж бренд-стелы PONSSE" loading="lazy" width="1400" height="933">
+          <span class="work__num">03</span>
+          <span class="work__go" aria-hidden="true"></span>
           <div class="work__body">
             <h3 class="work__title">Бренд-стела PONSSE</h3>
             <p class="work__text">Изготовление и&nbsp;монтаж стелы бренда.</p>
@@ -619,7 +628,9 @@
           </div>
         </a>
         <a class="work" href="#works">
-          <div class="work__media"><img src="img/photos/33-work-pylon-smart.jpg" alt="Информационный пилон SMART" loading="lazy" width="1400" height="933"></div>
+          <img class="work__img" src="img/photos/33-work-pylon-smart.jpg" alt="Информационный пилон SMART" loading="lazy" width="1400" height="933">
+          <span class="work__num">04</span>
+          <span class="work__go" aria-hidden="true"></span>
           <div class="work__body">
             <h3 class="work__title">Информационный пилон SMART</h3>
             <p class="work__text">Пилон с&nbsp;картой и&nbsp;электронным табло.</p>
@@ -627,21 +638,37 @@
           </div>
         </a>
         <a class="work" href="#works">
-          <div class="work__media"><img src="img/photos/34-work-shooting-range.jpg" alt="Павильон стрелкового комплекса" loading="lazy" width="1400" height="933"></div>
+          <img class="work__img" src="img/photos/34-work-shooting-range.jpg" alt="Павильон стрелкового комплекса" loading="lazy" width="1400" height="933">
+          <span class="work__num">05</span>
+          <span class="work__go" aria-hidden="true"></span>
           <div class="work__body">
             <h3 class="work__title">Стрелковый комплекс</h3>
             <p class="work__text">Павильон и&nbsp;оборудование для стендовой стрельбы.</p>
             <ul class="tags"><li>Стрельбища</li></ul>
           </div>
         </a>
-        <a class="work work--wide" href="#works">
-          <div class="work__media"><img src="img/photos/35-work-tumba-street.jpg" alt="Круглая рекламная тумба на городской улице" loading="lazy" width="1400" height="933"></div>
+        <a class="work" href="#works">
+          <img class="work__img" src="img/photos/35-work-tumba-street.jpg" alt="Круглая рекламная тумба на городской улице" loading="lazy" width="1400" height="933">
+          <span class="work__num">06</span>
+          <span class="work__go" aria-hidden="true"></span>
           <div class="work__body">
             <h3 class="work__title">Круглая рекламная тумба</h3>
             <p class="work__text">Тумба с&nbsp;внутренней подсветкой на&nbsp;городской улице.</p>
             <ul class="tags"><li>Рекламные тумбы</li></ul>
           </div>
         </a>
+      </div>
+    </div>
+    <div class="container works__bar">
+      <div class="works__progress" aria-hidden="true"><span></span></div>
+      <p class="works__count"><b>01</b>&nbsp;/&nbsp;06</p>
+      <div class="works__nav">
+        <button class="works__btn works__btn--prev" type="button" aria-label="Предыдущая работа">
+          <svg width="18" height="10" viewBox="0 0 18 10" aria-hidden="true"><path d="M18 5H2M6 1L2 5l4 4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+        </button>
+        <button class="works__btn works__btn--next" type="button" aria-label="Следующая работа">
+          <svg width="18" height="10" viewBox="0 0 18 10" aria-hidden="true"><path d="M0 5h16M12 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+        </button>
       </div>
     </div>
   </section>

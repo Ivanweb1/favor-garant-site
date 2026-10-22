@@ -166,6 +166,69 @@
     show(0);
   }
 
+  // Слайдер «Наши работы»: стрелки, счётчик, полоска прогресса, перетаскивание мышью
+  const worksTrack = document.querySelector('.works__track');
+  if (worksTrack) {
+    const cards = [...worksTrack.querySelectorAll('.work')];
+    const prevBtn = document.querySelector('.works__btn--prev');
+    const nextBtn = document.querySelector('.works__btn--next');
+    const countNow = document.querySelector('.works__count b');
+    const bar = document.querySelector('.works__progress span');
+
+    const step = () => cards[1].offsetLeft - cards[0].offsetLeft;
+    const maxScroll = () => worksTrack.scrollWidth - worksTrack.clientWidth;
+
+    function update() {
+      const max = maxScroll();
+      const left = worksTrack.scrollLeft;
+      // у конца ленты последние карточки не встают к краю — считаем, что показана последняя
+      const index = left >= max - 4 ? cards.length - 1 : Math.round(left / step());
+      countNow.textContent = String(index + 1).padStart(2, '0');
+      const visible = worksTrack.clientWidth / worksTrack.scrollWidth;
+      bar.style.width = visible * 100 + '%';
+      bar.style.left = (max ? left / max : 0) * (1 - visible) * 100 + '%';
+      prevBtn.disabled = left <= 4;
+      nextBtn.disabled = left >= max - 4;
+    }
+
+    prevBtn.addEventListener('click', () => worksTrack.scrollBy({ left: -step(), behavior: 'smooth' }));
+    nextBtn.addEventListener('click', () => worksTrack.scrollBy({ left: step(), behavior: 'smooth' }));
+    worksTrack.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+
+    // перетаскивание мышью; на тач-устройствах лента листается нативно
+    let dragX = null;
+    let dragLeft = 0;
+    let moved = false;
+    worksTrack.addEventListener('pointerdown', (e) => {
+      if (e.pointerType !== 'mouse' || e.button !== 0) return;
+      dragX = e.clientX;
+      dragLeft = worksTrack.scrollLeft;
+      moved = false;
+    });
+    window.addEventListener('pointermove', (e) => {
+      if (dragX === null) return;
+      const dx = e.clientX - dragX;
+      if (!moved && Math.abs(dx) < 5) return;
+      moved = true;
+      worksTrack.classList.add('is-dragging');
+      worksTrack.scrollLeft = dragLeft - dx;
+    });
+    window.addEventListener('pointerup', () => {
+      if (dragX === null) return;
+      dragX = null;
+      if (!moved) return;
+      // после отпускания доводим до ближайшей карточки
+      const target = Math.min(maxScroll(), Math.round(worksTrack.scrollLeft / step()) * step());
+      worksTrack.classList.remove('is-dragging');
+      worksTrack.scrollTo({ left: target, behavior: 'smooth' });
+    });
+    // клик по карточке после перетаскивания не считается переходом
+    worksTrack.addEventListener('click', (e) => { if (moved) { e.preventDefault(); moved = false; } }, true);
+
+    update();
+  }
+
   // Имя прикреплённого файла
   const fileInput = document.querySelector('.file__input');
   const fileName = document.querySelector('.file__name');

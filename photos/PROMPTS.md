@@ -378,3 +378,48 @@ Composition: step back so the front of the tram and its first doors are fully vi
 Light: exhibition lighting, soft and even, no harsh glare.
 Style: unretouched documentary event photo, not CGI, true-to-life colors, no HDR glow, 35 mm lens.
 ```
+
+---
+
+## 7. Меню «Продукция» — вертикальные кадры (4:5)
+
+В меню фото стоит в вертикальной рамке 360×430. Горизонтальные кадры каталога 4:3 там обрезаются до 63% ширины, и у трёх разделов конструкция не помещается: вышка стрельбища, навес для мотоцикла и скамья. Для меню делаем отдельные вертикальные версии. Карточки каталога остаются на старых файлах.
+
+Исходник — уже готовый ИИ-кадр из `site/img/photos/`, чтобы конструкция совпадала с каталогом. Готовый файл кладём в `photos/ai/` под новым именем.
+
+Безопасная зона: рамка меню срезает до ~4% сверху и снизу, края кадра могут попасть под скругление, поэтому конструкция целиком внутри центральных 80% ширины и 85% высоты.
+
+### 14-menu-shooting — Оборудование для стрельбищ (4:5)
+Исходник: `site/img/photos/14-cat-shooting.jpg`.
+
+```
+Aspect ratio 4:5, vertical.
+Edit the attached photo and recompose it as a vertical frame. Keep the steel trap tower, the throwing machine inside it and the platform roof exactly as they are: same structure, proportions and dark paint — do not redesign them. No text or logos.
+Composition: step back so the whole tower fits, from the roof to the ground, centered horizontally, about 70% of the frame height. Nothing of the tower or the platform is cut by the frame edges: keep at least 10% of calm space on the left and right and 8% at the top and bottom. Birch forest behind, softly out of focus; sky visible above the roof.
+Light: early-autumn day, soft sun, a few golden leaves. No people.
+Style: photorealistic, not CGI, natural colors, slightly cool neutral grade, sharp, straight verticals.
+```
+
+### 15-menu-custom — Нестандартные конструкции (4:5)
+Исходник: `site/img/photos/15-cat-custom.jpg`.
+
+```
+Aspect ratio 4:5, vertical.
+Edit the attached photo and recompose it as a vertical frame. Keep the fan-shaped motorcycle shelter exactly as it is: same segmented amber polycarbonate shell, dark steel ribs, base platform and proportions — do not redesign it. Keep the motorcycle inside. No text or logos.
+Composition: shoot from a three-quarter angle from the open side so the shelter is narrower in the frame. The shelter with the motorcycle is centered, about 75% of the frame width, fully visible including the base platform; at least 10% of calm space on the left and right. Lower half: clean paving; upper part: the modern low house and garden softly out of focus and a strip of sky.
+Light: late-summer afternoon, warm low sun shining through the amber shell.
+Style: photorealistic architectural photography, not CGI, natural colors, sharp, straight verticals.
+```
+
+### 16-menu-maf — Малые архитектурные формы (4:5)
+Исходник: `site/img/photos/16-cat-maf.jpg`.
+
+```
+Aspect ratio 4:5, vertical.
+Edit the attached photo and recompose it as a vertical frame. Keep the bench exactly as it is: same wooden slats, dark steel legs and armrests, proportions — do not redesign it. Keep the dark steel bollard with the chain only if it fits without touching the frame edges. No text or logos.
+Composition: a steeper three-quarter view, looking along the bench, so its full length fits: the whole bench, both armrests and all legs, centered, about 75% of the frame width, in the lower half of the frame; at least 10% of calm space on the left and right. Wooden deck in the foreground, the pond, trees and the small bridge behind, softly out of focus, sky in the upper part.
+Light: late-summer morning, soft sun. No people.
+Style: photorealistic, not CGI, natural colors, slightly cool neutral grade, sharp.
+```
+
+Павильоны (10) и щиты (13) в меню помещаются, но впритык. Если после трёх новых кадров они будут выделяться, по тому же принципу сделаем `10-menu-pavilions` и `13-menu-billboards`.
