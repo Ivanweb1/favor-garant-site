@@ -520,3 +520,20 @@ Edit the attached photo and extend it to a wide frame. Keep the information pylo
 Setting: a square with lawn and flowers in front of a historic Stalin-era building, softly out of focus. Light: late-summer day. No people, no cars.
 [общий хвост]
 ```
+
+---
+
+## 9. Слайдер первого экрана — кадр «Полный цикл» (21:9)
+
+Слайдер теперь идёт по четырём акцентам брифа (п. 04): российское производство → свой парк оборудования → нестандартные конструкции → полный цикл. Для последнего слайда стоит кадр монтажа 4:3, и в широком слайде у него срезается крыша павильона. Нужна широкая версия.
+
+### 45-slide-installation — Полный цикл: от идеи до монтажа (21:9)
+Исходник: `site/img/photos/24-prod-installation.jpg`. Готовый файл — `photos/ai/45-slide-installation.jpg`.
+
+```
+Aspect ratio 21:9.
+Edit the attached photo and extend it to a wide frame. Keep the installation crew in orange vests, the bus shelter frame they are assembling, the flatbed truck with glass panels and the city street exactly as they are — do not redesign them.
+Composition: step back so the whole shelter frame including its roof is fully visible, standing slightly right of center, about 55% of the frame height, with at least 20% of calm sky above the roof and paving below. The left third is calm street and buildings, softly out of focus — a caption will sit there at the bottom left.
+Light: late-summer overcast day, soft even light.
+Style: photorealistic, not CGI, natural colors, slightly cool neutral grade, sharp, straight verticals. No text or logos.
+```
