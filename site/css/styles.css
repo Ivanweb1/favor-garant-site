@@ -314,44 +314,52 @@ button, input, select, textarea { font: inherit; color: inherit; }
 
 /* ---------- 2. Каталог ---------- */
 
-/* Каталог: павильоны — широкая карточка на всю строку (фото + модели), ниже 8 компактных карточек */
-.catalog { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
-.card {
-  display: flex; flex-direction: column;
+/* Каталог вкладками: слева 8 разделов, справа витрина выбранного — фото, описание, подразделы */
+.showcase { display: grid; grid-template-columns: minmax(0, 320px) minmax(0, 1fr); gap: 20px; }
+.showcase__side { display: flex; flex-direction: column; gap: 20px; }
+.showcase__tabs { display: grid; gap: 4px; }
+.showcase__tab {
+  display: grid; grid-template-columns: 44px minmax(0, 1fr) 9px; align-items: center; column-gap: 14px;
+  padding: 10px 16px 10px 10px; text-align: left;
+  border: 0; border-radius: 12px; background: transparent; font: inherit;
+  cursor: pointer; transition: background-color .2s ease;
+}
+.showcase__tab:hover { background: #F5F6F8; }
+.showcase__tab::after {
+  content: ""; width: 9px; height: 10px; background: var(--grey);
+  -webkit-mask: var(--arrow) center / contain no-repeat; mask: var(--arrow) center / contain no-repeat;
+  opacity: .6; transition: transform .2s ease, opacity .2s ease, background-color .2s ease;
+}
+.showcase__icon { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 10px; background: var(--light); }
+.showcase__icon img { width: 26px; height: auto; }
+.showcase__name { font-size: 15px; line-height: 1.3; font-weight: 600; color: var(--navy); }
+/* активный раздел — синей плашкой, чтобы не путать с вкладками «Решения для заказчиков» */
+.showcase__tab[aria-selected="true"] { background: var(--navy); }
+.showcase__tab[aria-selected="true"] .showcase__icon { background: var(--white); }
+.showcase__tab[aria-selected="true"] .showcase__name { color: var(--white); }
+.showcase__tab[aria-selected="true"]::after { background: var(--white); opacity: 1; transform: rotate(-45deg); }
+.showcase__cta {
+  display: grid; gap: 8px; justify-items: start; margin-top: auto; padding: 22px;
+  border-radius: var(--radius); background: var(--light);
+}
+.showcase__cta-title { font-size: 17px; line-height: 1.3; font-weight: 700; color: var(--navy); }
+.showcase__cta-text { margin-bottom: 6px; font-size: 13px; color: var(--muted); }
+.showcase__cta:hover .showcase__cta-title { color: var(--red); }
+.showcase__panel {
+  display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); min-height: 540px;
   overflow: hidden; border: 1px solid var(--line); border-radius: var(--radius);
-  background: var(--white);
-  transition: border-color .2s ease, box-shadow .2s ease;
+  animation: showcase-in .4s ease;
 }
-.card:hover { border-color: rgba(42, 37, 96, .3); box-shadow: 0 18px 40px -24px rgba(23, 22, 43, .35); }
-.card__media { display: block; overflow: hidden; background: var(--light); }
-.card__media img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; transition: transform .5s ease; }
-.card:hover .card__media img { transform: scale(1.03); }
-.card__body { display: grid; gap: 6px; align-content: start; padding: 16px 20px 20px; }
-.card__title { font-size: 17px; line-height: 1.3; font-weight: 700; color: var(--navy); }
-.card__text { font-size: 13px; color: var(--muted); }
-/* малые карточки каталога: стрелка справа от заголовка, ниже подразделы чипами */
-.card:not(.card--big):not(.card--cta) .card__body { grid-template-columns: minmax(0, 1fr) auto; column-gap: 12px; }
-.card:not(.card--big):not(.card--cta) .card__title { grid-column: 1; grid-row: 1; align-self: center; }
-.card .chips { grid-column: 1 / -1; align-self: start; margin-top: 6px; }
-.card__go {
-  grid-column: 2; grid-row: 1; display: grid; place-items: center; width: 36px; height: 36px;
-  border: 1px solid rgba(42, 37, 96, .14); border-radius: 50%; color: var(--navy);
-  transition: background-color .2s ease, color .2s ease, border-color .2s ease;
-}
-.card__go::before { content: ""; width: 9px; height: 10px; flex: none; background: currentColor; -webkit-mask: var(--arrow) center / contain no-repeat; mask: var(--arrow) center / contain no-repeat; transition: transform .2s ease; }
-.card:hover .card__go::before { transform: rotate(-45deg); }
-.card:hover .card__go { background: var(--navy); border-color: var(--navy); color: var(--white); }
-
-.card--big { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
-.card--big:hover { box-shadow: none; }
-/* фото заполняет всю левую половину карточки — без серой полосы снизу, когда текст выше фото */
-.card--big .card__media { position: relative; min-height: 340px; }
-.card--big .card__media img { position: absolute; inset: 0; height: 100%; aspect-ratio: auto; }
-.card--big .card__body { gap: 14px; align-content: center; padding: clamp(24px, 3vw, 44px); }
-.card__kicker { font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--grey); }
-.card--big .card__title { font-size: clamp(24px, 2.4vw, 32px); line-height: 1.15; }
-.card--big .card__title a:hover { color: var(--red); }
-.card--big .card__text { font-size: 15px; max-width: 520px; }
+.showcase__panel[hidden] { display: none; }
+@keyframes showcase-in { from { opacity: 0; } }
+.showcase__media { position: relative; overflow: hidden; background: var(--light); }
+/* кадры и точки кадрирования те же, что в меню «Продукция» */
+.showcase__media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: var(--pos, 50% 50%); transition: transform .6s ease; }
+.showcase__media:hover img { transform: scale(1.03); }
+.showcase__body { display: grid; gap: 14px; align-content: center; justify-items: start; padding: clamp(24px, 3vw, 44px); }
+.showcase__kicker { font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--grey); }
+.showcase__title { font-size: clamp(24px, 2.4vw, 32px); line-height: 1.15; font-weight: 700; color: var(--navy); }
+.showcase__text { max-width: 520px; font-size: 15px; color: var(--muted); }
 .card__models { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
 .card__models a {
   display: block; padding: 6px 12px; border: 1px solid var(--line); border-radius: 999px;
@@ -361,15 +369,6 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .card__models a:hover { border-color: var(--navy); background: var(--light); }
 .card__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 28px; margin-top: 10px; }
 
-.card--cta { background: var(--navy); border-color: var(--navy); justify-content: space-between; }
-.card__icon {
-  display: grid; place-items: center; width: 48px; height: 48px; margin: 22px 22px 0;
-  border: 1px solid rgba(255, 255, 255, .3); border-radius: 50%; color: var(--white);
-}
-.card__icon svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linejoin: round; stroke-linecap: round; }
-.card--cta .card__body { gap: 10px; padding: 22px 22px; margin-top: auto; }
-.card--cta .card__title { color: var(--white); font-size: 19px; }
-.card--cta .card__text { color: #C9C7E6; }
 
 /* ---------- 3. Для кого — вкладки ---------- */
 
@@ -442,9 +441,6 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .tile .chips li { background: rgba(255, 255, 255, .1); color: var(--white); }
 .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
 .chips li { padding: 5px 11px; border-radius: 999px; background: #F5F6F8; font-size: 12px; font-weight: 500; color: var(--navy); white-space: nowrap; }
-/* в карточках каталога чипы в одну строку: что не влезло, прячет JS и показывает «+N» */
-.catalog .chips { flex-wrap: nowrap; overflow: hidden; }
-.chips .chips__more { background: transparent; border: 1px solid var(--line); color: var(--muted); }
 
 /* Этапы перед формой заявки: одна панель — слева вводная и кнопка, справа таймлайн с крупными номерами */
 .steps {
@@ -681,10 +677,17 @@ select.field__input { appearance: none; padding-right: 40px; background: var(--w
   .usp__item:nth-child(even) { border-left: 1px solid var(--line); }
   .usp__item:nth-child(even) { padding-right: 0; }
   .usp__item:nth-child(n + 3) { border-top: 1px solid var(--line); }
-  .catalog { grid-template-columns: repeat(2, 1fr); }
-  .card--big { grid-template-columns: 1fr; }
-  .card--big .card__media { min-height: 0; }
-  .card--big .card__media img { position: static; height: auto; aspect-ratio: 16 / 9; }
+  .showcase { grid-template-columns: minmax(0, 1fr); }
+  .showcase__tabs { display: flex; gap: 8px; margin: 0 calc(var(--gutter) * -1); padding: 0 var(--gutter); overflow-x: auto; scrollbar-width: none; }
+  .showcase__tabs::-webkit-scrollbar { display: none; }
+  .showcase__tab { flex: none; grid-template-columns: 32px auto; column-gap: 10px; padding: 6px 14px 6px 6px; border: 1px solid var(--line); border-radius: 999px; }
+  .showcase__tab::after { content: none; }
+  .showcase__icon { width: 32px; height: 32px; border-radius: 50%; }
+  .showcase__icon img { width: 20px; }
+  .showcase__name { font-size: 14px; white-space: nowrap; }
+  .showcase__cta { display: none; }
+  .showcase__panel { grid-template-columns: minmax(0, 1fr); min-height: 0; }
+  .showcase__media img { position: static; height: auto; aspect-ratio: 16 / 9; }
   .aud { grid-template-columns: 1fr; }
   .bento { grid-template-columns: 1fr 1fr; }
   .tile--tall { grid-column: span 2; grid-row: auto; }
@@ -710,8 +713,7 @@ select.field__input { appearance: none; padding-right: 40px; background: var(--w
   .usp__item + .usp__item { border-top: 1px solid var(--line); }
   .usp__title { margin-top: 16px; }
   .usp__text { min-height: 0; }
-  .catalog { grid-template-columns: 1fr; gap: 16px; }
-  .card--big .card__media img { aspect-ratio: 4 / 3; }
+  .showcase__media img { aspect-ratio: 4 / 3; }
   .aud__tabs { grid-template-columns: 1fr; }
   .aud__panel { grid-template-columns: 1fr; }
   .aud__media img { min-height: 0; aspect-ratio: 16 / 10; }

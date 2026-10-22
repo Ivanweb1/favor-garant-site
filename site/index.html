@@ -320,13 +320,55 @@
         <a class="btn btn--outline section-head__link" href="#catalog">Весь каталог</a>
       </div>
 
-      <div class="catalog">
-        <div class="card card--big">
-          <a class="card__media" href="#catalog"><img src="img/photos/10-cat-pavilions.jpg" alt="Закрытый остановочный павильон" loading="lazy" width="1254" height="1254"></a>
-          <div class="card__body">
-            <span class="card__kicker">Основное направление</span>
-            <h3 class="card__title"><a href="#catalog">Остановочные павильоны</a></h3>
-            <p class="card__text">Умные павильоны с&nbsp;современным дизайном для ожидания общественного транспорта: открытые, закрытые, SMART и&nbsp;для маломобильных групп.</p>
+      <!-- Каталог вкладками: слева разделы, справа витрина выбранного -->
+      <div class="showcase">
+        <div class="showcase__side">
+          <div class="showcase__tabs" role="tablist" aria-label="Разделы каталога">
+            <button class="showcase__tab" type="button" role="tab" id="cat-tab-pav" aria-controls="cat-panel-pav" aria-selected="true">
+              <span class="showcase__icon"><img src="img/icons/line-pavilion.svg" alt="" width="36" height="20"></span>
+              <span class="showcase__name">Остановочные павильоны</span>
+            </button>
+            <button class="showcase__tab" type="button" role="tab" id="cat-tab-tumb" aria-controls="cat-panel-tumb" aria-selected="false" tabindex="-1">
+              <span class="showcase__icon"><img src="img/icons/line-tumba.svg" alt="" width="36" height="20"></span>
+              <span class="showcase__name">Рекламные тумбы</span>
+            </button>
+            <button class="showcase__tab" type="button" role="tab" id="cat-tab-light" aria-controls="cat-panel-light" aria-selected="false" tabindex="-1">
+              <span class="showcase__icon"><img src="img/icons/line-lightbox.svg" alt="" width="36" height="20"></span>
+              <span class="showcase__name">Лайтпостеры</span>
+            </button>
+            <button class="showcase__tab" type="button" role="tab" id="cat-tab-bill" aria-controls="cat-panel-bill" aria-selected="false" tabindex="-1">
+              <span class="showcase__icon"><img src="img/icons/line-billboard.svg" alt="" width="36" height="20"></span>
+              <span class="showcase__name">Рекламные щиты</span>
+            </button>
+            <button class="showcase__tab" type="button" role="tab" id="cat-tab-shoot" aria-controls="cat-panel-shoot" aria-selected="false" tabindex="-1">
+              <span class="showcase__icon"><img src="img/icons/line-shooting.svg" alt="" width="36" height="20"></span>
+              <span class="showcase__name">Оборудование для&nbsp;стрельбищ</span>
+            </button>
+            <button class="showcase__tab" type="button" role="tab" id="cat-tab-custom" aria-controls="cat-panel-custom" aria-selected="false" tabindex="-1">
+              <span class="showcase__icon"><img src="img/icons/line-custom.svg" alt="" width="36" height="20"></span>
+              <span class="showcase__name">Нестандартные конструкции</span>
+            </button>
+            <button class="showcase__tab" type="button" role="tab" id="cat-tab-maf" aria-controls="cat-panel-maf" aria-selected="false" tabindex="-1">
+              <span class="showcase__icon"><img src="img/icons/line-maf.svg" alt="" width="36" height="20"></span>
+              <span class="showcase__name">Малые архитектурные формы</span>
+            </button>
+            <button class="showcase__tab" type="button" role="tab" id="cat-tab-nav" aria-controls="cat-panel-nav" aria-selected="false" tabindex="-1">
+              <span class="showcase__icon"><img src="img/icons/line-navigation.svg" alt="" width="36" height="20"></span>
+              <span class="showcase__name">Навигация</span>
+            </button>
+          </div>
+          <a class="showcase__cta" href="#request-form">
+            <span class="showcase__cta-title">Не&nbsp;нашли нужную конструкцию?</span>
+            <span class="showcase__cta-text">Пришлите эскиз или ТЗ&nbsp;— спроектируем и&nbsp;изготовим.</span>
+            <span class="link-arrow">Отправить ТЗ</span>
+          </a>
+        </div>
+        <div class="showcase__panel" role="tabpanel" id="cat-panel-pav" aria-labelledby="cat-tab-pav">
+          <a class="showcase__media" href="#catalog" tabindex="-1"><img src="img/photos/10-cat-pavilions.jpg" style="--pos: 50% 50%" alt="Закрытый остановочный павильон" loading="lazy" width="1400" height="1050"></a>
+          <div class="showcase__body">
+            <span class="showcase__kicker">Основное направление</span>
+            <h3 class="showcase__title">Остановочные павильоны</h3>
+            <p class="showcase__text">Умные павильоны с&nbsp;современным дизайном для ожидания общественного транспорта: открытые, закрытые, SMART и&nbsp;для маломобильных групп.</p>
             <ul class="card__models">
               <li><a href="#catalog">Элегант</a></li>
               <li><a href="#catalog">Стандарт</a></li>
@@ -348,70 +390,113 @@
             </div>
           </div>
         </div>
-        <a class="card" href="#catalog">
-          <div class="card__media"><img src="img/photos/11-cat-tumby.jpg" alt="Круглая рекламная тумба" loading="lazy" width="1400" height="1050"></div>
-          <div class="card__body">
-            <h3 class="card__title">Рекламные тумбы</h3>
-            <ul class="chips"><li>Круглая</li><li>Плоская</li><li>Вогнутая</li></ul>
-            <span class="card__go" aria-hidden="true"></span>
+        <div class="showcase__panel" role="tabpanel" id="cat-panel-tumb" aria-labelledby="cat-tab-tumb" hidden>
+          <a class="showcase__media" href="#catalog" tabindex="-1"><img src="img/photos/11-cat-tumby.jpg" style="--pos: 100% 50%" alt="Круглая рекламная тумба" loading="lazy" width="1400" height="1050"></a>
+          <div class="showcase__body">
+            <h3 class="showcase__title">Рекламные тумбы</h3>
+            <p class="showcase__text">Тумбы с внутренней светодиодной подсветкой.</p>
+            <ul class="card__models">
+              <li><a href="#catalog">Круглая</a></li>
+              <li><a href="#catalog">Плоская</a></li>
+              <li><a href="#catalog">Вогнутая</a></li>
+            </ul>
+            <div class="card__actions">
+              <a class="btn btn--primary" href="#catalog">Смотреть раздел</a>
+            </div>
           </div>
-        </a>
-        <a class="card" href="#catalog">
-          <div class="card__media"><img src="img/photos/12-cat-lightposters.jpg" alt="Лайтпостер у исторического здания" loading="lazy" width="1400" height="1050"></div>
-          <div class="card__body">
-            <h3 class="card__title">Лайтпостеры</h3>
-            <ul class="chips"><li>Сити-формат</li><li>2 поверхности</li><li>LED-подсветка</li></ul>
-            <span class="card__go" aria-hidden="true"></span>
+        </div>
+        <div class="showcase__panel" role="tabpanel" id="cat-panel-light" aria-labelledby="cat-tab-light" hidden>
+          <a class="showcase__media" href="#catalog" tabindex="-1"><img src="img/photos/12-cat-lightposters.jpg" style="--pos: 50% 50%" alt="Лайтпостер у исторического здания" loading="lazy" width="1400" height="1050"></a>
+          <div class="showcase__body">
+            <h3 class="showcase__title">Лайтпостеры</h3>
+            <p class="showcase__text">Конструкции сити-формата с двумя информационными поверхностями и подсветкой.</p>
+            <ul class="card__models">
+              <li><a href="#catalog">Сити-формат</a></li>
+              <li><a href="#catalog">2 поверхности</a></li>
+              <li><a href="#catalog">LED-подсветка</a></li>
+            </ul>
+            <div class="card__actions">
+              <a class="btn btn--primary" href="#catalog">Смотреть раздел</a>
+            </div>
           </div>
-        </a>
-        <a class="card" href="#catalog">
-          <div class="card__media"><img src="img/photos/13-cat-billboards.jpg" alt="Рекламный щит" loading="lazy" width="1400" height="1050"></div>
-          <div class="card__body">
-            <h3 class="card__title">Рекламные щиты</h3>
-            <ul class="chips"><li>Щит</li><li>Триборд</li><li>Тривижн®</li><li>Скроллер</li></ul>
-            <span class="card__go" aria-hidden="true"></span>
+        </div>
+        <div class="showcase__panel" role="tabpanel" id="cat-panel-bill" aria-labelledby="cat-tab-bill" hidden>
+          <a class="showcase__media" href="#catalog" tabindex="-1"><img src="img/photos/13-cat-billboards.jpg" style="--pos: 0% 50%" alt="Рекламный щит" loading="lazy" width="1400" height="1050"></a>
+          <div class="showcase__body">
+            <h3 class="showcase__title">Рекламные щиты</h3>
+            <p class="showcase__text">Несущие конструкции для рекламы и городской информации.</p>
+            <ul class="card__models">
+              <li><a href="#catalog">Щит</a></li>
+              <li><a href="#catalog">Триборд</a></li>
+              <li><a href="#catalog">Тривижн®</a></li>
+              <li><a href="#catalog">Скроллер</a></li>
+            </ul>
+            <div class="card__actions">
+              <a class="btn btn--primary" href="#catalog">Смотреть раздел</a>
+            </div>
           </div>
-        </a>
-        <a class="card" href="#catalog">
-          <div class="card__media"><img src="img/photos/14-cat-shooting.jpg" alt="Вышка с метательной машинкой на стрельбище" loading="lazy" width="1400" height="1050"></div>
-          <div class="card__body">
-            <h3 class="card__title">Оборудование для&nbsp;стрельбищ</h3>
-            <ul class="chips"><li>Пирамиды для ружей</li><li>Ракушки</li></ul>
-            <span class="card__go" aria-hidden="true"></span>
+        </div>
+        <div class="showcase__panel" role="tabpanel" id="cat-panel-shoot" aria-labelledby="cat-tab-shoot" hidden>
+          <a class="showcase__media" href="#catalog" tabindex="-1"><picture><source media="(max-width: 1080px)" srcset="img/photos/14-cat-shooting.jpg" width="1400" height="1050"><img src="img/photos/14-menu-shooting.jpg" style="--pos: 50% 50%" alt="Вышка с метательной машинкой на стрельбище" loading="lazy" width="1120" height="1400"></picture></a>
+          <div class="showcase__body">
+            <h3 class="showcase__title">Оборудование для&nbsp;стрельбищ</h3>
+            <p class="showcase__text">Конструкции для стендовой стрельбы по требованиям международной федерации.</p>
+            <ul class="card__models">
+              <li><a href="#catalog">Пирамиды для ружей</a></li>
+              <li><a href="#catalog">Ракушки</a></li>
+            </ul>
+            <div class="card__actions">
+              <a class="btn btn--primary" href="#catalog">Смотреть раздел</a>
+            </div>
           </div>
-        </a>
-        <a class="card" href="#catalog">
-          <div class="card__media"><img src="img/photos/15-cat-custom.jpg" alt="Навес для мотоцикла индивидуального дизайна" loading="lazy" width="1400" height="1050"></div>
-          <div class="card__body">
-            <h3 class="card__title">Нестандартные конструкции</h3>
-            <ul class="chips"><li>По эскизу</li><li>По чертежам</li><li>Нержавейка, латунь</li></ul>
-            <span class="card__go" aria-hidden="true"></span>
+        </div>
+        <div class="showcase__panel" role="tabpanel" id="cat-panel-custom" aria-labelledby="cat-tab-custom" hidden>
+          <a class="showcase__media" href="#catalog" tabindex="-1"><picture><source media="(max-width: 1080px)" srcset="img/photos/15-cat-custom.jpg" width="1400" height="1050"><img src="img/photos/15-menu-custom.jpg" style="--pos: 50% 50%" alt="Навес для мотоцикла индивидуального дизайна" loading="lazy" width="1120" height="1400"></picture></a>
+          <div class="showcase__body">
+            <h3 class="showcase__title">Нестандартные конструкции</h3>
+            <p class="showcase__text">Металлоконструкции по эскизам и чертежам заказчика — от деталей до сборки готовых изделий.</p>
+            <ul class="card__models">
+              <li><a href="#catalog">По эскизу</a></li>
+              <li><a href="#catalog">По чертежам</a></li>
+              <li><a href="#catalog">Нержавейка, латунь</a></li>
+            </ul>
+            <div class="card__actions">
+              <a class="btn btn--primary" href="#catalog">Смотреть раздел</a>
+            </div>
           </div>
-        </a>
-        <a class="card" href="#catalog">
-          <div class="card__media"><img src="img/photos/16-cat-maf.jpg" alt="Парковая скамья" loading="lazy" width="1400" height="1050"></div>
-          <div class="card__body">
-            <h3 class="card__title">Малые архитектурные формы</h3>
-            <ul class="chips"><li>Кабинки</li><li>Павильоны</li><li>Скамьи</li><li>Книжный шкаф</li></ul>
-            <span class="card__go" aria-hidden="true"></span>
+        </div>
+        <div class="showcase__panel" role="tabpanel" id="cat-panel-maf" aria-labelledby="cat-tab-maf" hidden>
+          <a class="showcase__media" href="#catalog" tabindex="-1"><picture><source media="(max-width: 1080px)" srcset="img/photos/16-cat-maf.jpg" width="1400" height="1050"><img src="img/photos/16-menu-maf.jpg" style="--pos: 50% 50%" alt="Парковая скамья" loading="lazy" width="1120" height="1400"></picture></a>
+          <div class="showcase__body">
+            <h3 class="showcase__title">Малые архитектурные формы</h3>
+            <p class="showcase__text">Элементы городской среды.</p>
+            <ul class="card__models">
+              <li><a href="#catalog">Кабинки</a></li>
+              <li><a href="#catalog">Павильоны</a></li>
+              <li><a href="#catalog">Скамьи</a></li>
+              <li><a href="#catalog">Книжный шкаф</a></li>
+            </ul>
+            <div class="card__actions">
+              <a class="btn btn--primary" href="#catalog">Смотреть раздел</a>
+            </div>
           </div>
-        </a>
-        <a class="card" href="#catalog">
-          <div class="card__media"><img src="img/photos/17-cat-navigation.jpg" alt="Информационный пилон в сквере" loading="lazy" width="1400" height="1050"></div>
-          <div class="card__body">
-            <h3 class="card__title">Навигация</h3>
-            <ul class="chips"><li>Пилоны</li><li>Указатели</li><li>Афишные стенды</li><li>Стелы</li></ul>
-            <span class="card__go" aria-hidden="true"></span>
+        </div>
+        <div class="showcase__panel" role="tabpanel" id="cat-panel-nav" aria-labelledby="cat-tab-nav" hidden>
+          <a class="showcase__media" href="#catalog" tabindex="-1"><img src="img/photos/17-cat-navigation.jpg" style="--pos: 50% 50%" alt="Информационный пилон в сквере" loading="lazy" width="1400" height="1050"></a>
+          <div class="showcase__body">
+            <h3 class="showcase__title">Навигация</h3>
+            <p class="showcase__text">Информационные указатели и стелы для городской среды.</p>
+            <ul class="card__models">
+              <li><a href="#catalog">Пилоны</a></li>
+              <li><a href="#catalog">Указатели</a></li>
+              <li><a href="#catalog">Афишные стенды</a></li>
+              <li><a href="#catalog">Стелы</a></li>
+            </ul>
+            <div class="card__actions">
+              <a class="btn btn--primary" href="#catalog">Смотреть раздел</a>
+            </div>
           </div>
-        </a>
-        <a class="card card--cta" href="#request">
-          <span class="card__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14 3H6v18h12V7z"/><path d="M14 3v4h4"/><path d="M9 17v-2l5-5 2 2-5 5z"/></svg></span>
-          <div class="card__body">
-            <h3 class="card__title">Не&nbsp;нашли нужную конструкцию?</h3>
-            <p class="card__text">Пришлите эскиз или ТЗ&nbsp;— спроектируем и&nbsp;изготовим.</p>
-            <span class="link-arrow link-arrow--light">Отправить ТЗ</span>
-          </div>
-        </a>
+        </div>
       </div>
     </div>
   </section>

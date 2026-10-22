@@ -44,25 +44,31 @@
     cat.addEventListener('focus', () => showCat(cat.dataset.cat));
   });
 
-  // Вкладки «Решения для заказчиков»
-  const tabs = [...document.querySelectorAll('.aud__tab')];
-  function selectTab(tab) {
-    tabs.forEach((t) => {
-      const on = t === tab;
-      t.setAttribute('aria-selected', String(on));
-      t.tabIndex = on ? 0 : -1;
-      document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
-    });
-  }
-  tabs.forEach((tab, i) => {
-    tab.addEventListener('click', () => selectTab(tab));
-    tab.addEventListener('keydown', (e) => {
-      const step = { ArrowDown: 1, ArrowRight: 1, ArrowUp: -1, ArrowLeft: -1 }[e.key];
-      if (!step) return;
-      e.preventDefault();
-      const next = tabs[(i + step + tabs.length) % tabs.length];
-      selectTab(next);
-      next.focus();
+  // Вкладки: «Каталог» и «Решения для заказчиков» — каждый список вкладок переключается сам по себе
+  document.querySelectorAll('[role="tablist"]').forEach((list) => {
+    const tabs = [...list.querySelectorAll('[role="tab"]')];
+    function selectTab(tab) {
+      tabs.forEach((t) => {
+        const on = t === tab;
+        t.setAttribute('aria-selected', String(on));
+        t.tabIndex = on ? 0 : -1;
+        document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
+      });
+    }
+    tabs.forEach((tab, i) => {
+      tab.addEventListener('click', () => {
+        selectTab(tab);
+        // на телефоне вкладки каталога листаются строкой — подтягиваем выбранную в зону видимости
+        tab.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'smooth' });
+      });
+      tab.addEventListener('keydown', (e) => {
+        const step = { ArrowDown: 1, ArrowRight: 1, ArrowUp: -1, ArrowLeft: -1 }[e.key];
+        if (!step) return;
+        e.preventDefault();
+        const next = tabs[(i + step + tabs.length) % tabs.length];
+        selectTab(next);
+        next.focus();
+      });
     });
   });
 
@@ -272,31 +278,4 @@
   });
 
   document.getElementById('year').textContent = new Date().getFullYear();
-})();
-
-// Чипы в карточках каталога — в одну строку: лишние прячем и показываем «+N»
-(function () {
-  const lists = [...document.querySelectorAll('.catalog .chips')];
-  if (!lists.length) return;
-
-  function fit(list) {
-    list.querySelectorAll('.chips__more').forEach((el) => el.remove());
-    const items = [...list.children];
-    items.forEach((li) => { li.hidden = false; });
-    if (list.scrollWidth <= list.clientWidth) return;
-    const more = document.createElement('li');
-    more.className = 'chips__more';
-    list.appendChild(more);
-    for (let i = items.length - 1; i > 0; i--) {
-      items[i].hidden = true;
-      more.textContent = '+' + (items.length - i);
-      if (list.scrollWidth <= list.clientWidth) return;
-    }
-  }
-
-  const fitAll = () => lists.forEach(fit);
-  fitAll();
-  document.fonts && document.fonts.ready.then(fitAll);
-  let t;
-  window.addEventListener('resize', () => { clearTimeout(t); t = setTimeout(fitAll, 120); });
 })();
