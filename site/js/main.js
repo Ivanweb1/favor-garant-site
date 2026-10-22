@@ -60,6 +60,69 @@
     }
   });
 
+  // Галерея первого экрана: автосмена, стрелки, свайп, пауза при наведении
+  const gallery = document.querySelector('.gallery');
+  if (gallery) {
+    const slides = [...gallery.querySelectorAll('.gallery__slide')];
+    const caption = gallery.querySelector('.gallery__caption');
+    const captionText = gallery.querySelector('.gallery__caption-text');
+    const progress = gallery.querySelector('.gallery__progress');
+    const SLIDE_TIME = 6000;
+    const autoplay = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let current = 0;
+    let timer;
+
+    gallery.style.setProperty('--slide-time', SLIDE_TIME + 'ms');
+    const bars = slides.map(() => {
+      const bar = document.createElement('span');
+      bar.className = 'gallery__bar';
+      bar.appendChild(document.createElement('span'));
+      progress.appendChild(bar);
+      return bar;
+    });
+
+    function show(index) {
+      current = (index + slides.length) % slides.length;
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('is-active', i === current);
+        // подгружаем следующий слайд заранее
+        if (i === (current + 1) % slides.length) slide.querySelector('img').loading = 'eager';
+      });
+      bars.forEach((bar, i) => {
+        bar.classList.remove('is-active');
+        bar.classList.toggle('is-done', i < current);
+      });
+      void bars[current].offsetWidth; // перезапуск анимации полоски
+      if (autoplay) bars[current].classList.add('is-active');
+      captionText.textContent = slides[current].dataset.caption;
+      caption.href = slides[current].dataset.href;
+      schedule();
+    }
+
+    function schedule() {
+      clearTimeout(timer);
+      if (!autoplay || gallery.classList.contains('is-paused')) return;
+      timer = setTimeout(() => show(current + 1), SLIDE_TIME);
+    }
+
+    gallery.querySelector('.gallery__btn--prev').addEventListener('click', () => show(current - 1));
+    gallery.querySelector('.gallery__btn--next').addEventListener('click', () => show(current + 1));
+
+    gallery.addEventListener('mouseenter', () => { gallery.classList.add('is-paused'); clearTimeout(timer); });
+    gallery.addEventListener('mouseleave', () => { gallery.classList.remove('is-paused'); show(current); });
+
+    let startX = null;
+    gallery.addEventListener('pointerdown', (e) => { startX = e.clientX; });
+    gallery.addEventListener('pointerup', (e) => {
+      if (startX === null) return;
+      const dx = e.clientX - startX;
+      startX = null;
+      if (Math.abs(dx) > 40) show(current + (dx < 0 ? 1 : -1));
+    });
+
+    show(0);
+  }
+
   // Имя прикреплённого файла
   const fileInput = document.querySelector('.file__input');
   const fileName = document.querySelector('.file__name');

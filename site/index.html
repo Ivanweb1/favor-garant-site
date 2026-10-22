@@ -159,8 +159,40 @@
         </div>
       </div>
     </div>
-    <div class="hero__media">
-      <img src="img/photos/01-hero-pavilion.jpg" alt="Остановочный павильон «Городской» на улице Санкт-Петербурга" width="1201" height="901" fetchpriority="high">
+    <!-- Галерея первого экрана: смена слайдов по таймеру, стрелками и свайпом -->
+    <div class="gallery" aria-roledescription="карусель" aria-label="Наши конструкции в городе">
+      <div class="gallery__track">
+        <figure class="gallery__slide is-active" data-caption="Остановочный павильон «Городской»" data-href="#catalog">
+          <img src="img/photos/01-hero-pavilion.jpg" alt="Остановочный павильон «Городской» на улице Санкт-Петербурга" width="1672" height="941" fetchpriority="high">
+        </figure>
+        <figure class="gallery__slide" data-caption="Остановочные павильоны" data-href="#catalog">
+          <img src="img/photos/02-hero-alt-evening.jpg" alt="Остановочные павильоны и информационный стенд вечером" width="1672" height="941" loading="lazy">
+        </figure>
+        <figure class="gallery__slide" data-caption="Остановочный павильон SMART" data-href="#works" style="--pos: 50% 45%">
+          <img src="img/photos/30-work-smart-stops.jpg" alt="Остановочный павильон SMART с картой города" width="1400" height="933" loading="lazy">
+        </figure>
+        <figure class="gallery__slide" data-caption="Въездная стела «Гатчина»" data-href="#works" style="--pos: 50% 40%; --pos-m: 45% 50%">
+          <img src="img/photos/31-work-stele-gatchina.jpg" alt="Въездная стела «Гатчина — город воинской славы»" width="1400" height="933" loading="lazy">
+        </figure>
+        <figure class="gallery__slide" data-caption="Бренд-стела PONSSE" data-href="#works" style="--pos: 50% 50%; --pos-m: 60% 50%">
+          <img src="img/photos/32-work-stele-ponsse.jpg" alt="Монтаж бренд-стелы PONSSE" width="1400" height="935" loading="lazy">
+        </figure>
+      </div>
+
+      <div class="gallery__ui container">
+        <a class="gallery__caption" href="#catalog">
+          <span class="gallery__caption-text">Остановочный павильон «Городской»</span>
+        </a>
+        <div class="gallery__controls">
+          <button class="gallery__btn gallery__btn--prev" type="button" aria-label="Предыдущее фото">
+            <svg width="18" height="10" viewBox="0 0 18 10" aria-hidden="true"><path d="M18 5H2M6 1L2 5l4 4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+          </button>
+          <button class="gallery__btn gallery__btn--next" type="button" aria-label="Следующее фото">
+            <svg width="18" height="10" viewBox="0 0 18 10" aria-hidden="true"><path d="M0 5h16M12 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="gallery__progress container" aria-hidden="true"></div>
     </div>
     <div class="container">
       <ul class="usp">
