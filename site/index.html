@@ -433,18 +433,15 @@
         <div class="aud__tabs" role="tablist" aria-label="Тип заказчика">
           <button class="aud__tab" type="button" role="tab" id="tab-gov" aria-controls="panel-gov" aria-selected="true">
             <span class="aud__tab-icon"><img src="img/icons/line-pavilion.svg" alt="" width="36" height="20"></span>
-            <span class="aud__tab-title">Государственным и&nbsp;муниципальным заказчикам</span>
-            <span class="aud__tab-sub">Остановки, навигация, МАФ, монтаж</span>
+            <span class="aud__tab-text"><span class="aud__tab-title">Государственным и&nbsp;муниципальным заказчикам</span><span class="aud__tab-sub">Остановки, навигация, МАФ, монтаж</span></span>
           </button>
           <button class="aud__tab" type="button" role="tab" id="tab-arch" aria-controls="panel-arch" aria-selected="false" tabindex="-1">
             <span class="aud__tab-icon"><img src="img/icons/line-custom.svg" alt="" width="36" height="20"></span>
-            <span class="aud__tab-title">Архитекторам и&nbsp;проектировщикам</span>
-            <span class="aud__tab-sub">Проектирование, документация, экспертиза</span>
+            <span class="aud__tab-text"><span class="aud__tab-title">Архитекторам и&nbsp;проектировщикам</span><span class="aud__tab-sub">Проектирование, документация, экспертиза</span></span>
           </button>
           <button class="aud__tab" type="button" role="tab" id="tab-biz" aria-controls="panel-biz" aria-selected="false" tabindex="-1">
             <span class="aud__tab-icon"><img src="img/icons/line-billboard.svg" alt="" width="36" height="20"></span>
-            <span class="aud__tab-title">Рекламным операторам и&nbsp;бизнесу</span>
-            <span class="aud__tab-sub">Рекламные конструкции, торги, согласование</span>
+            <span class="aud__tab-text"><span class="aud__tab-title">Рекламным операторам и&nbsp;бизнесу</span><span class="aud__tab-sub">Рекламные конструкции, торги, согласование</span></span>
           </button>
         </div>
 
@@ -515,7 +512,6 @@
             <h3 class="tile__title">Производственный комплекс</h3>
             <p class="tile__text">Полный цикл изготовления на&nbsp;одной площадке в&nbsp;Санкт-Петербурге: от&nbsp;заготовки до&nbsp;отгрузки.</p>
             <ul class="chips"><li>Сборочно-сварочный участок</li><li>Покраска</li><li>Приёмка и&nbsp;отгрузка</li></ul>
-            <span class="card__go" aria-hidden="true"></span>
           </div>
         </a>
         <a class="tile" href="#services">
@@ -524,7 +520,6 @@
             <h3 class="tile__title">Металлообработка</h3>
             <p class="tile__text">Детали любой сложности серийно и&nbsp;в&nbsp;единичном исполнении.</p>
             <ul class="chips"><li>Лазерная резка</li><li>Плазменная резка</li><li>Вальцовка</li><li>Сварка</li></ul>
-            <span class="card__go" aria-hidden="true"></span>
           </div>
         </a>
         <a class="tile" href="#services">
@@ -533,7 +528,6 @@
             <h3 class="tile__title">Станочный парк</h3>
             <p class="tile__text">Оборудование с&nbsp;ЧПУ для гибки, распиловки и&nbsp;фрезеровки.</p>
             <ul class="chips"><li>HYPERTHERM</li><li>Senfeng</li><li>ERMAKSAN</li><li>PERTICI</li><li>COMET</li></ul>
-            <span class="card__go" aria-hidden="true"></span>
           </div>
         </a>
         <a class="tile" href="#services">
@@ -542,7 +536,6 @@
             <h3 class="tile__title">Конструкторское и&nbsp;дизайн-бюро</h3>
             <p class="tile__text">Разрабатываем конструкцию по&nbsp;эскизу или идее заказчика.</p>
             <ul class="chips"><li>3D-модели</li><li>Визуализация</li><li>Прочностной расчёт</li></ul>
-            <span class="card__go" aria-hidden="true"></span>
           </div>
         </a>
         <a class="tile" href="#services">
@@ -551,7 +544,6 @@
             <h3 class="tile__title">Монтаж и&nbsp;шеф-монтаж</h3>
             <p class="tile__text">Устанавливаем павильоны под ключ или контролируем монтаж на&nbsp;объекте.</p>
             <ul class="chips"><li>Монтаж под ключ</li><li>Шеф-монтаж</li></ul>
-            <span class="card__go" aria-hidden="true"></span>
           </div>
         </a>
       </div>
@@ -720,7 +712,10 @@
             <span class="news__tag">Проекты</span>
             <h3 class="news__title">Транспортная реформа в&nbsp;Санкт-Петербурге</h3>
             <p class="news__text">Новые остановочные павильоны по&nbsp;адресной программе благоустройства Санкт-Петербурга.</p>
-            <span class="link-arrow">Читать</span>
+            <div class="news__foot">
+              <span class="link-arrow">Читать</span>
+              <span class="news__time"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.25"/><path d="M8 4.5V8l2.5 1.5"/></svg>5 мин чтения</span>
+            </div>
           </div>
         </a>
         <a class="news__card" href="#news">
@@ -729,7 +724,10 @@
             <span class="news__tag">События</span>
             <h3 class="news__title">Международный форум транспортной инфраструктуры «SmartTransport»</h3>
             <p class="news__text">Отраслевое мероприятие, на&nbsp;котором демонстрируют технологии для транспортной инфраструктуры.</p>
-            <span class="link-arrow">Читать</span>
+            <div class="news__foot">
+              <span class="link-arrow">Читать</span>
+              <span class="news__time"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.25"/><path d="M8 4.5V8l2.5 1.5"/></svg>5 мин чтения</span>
+            </div>
           </div>
         </a>
       </div>
