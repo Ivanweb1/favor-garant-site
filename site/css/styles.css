@@ -568,7 +568,10 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .request__info { display: flex; flex-direction: column; }
 .request__lead { margin: 24px 0 36px; max-width: 460px; font-size: 17px; color: var(--muted); }
 .request__contacts { display: grid; margin-top: auto; border-top: 1px solid rgba(42, 37, 96, .14); }
-.request__contacts > div { display: grid; gap: 4px; padding: 18px 0; border-bottom: 1px solid rgba(42, 37, 96, .14); }
+/* у каждого контакта иконка в синем круге, как у преимуществ */
+.request__contacts > div { display: grid; grid-template-columns: 48px minmax(0, 1fr); align-items: center; column-gap: 18px; row-gap: 4px; padding: 18px 0; border-bottom: 1px solid rgba(42, 37, 96, .14); }
+.request__contacts > div::before { content: ""; grid-row: span 2; width: 48px; height: 48px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Ccircle cx='24' cy='24' r='24' fill='%232A2560'/%3E%3Cpath d='M30.5 27.6v2.6a1.7 1.7 0 0 1-1.9 1.7 17 17 0 0 1-7.4-2.6 16.7 16.7 0 0 1-5.1-5.1 17 17 0 0 1-2.6-7.4 1.7 1.7 0 0 1 1.7-1.9h2.6a1.7 1.7 0 0 1 1.7 1.5c.1.8.3 1.6.6 2.4a1.7 1.7 0 0 1-.4 1.8l-1.1 1.1a13.6 13.6 0 0 0 5.1 5.1l1.1-1.1a1.7 1.7 0 0 1 1.8-.4c.8.3 1.6.5 2.4.6a1.7 1.7 0 0 1 1.5 1.7z' fill='none' stroke='%23fff' stroke-width='1.5' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat; }
+.request__contacts > div:nth-child(2)::before { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Ccircle cx='24' cy='24' r='24' fill='%232A2560'/%3E%3Crect x='15' y='17' width='18' height='14' rx='1.5' fill='none' stroke='%23fff' stroke-width='1.5'/%3E%3Cpath d='M15.5 18l8.5 7 8.5-7' fill='none' stroke='%23fff' stroke-width='1.5' stroke-linejoin='round'/%3E%3C/svg%3E"); }
 .request__contacts dt { font-size: 13px; color: var(--muted); }
 .request__contacts dd { font-size: 22px; font-weight: 700; color: var(--navy); }
 .request__contacts a:hover { color: var(--red); }
