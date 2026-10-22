@@ -509,48 +509,64 @@
         <p class="section-head__text">Парк оборудования позволяет браться за&nbsp;заказы любой сложности и&nbsp;выпускать изделия серийно и&nbsp;в&nbsp;единичном исполнении.</p>
       </div>
 
-      <div class="bento">
-        <a class="tile tile--tall" href="#services">
-          <div class="tile__media"><img src="img/photos/20-prod-hall.jpg" alt="Цех производственного комплекса" loading="lazy" width="1122" height="1402"></div>
-          <div class="tile__body">
-            <h3 class="tile__title">Производственный комплекс</h3>
-            <p class="tile__text">Полный цикл изготовления на&nbsp;одной площадке в&nbsp;Санкт-Петербурге: от&nbsp;заготовки до&nbsp;отгрузки.</p>
-            <ul class="chips"><li>Сборочно-сварочный участок</li><li>Покраска</li><li>Приёмка и&nbsp;отгрузка</li></ul>
-          </div>
-        </a>
-        <a class="tile" href="#services">
-          <div class="tile__media"><img src="img/photos/21-prod-metalworking.jpg" alt="Резка металла на станке с ЧПУ" loading="lazy" width="1400" height="1050"></div>
-          <div class="tile__body">
-            <h3 class="tile__title">Металлообработка</h3>
-            <p class="tile__text">Детали любой сложности серийно и&nbsp;в&nbsp;единичном исполнении.</p>
-            <ul class="chips"><li>Лазерная резка</li><li>Плазменная резка</li><li>Вальцовка</li><li>Сварка</li></ul>
-          </div>
-        </a>
-        <a class="tile" href="#services">
-          <div class="tile__media"><img src="img/photos/22-prod-bending.jpg" alt="Листогибочный пресс" loading="lazy" width="1400" height="1050"></div>
-          <div class="tile__body">
-            <h3 class="tile__title">Станочный парк</h3>
-            <p class="tile__text">Оборудование с&nbsp;ЧПУ для гибки, распиловки и&nbsp;фрезеровки.</p>
-            <ul class="chips"><li>HYPERTHERM</li><li>Senfeng</li><li>ERMAKSAN</li><li>PERTICI</li><li>COMET</li></ul>
-          </div>
-        </a>
-        <a class="tile" href="#services">
-          <div class="tile__media"><img src="img/photos/23-prod-kb.jpg" alt="Инженеры обсуждают чертёж конструкции" loading="lazy" width="1400" height="1050"></div>
-          <div class="tile__body">
-            <h3 class="tile__title">Конструкторское и&nbsp;дизайн-бюро</h3>
-            <p class="tile__text">Разрабатываем конструкцию по&nbsp;эскизу или идее заказчика.</p>
-            <ul class="chips"><li>3D-модели</li><li>Визуализация</li><li>Прочностной расчёт</li></ul>
-          </div>
-        </a>
-        <a class="tile" href="#services">
-          <div class="tile__media"><img src="img/photos/24-prod-installation.jpg" alt="Бригада монтирует остановочный павильон" loading="lazy" width="1400" height="1050"></div>
-          <div class="tile__body">
-            <h3 class="tile__title">Монтаж и&nbsp;шеф-монтаж</h3>
-            <p class="tile__text">Устанавливаем павильоны под ключ или контролируем монтаж на&nbsp;объекте.</p>
-            <ul class="chips"><li>Монтаж под ключ</li><li>Шеф-монтаж</li></ul>
-          </div>
-        </a>
-      </div>
+      <!-- Путь изделия: этапы слева направо по порядку работ, над карточками — номера на линии таймлайна -->
+      <ol class="flow">
+        <li class="flow__item">
+          <span class="flow__num">01</span>
+          <a class="tile" href="#services">
+            <div class="tile__media"><img src="img/photos/23-prod-kb.jpg" alt="Инженеры обсуждают чертёж конструкции" loading="lazy" width="1400" height="1050"></div>
+            <div class="tile__body">
+              <h3 class="tile__title">Конструкторское и&nbsp;дизайн-бюро</h3>
+              <p class="tile__text">Разрабатываем конструкцию по&nbsp;эскизу или идее заказчика.</p>
+              <ul class="chips"><li>3D-модели</li><li>Визуализация</li><li>Прочностной расчёт</li></ul>
+            </div>
+          </a>
+        </li>
+        <li class="flow__item">
+          <span class="flow__num">02</span>
+          <a class="tile" href="#services">
+            <div class="tile__media"><img src="img/photos/21-prod-metalworking.jpg" alt="Резка металла на станке с ЧПУ" loading="lazy" width="1400" height="1050"></div>
+            <div class="tile__body">
+              <h3 class="tile__title">Металлообработка</h3>
+              <p class="tile__text">Детали любой сложности серийно и&nbsp;в&nbsp;единичном исполнении.</p>
+              <ul class="chips"><li>Лазерная резка</li><li>Плазменная резка</li><li>Вальцовка</li><li>Сварка</li></ul>
+            </div>
+          </a>
+        </li>
+        <li class="flow__item">
+          <span class="flow__num">03</span>
+          <a class="tile" href="#services">
+            <div class="tile__media"><img src="img/photos/22-prod-bending.jpg" alt="Листогибочный пресс" loading="lazy" width="1400" height="1050"></div>
+            <div class="tile__body">
+              <h3 class="tile__title">Станочный парк</h3>
+              <p class="tile__text">Оборудование с&nbsp;ЧПУ для гибки, распиловки и&nbsp;фрезеровки.</p>
+              <ul class="chips"><li>HYPERTHERM</li><li>Senfeng</li><li>ERMAKSAN</li><li>PERTICI</li><li>COMET</li></ul>
+            </div>
+          </a>
+        </li>
+        <li class="flow__item">
+          <span class="flow__num">04</span>
+          <a class="tile" href="#services">
+            <div class="tile__media"><img src="img/photos/20-prod-hall.jpg" alt="Цех производственного комплекса" loading="lazy" width="1122" height="1402"></div>
+            <div class="tile__body">
+              <h3 class="tile__title">Производственный комплекс</h3>
+              <p class="tile__text">Полный цикл изготовления на&nbsp;одной площадке в&nbsp;Санкт-Петербурге: от&nbsp;заготовки до&nbsp;отгрузки.</p>
+              <ul class="chips"><li>Сборочно-сварочный участок</li><li>Покраска</li><li>Приёмка и&nbsp;отгрузка</li></ul>
+            </div>
+          </a>
+        </li>
+        <li class="flow__item">
+          <span class="flow__num">05</span>
+          <a class="tile" href="#services">
+            <div class="tile__media"><img src="img/photos/24-prod-installation.jpg" alt="Бригада монтирует остановочный павильон" loading="lazy" width="1400" height="1050"></div>
+            <div class="tile__body">
+              <h3 class="tile__title">Монтаж и&nbsp;шеф-монтаж</h3>
+              <p class="tile__text">Устанавливаем павильоны под ключ или контролируем монтаж на&nbsp;объекте.</p>
+              <ul class="chips"><li>Монтаж под ключ</li><li>Шеф-монтаж</li></ul>
+            </div>
+          </a>
+        </li>
+      </ol>
     </div>
   </section>
 

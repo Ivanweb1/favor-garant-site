@@ -399,8 +399,20 @@ button, input, select, textarea { font: inherit; color: inherit; }
 
 /* ---------- 4. Производство и услуги ---------- */
 
+/* Путь изделия: 5 этапов слева направо, над карточками — номер на общей линии таймлайна с точкой */
+.flow { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 20px; }
+.flow__item { display: flex; flex-direction: column; }
+.flow__num {
+  position: relative; display: block; padding-bottom: 18px; margin-bottom: 22px;
+  font-size: 44px; line-height: 1; font-weight: 700; letter-spacing: -.02em; color: #D5D6E2;
+  transition: color .25s ease;
+}
+.flow__num::before { content: ""; position: absolute; left: 0; right: -20px; bottom: 0; height: 1px; background: rgba(42, 37, 96, .2); }
+.flow__item:last-child .flow__num::before { right: 0; }
+.flow__num::after { content: ""; position: absolute; left: 0; bottom: -4px; width: 9px; height: 9px; border-radius: 50%; background: var(--navy); }
+.flow__item:hover .flow__num { color: var(--navy); }
+.flow .tile { flex: 1; }
 /* Белые карточки на светлом фоне: фото, текст, чипы с участками и оборудованием */
-.bento { display: grid; grid-template-columns: 1.15fr 1fr 1fr; gap: 20px; }
 .tile {
   display: flex; flex-direction: column; overflow: hidden;
   border-radius: var(--radius); background: var(--white);
@@ -408,14 +420,10 @@ button, input, select, textarea { font: inherit; color: inherit; }
 }
 .tile:hover { transform: translateY(-3px); box-shadow: 0 22px 40px -28px rgba(23, 22, 43, .45); }
 .tile__media { overflow: hidden; background: var(--light); }
-.tile__media img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; transition: transform .6s ease; }
+.tile__media img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; transition: transform .6s ease; }
 .tile:hover .tile__media img { transform: scale(1.04); }
-.tile--tall { grid-row: span 2; }
-.tile--tall .tile__media { flex: 1; }
-.tile--tall .tile__media img { height: 100%; aspect-ratio: auto; min-height: 320px; }
 .tile__body { display: grid; gap: 8px; padding: 20px 22px 22px; }
 .tile__title { font-size: 18px; line-height: 1.3; font-weight: 700; color: var(--navy); }
-.tile--tall .tile__title { font-size: 22px; }
 .tile__text { font-size: 14px; color: var(--muted); }
 .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
 .chips li { padding: 5px 11px; border-radius: 999px; background: #F5F6F8; font-size: 12px; font-weight: 500; color: var(--navy); white-space: nowrap; }
@@ -672,9 +680,11 @@ select.field__input { appearance: none; padding-right: 40px; background: var(--w
   .route, .route:first-child, .route:last-child { padding: 0; }
   .route__title { min-height: 0; }
   .route + .route::before { top: -20px; bottom: auto; right: 0; width: auto; height: 1px; }
-  .bento { grid-template-columns: 1fr 1fr; }
-  .tile--tall { grid-column: span 2; grid-row: auto; }
-  .tile--tall .tile__media img { aspect-ratio: 16 / 9; height: auto; min-height: 0; }
+  /* на планшете и телефоне этапы листаются лентой */
+  .flow { display: flex; gap: 16px; margin: 0 calc(var(--gutter) * -1); padding: 0 var(--gutter) 4px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding: 0 var(--gutter); scrollbar-width: none; }
+  .flow::-webkit-scrollbar { display: none; }
+  .flow__item { flex: 0 0 min(300px, 78vw); scroll-snap-align: start; }
+  .flow__num::before { right: -16px; }
   .steps { grid-template-columns: 1fr; }
   .about { grid-template-columns: 1fr; }
 
@@ -697,8 +707,6 @@ select.field__input { appearance: none; padding-right: 40px; background: var(--w
   .usp__title { margin-top: 16px; }
   .usp__text { min-height: 0; }
   .showcase__media img { aspect-ratio: 4 / 3; }
-  .bento { grid-template-columns: 1fr; }
-  .tile--tall { grid-column: auto; }
   .steps__list { grid-template-columns: 1fr; gap: 22px; }
   .steps__item { grid-template-columns: 56px 1fr; column-gap: 14px; row-gap: 4px; padding: 0; }
   .steps__num { grid-row: span 2; padding: 0; margin: 0; font-size: 34px; }
