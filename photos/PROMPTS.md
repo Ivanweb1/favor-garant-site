@@ -273,3 +273,74 @@ Composition: the column right of center, fully visible, about 70% of the frame h
 Light: late-summer day, soft sun.
 Style: photorealistic street photography, not CGI, natural colors, slightly cool neutral grade, sharp, straight verticals.
 ```
+
+---
+
+## 5. Слайдер первого экрана — отдельные кадры
+
+Слайдер занимает всю ширину и остаток высоты окна под заголовком. Поэтому кадр бывает очень разным:
+- ноутбук 1366×768 — около 3.6:1, узкая полоса;
+- десктоп 1920×1080 — около 2.3:1;
+- телефон — около 1.25:1, почти квадрат.
+
+Чтобы ничего важного не срезалось, каждый кадр делаем широким, а сюжет — компактным в центре:
+- **сюжет** целиком в центральных 40% по ширине и в полосе от 25% до 75% по высоте;
+- **левый и правый края** — спокойное продолжение сцены (улица, небо, цех), их можно отрезать;
+- **нижние 20%** — спокойная поверхность: туда ложатся подпись слайда, стрелки и полоски прогресса.
+
+Референс для каждого кадра — уже готовая ИИ-версия из `photos/ai/`, чтобы конструкция осталась той же. Готовые файлы класть в `photos/ai/` под именами ниже.
+
+### 40-slide-pavilion — павильон «Городской», день
+Референс: `photos/ai/01-hero-pavilion.png`.
+
+```
+Aspect ratio 21:9 (if 21:9 is not available, use 16:9).
+Use the attached image as the reference. Keep the bus shelter exactly as it is: same design, proportions, dark grey frame, clear glass roof and walls, wooden bench — do not redesign it. No text, letters or logos anywhere.
+Composition: wide eye-level street view. The shelter is small in the frame and fully visible: it sits exactly in the center and takes no more than 35% of the frame width; its roof is below the top quarter and its base is above the bottom quarter of the frame. Left and right of it the calm city sidewalk continues: trimmed hedge, fir trees, historic red-brick and light buildings, softly out of focus — these sides may be cropped. The bottom 20% of the frame is clean, even grey paving with nothing on it.
+Light: late-summer morning, soft sun from the side, gentle long shadows. No people, no cars.
+Style: unretouched documentary architectural photo, not CGI: true-to-life slightly muted colors, natural lens, no HDR glow, straight vertical lines, 35 mm lens.
+```
+
+### 41-slide-evening — павильоны вечером
+Референс: `photos/ai/02-hero-alt-evening.png`.
+
+```
+Aspect ratio 21:9 (if 21:9 is not available, use 16:9).
+Use the attached image as the reference. Keep both bus shelters and the information stand exactly as they are: same design, light grey frames, glass, lit panels — do not redesign them. Panels show soft unreadable graphics; no readable text or logos anywhere.
+Composition: wide view along a historic St Petersburg street. The main shelter is in the exact center, fully visible, no more than 35% of the frame width, its roof below the top quarter and its base above the bottom quarter. The street with lit shop windows continues to the left and right — these sides may be cropped. The bottom 20% is calm stone paving with soft reflections and nothing on it.
+Light: blue hour right after sunset, warm light inside the shelter and windows. No people, no cars.
+Style: real evening photograph, not a render: natural noise, true-to-life colors, no HDR glow, straight vertical lines, 35 mm lens.
+```
+
+### 42-slide-production — собственное производство
+Референс: `photos/ai/21-prod-metalworking.png`.
+
+```
+Aspect ratio 21:9 (if 21:9 is not available, use 16:9).
+Use the attached image as the reference. Keep the CNC cutting machine, its control panel, the worker in dark navy workwear with safety glasses and the sparks from the cutting. No readable text or logos.
+Composition: step back to a wide shot of the workshop. The machine with the worker is in the exact center, no more than 40% of the frame width, between the top quarter and the bottom quarter of the frame. To the left and right the clean, orderly production hall continues — racks of metal profiles, other machines, roof windows — softly out of focus; these sides may be cropped. The bottom 20% is the calm, clean workshop floor with nothing on it.
+Light: even daylight from roof windows, cool industrial tones, slightly desaturated; the sparks are the only warm accent.
+Style: unretouched documentary industrial photo, not CGI, natural lens, no HDR, straight vertical lines.
+```
+
+### 43-slide-stele-gatchina — въездная стела «Гатчина»
+Референс: `photos/ai/31-work-stele-gatchina.png`. После генерации сверить надписи и гербы с референсом.
+
+```
+Aspect ratio 21:9 (if 21:9 is not available, use 16:9).
+Use the attached image as the reference. Keep the entrance stele exactly as it is: same shape, slatted grey body, yellow sign, both coats of arms and all lettering — copy the lettering from the reference without redrawing it.
+Composition: step back so the whole stele is visible from the top of the upper coat of arms to the ground, small in the frame: in the exact center, no more than 35% of the frame width, with the top of the coat of arms below the top quarter and the base above the bottom quarter. Left and right — the roadside, green fields, a few low houses and the summer sky; these sides may be cropped. The bottom 20% is a calm strip of grass and roadside with nothing important.
+Light: late-summer day, soft sun, a few white clouds. No cars close to the camera.
+Style: unretouched documentary photo, not CGI, true-to-life colors, no HDR, straight vertical lines.
+```
+
+### 44-slide-stele-ponsse — бренд-стела PONSSE
+Референс: `photos/ai/32-work-stele-ponsse.png`.
+
+```
+Aspect ratio 21:9 (if 21:9 is not available, use 16:9).
+Use the attached image as the reference. Keep the brand stele, its yellow PONSSE sign and the aerial lift with the installer exactly as they are — same shape, colors and lettering, do not redraw the letters.
+Composition: step back to a wider, less dramatic angle so the whole stele and the lift basket are visible and small in the frame: in the exact center, no more than 40% of the frame width, between the top quarter and the bottom quarter of the frame. Left and right — clean blue sky with a few clouds and a low industrial building; these sides may be cropped. The bottom 20% is calm: ground or the lower part of the stele base with nothing important.
+Light: bright late-summer day.
+Style: unretouched documentary photo, not CGI, true-to-life colors, no HDR, straight vertical lines.
+```

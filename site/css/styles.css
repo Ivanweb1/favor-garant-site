@@ -63,7 +63,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .eyebrow--light { color: var(--white); }
 
 /* нижняя граница подобрана так, чтобы «металлоконструкций» помещалось в строку на 360px */
-.h1 { font-size: clamp(25px, 6.6vw, 68px); line-height: 1.06; font-weight: 700; letter-spacing: -.02em; }
+.h1 { font-size: clamp(25px, 6.6vw, 56px); line-height: 1.06; font-weight: 700; letter-spacing: -.02em; }
 .h2 { font-size: clamp(28px, 3.6vw, 48px); line-height: 1.1; font-weight: 700; letter-spacing: -.015em; }
 
 /* Двухцветный заголовок: первая строка синяя, вторая серая */
@@ -168,20 +168,26 @@ button, input, select, textarea { font: inherit; color: inherit; }
 
 /* ---------- 1. Первый экран ---------- */
 
-.hero { padding-top: clamp(40px, 6vw, 80px); }
+/* Первый экран целиком в окне: заголовок сверху, галерея забирает оставшуюся высоту */
+.hero {
+  display: flex; flex-direction: column;
+  min-height: calc(100vh - var(--header-h));
+  min-height: calc(100svh - var(--header-h));
+  padding-top: clamp(24px, 3.5vw, 48px);
+}
 .hero__top {
   display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(280px, 1fr);
   gap: 40px 64px; align-items: end;
-  padding-bottom: clamp(32px, 4vw, 56px);
+  padding-bottom: clamp(24px, 3vw, 40px);
 }
 .hero__top > * { min-width: 0; }
 .hero__lead { margin-bottom: 28px; font-size: 17px; color: var(--muted); }
 .hero__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 28px; }
 
-/* Галерея первого экрана. Кадр 2:1 на десктопе, 4:3 на телефоне.
+/* Галерея первого экрана. Высота — остаток окна под заголовком.
    Точку кадрирования слайда задаёт --pos (и --pos-m для телефона) в разметке. */
-.gallery { position: relative; overflow: hidden; background: var(--navy-deep); color: var(--white); touch-action: pan-y; }
-.gallery__track { position: relative; aspect-ratio: 2 / 1; }
+.gallery { position: relative; flex: 1 1 auto; display: flex; flex-direction: column; min-height: 340px; overflow: hidden; background: var(--navy-deep); color: var(--white); touch-action: pan-y; }
+.gallery__track { position: relative; flex: 1 1 auto; }
 .gallery__slide { position: absolute; inset: 0; margin: 0; opacity: 0; transition: opacity 1s ease; }
 .gallery__slide.is-active { opacity: 1; }
 .gallery__slide img {
@@ -225,32 +231,16 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .gallery.is-paused .gallery__bar.is-active span { animation-play-state: paused; }
 @keyframes gallery-progress { to { transform: scaleX(1); } }
 
-.usp { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
-.usp__item {
-  position: relative; overflow: hidden;
-  display: flex; flex-direction: column; min-height: 300px;
-  padding: 22px 24px 28px;
-  border: 1px solid var(--line); border-radius: var(--radius); background: var(--white);
-  transition: border-color .25s ease, transform .25s ease, box-shadow .25s ease;
+/* Преимущества под галереей — как ряд «Why choose us» в AXION: без карточек и разделителей */
+.usp {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px 48px;
+  padding: clamp(36px, 4vw, 56px) 0;
+  border-bottom: 1px solid var(--line);
 }
-/* фирменные полоски знака в углу карточки — проявляются при наведении */
-.usp__item::after {
-  content: ""; position: absolute; right: -18px; top: 26px; width: 150px; height: 80px;
-  background: url("../img/brand/bars.svg") center / contain no-repeat;
-  opacity: .05; transition: opacity .3s ease, transform .3s ease;
-}
-.usp__item:hover { border-color: rgba(42, 37, 96, .28); transform: translateY(-4px); box-shadow: 0 22px 40px -28px rgba(23, 22, 43, .4); }
-.usp__item:hover::after { opacity: .12; transform: translateX(-8px); }
-.usp__badge {
-  display: grid; place-items: center; width: 52px; height: 52px; border-radius: 50%;
-  background: var(--light); color: var(--navy);
-  transition: background-color .25s ease, color .25s ease;
-}
-.usp__item:hover .usp__badge { background: var(--navy); color: var(--white); }
-.usp__badge svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linejoin: round; stroke-linecap: round; }
-.usp__title { margin-top: auto; margin-bottom: 8px; font-size: 18px; line-height: 1.25; font-weight: 700; color: var(--navy); }
-.usp__text { font-size: 14px; color: var(--muted); }
-.section-head .section-head__text--muted { color: var(--muted); }
+.usp__icon { display: block; width: 22px; height: 22px; margin-bottom: 22px; color: var(--navy); }
+.usp__icon svg { width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linejoin: round; stroke-linecap: round; }
+.usp__title { margin-bottom: 8px; font-size: 16px; line-height: 1.3; font-weight: 700; color: var(--navy); }
+.usp__text { font-size: 14px; line-height: 1.55; color: var(--muted); }
 
 /* ---------- Секции ---------- */
 
@@ -483,7 +473,6 @@ select.field__input { appearance: none; padding-right: 40px; background: var(--w
   .hero__top { grid-template-columns: 1fr; align-items: start; }
   .hero__aside { max-width: 620px; }
   .usp { grid-template-columns: repeat(2, 1fr); }
-  .usp__item { min-height: 240px; }
   .catalog { grid-template-columns: repeat(2, 1fr); }
   .card--big { grid-row: auto; }
   .card--big .card__media img { min-height: 0; aspect-ratio: 16 / 9; }
@@ -505,15 +494,14 @@ select.field__input { appearance: none; padding-right: 40px; background: var(--w
   :root { --header-h: 68px; }
   .header__logo img { width: 120px; }
   .section-head { flex-direction: column; align-items: flex-start; }
-  .gallery__track { aspect-ratio: 4 / 3; }
+  .gallery { min-height: 260px; }
   .gallery__slide img { object-position: var(--pos-m, var(--pos, 50% 50%)); }
   .gallery__ui { bottom: 26px; }
   .gallery__caption { max-width: none; padding: 9px 14px; font-size: 13px; }
   .gallery__controls { display: none; }
   .gallery__progress { bottom: 10px; }
-  .usp { grid-template-columns: 1fr; gap: 12px; }
-  .usp__item { min-height: 0; }
-  .usp__title { margin-top: 28px; }
+  .usp { grid-template-columns: 1fr; gap: 28px; }
+  .usp__icon { margin-bottom: 14px; }
   .catalog { grid-template-columns: 1fr; gap: 16px; }
   .card--big, .card--cta { grid-column: auto; }
   .card--big .card__media img { aspect-ratio: 4 / 3; }
