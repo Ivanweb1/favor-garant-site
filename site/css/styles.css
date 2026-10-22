@@ -218,7 +218,10 @@ button, input, select, textarea { font: inherit; color: inherit; }
 }
 .hero__top > * { min-width: 0; }
 .hero__lead { margin-bottom: 28px; font-size: 17px; color: var(--muted); }
-.hero__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 28px; }
+/* столбиком: кнопка, под ней подсказка, с чем прийти за расчётом, ниже ссылка на каталог */
+.hero__actions { display: flex; flex-direction: column; align-items: flex-start; }
+.hero__note { margin-top: 10px; font-size: 13px; color: var(--grey); }
+.hero__actions .link-arrow { margin-top: 20px; }
 
 /* Галерея первого экрана. Целиком помещается в окно под шапкой: 16:9 по ширине, но не выше окна.
    Точку кадрирования слайда задаёт --pos (и --pos-m для телефона) в разметке. */
