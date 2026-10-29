@@ -159,7 +159,7 @@ def shelter_tile(m):
     badges = ''.join(f'<span class="tile__count">{TAG_NAMES[t]}</span>' for t in tags.split() if TAG_NAMES[t] not in name)
     photo = (f'<img class="tile__photo" src="img/catalog/shelter-{slug}-photo.jpg" alt="" loading="lazy" width="960" height="720">'
              if slug in PHOTOS else '')
-    # вся карточка кликабельна через ссылку в заголовке; кнопка «Рассчитать» лежит поверх неё.
+    # вся карточка кликабельна через ссылку в заголовке; кнопка «Подробнее» ведёт туда же.
     # пока готова только эталонная карточка «Атланта» — остальные модели открывают её как образец
     return f'''        <article class="tile tile--model" data-tags="{tags}">
           <div class="tile__media tile__media--render"><span class="tile__tags">{badges}</span><img src="img/catalog/shelter-{slug}.jpg" alt="Остановочный павильон «{name}»" loading="lazy" width="960" height="720">{photo}</div>
@@ -168,7 +168,7 @@ def shelter_tile(m):
             <p class="tile__text">{text}</p>
             <div class="tile__meta tile__foot">
               <p class="tile__dims"><span>Габариты</span>{dims} мм</p>
-              <a class="btn btn--outline tile__calc" href="#request-form" data-model="{name}">Рассчитать</a>
+              <a class="btn btn--outline tile__calc" href="bus-shelter-atlant.html" tabindex="-1">Подробнее</a>
             </div>
           </div>
         </article>'''

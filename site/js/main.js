@@ -377,8 +377,6 @@
     btn.addEventListener('blur', close);
     // после сброса формы показываем заглушку снова
     select.form.addEventListener('reset', () => setTimeout(render));
-    // значение могут подставить снаружи (кнопка «Рассчитать» на карточке модели)
-    select.addEventListener('change', render);
     render();
   });
 
@@ -433,17 +431,6 @@
         main.classList.toggle('is-render', thumb.hasAttribute('data-render'));
         thumbs.forEach((t) => t.setAttribute('aria-pressed', String(t === thumb)));
       });
-    });
-  });
-
-  // «Рассчитать» на карточке модели: подставляем тип изделия и модель в форму заявки
-  document.querySelectorAll('.tile__calc').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const f = document.getElementById('request-form');
-      const product = f.querySelector('select[name="product"]');
-      product.value = 'Остановочный павильон';
-      product.dispatchEvent(new Event('change'));
-      f.comment.value = 'Рассчитать стоимость павильона «' + btn.dataset.model + '»';
     });
   });
 
