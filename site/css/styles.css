@@ -871,12 +871,14 @@ select.field__input, .select__btn { appearance: none; padding-right: 40px; backg
   position: absolute; left: var(--x); top: var(--y); display: grid; place-items: center; width: 28px; height: 28px; margin: -14px 0 0 -14px; padding: 0;
   border: 0; border-radius: 50%; background: rgba(255, 255, 255, .9); backdrop-filter: blur(4px);
   box-shadow: 0 0 0 4px rgba(255, 255, 255, .22), 0 6px 14px -6px rgba(10, 10, 30, .6);
-  font: inherit; font-size: 12px; line-height: 1; font-weight: 600; font-variant-numeric: tabular-nums; color: var(--navy); cursor: pointer;
+  font: inherit; font-size: 12px; line-height: 1; font-weight: 600; font-variant-numeric: lining-nums tabular-nums; color: var(--navy); cursor: pointer;
+  /* цифра по центру кружка по высоте самой цифры, а не строки шрифта */
+  text-box: trim-both cap alphabetic;
   transition: background-color .2s ease, color .2s ease, box-shadow .2s ease;
 }
-.hotspot::after { content: ""; position: absolute; inset: -6px; border-radius: 50%; border: 1.5px solid rgba(255, 255, 255, .85); opacity: 0; }
+.hotspot::after { content: ""; position: absolute; inset: -4px; border-radius: 50%; border: 1px solid rgba(255, 255, 255, .7); opacity: 0; }
 .hotspot:hover { background: var(--white); box-shadow: 0 0 0 6px rgba(255, 255, 255, .3), 0 6px 14px -6px rgba(10, 10, 30, .6); }
-.hotspot.is-active { background: var(--navy); color: var(--white); box-shadow: 0 0 0 4px rgba(255, 255, 255, .9), 0 6px 14px -6px rgba(10, 10, 30, .6); }
+.hotspot.is-active { background: var(--navy); color: var(--white); box-shadow: 0 0 0 1.5px rgba(255, 255, 255, .85), 0 6px 14px -6px rgba(10, 10, 30, .6); }
 .hotspot.is-active::after { animation: hotspot-pulse 1.8s ease-out infinite; }
 @keyframes hotspot-pulse { from { opacity: .9; transform: scale(.9); } to { opacity: 0; transform: scale(1.6); } }
 @media (prefers-reduced-motion: reduce) { .hotspot.is-active::after { animation: none; opacity: .5; } }
