@@ -405,7 +405,7 @@
   });
 
   // Каталог: фильтр моделей по чипам (data-tags у карточки)
-  document.querySelectorAll('.filters').forEach((bar) => {
+  document.querySelectorAll('.filters[data-target]').forEach((bar) => {
     const grid = document.getElementById(bar.dataset.target);
     const chips = [...bar.querySelectorAll('.chip')];
     chips.forEach((chip) => {
@@ -419,19 +419,80 @@
     });
   });
 
-  // Карточка модели: миниатюры переключают большое фото
+  // Карточка модели: галерея со стрелками и счётчиком, чипы комплектаций, просмотр на весь экран
   document.querySelectorAll('.pgallery').forEach((box) => {
     const main = box.querySelector('.pgallery__main img');
+    const counter = box.querySelector('.pgallery__counter');
     const thumbs = [...box.querySelectorAll('.pgallery__thumb')];
-    thumbs.forEach((thumb) => {
-      thumb.addEventListener('click', () => {
-        const img = thumb.querySelector('img');
-        main.src = thumb.dataset.full;
-        main.alt = img.alt;
-        main.classList.toggle('is-render', thumb.hasAttribute('data-render'));
-        thumbs.forEach((t) => t.setAttribute('aria-pressed', String(t === thumb)));
+    const slides = thumbs.map((t) => ({ src: t.dataset.full, alt: t.querySelector('img').alt }));
+    const chips = [...document.querySelectorAll('.filters--configs .chip')];
+    let index = 0;
+
+    function show(i) {
+      index = (i + slides.length) % slides.length;
+      main.src = slides[index].src;
+      main.alt = slides[index].alt;
+      counter.textContent = (index + 1) + ' / ' + slides.length;
+      thumbs.forEach((t, n) => t.setAttribute('aria-pressed', String(n === index)));
+      chips.forEach((c) => c.setAttribute('aria-pressed', 'false'));
+    }
+
+    thumbs.forEach((t, n) => t.addEventListener('click', () => show(n)));
+    box.querySelector('.pgallery__nav--prev').addEventListener('click', () => show(index - 1));
+    box.querySelector('.pgallery__nav--next').addEventListener('click', () => show(index + 1));
+
+    // комплектация: на главном фото её рендер, миниатюры и стрелки возвращают к фото модели
+    chips.forEach((chip) => {
+      chip.addEventListener('click', () => {
+        main.src = chip.dataset.full;
+        main.alt = 'Комплектация «' + chip.textContent + '»';
+        counter.textContent = chip.textContent;
+        chips.forEach((c) => c.setAttribute('aria-pressed', String(c === chip)));
+        thumbs.forEach((t) => t.setAttribute('aria-pressed', 'false'));
       });
     });
+
+    // просмотр на весь экран: листается по фото модели
+    let lightbox;
+    const sync = () => {
+      const img = lightbox.querySelector('img');
+      img.src = main.src;
+      img.alt = main.alt;
+    };
+    function step(d) { show(index + d); sync(); }
+    function closeLightbox() {
+      lightbox.hidden = true;
+      document.body.style.overflow = '';
+    }
+    function openLightbox() {
+      if (!lightbox) {
+        lightbox = document.createElement('div');
+        lightbox.className = 'lightbox';
+        lightbox.setAttribute('role', 'dialog');
+        lightbox.setAttribute('aria-modal', 'true');
+        lightbox.innerHTML = '<img alt="">'
+          + '<button class="lightbox__close" type="button" aria-label="Закрыть">&times;</button>'
+          + '<button class="lightbox__nav lightbox__nav--prev" type="button" aria-label="Предыдущее фото">' + box.querySelector('.pgallery__nav--prev').innerHTML + '</button>'
+          + '<button class="lightbox__nav lightbox__nav--next" type="button" aria-label="Следующее фото">' + box.querySelector('.pgallery__nav--next').innerHTML + '</button>';
+        document.body.appendChild(lightbox);
+        lightbox.querySelector('.lightbox__nav--prev').addEventListener('click', () => step(-1));
+        lightbox.querySelector('.lightbox__nav--next').addEventListener('click', () => step(1));
+        lightbox.querySelector('.lightbox__close').addEventListener('click', closeLightbox);
+        lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+        document.addEventListener('keydown', (e) => {
+          if (lightbox.hidden) return;
+          if (e.key === 'Escape') closeLightbox();
+          if (e.key === 'ArrowLeft') step(-1);
+          if (e.key === 'ArrowRight') step(1);
+        });
+      }
+      sync();
+      lightbox.hidden = false;
+      document.body.style.overflow = 'hidden';
+      lightbox.querySelector('.lightbox__close').focus();
+    }
+    box.querySelector('.pgallery__zoom').addEventListener('click', openLightbox);
+    main.addEventListener('click', openLightbox);
   });
 
   // Форма: проверка обязательных полей. Отправки на сервер в прототипе нет.

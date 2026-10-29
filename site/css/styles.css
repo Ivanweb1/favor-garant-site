@@ -798,7 +798,53 @@ select.field__input, .select__btn { appearance: none; padding-right: 40px; backg
 .pgallery { display: grid; gap: 12px; }
 .pgallery__main { overflow: hidden; border-radius: var(--radius); background: var(--white); }
 .pgallery__main img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
-.pgallery__main img.is-render { object-fit: contain; }
+.pgallery__main { position: relative; }
+.pgallery__main > img { cursor: zoom-in; }
+/* стрелки по краям фото: проявляются при наведении, на сенсорных экранах видны всегда */
+.pgallery__nav, .pgallery__zoom {
+  position: absolute; display: grid; place-items: center; padding: 0; border: 0; border-radius: 50%;
+  background: rgba(255, 255, 255, .92); color: var(--navy); cursor: pointer;
+  box-shadow: 0 6px 18px -8px rgba(23, 22, 43, .35);
+  transition: opacity .2s ease, background-color .2s ease, color .2s ease;
+}
+.pgallery__nav { top: 50%; width: 44px; height: 44px; margin-top: -22px; opacity: 0; }
+.pgallery__nav--prev { left: 14px; }
+.pgallery__nav--next { right: 14px; }
+.pgallery__main:hover .pgallery__nav { opacity: 1; }
+.pgallery__zoom { top: 14px; right: 14px; width: 40px; height: 40px; }
+.pgallery__zoom svg { fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.pgallery__nav:hover, .pgallery__zoom:hover { background: var(--navy-bright); color: var(--white); }
+.pgallery__counter {
+  position: absolute; bottom: 14px; left: 14px; padding: 6px 12px; border-radius: 999px;
+  background: rgba(255, 255, 255, .92); font-size: 12px; font-weight: 600; color: var(--navy);
+}
+@media (hover: none) { .pgallery__nav { opacity: 1; } }
+
+/* полноэкранный просмотр фото */
+.lightbox { position: fixed; inset: 0; z-index: 100; display: grid; place-items: center; padding: 56px 72px; background: rgba(23, 22, 43, .94); }
+.lightbox[hidden] { display: none; }
+.lightbox img { max-width: 100%; max-height: calc(100vh - 112px); border-radius: var(--radius-sm); background: var(--white); }
+.lightbox button {
+  position: absolute; display: grid; place-items: center; width: 48px; height: 48px; padding: 0;
+  border: 1px solid rgba(255, 255, 255, .5); border-radius: 50%; background: transparent; color: var(--white); cursor: pointer;
+  transition: background-color .2s ease, color .2s ease;
+}
+.lightbox button:hover { background: var(--white); color: var(--navy); }
+.lightbox__close { top: 16px; right: 16px; font-size: 28px; line-height: 1; }
+.lightbox__nav { top: 50%; margin-top: -24px; }
+.lightbox__nav--prev { left: 16px; }
+.lightbox__nav--next { right: 16px; }
+
+/* чипы комплектаций у фото */
+.pinfo__configs { display: grid; gap: 10px; }
+.pinfo__label { font-size: 13px; font-weight: 500; color: var(--muted); }
+.filters--configs { margin: 0; }
+.filters--configs .chip { padding: 8px 16px; }
+
+/* строка доверия под кнопками */
+.trust { display: flex; flex-wrap: wrap; gap: 12px 28px; padding-top: 4px; }
+.trust li { display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 500; color: var(--ink); }
+.trust svg { flex: none; width: 22px; height: 22px; fill: none; stroke: var(--navy); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
 .pgallery__thumbs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
 .pgallery__thumb { overflow: hidden; padding: 0; border: 2px solid transparent; border-radius: var(--radius-sm); background: var(--white); cursor: pointer; transition: border-color .2s ease; }
 .pgallery__thumb img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
@@ -908,6 +954,10 @@ select.field__input, .select__btn { appearance: none; padding-right: 40px; backg
   .filters::-webkit-scrollbar { display: none; }
   .chip { flex: none; }
   .pgallery__thumbs { gap: 8px; }
+  .filters--configs { flex-wrap: wrap; margin: 0; padding: 0; overflow: visible; }
+  .trust { flex-direction: column; gap: 10px; }
+  .lightbox { padding: 64px 12px; }
+  .lightbox__nav { top: auto; bottom: 16px; margin-top: 0; }
   .specs > div { grid-template-columns: 1fr 1fr; }
   .gallery__progress { bottom: 10px; }
   .usp { grid-template-columns: 1fr; padding-top: 0; }

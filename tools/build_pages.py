@@ -250,8 +250,17 @@ THUMBS = [
     ('img/catalog/atlant-photo-3.jpg', '«Атлант» с лайтпостером на объекте', False),
 ]
 thumbs = '\n'.join(
-    f'''            <button class="pgallery__thumb" type="button" data-full="{src}"{' data-render' if r else ''} aria-pressed="{str(i == 0).lower()}" aria-label="Фото {i + 1}"><img src="{src}" alt="{alt}" loading="lazy"></button>'''
+    f'''            <button class="pgallery__thumb" type="button" data-full="{src}" aria-pressed="{str(i == 0).lower()}" aria-label="Фото {i + 1}"><img src="{src}" alt="{alt}" loading="lazy"></button>'''
     for i, (src, alt, r) in enumerate(THUMBS))
+
+ARR = '<svg class="arr arr--%s" width="10" height="11" viewBox="0 0 13 14" aria-hidden="true"><path d="M.74.68l11 12M11.74 12.68V1.84M11.74 12.68H1.88" fill="none" stroke="currentColor" stroke-width="2"/></svg>'
+
+# чипы у фото: клик показывает рендер выбранной комплектации (картинки те же, что в блоке «Комплектации»)
+CHIP_NAMES = {'atlant-cfg-base': 'Стандартная', 'atlant-cfg-light': 'С&nbsp;лайтпостером', 'atlant-cfg-smart': 'SMART',
+              'atlant-cfg-6m': '6&nbsp;м', 'atlant-cfg-10m': '10&nbsp;м'}
+cfg_chips = '\n'.join(
+    f'              <button class="chip" type="button" data-full="img/catalog/{img}.jpg" aria-pressed="false">{CHIP_NAMES[img]}</button>'
+    for img, *_ in CONFIGS)
 
 others = [m for m in SHELTERS if m[0] in ('atlant-smart', 'elegant-p', 'compact', 'closed')]
 
@@ -261,7 +270,13 @@ atlant_main = f'''
       {crumbs(('Главная', 'index.html'), ('Продукция', 'catalog.html'), ('Остановочные павильоны', 'bus-shelters.html'), ('Атлант', None))}
       <div class="product">
         <div class="pgallery">
-          <div class="pgallery__main"><img class="is-render" src="img/catalog/atlant-render.jpg" alt="Остановочный павильон «Атлант»" width="1400" height="1050"></div>
+          <div class="pgallery__main">
+            <img src="img/catalog/atlant-render.jpg" alt="Остановочный павильон «Атлант»" width="1400" height="1050">
+            <button class="pgallery__nav pgallery__nav--prev" type="button" aria-label="Предыдущее фото">{ARR % 'prev'}</button>
+            <button class="pgallery__nav pgallery__nav--next" type="button" aria-label="Следующее фото">{ARR % 'next'}</button>
+            <span class="pgallery__counter" aria-live="polite">1 / {len(THUMBS)}</span>
+            <button class="pgallery__zoom" type="button" aria-label="Открыть фото на весь экран"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M10 20H4v-6M20 4l-7 7M4 20l7-7"/></svg></button>
+          </div>
           <div class="pgallery__thumbs">
 {thumbs}
           </div>
@@ -269,6 +284,12 @@ atlant_main = f'''
         <div class="pinfo">
           <h1 class="h2 duo"><span>Атлант</span></h1>
           <p class="pinfo__lead">Модульный остановочный павильон с&nbsp;интегрированной информационной системой.</p>
+          <div class="pinfo__configs">
+            <p class="pinfo__label">Комплектация</p>
+            <div class="filters filters--configs" role="group" aria-label="Комплектация">
+{cfg_chips}
+            </div>
+          </div>
           <p class="pinfo__text">Увеличенный просвет между несущей конструкцией и&nbsp;крышей позволяет разместить декоративные или информационные панели с&nbsp;названием остановки и&nbsp;маршрутами общественного транспорта.</p>
           <dl class="specs">
             <div><dt>Габариты, мм</dt><dd>4996 × 2730 × 1645</dd></div>
@@ -281,7 +302,11 @@ atlant_main = f'''
             <a class="btn btn--primary" href="#request-form">Рассчитать стоимость</a>
             <a class="link-arrow" href="index.html#services">Монтаж под ключ</a>
           </div>
-          <p class="pinfo__note">Цена рассчитывается индивидуально: зависит от&nbsp;комплектации, тиража и&nbsp;адреса доставки.</p>
+          <ul class="trust">
+            <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21h18M4 21V11l5 3v-3l5 3v-3l5 3V4h2v17"/></svg>Собственное производство в&nbsp;Санкт-Петербурге</li>
+            <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 6h11v10H2zM13 9h4l4 4v3h-8"/><circle cx="6" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg>Доставка и&nbsp;монтаж по&nbsp;всей России</li>
+            <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8-8 9-4.6-1-8-4.5-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg>Гарантия производителя</li>
+          </ul>
         </div>
       </div>
     </div>
