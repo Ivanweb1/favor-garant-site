@@ -496,21 +496,22 @@
     main.addEventListener('click', openLightbox);
   });
 
-  // SMART-схема: точка на фото и пункт списка выбирают один и тот же компонент
+  // SMART-схема: точка на фото и стрелки карточки выбирают компонент
   document.querySelectorAll('.hotspots').forEach((box) => {
     const pins = [...box.querySelectorAll('.hotspot')];
-    const items = [...box.querySelectorAll('.hotspots__item')];
     const details = [...box.querySelectorAll('.hotspots__detail')];
+    let current = 0;
     function select(i) {
-      pins.forEach((p, n) => p.classList.toggle('is-active', n === i));
-      items.forEach((it, n) => it.setAttribute('aria-pressed', String(n === i)));
-      details.forEach((d, n) => { d.hidden = n !== i; });
+      current = (i + pins.length) % pins.length;
+      pins.forEach((p, n) => p.classList.toggle('is-active', n === current));
+      details.forEach((d, n) => { d.hidden = n !== current; });
     }
-    [...pins, ...items].forEach((el) => {
-      const i = Number(el.dataset.i);
-      el.addEventListener('click', () => select(i));
-      el.addEventListener('mouseenter', () => { if (window.matchMedia('(hover: hover)').matches) select(i); });
+    pins.forEach((pin, n) => {
+      pin.addEventListener('click', () => select(n));
+      pin.addEventListener('mouseenter', () => { if (window.matchMedia('(hover: hover)').matches) select(n); });
     });
+    box.querySelector('.hotspots__prev').addEventListener('click', () => select(current - 1));
+    box.querySelector('.hotspots__next').addEventListener('click', () => select(current + 1));
     select(0);
   });
 

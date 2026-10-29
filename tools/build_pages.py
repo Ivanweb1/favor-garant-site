@@ -261,19 +261,28 @@ SMART_PARTS = [
 ]
 SMART_PHOTOS = {'board', 'poster', 'usb', 'sos', 'camera', 'sound'}
 
+# у подсветки, Wi-Fi и таблички пока нет фото — показываем крупную иконку
+SMART_ICONS = {
+    'sign': '<rect x="3" y="6" width="18" height="8" rx="1"/><path d="M7 10h10M12 14v6M9 20h6"/>',
+    'light': '<path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9V16h7v-2.1A6 6 0 0 0 12 3z"/>',
+    'wifi': '<path d="M2 9a15 15 0 0 1 20 0M5 12.5a10 10 0 0 1 14 0M8.5 16a5 5 0 0 1 7 0"/><circle cx="12" cy="19" r="1"/>',
+}
+
 smart_pins = '\n'.join(
     f'            <button class="hotspot" type="button" style="--x: {x}%; --y: {y}%" data-i="{n}" aria-label="{t.replace("&nbsp;", " ")}">{n + 1}</button>'
     for n, (key, x, y, t, d) in enumerate(SMART_PARTS))
-smart_items = '\n'.join(
-    f'''            <li><button class="hotspots__item" type="button" data-i="{n}" aria-pressed="{str(n == 0).lower()}"><span class="hotspots__num">{n + 1}</span>{t}</button></li>'''
-    for n, (key, x, y, t, d) in enumerate(SMART_PARTS))
+
+def smart_media(key):
+    if key in SMART_PHOTOS:
+        return f'<img src="img/catalog/smart-{key}.jpg" alt="" loading="lazy" width="960" height="720">'
+    return f'<span class="hotspots__icon"><svg viewBox="0 0 24 24" aria-hidden="true">{SMART_ICONS[key]}</svg></span>'
+
 smart_details = '\n'.join(
     f'''          <div class="hotspots__detail" data-i="{n}"{'' if n == 0 else ' hidden'}>
-            {f'<img src="img/catalog/smart-{key}.jpg" alt="" loading="lazy" width="960" height="720">' if key in SMART_PHOTOS else ''}
-            <div>
-              <h3 class="hotspots__title">{t}</h3>
-              <p class="hotspots__text">{d}</p>
-            </div>
+            <div class="hotspots__media">{smart_media(key)}</div>
+            <p class="hotspots__count">{n + 1:02d} / {len(SMART_PARTS):02d}</p>
+            <h3 class="hotspots__title">{t}</h3>
+            <p class="hotspots__text">{d}</p>
           </div>'''
     for n, (key, x, y, t, d) in enumerate(SMART_PARTS))
 
@@ -369,12 +378,14 @@ atlant_main = f'''
         <div class="hotspots__stage">
           <img src="img/catalog/smart-stage.jpg" alt="«Атлант» с лайтпостером SMART и местами установки оборудования" loading="lazy" width="940" height="537">
 {smart_pins}
+          <p class="hotspots__hint">Нажмите на точку, чтобы узнать о&nbsp;компоненте</p>
         </div>
-        <div class="hotspots__panel">
-          <ol class="hotspots__list">
-{smart_items}
-          </ol>
+        <div class="hotspots__card">
 {smart_details}
+          <div class="hotspots__nav">
+            <button class="slider-nav__btn hotspots__prev" type="button" aria-label="Предыдущий компонент">{ARR % 'prev'}</button>
+            <button class="slider-nav__btn hotspots__next" type="button" aria-label="Следующий компонент">{ARR % 'next'}</button>
+          </div>
         </div>
       </div>
     </div>

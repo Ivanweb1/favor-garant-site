@@ -862,9 +862,10 @@ select.field__input, .select__btn { appearance: none; padding-right: 40px; backg
 /* ---------- Карточка модели: SMART, выполненные проекты ---------- */
 
 /* SMART: схема павильона с номерами-точками и список; наведение или клик открывает описание компонента */
-.hotspots { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 24px; align-items: stretch; }
-.hotspots__stage { position: relative; align-self: start; overflow: hidden; border: 1px solid var(--line); border-radius: var(--radius); background: var(--white); }
-.hotspots__stage img { width: 100%; height: auto; }
+.hotspots { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); gap: 20px; align-items: stretch; }
+.hotspots__stage { position: relative; display: grid; place-items: center; overflow: hidden; padding: 24px; border-radius: var(--radius); background: var(--light); }
+.hotspots__stage img { width: 100%; height: auto; mix-blend-mode: multiply; }
+.hotspots__hint { position: absolute; left: 20px; bottom: 16px; font-size: 12px; color: var(--muted); }
 .hotspot {
   position: absolute; left: var(--x); top: var(--y); display: grid; place-items: center; width: 30px; height: 30px; margin: -15px 0 0 -15px; padding: 0;
   border: 2px solid var(--white); border-radius: 50%; background: var(--navy); box-shadow: 0 4px 12px -4px rgba(23, 22, 43, .5);
@@ -876,22 +877,18 @@ select.field__input, .select__btn { appearance: none; padding-right: 40px; backg
 .hotspot.is-active::after { animation: hotspot-pulse 1.6s ease-out infinite; }
 @keyframes hotspot-pulse { from { opacity: .7; transform: scale(.7); } to { opacity: 0; transform: scale(1.3); } }
 @media (prefers-reduced-motion: reduce) { .hotspot.is-active::after { animation: none; opacity: .5; } }
-.hotspots__panel { display: flex; flex-direction: column; gap: 16px; }
-.hotspots__list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; }
-.hotspots__item {
-  display: flex; align-items: center; gap: 10px; width: 100%; padding: 8px 10px; border: 0; border-radius: var(--radius-sm);
-  background: transparent; font: inherit; font-size: 13px; line-height: 1.3; font-weight: 500; text-align: left; color: var(--ink); cursor: pointer;
-  transition: background-color .2s ease, color .2s ease;
-}
-.hotspots__num { display: grid; flex: none; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: var(--light); font-size: 11px; font-weight: 700; color: var(--navy); transition: background-color .2s ease, color .2s ease; }
-.hotspots__item:hover, .hotspots__item[aria-pressed="true"] { background: var(--light); color: var(--navy); }
-.hotspots__item[aria-pressed="true"] .hotspots__num { background: var(--navy); color: var(--white); }
-.hotspots__detail { display: grid; grid-template-columns: 120px minmax(0, 1fr); align-items: center; gap: 18px; min-height: 140px; margin-top: auto; padding: 16px; border-radius: var(--radius); background: var(--light); }
+/* карточка компонента: фото, номер, название, текст и стрелки внизу */
+.hotspots__card { display: flex; flex-direction: column; padding: 20px 24px 24px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--white); }
+.hotspots__detail { display: flex; flex: 1; flex-direction: column; gap: 8px; }
 .hotspots__detail[hidden] { display: none; }
-.hotspots__detail:not(:has(img)) { grid-template-columns: minmax(0, 1fr); }
-.hotspots__detail img { width: 120px; aspect-ratio: 1; object-fit: contain; border-radius: var(--radius-sm); background: var(--white); }
-.hotspots__title { margin-bottom: 6px; font-size: 16px; font-weight: 700; color: var(--navy); }
-.hotspots__text { font-size: 14px; line-height: 1.5; color: var(--muted); }
+.hotspots__media { display: grid; place-items: center; height: 180px; margin-bottom: 12px; border-radius: var(--radius-sm); background: var(--white); }
+.hotspots__media img { width: 100%; height: 100%; object-fit: contain; }
+.hotspots__icon { display: grid; place-items: center; width: 96px; height: 96px; border-radius: 50%; background: var(--light); color: var(--navy); }
+.hotspots__icon svg { width: 44px; height: 44px; fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+.hotspots__count { font-size: 12px; font-weight: 600; letter-spacing: .08em; color: var(--grey); }
+.hotspots__title { font-size: 20px; line-height: 1.25; font-weight: 700; color: var(--navy); }
+.hotspots__text { font-size: 14px; line-height: 1.55; color: var(--muted); }
+.hotspots__nav { display: flex; gap: 10px; margin-top: 20px; }
 
 /* выполненные проекты: горизонтальная лента фото, листается стрелками и свайпом */
 .project-head { display: grid; gap: 14px; }
@@ -989,11 +986,10 @@ select.field__input, .select__btn { appearance: none; padding-right: 40px; backg
   .pgallery__thumbs { gap: 8px; }
   .filters--configs { flex-wrap: wrap; margin: 0; padding: 0; overflow: visible; }
   .hotspot { width: 24px; height: 24px; margin: -12px 0 0 -12px; font-size: 10px; }
-  .hotspots__list { grid-template-columns: 1fr; }
-  /* на телефоне описание сразу под фото, список ниже — выбранное видно без прокрутки */
-  .hotspots__detail { order: -1; margin-top: 0; min-height: 0; }
-  .hotspots__detail { grid-template-columns: 88px minmax(0, 1fr); gap: 14px; }
-  .hotspots__detail img { width: 88px; }
+  .hotspots__stage { padding: 12px; }
+  .hotspots__hint { display: none; }
+  .hotspots__card { padding: 16px; }
+  .hotspots__media { height: 140px; }
   .lightbox { padding: 64px 12px; }
   .lightbox__nav { top: auto; bottom: 16px; margin-top: 0; }
   .specs > div { grid-template-columns: 1fr 1fr; }
