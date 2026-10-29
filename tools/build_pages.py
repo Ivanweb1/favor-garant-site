@@ -259,23 +259,14 @@ SMART_PARTS = [
     ('sound', 64.0, 51.3, 'Модуль звукового дублирования', 'Озвучивает прогноз прибытия транспорта, надписи продублированы шрифтом Брайля.'),
     ('usb', 47.0, 66.7, 'USB-зарядка', 'Для подзарядки телефонов, планшетов и&nbsp;других гаджетов.'),
 ]
-SMART_PHOTOS = {'board', 'poster', 'usb', 'sos', 'camera', 'sound'}
 
-# у подсветки, Wi-Fi и таблички пока нет фото — показываем крупную иконку
-SMART_ICONS = {
-    'sign': '<rect x="3" y="6" width="18" height="8" rx="1"/><path d="M7 10h10M12 14v6M9 20h6"/>',
-    'light': '<path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9V16h7v-2.1A6 6 0 0 0 12 3z"/>',
-    'wifi': '<path d="M2 9a15 15 0 0 1 20 0M5 12.5a10 10 0 0 1 14 0M8.5 16a5 5 0 0 1 7 0"/><circle cx="12" cy="19" r="1"/>',
-}
 
 smart_pins = '\n'.join(
     f'            <button class="hotspot" type="button" style="--x: {x}%; --y: {y}%" data-i="{n}" aria-label="{t.replace("&nbsp;", " ")}">{n + 1}</button>'
     for n, (key, x, y, t, d) in enumerate(SMART_PARTS))
 
 def smart_media(key):
-    if key in SMART_PHOTOS:
-        return f'<img src="img/catalog/smart-{key}-photo.jpg" alt="" loading="lazy" width="960" height="720">'
-    return f'<span class="hotspots__icon"><svg viewBox="0 0 24 24" aria-hidden="true">{SMART_ICONS[key]}</svg></span>'
+    return f'<img src="img/catalog/smart-{key}-photo.jpg" alt="" loading="lazy" width="960" height="720">'
 
 smart_details = '\n'.join(
     f'''          <div class="hotspots__detail" data-i="{n}"{'' if n == 0 else ' hidden'}>
