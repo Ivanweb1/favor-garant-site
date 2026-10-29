@@ -794,7 +794,7 @@ select.field__input, .select__btn { appearance: none; padding-right: 40px; backg
 
 /* ---------- Карточка модели ---------- */
 
-.product { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 32px clamp(32px, 5vw, 72px); align-items: start; }
+.product { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 32px clamp(32px, 5vw, 72px); align-items: stretch; }
 .pgallery { display: grid; gap: 12px; }
 .pgallery__main { overflow: hidden; border-radius: var(--radius); background: var(--white); }
 .pgallery__main img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
@@ -841,20 +841,24 @@ select.field__input, .select__btn { appearance: none; padding-right: 40px; backg
 .filters--configs { margin: 0; }
 .filters--configs .chip { padding: 8px 16px; }
 
-/* строка доверия под кнопками */
-.trust { display: flex; flex-wrap: wrap; gap: 12px 28px; padding-top: 4px; }
-.trust li { display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 500; color: var(--ink); }
-.trust svg { flex: none; width: 22px; height: 22px; fill: none; stroke: var(--navy); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+/* преимущества под кнопками: три белые плашки с иконкой в круге, прижаты к низу колонки */
+.trust { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-top: auto; }
+.trust li {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 8px; padding: 12px 14px 14px; border-radius: var(--radius-sm);
+  background: var(--white); font-size: 13px; line-height: 1.35; font-weight: 600; color: var(--navy);
+}
+.trust__icon { display: grid; flex: none; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--light); color: var(--navy); }
+.trust__icon svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
 .pgallery__thumbs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
 .pgallery__thumb { overflow: hidden; padding: 0; border: 2px solid transparent; border-radius: var(--radius-sm); background: var(--white); cursor: pointer; transition: border-color .2s ease; }
 .pgallery__thumb img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
 .pgallery__thumb:hover { border-color: rgba(42, 37, 96, .3); }
 .pgallery__thumb[aria-pressed="true"] { border-color: var(--navy); }
-.pinfo { display: flex; flex-direction: column; gap: 20px; }
-.pinfo__lead { font-size: 17px; line-height: 1.6; color: var(--ink); }
+.pinfo { display: flex; flex-direction: column; gap: 14px; }
+.pinfo__lead { font-size: 16px; line-height: 1.6; color: var(--ink); }
 .pinfo__text { font-size: 15px; color: var(--muted); }
 .specs { display: grid; border-top: 1px solid var(--line); }
-.specs > div { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: 16px; padding: 13px 0; border-bottom: 1px solid var(--line); font-size: 14px; }
+.specs > div { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: 16px; padding: 10px 0; border-bottom: 1px solid var(--line); font-size: 14px; }
 .specs dt { color: var(--muted); }
 .specs dd { font-weight: 600; color: var(--navy); }
 .pinfo__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 28px; margin-top: 4px; }
@@ -872,14 +876,21 @@ select.field__input, .select__btn { appearance: none; padding-right: 40px; backg
 
 /* ---------- Карточка модели: тёплый стандарт, SMART, выполненные проекты ---------- */
 
-.warm { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 40px clamp(40px, 6vw, 88px); align-items: center; }
-.warm__media { overflow: hidden; border-radius: var(--radius); background: var(--white); }
-.warm__media img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
-.warm__body { display: flex; flex-direction: column; align-items: flex-start; gap: 20px; }
+/* фото и текст одной высоты: рендер вписан в белую плашку на всю высоту колонки */
+.warm { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 40px clamp(40px, 6vw, 88px); align-items: stretch; }
+.warm__media { display: grid; place-items: center; overflow: hidden; border-radius: var(--radius); background: var(--white); }
+.warm__media img { width: 100%; height: 100%; min-height: 320px; object-fit: contain; }
+.warm__body { display: flex; flex-direction: column; align-items: flex-start; gap: 22px; padding: 8px 0; }
 .warm__lead { font-size: 16px; line-height: 1.6; color: #C9C7E6; }
-.warm__list { display: grid; gap: 12px; margin-bottom: 8px; }
-.warm__list li { display: flex; align-items: flex-start; gap: 12px; font-size: 15px; font-weight: 500; color: var(--white); }
-.warm__list li::before { content: ""; flex: none; width: 8px; height: 8px; margin-top: 7px; border-radius: 50%; background: #A9A6D6; }
+/* четыре свойства — плашками 2×2 с иконкой */
+.warm__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; align-self: stretch; }
+.warm__grid li {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 12px; padding: 18px;
+  border: 1px solid rgba(255, 255, 255, .12); border-radius: var(--radius-sm); background: rgba(255, 255, 255, .05);
+  font-size: 14px; line-height: 1.4; font-weight: 600; color: var(--white);
+}
+.warm__icon { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: rgba(169, 166, 214, .18); color: #C9C7E6; }
+.warm__icon svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
 
 .smart-parts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
 .smart-part { display: flex; flex-direction: column; gap: 8px; padding: 24px; border: 1px solid var(--line); border-radius: var(--radius); transition: border-color .2s ease; }
@@ -889,13 +900,10 @@ select.field__input, .select__btn { appearance: none; padding-right: 40px; backg
 .smart-part__title { font-size: 16px; line-height: 1.3; font-weight: 600; color: var(--ink); }
 .smart-part__text { font-size: 14px; color: var(--muted); }
 
-.project { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.4fr); gap: 32px clamp(40px, 6vw, 88px); align-items: start; }
-.project__body { display: flex; flex-direction: column; gap: 16px; }
-.project__text { font-size: 15px; color: var(--muted); }
-.project__photos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
-.project__photos img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radius-sm); }
-/* первое фото крупно на всю ширину, остальные три — рядом под ним */
-.project__photos img:first-child { grid-column: 1 / -1; aspect-ratio: 16 / 9; }
+/* выполненные проекты: горизонтальная лента фото, листается стрелками и свайпом */
+.project-track { display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; scrollbar-width: none; }
+.project-track::-webkit-scrollbar { display: none; }
+.project-track img { flex: 0 0 calc((100% - 32px) / 2.4); min-width: 0; width: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radius); scroll-snap-align: start; }
 
 /* ---------- Адаптив ---------- */
 
@@ -947,7 +955,8 @@ select.field__input, .select__btn { appearance: none; padding-right: 40px; backg
   .cards, .cards--4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .product { grid-template-columns: 1fr; }
   .features { grid-template-columns: 1fr; }
-  .warm, .project { grid-template-columns: 1fr; }
+  .warm { grid-template-columns: 1fr; }
+  .project-track img { flex-basis: calc((100% - 16px) / 1.6); }
   .smart-parts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .page-head { flex-direction: column; align-items: flex-start; }
 }
@@ -966,6 +975,8 @@ select.field__input, .select__btn { appearance: none; padding-right: 40px; backg
   .gallery__caption { max-width: none; padding: 9px 14px; font-size: 13px; }
   .gallery__controls { display: none; }
   .slider-nav { display: none; }
+  .project-track { gap: 10px; margin: 0 calc(var(--gutter) * -1); padding: 0 var(--gutter); scroll-padding: 0 var(--gutter); }
+  .project-track img { flex-basis: 82%; }
   .cards { grid-template-columns: 1fr; gap: 16px; }
   /* модели на телефоне — по две в ряд, без описания */
   .cards--models { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
@@ -984,8 +995,12 @@ select.field__input, .select__btn { appearance: none; padding-right: 40px; backg
   .chip { flex: none; }
   .pgallery__thumbs { gap: 8px; }
   .filters--configs { flex-wrap: wrap; margin: 0; padding: 0; overflow: visible; }
-  .trust { flex-direction: column; gap: 10px; }
+  .trust { grid-template-columns: 1fr; gap: 8px; }
+  .trust li { flex-direction: row; align-items: center; gap: 12px; }
   .smart-parts { gap: 10px; }
+  .warm__grid { grid-template-columns: 1fr; }
+  .warm__grid li { flex-direction: row; align-items: center; padding: 14px; }
+  .warm__media img { min-height: 0; }
   .smart-part { padding: 16px; }
   .smart-part__icon { width: 40px; height: 40px; margin-bottom: 4px; }
   .smart-part__title { font-size: 14px; }

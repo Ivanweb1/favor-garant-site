@@ -299,7 +299,7 @@ PROJECT_PHOTOS = [
     ('img/catalog/atlant-photo-3.jpg', '«Атлант» с лайтпостером на объекте'),
 ]
 project_photos = '\n'.join(
-    f'          <img src="{src}" alt="{alt}" loading="lazy">' for src, alt in PROJECT_PHOTOS)
+    f'        <img src="{src}" alt="{alt}" loading="lazy">' for src, alt in PROJECT_PHOTOS)
 
 others = [m for m in SHELTERS if m[0] in ('atlant-smart', 'elegant-p', 'compact', 'closed')]
 
@@ -322,29 +322,27 @@ atlant_main = f'''
         </div>
         <div class="pinfo">
           <h1 class="h2 duo"><span>Атлант</span></h1>
-          <p class="pinfo__lead">Модульный остановочный павильон с&nbsp;интегрированной информационной системой.</p>
+          <p class="pinfo__lead">Модульный павильон с&nbsp;увеличенным просветом между каркасом и&nbsp;крышей&nbsp;— для информационной панели с&nbsp;названием остановки и&nbsp;маршрутами транспорта.</p>
           <div class="pinfo__configs">
             <p class="pinfo__label">Комплектация</p>
             <div class="filters filters--configs" role="group" aria-label="Комплектация">
 {cfg_chips}
             </div>
           </div>
-          <p class="pinfo__text">Увеличенный просвет между несущей конструкцией и&nbsp;крышей позволяет разместить декоративные или информационные панели с&nbsp;названием остановки и&nbsp;маршрутами общественного транспорта.</p>
           <dl class="specs">
             <div><dt>Габариты, мм</dt><dd>4996 × 2730 × 1645</dd></div>
             <div><dt>Крыша</dt><dd>Изогнутая, монолитный или сотовый поликарбонат</dd></div>
             <div><dt>Ветрозащитные панели</dt><dd>Триплекс, калёное стекло 6&nbsp;или 8&nbsp;мм, сетка-ПВЛ</dd></div>
             <div><dt>Скамья</dt><dd>Деревянный брус с&nbsp;антисептической пропиткой</dd></div>
-            <div><dt>Комплектации</dt><dd>Стандартная, SMART, удлинённая 6&nbsp;и&nbsp;10&nbsp;м</dd></div>
           </dl>
           <div class="pinfo__actions">
             <a class="btn btn--primary" href="#request-form">Рассчитать стоимость</a>
             <a class="link-arrow" href="index.html#services">Монтаж под ключ</a>
           </div>
           <ul class="trust">
-            <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21h18M4 21V11l5 3v-3l5 3v-3l5 3V4h2v17"/></svg>Собственное производство в&nbsp;Санкт-Петербурге</li>
-            <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 6h11v10H2zM13 9h4l4 4v3h-8"/><circle cx="6" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg>Доставка и&nbsp;монтаж по&nbsp;всей России</li>
-            <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8-8 9-4.6-1-8-4.5-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg>Гарантия производителя</li>
+            <li><span class="trust__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21h18M4 21V11l5 3v-3l5 3v-3l5 3V4h2v17"/></svg></span>Своё производство в&nbsp;СПб</li>
+            <li><span class="trust__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 6h11v10H2zM13 9h4l4 4v3h-8"/><circle cx="6" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg></span>Доставка и&nbsp;монтаж по&nbsp;РФ</li>
+            <li><span class="trust__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8-8 9-4.6-1-8-4.5-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg></span>Гарантия производителя</li>
           </ul>
         </div>
       </div>
@@ -373,17 +371,16 @@ atlant_main = f'''
     <div class="container warm">
       <div class="warm__media"><img src="img/catalog/atlant-cfg-6m.jpg" alt="Полузакрытый удлинённый «Атлант»" loading="lazy" width="1120" height="840"></div>
       <div class="warm__body">
-        <p class="eyebrow">Тёплый стандарт</p>
         <h2 class="h2 duo duo--light">
-          <span>Павильон</span>
-          <span class="duo__second">повышенной комфортности</span>
+          <span>Тёплый</span>
+          <span class="duo__second">павильон</span>
         </h2>
-        <p class="warm__lead">Утеплённая конструкция, эргономичный дизайн и&nbsp;надёжные материалы: фронтальные ветрозащитные панели формируют тепловой барьер, снижают продувание и&nbsp;сохраняют тепло в&nbsp;зоне ожидания.</p>
-        <ul class="warm__list">
-          <li>Защита от&nbsp;холода, ветра и&nbsp;осадков</li>
-          <li>Полная адаптация под требования заказчика</li>
-          <li>Сочетание теплоизоляции и&nbsp;долговечности</li>
-          <li>Готовность к&nbsp;дополнительным опциям и&nbsp;smart-технологиям</li>
+        <p class="warm__lead">Фронтальные ветрозащитные панели формируют тепловой барьер: снижают продувание и&nbsp;сохраняют тепло в&nbsp;зоне ожидания.</p>
+        <ul class="warm__grid">
+          <li><span class="warm__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 8h10a3 3 0 1 0-3-3M3 12h15a3 3 0 1 1-3 3M3 16h7"/></svg></span>Защита от&nbsp;холода, ветра и&nbsp;осадков</li>
+          <li><span class="warm__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg></span>Адаптация под требования заказчика</li>
+          <li><span class="warm__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 13.5V5a2 2 0 1 1 4 0v8.5a4 4 0 1 1-4 0z"/><path d="M12 9v6"/></svg></span>Теплоизоляция и&nbsp;долговечность</li>
+          <li><span class="warm__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="7" width="10" height="10" rx="1"/><path d="M10 3v4M14 3v4M10 17v4M14 17v4M3 10h4M3 14h4M17 10h4M17 14h4"/></svg></span>Готов к&nbsp;опциям и&nbsp;smart-технологиям</li>
         </ul>
         <a class="btn btn--light" href="#request-form">Рассчитать тёплый павильон</a>
       </div>
@@ -431,17 +428,28 @@ atlant_main = f'''
   </section>
 
   <section class="section section--light">
-    <div class="container project">
-      <div class="project__body">
-        <p class="eyebrow">Выполненные проекты</p>
-        <h2 class="h2 duo">
-          <span>«Атлант»</span>
-          <span class="duo__second">на&nbsp;объекте</span>
-        </h2>
-        <p class="project__text">Павильон с&nbsp;широкой изогнутой крышей из&nbsp;монолитного поликарбоната и&nbsp;увеличенным просветом для информационной панели с&nbsp;названием остановки.</p>
-        <p class="project__text">Конструкция установлена на&nbsp;тротуаре для комфортного ожидания городского транспорта.</p>
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Выполненные проекты</p>
+          <h2 class="h2 duo">
+            <span>«Атлант»</span>
+            <span class="duo__second">на&nbsp;объекте</span>
+          </h2>
+        </div>
+        <div class="section-head__side section-head__side--slider">
+          <p class="section-head__text">Павильон с&nbsp;изогнутой крышей из&nbsp;монолитного поликарбоната установлен на&nbsp;тротуаре для комфортного ожидания транспорта.</p>
+          <div class="slider-nav" data-slider="project-track">
+            <button class="slider-nav__btn" type="button" data-dir="-1" aria-label="Предыдущее фото">
+              {ARR % 'prev'}
+            </button>
+            <button class="slider-nav__btn" type="button" data-dir="1" aria-label="Следующее фото">
+              {ARR % 'next'}
+            </button>
+          </div>
+        </div>
       </div>
-      <div class="project__photos">
+      <div class="project-track" id="project-track">
 {project_photos}
       </div>
     </div>
@@ -452,7 +460,7 @@ atlant_main = f'''
       <div class="page-head">
         <div>
           <p class="eyebrow">Остановочные павильоны</p>
-          <h2 class="h2 duo">
+          <h2 class="h2 duo duo--inline">
             <span>Другие</span>
             <span class="duo__second">модели</span>
           </h2>
