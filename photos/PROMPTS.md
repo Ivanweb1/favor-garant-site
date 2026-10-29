@@ -686,3 +686,30 @@ Shot: close-up three-quarter view of the yellow audio module mounted on the shel
 Light: blue hour, soft light from the shelter roof lighting.
 Style: photorealistic product detail photography, not CGI, 85 mm lens, shallow depth of field. No readable text or letters, no logos, watermarks; no face.
 ```
+
+### 77-smart-light — подсветка конструкции
+```
+Aspect ratio 4:3.
+Use the attached render and photo of the "Atlant" bus shelter as the exact reference: light silver-grey square aluminium frame, wave-shaped clear polycarbonate roof, wooden bench. Do not redesign.
+Shot: three-quarter view from inside the shelter looking up at the roof: a slim built-in LED strip along the inner roof beam glows warm white and evenly lights the bench and the paving below; the curved polycarbonate roof softly reflects the light. The lit roof beam crosses the upper half of the frame, the glowing bench is in the lower third.
+Light: blue hour, the LED lighting is the main light source, the evening street outside is softly visible.
+Style: photorealistic architectural detail photography, not CGI, 35 mm lens. No text, letters, logos, watermarks or people.
+```
+
+### 78-smart-wifi — Wi-Fi маршрутизатор
+```
+Aspect ratio 4:3.
+Use the attached render and photo of the "Atlant" bus shelter as the exact reference for the frame and roof. Do not redesign.
+Shot: close-up from below of a compact white weatherproof outdoor Wi-Fi access point with two short antennas, neatly mounted on the inner roof beam of the shelter, a thin cable hidden inside the aluminium profile. A small green status LED glows on the device. The polycarbonate roof and the evening sky are softly visible above. The device fills the central 45% of the frame.
+Light: blue hour, soft light from the roof LED lighting.
+Style: photorealistic product detail photography, not CGI, 85 mm lens, shallow depth of field. No brand names, text, letters, logos, watermarks or people.
+```
+
+### 79-smart-sign — табличка с названием остановки
+```
+Aspect ratio 4:3.
+Use the attached render and photo of the "Atlant" bus shelter as the exact reference: the long name plate fixed along the front roof beam above the glass panels. Do not redesign.
+Shot: three-quarter eye-level view of the front roof beam with the illuminated name plate: a white backlit panel glowing evenly, with a small bus pictogram on the left and a row of coloured route dots, and a blank area where the stop name will be — no letters or words. The polycarbonate roof edge above and the top of the glass panels below. The plate runs diagonally across the central 70% of the frame.
+Light: blue hour, the plate glows softly, the street behind is still visible.
+Style: photorealistic architectural detail photography, not CGI, 50 mm lens. No readable text, letters, numbers, logos, watermarks or people.
+```

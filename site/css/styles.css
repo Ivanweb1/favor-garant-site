@@ -861,20 +861,41 @@ select.field__input, .select__btn { appearance: none; padding-right: 40px; backg
 
 /* ---------- Карточка модели: SMART, выполненные проекты ---------- */
 
-/* SMART: крупный рендер павильона 2×2 и фото компонентов вокруг, как на старом сайте */
-.smart-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
-.smart-hero { position: relative; grid-column: span 2; grid-row: span 2; overflow: hidden; border: 1px solid var(--line); border-radius: var(--radius); background: var(--white); }
-.smart-hero img { width: 100%; height: 100%; object-fit: contain; }
-.smart-hero__caption { position: absolute; left: 16px; bottom: 16px; padding: 6px 12px; border-radius: 999px; background: var(--light); font-size: 12px; font-weight: 600; color: var(--navy); }
-.smart-card { display: flex; flex-direction: column; gap: 6px; padding: 12px 16px 18px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--white); }
-.smart-card img { width: 100%; aspect-ratio: 4 / 3; margin-bottom: 6px; object-fit: contain; }
-.smart-card__title { font-size: 15px; line-height: 1.3; font-weight: 600; color: var(--ink); }
-.smart-card__text { font-size: 13px; line-height: 1.5; color: var(--muted); }
-.smart-more { grid-column: span 2; display: flex; flex-direction: column; justify-content: center; gap: 14px; padding: 24px 28px; border-radius: var(--radius); background: var(--light); }
-.smart-more__list { display: flex; flex-wrap: wrap; gap: 8px; }
-.smart-more__list li { padding: 8px 14px; border-radius: 999px; background: var(--white); font-size: 13px; font-weight: 500; color: var(--navy); }
+/* SMART: схема павильона с номерами-точками и список; наведение или клик открывает описание компонента */
+.hotspots { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 24px; align-items: stretch; }
+.hotspots__stage { position: relative; align-self: start; overflow: hidden; border: 1px solid var(--line); border-radius: var(--radius); background: var(--white); }
+.hotspots__stage img { width: 100%; height: auto; }
+.hotspot {
+  position: absolute; left: var(--x); top: var(--y); display: grid; place-items: center; width: 30px; height: 30px; margin: -15px 0 0 -15px; padding: 0;
+  border: 2px solid var(--white); border-radius: 50%; background: var(--navy); box-shadow: 0 4px 12px -4px rgba(23, 22, 43, .5);
+  font: inherit; font-size: 12px; font-weight: 700; color: var(--white); cursor: pointer;
+  transition: background-color .2s ease, transform .2s ease;
+}
+.hotspot::after { content: ""; position: absolute; inset: -8px; border-radius: 50%; border: 2px solid var(--navy-bright); opacity: 0; }
+.hotspot:hover, .hotspot.is-active { background: var(--navy-bright); transform: scale(1.12); }
+.hotspot.is-active::after { animation: hotspot-pulse 1.6s ease-out infinite; }
+@keyframes hotspot-pulse { from { opacity: .7; transform: scale(.7); } to { opacity: 0; transform: scale(1.3); } }
+@media (prefers-reduced-motion: reduce) { .hotspot.is-active::after { animation: none; opacity: .5; } }
+.hotspots__panel { display: flex; flex-direction: column; gap: 16px; }
+.hotspots__list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; }
+.hotspots__item {
+  display: flex; align-items: center; gap: 10px; width: 100%; padding: 8px 10px; border: 0; border-radius: var(--radius-sm);
+  background: transparent; font: inherit; font-size: 13px; line-height: 1.3; font-weight: 500; text-align: left; color: var(--ink); cursor: pointer;
+  transition: background-color .2s ease, color .2s ease;
+}
+.hotspots__num { display: grid; flex: none; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: var(--light); font-size: 11px; font-weight: 700; color: var(--navy); transition: background-color .2s ease, color .2s ease; }
+.hotspots__item:hover, .hotspots__item[aria-pressed="true"] { background: var(--light); color: var(--navy); }
+.hotspots__item[aria-pressed="true"] .hotspots__num { background: var(--navy); color: var(--white); }
+.hotspots__detail { display: grid; grid-template-columns: 120px minmax(0, 1fr); align-items: center; gap: 18px; min-height: 140px; margin-top: auto; padding: 16px; border-radius: var(--radius); background: var(--light); }
+.hotspots__detail[hidden] { display: none; }
+.hotspots__detail:not(:has(img)) { grid-template-columns: minmax(0, 1fr); }
+.hotspots__detail img { width: 120px; aspect-ratio: 1; object-fit: contain; border-radius: var(--radius-sm); background: var(--white); }
+.hotspots__title { margin-bottom: 6px; font-size: 16px; font-weight: 700; color: var(--navy); }
+.hotspots__text { font-size: 14px; line-height: 1.5; color: var(--muted); }
 
 /* выполненные проекты: горизонтальная лента фото, листается стрелками и свайпом */
+.project-head { display: grid; gap: 14px; }
+.project-head .section-head__text { max-width: 560px; }
 .project-track { display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; scrollbar-width: none; }
 .project-track::-webkit-scrollbar { display: none; }
 .project-track img { flex: 0 0 calc((100% - 32px) / 2.4); min-width: 0; width: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radius); scroll-snap-align: start; }
@@ -929,7 +950,7 @@ select.field__input, .select__btn { appearance: none; padding-right: 40px; backg
   .cards, .cards--4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .product { grid-template-columns: 1fr; }
   .project-track img { flex-basis: calc((100% - 16px) / 1.6); }
-  .smart-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .hotspots { grid-template-columns: 1fr; }
   .page-head { flex-direction: column; align-items: flex-start; }
 }
 
@@ -967,12 +988,12 @@ select.field__input, .select__btn { appearance: none; padding-right: 40px; backg
   .chip { flex: none; }
   .pgallery__thumbs { gap: 8px; }
   .filters--configs { flex-wrap: wrap; margin: 0; padding: 0; overflow: visible; }
-  .smart-grid { gap: 10px; }
-  .smart-hero { grid-row: auto; }
-  .smart-card { padding: 10px 12px 14px; }
-  .smart-card__title { font-size: 14px; }
-  .smart-card__text { font-size: 12px; }
-  .smart-more { padding: 18px; }
+  .hotspot { width: 24px; height: 24px; margin: -12px 0 0 -12px; font-size: 10px; }
+  .hotspots__list { grid-template-columns: 1fr; }
+  /* на телефоне описание сразу под фото, список ниже — выбранное видно без прокрутки */
+  .hotspots__detail { order: -1; margin-top: 0; min-height: 0; }
+  .hotspots__detail { grid-template-columns: 88px minmax(0, 1fr); gap: 14px; }
+  .hotspots__detail img { width: 88px; }
   .lightbox { padding: 64px 12px; }
   .lightbox__nav { top: auto; bottom: 16px; margin-top: 0; }
   .specs > div { grid-template-columns: 1fr 1fr; }

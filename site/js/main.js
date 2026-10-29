@@ -496,6 +496,24 @@
     main.addEventListener('click', openLightbox);
   });
 
+  // SMART-схема: точка на фото и пункт списка выбирают один и тот же компонент
+  document.querySelectorAll('.hotspots').forEach((box) => {
+    const pins = [...box.querySelectorAll('.hotspot')];
+    const items = [...box.querySelectorAll('.hotspots__item')];
+    const details = [...box.querySelectorAll('.hotspots__detail')];
+    function select(i) {
+      pins.forEach((p, n) => p.classList.toggle('is-active', n === i));
+      items.forEach((it, n) => it.setAttribute('aria-pressed', String(n === i)));
+      details.forEach((d, n) => { d.hidden = n !== i; });
+    }
+    [...pins, ...items].forEach((el) => {
+      const i = Number(el.dataset.i);
+      el.addEventListener('click', () => select(i));
+      el.addEventListener('mouseenter', () => { if (window.matchMedia('(hover: hover)').matches) select(i); });
+    });
+    select(0);
+  });
+
   // Форма: проверка обязательных полей. Отправки на сервер в прототипе нет.
   const form = document.getElementById('request-form');
   const status = form.querySelector('.form__status');

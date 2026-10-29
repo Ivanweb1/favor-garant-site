@@ -246,22 +246,36 @@ cfg_chips = '\n'.join(
     f'              <button class="chip" type="button" data-full="img/catalog/{img}.jpg" data-desc="{text}" aria-pressed="{str(n == 0).lower()}">{CHIP_NAMES[img]}</button>'
     for n, (img, name, text, kind) in enumerate(CONFIGS))
 
-# SMART-компоненты: фото вырезаны из листа «Элегант П» старого сайта, тексты — со страницы «Элеганта»
+# SMART-схема: точки на рендере «Атланта SMART» (координаты в % кадра smart-stage.jpg) и список справа.
+# Фото компонентов — временные вырезки из листа «Элегант П» старого сайта; тексты — со страницы «Элеганта».
 SMART_PARTS = [
-    ('board', 'Электронное табло прибытия', 'Номера и&nbsp;время ожидания маршрутов городского транспорта'),
-    ('poster', 'Лайтпостер сити-формат', 'Световой короб с&nbsp;подсветкой для информационного баннера'),
-    ('usb', 'USB-зарядка', 'Для подзарядки телефонов, планшетов и&nbsp;других гаджетов'),
-    ('sos', 'Кнопка экстренного вызова', 'Моментальный вызов единого номера экстренных служб 112'),
-    ('camera', 'Камеры видеонаблюдения', 'Обзор пространства внутри павильона'),
-    ('sound', 'Модуль звукового дублирования', 'Озвучивает прогноз прибытия транспорта, надписи продублированы шрифтом Брайля'),
+    ('board', 16.7, 31.0, 'Электронное табло прибытия', 'Показывает номера и&nbsp;время ожидания маршрутов городского транспорта.'),
+    ('poster', 16.7, 60.0, 'Лайтпостер сити-формат', 'Световой короб с&nbsp;внутренней подсветкой для информационного баннера или схемы маршрутов.'),
+    ('sign', 40.5, 16.5, 'Табличка с&nbsp;названием', 'Название остановки общественного транспорта с&nbsp;подсветкой.'),
+    ('light', 73.8, 21.0, 'Подсветка конструкции', 'Светодиодная подсветка павильона в&nbsp;тёмное время суток.'),
+    ('wifi', 56.0, 9.0, 'Wi-Fi маршрутизатор', 'Пассажиры подключаются к&nbsp;интернету во&nbsp;время ожидания.'),
+    ('camera', 89.0, 25.0, 'Камеры видеонаблюдения', 'Обзор пространства внутри павильона.'),
+    ('sos', 84.5, 44.0, 'Кнопка экстренного вызова', 'Моментальный вызов единого номера экстренных служб 112.'),
+    ('sound', 66.7, 44.0, 'Модуль звукового дублирования', 'Озвучивает прогноз прибытия транспорта, надписи продублированы шрифтом Брайля.'),
+    ('usb', 44.0, 62.0, 'USB-зарядка', 'Для подзарядки телефонов, планшетов и&nbsp;других гаджетов.'),
 ]
-smart_parts = '\n'.join(
-    f'''        <div class="smart-card">
-          <img src="img/catalog/smart-{img}.jpg" alt="{t}" loading="lazy" width="960" height="720">
-          <h3 class="smart-card__title">{t}</h3>
-          <p class="smart-card__text">{d}</p>
-        </div>'''
-    for img, t, d in SMART_PARTS)
+SMART_PHOTOS = {'board', 'poster', 'usb', 'sos', 'camera', 'sound'}
+
+smart_pins = '\n'.join(
+    f'            <button class="hotspot" type="button" style="--x: {x}%; --y: {y}%" data-i="{n}" aria-label="{t.replace("&nbsp;", " ")}">{n + 1}</button>'
+    for n, (key, x, y, t, d) in enumerate(SMART_PARTS))
+smart_items = '\n'.join(
+    f'''            <li><button class="hotspots__item" type="button" data-i="{n}" aria-pressed="{str(n == 0).lower()}"><span class="hotspots__num">{n + 1}</span>{t}</button></li>'''
+    for n, (key, x, y, t, d) in enumerate(SMART_PARTS))
+smart_details = '\n'.join(
+    f'''          <div class="hotspots__detail" data-i="{n}"{'' if n == 0 else ' hidden'}>
+            {f'<img src="img/catalog/smart-{key}.jpg" alt="" loading="lazy" width="960" height="720">' if key in SMART_PHOTOS else ''}
+            <div>
+              <h3 class="hotspots__title">{t}</h3>
+              <p class="hotspots__text">{d}</p>
+            </div>
+          </div>'''
+    for n, (key, x, y, t, d) in enumerate(SMART_PARTS))
 
 # Выполненный проект «Атланта» — подпись со старой страницы модели
 PROJECT_PHOTOS = [
@@ -351,19 +365,16 @@ atlant_main = f'''
         </div>
         <p class="page-head__text">Умные модули встраиваются в&nbsp;базовую конструкцию: стандартный павильон превращается в&nbsp;комплекс с&nbsp;информированием, связью и&nbsp;мониторингом, совместимый со&nbsp;стратегией «Умного города».</p>
       </div>
-      <div class="smart-grid">
-        <div class="smart-hero">
-          <img src="img/catalog/atlant-cfg-smart.jpg" alt="«Атлант» с лайтпостером SMART" loading="lazy" width="1120" height="840">
-          <p class="smart-hero__caption">«Атлант» с&nbsp;лайтпостером SMART</p>
+      <div class="hotspots">
+        <div class="hotspots__stage">
+          <img src="img/catalog/smart-stage.jpg" alt="«Атлант» с лайтпостером SMART и местами установки оборудования" loading="lazy" width="940" height="537">
+{smart_pins}
         </div>
-{smart_parts}
-        <div class="smart-more">
-          <h3 class="smart-card__title">Также подключаем</h3>
-          <ul class="smart-more__list">
-            <li>Светодиодная подсветка конструкции</li>
-            <li>Wi-Fi маршрутизатор</li>
-            <li>Табличка с&nbsp;названием остановки и&nbsp;подсветкой</li>
-          </ul>
+        <div class="hotspots__panel">
+          <ol class="hotspots__list">
+{smart_items}
+          </ol>
+{smart_details}
         </div>
       </div>
     </div>
@@ -372,23 +383,21 @@ atlant_main = f'''
   <section class="section section--light">
     <div class="container">
       <div class="section-head">
-        <div>
+        <div class="project-head">
           <p class="eyebrow">Выполненные проекты</p>
-          <h2 class="h2 duo">
+          <h2 class="h2 duo duo--inline">
             <span>«Атлант»</span>
             <span class="duo__second">на&nbsp;объекте</span>
           </h2>
+          <p class="section-head__text">Павильон с&nbsp;изогнутой крышей из&nbsp;монолитного поликарбоната на&nbsp;городском тротуаре.</p>
         </div>
-        <div class="section-head__side section-head__side--slider">
-          <p class="section-head__text">Павильон с&nbsp;изогнутой крышей из&nbsp;монолитного поликарбоната установлен на&nbsp;тротуаре для комфортного ожидания транспорта.</p>
-          <div class="slider-nav" data-slider="project-track">
-            <button class="slider-nav__btn" type="button" data-dir="-1" aria-label="Предыдущее фото">
-              {ARR % 'prev'}
-            </button>
-            <button class="slider-nav__btn" type="button" data-dir="1" aria-label="Следующее фото">
-              {ARR % 'next'}
-            </button>
-          </div>
+        <div class="slider-nav" data-slider="project-track">
+          <button class="slider-nav__btn" type="button" data-dir="-1" aria-label="Предыдущее фото">
+            {ARR % 'prev'}
+          </button>
+          <button class="slider-nav__btn" type="button" data-dir="1" aria-label="Следующее фото">
+            {ARR % 'next'}
+          </button>
         </div>
       </div>
       <div class="project-track" id="project-track">
