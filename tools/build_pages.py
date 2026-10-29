@@ -340,7 +340,7 @@ atlant_main = f'''
             <a class="link-arrow" href="index.html#services">Монтаж под ключ</a>
           </div>
           <ul class="trust">
-            <li><span class="trust__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21h18M4 21V11l5 3v-3l5 3v-3l5 3V4h2v17"/></svg></span>Своё производство в&nbsp;СПб</li>
+            <li><span class="trust__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21h18M4 21V11l5 3v-3l5 3v-3l5 3V4h2v17"/></svg></span>Производство в&nbsp;СПб</li>
             <li><span class="trust__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 6h11v10H2zM13 9h4l4 4v3h-8"/><circle cx="6" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg></span>Доставка и&nbsp;монтаж по&nbsp;РФ</li>
             <li><span class="trust__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8-8 9-4.6-1-8-4.5-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg></span>Гарантия производителя</li>
           </ul>
