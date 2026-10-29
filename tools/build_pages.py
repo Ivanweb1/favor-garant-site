@@ -229,8 +229,8 @@ CONFIGS = [
     ('atlant-cfg-base', 'Атлант', 'Широкие боковые ветрозащитные панели и&nbsp;изогнутая крыша.', 'Стандартная'),
     ('atlant-cfg-light', 'С&nbsp;лайтпостером', 'Узкая боковая панель и&nbsp;лайтпостер ситиформата вместо широкой. Можно поставить несколько лайтпостеров.', 'Стандартная'),
     ('atlant-cfg-smart', 'С&nbsp;лайтпостером SMART', 'Лайтпостер с&nbsp;электронным табло прибытия транспорта.', 'SMART'),
-    ('atlant-cfg-6m', 'Полузакрытый удлинённый 6&nbsp;м', 'Широкие боковые и&nbsp;фронтальные ветрозащитные панели.', 'Увеличенная'),
-    ('atlant-cfg-10m', 'Полузакрытый удлинённый 10&nbsp;м', 'Боковые и&nbsp;фронтальные панели, лайтпостер и&nbsp;пилон.', 'Увеличенная'),
+    ('atlant-cfg-6m', 'Полузакрытый удлинённый 6&nbsp;м', 'Широкие боковые и&nbsp;фронтальные панели: тепловой барьер сохраняет тепло в&nbsp;зоне ожидания.', 'Увеличенная'),
+    ('atlant-cfg-10m', 'Полузакрытый удлинённый 10&nbsp;м', 'Боковые и&nbsp;фронтальные панели защищают от&nbsp;продувания, плюс лайтпостер и&nbsp;пилон.', 'Увеличенная'),
 ]
 
 def cfg_tile(c):
@@ -358,26 +358,6 @@ atlant_main = f'''
       </div>
       <div class="cards">
 {chr(10).join(cfg_tile(c) for c in CONFIGS)}
-      </div>
-    </div>
-  </section>
-
-  <section class="section section--dark">
-    <div class="container warm">
-      <div class="warm__media"><img src="img/catalog/atlant-cfg-6m.jpg" alt="Полузакрытый удлинённый «Атлант»" loading="lazy" width="1120" height="840"></div>
-      <div class="warm__body">
-        <h2 class="h2 duo duo--light">
-          <span>Тёплый</span>
-          <span class="duo__second">павильон</span>
-        </h2>
-        <p class="warm__lead">Фронтальные ветрозащитные панели формируют тепловой барьер: снижают продувание и&nbsp;сохраняют тепло в&nbsp;зоне ожидания.</p>
-        <ul class="warm__grid">
-          <li><span class="warm__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 8h10a3 3 0 1 0-3-3M3 12h15a3 3 0 1 1-3 3M3 16h7"/></svg></span>Защита от&nbsp;холода, ветра и&nbsp;осадков</li>
-          <li><span class="warm__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg></span>Адаптация под требования заказчика</li>
-          <li><span class="warm__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 13.5V5a2 2 0 1 1 4 0v8.5a4 4 0 1 1-4 0z"/><path d="M12 9v6"/></svg></span>Теплоизоляция и&nbsp;долговечность</li>
-          <li><span class="warm__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="7" width="10" height="10" rx="1"/><path d="M10 3v4M14 3v4M10 17v4M14 17v4M3 10h4M3 14h4M17 10h4M17 14h4"/></svg></span>Готов к&nbsp;опциям и&nbsp;smart-технологиям</li>
-        </ul>
-        <a class="btn btn--light" href="#request-form">Рассчитать тёплый павильон</a>
       </div>
     </div>
   </section>
