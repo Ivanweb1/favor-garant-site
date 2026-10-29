@@ -147,7 +147,7 @@ a.link-arrow:not(.link-arrow--light):hover { color: var(--navy-bright); }
   border: 1px solid rgba(42, 37, 96, .35); border-radius: 50%; color: var(--navy);
   transition: background-color .2s ease, color .2s ease, border-color .2s ease;
 }
-.header__cart:hover { border-color: var(--navy-bright); background: var(--navy-bright); color: var(--white); }
+.header__cart:hover { border-color: rgba(42, 37, 96, .5); background: rgba(74, 65, 201, .1); }
 .header__cart-count {
   position: absolute; top: -4px; right: -4px; min-width: 20px; height: 20px; padding: 0 5px;
   border: 2px solid var(--white); border-radius: 999px; background: var(--red);
@@ -215,7 +215,8 @@ a.link-arrow:not(.link-arrow--light):hover { color: var(--navy-bright); }
   border: 1px solid rgba(42, 37, 96, .35); border-radius: 50%; background: none; color: var(--navy); cursor: pointer;
   transition: background-color .2s ease, color .2s ease, border-color .2s ease;
 }
-.burger:hover { border-color: var(--navy-bright); background: var(--navy-bright); color: var(--white); }
+/* ховер круглых кнопок с обводкой: лёгкая сиреневая подложка — заметно, но не ярко */
+.burger:hover { border-color: rgba(42, 37, 96, .5); background: rgba(74, 65, 201, .1); }
 .burger span { display: block; width: 18px; height: 1.8px; border-radius: 2px; background: currentColor; transition: transform .2s ease, opacity .2s ease; }
 .burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(5.8px) rotate(45deg); }
 .burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
@@ -531,7 +532,7 @@ a.link-arrow:not(.link-arrow--light):hover { color: var(--navy-bright); }
   border: 1px solid rgba(42, 37, 96, .35); border-radius: 50%; background: transparent; color: var(--navy);
   cursor: pointer; transition: background-color .2s ease, color .2s ease, border-color .2s ease, opacity .2s ease;
 }
-.slider-nav__btn:hover { border-color: var(--navy-bright); background: var(--navy-bright); color: var(--white); }
+.slider-nav__btn:hover { border-color: rgba(42, 37, 96, .5); background: rgba(74, 65, 201, .1); }
 .slider-nav__btn:disabled { opacity: .35; pointer-events: none; }
 .works__nav { display: flex; gap: 10px; }
 .works__btn {
@@ -806,6 +807,7 @@ select.field__input, .select__btn { appearance: none; padding-right: 40px; backg
 }
 .slider-nav--overlay .slider-nav__btn { border-color: transparent; background: rgba(255, 255, 255, .92); box-shadow: 0 6px 16px -8px rgba(10, 10, 30, .5); pointer-events: auto; }
 .slider-nav--overlay .slider-nav__btn:disabled { opacity: 0; }
+.slider-nav--overlay .slider-nav__btn:hover { border-color: transparent; background: #ECEBF8; }
 /* «Другие модели»: на десктопе сетка и кнопка в шапке; на телефоне лента со стрелками, кнопка под ней */
 .slider-nav--mobile, .others__all-bottom { display: none; }
 /* на белом фоне белой карточке нужна обводка */
