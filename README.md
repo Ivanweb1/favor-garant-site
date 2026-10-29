@@ -23,3 +23,11 @@
 - Основной цвет `#2A2560`, акцент `#CB0404`, доп. `#DEDBD2` и `#EEF0F2`
 - Шрифты: web — Montserrat (Black / Bold / Regular), печать — Manrope
 - Контакты: 8 (800) 333-222-7, 8 (812) 640-222-7, info@favor-garant.ru, 196006, Санкт-Петербург, ул. Цветочная, д. 7, лит. Б, пом. 6
+
+## Внутренние страницы каталога
+
+`site/catalog.html`, `site/bus-shelters.html`, `site/bus-shelter-atlant.html` собираются скриптом: шапка, заявка и подвал берутся из `site/index.html`, содержимое страниц — в самом скрипте. После правок шапки или подвала на главной пересобрать:
+
+```
+python tools/build_pages.py site
+```

@@ -1,0 +1,521 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Прототип на GitHub Pages: не индексировать, чтобы не дублировать favor-garant.ru -->
+  <meta name="robots" content="noindex, nofollow">
+  <title>Остановочные павильоны — ФАВОР-ГАРАНТ</title>
+  <meta name="description" content="Остановочные павильоны от производителя ФАВОР-ГАРАНТ: модульные, городские, курортные, закрытые и SMART. Производство в Санкт-Петербурге, доставка и монтаж по России.">
+  <link rel="icon" href="img/brand/logo-circle.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap&subset=cyrillic" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<!-- Шапка -->
+<header class="header" id="top">
+  <div class="container header__row">
+    <a class="header__logo" href="index.html" aria-label="ФАВОР-ГАРАНТ — на главную">
+      <img src="img/brand/logo-ru.svg" alt="ФАВОР ГАРАНТ" width="160" height="53">
+    </a>
+
+    <nav class="nav" aria-label="Основное меню">
+      <ul class="nav__list">
+        <li class="nav__item nav__item--mega">
+          <button class="nav__link nav__toggle" type="button" aria-expanded="false" aria-controls="mega">
+            Продукция
+            <svg class="nav__chevron" width="10" height="6" viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+          </button>
+        </li>
+        <li class="nav__item"><a class="nav__link" href="index.html#about">О компании</a></li>
+        <li class="nav__item"><a class="nav__link" href="index.html#works">Наши работы</a></li>
+        <li class="nav__item"><a class="nav__link" href="index.html#news">Новости</a></li>
+        <li class="nav__item"><a class="nav__link" href="#contacts">Контакты</a></li>
+      </ul>
+    </nav>
+
+    <div class="header__contacts">
+      <a class="header__phone" href="tel:+78003332227">8 (800) 333-222-7</a>
+      <span class="header__address">СПб, ул. Цветочная, д. 7, лит. Б, пом. 6</span>
+    </div>
+    <!-- Вход в ЛК и корзина интернет-магазина комплектующих: логику обсуждаем отдельно, пока ссылки-заглушки -->
+    <div class="header__actions">
+      <a class="btn btn--primary header__login" href="#" aria-label="Войти в личный кабинет">
+        <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg>
+        <span>Войти</span>
+      </a>
+      <a class="header__cart" href="#" aria-label="Корзина, товаров: 0">
+        <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2.2l2.3 11h10.8l2-8H6.4"/><circle cx="9.5" cy="19.5" r="1.5"/><circle cx="17" cy="19.5" r="1.5"/></svg>
+        <span class="header__cart-count">0</span>
+      </a>
+    </div>
+
+    <button class="burger" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="mobile-menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <!-- Выпадающее меню «Продукция»: слева разделы, как в примере клиента, справа подразделы выбранного -->
+  <div class="mega" id="mega" hidden>
+    <div class="container mega__grid">
+      <ul class="mega__cats">
+        <li><a class="mega__cat is-active" href="bus-shelters.html" data-cat="pav"><img src="img/icons/line-pavilion.svg" alt="" width="40" height="22"><span>Остановочные павильоны</span></a></li>
+        <li><a class="mega__cat" href="index.html#catalog" data-cat="tumb"><img src="img/icons/line-tumba.svg" alt="" width="40" height="22"><span>Рекламные тумбы</span></a></li>
+        <li><a class="mega__cat" href="index.html#catalog" data-cat="light"><img src="img/icons/line-lightbox.svg" alt="" width="40" height="22"><span>Лайтпостеры</span></a></li>
+        <li><a class="mega__cat" href="index.html#catalog" data-cat="bill"><img src="img/icons/line-billboard.svg" alt="" width="40" height="22"><span>Рекламные щиты</span></a></li>
+        <li><a class="mega__cat" href="index.html#catalog" data-cat="shoot"><img src="img/icons/line-shooting.svg" alt="" width="40" height="22"><span>Оборудование для стрельбищ</span></a></li>
+        <li><a class="mega__cat" href="index.html#catalog" data-cat="custom"><img src="img/icons/line-custom.svg" alt="" width="40" height="22"><span>Нестандартные конструкции</span></a></li>
+        <li><a class="mega__cat" href="index.html#catalog" data-cat="maf"><img src="img/icons/line-maf.svg" alt="" width="40" height="22"><span>Малые архитектурные формы</span></a></li>
+        <li><a class="mega__cat" href="index.html#catalog" data-cat="nav"><img src="img/icons/line-navigation.svg" alt="" width="40" height="22"><span>Навигация</span></a></li>
+      </ul>
+      <div class="mega__panel" data-panel="pav">
+        <div class="mega__info">
+          <p class="mega__title">Остановочные павильоны</p>
+          <p class="mega__text">Умные павильоны с современным дизайном для ожидания общественного транспорта.</p>
+          <ul class="mega__subs mega__subs--cols">
+            <li><a href="bus-shelters.html">Элегант</a></li>
+            <li><a href="bus-shelters.html">Элегант П</a></li>
+            <li><a href="bus-shelters.html">Стандарт</a></li>
+            <li><a href="bus-shelters.html">Галант</a></li>
+            <li><a href="bus-shelter-atlant.html">Атлант</a></li>
+            <li><a href="bus-shelters.html">Атлант SMART</a></li>
+            <li><a href="bus-shelters.html">Компакт</a></li>
+            <li><a href="bus-shelters.html">Городской</a></li>
+            <li><a href="bus-shelters.html">Городской SMART</a></li>
+            <li><a href="bus-shelters.html">Чайка</a></li>
+            <li><a href="bus-shelters.html">Альбатрос</a></li>
+            <li><a href="bus-shelters.html">Регион</a></li>
+            <li><a href="bus-shelters.html">Закрытый</a></li>
+            <li><a href="bus-shelters.html">Закрытый Регион</a></li>
+            <li><a href="bus-shelters.html">Закрытый для МГН</a></li>
+          </ul>
+          <a class="btn btn--outline" href="bus-shelters.html">Смотреть раздел</a>
+        </div>
+        <img class="mega__photo" style="--pos: 50% 50%" src="img/photos/10-cat-pavilions.jpg" alt="" loading="lazy" width="1400" height="1050">
+      </div>
+      <div class="mega__panel" data-panel="tumb" hidden>
+        <div class="mega__info">
+          <p class="mega__title">Рекламные тумбы</p>
+          <p class="mega__text">Тумбы с внутренней светодиодной подсветкой.</p>
+          <ul class="mega__subs">
+            <li><a href="index.html#catalog">Круглая рекламная тумба</a></li>
+            <li><a href="index.html#catalog">Плоская рекламная тумба</a></li>
+            <li><a href="index.html#catalog">Вогнутая рекламная тумба</a></li>
+          </ul>
+          <a class="btn btn--outline" href="index.html#catalog">Смотреть раздел</a>
+        </div>
+        <img class="mega__photo" style="--pos: 100% 50%" src="img/photos/11-cat-tumby.jpg" alt="" loading="lazy" width="1400" height="1050">
+      </div>
+      <div class="mega__panel" data-panel="light" hidden>
+        <div class="mega__info">
+          <p class="mega__title">Лайтпостеры</p>
+          <p class="mega__text">Конструкции сити-формата с двумя информационными поверхностями и подсветкой.</p>
+          <a class="btn btn--outline" href="index.html#catalog">Смотреть раздел</a>
+        </div>
+        <img class="mega__photo" style="--pos: 50% 50%" src="img/photos/12-cat-lightposters.jpg" alt="" loading="lazy" width="1400" height="1050">
+      </div>
+      <div class="mega__panel" data-panel="bill" hidden>
+        <div class="mega__info">
+          <p class="mega__title">Рекламные щиты</p>
+          <p class="mega__text">Несущие конструкции для рекламы и городской информации.</p>
+          <ul class="mega__subs">
+            <li><a href="index.html#catalog">Рекламный щит</a></li>
+            <li><a href="index.html#catalog">Триборд</a></li>
+            <li><a href="index.html#catalog">Тривижн®</a></li>
+            <li><a href="index.html#catalog">Скроллер</a></li>
+          </ul>
+          <a class="btn btn--outline" href="index.html#catalog">Смотреть раздел</a>
+        </div>
+        <img class="mega__photo" style="--pos: 0% 50%" src="img/photos/13-cat-billboards.jpg" alt="" loading="lazy" width="1400" height="1050">
+      </div>
+      <div class="mega__panel" data-panel="shoot" hidden>
+        <div class="mega__info">
+          <p class="mega__title">Оборудование для стрельбищ</p>
+          <p class="mega__text">Конструкции для стендовой стрельбы по требованиям международной федерации.</p>
+          <ul class="mega__subs">
+            <li><a href="index.html#catalog">Пирамиды для ружей</a></li>
+            <li><a href="index.html#catalog">Ракушки для метательных машинок</a></li>
+          </ul>
+          <a class="btn btn--outline" href="index.html#catalog">Смотреть раздел</a>
+        </div>
+        <img class="mega__photo" style="--pos: 50% 50%" src="img/photos/14-menu-shooting.jpg" alt="" loading="lazy" width="1120" height="1400">
+      </div>
+      <div class="mega__panel" data-panel="custom" hidden>
+        <div class="mega__info">
+          <p class="mega__title">Нестандартные конструкции</p>
+          <p class="mega__text">Металлоконструкции по эскизам и чертежам заказчика — от деталей до сборки готовых изделий.</p>
+          <a class="btn btn--outline" href="index.html#catalog">Смотреть раздел</a>
+        </div>
+        <img class="mega__photo" style="--pos: 50% 50%" src="img/photos/15-menu-custom.jpg" alt="" loading="lazy" width="1120" height="1400">
+      </div>
+      <div class="mega__panel" data-panel="maf" hidden>
+        <div class="mega__info">
+          <p class="mega__title">Малые архитектурные формы</p>
+          <p class="mega__text">Элементы городской среды.</p>
+          <ul class="mega__subs">
+            <li><a href="index.html#catalog">Кабинка для таксофона</a></li>
+            <li><a href="index.html#catalog">Кабинка для банкомата</a></li>
+            <li><a href="index.html#catalog">Павильон для курения</a></li>
+            <li><a href="index.html#catalog">Павильон для мусорных баков</a></li>
+            <li><a href="index.html#catalog">Торговый павильон</a></li>
+            <li><a href="index.html#catalog">Книжный шкаф</a></li>
+            <li><a href="index.html#catalog">Скамья</a></li>
+          </ul>
+          <a class="btn btn--outline" href="index.html#catalog">Смотреть раздел</a>
+        </div>
+        <img class="mega__photo" style="--pos: 50% 50%" src="img/photos/16-menu-maf.jpg" alt="" loading="lazy" width="1120" height="1400">
+      </div>
+      <div class="mega__panel" data-panel="nav" hidden>
+        <div class="mega__info">
+          <p class="mega__title">Навигация</p>
+          <p class="mega__text">Информационные указатели и стелы для городской среды.</p>
+          <ul class="mega__subs">
+            <li><a href="index.html#catalog">Пилон</a></li>
+            <li><a href="index.html#catalog">Указатель</a></li>
+            <li><a href="index.html#catalog">Афишный стенд</a></li>
+            <li><a href="index.html#catalog">Бренд-стела</a></li>
+            <li><a href="index.html#catalog">Въездная стела</a></li>
+          </ul>
+          <a class="btn btn--outline" href="index.html#catalog">Смотреть раздел</a>
+        </div>
+        <img class="mega__photo" style="--pos: 50% 50%" src="img/photos/17-cat-navigation.jpg" alt="" loading="lazy" width="1400" height="1050">
+      </div>
+    </div>
+  </div>
+
+  <!-- Мобильное меню -->
+  <div class="mobile-menu" id="mobile-menu" hidden>
+    <div class="container">
+      <p class="mobile-menu__label">Продукция</p>
+      <ul class="mobile-menu__list">
+        <li><a href="catalog.html">Весь каталог</a></li>
+        <li><a href="bus-shelters.html">Остановочные павильоны</a></li>
+        <li><a href="index.html#catalog">Рекламные тумбы</a></li>
+        <li><a href="index.html#catalog">Лайтпостеры</a></li>
+        <li><a href="index.html#catalog">Рекламные щиты</a></li>
+        <li><a href="index.html#catalog">Оборудование для стрельбищ</a></li>
+        <li><a href="index.html#catalog">Нестандартные конструкции</a></li>
+        <li><a href="index.html#catalog">Малые архитектурные формы</a></li>
+        <li><a href="index.html#catalog">Навигация</a></li>
+      </ul>
+      <ul class="mobile-menu__list mobile-menu__list--main">
+        <li><a href="index.html#about">О компании</a></li>
+        <li><a href="index.html#works">Наши работы</a></li>
+        <li><a href="index.html#news">Новости</a></li>
+        <li><a href="#contacts">Контакты</a></li>
+      </ul>
+      <a class="mobile-menu__phone" href="tel:+78003332227">8 (800) 333-222-7</a>
+      <a class="btn btn--primary btn--block" href="#">Войти в личный кабинет</a>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <section class="section section--light page-top">
+    <div class="container">
+      <ol class="crumbs" aria-label="Навигация по сайту"><li><a href="index.html">Главная</a></li><li><a href="catalog.html">Продукция</a></li><li><span aria-current="page">Остановочные павильоны</span></li></ol>
+      <div class="page-head">
+        <div>
+          <p class="eyebrow">Продукция</p>
+          <h1 class="h2 duo">
+            <span>Остановочные</span>
+            <span class="duo__second">павильоны</span>
+          </h1>
+        </div>
+        <p class="page-head__text">Павильоны для ожидания общественного транспорта: от&nbsp;компактных модульных до&nbsp;закрытых и&nbsp;SMART. Размеры и&nbsp;комплектация адаптируются под ваш регион.</p>
+      </div>
+      <div class="filters" data-target="shelters" role="group" aria-label="Тип павильона">
+        <button class="chip" type="button" data-filter="all" aria-pressed="true">Все<span class="chip__num">15</span></button>
+        <button class="chip" type="button" data-filter="modular" aria-pressed="false">Модульные<span class="chip__num">7</span></button>
+        <button class="chip" type="button" data-filter="city" aria-pressed="false">Городские<span class="chip__num">2</span></button>
+        <button class="chip" type="button" data-filter="resort" aria-pressed="false">Курортные<span class="chip__num">2</span></button>
+        <button class="chip" type="button" data-filter="suburb" aria-pressed="false">Пригородные<span class="chip__num">2</span></button>
+        <button class="chip" type="button" data-filter="closed" aria-pressed="false">Закрытые<span class="chip__num">4</span></button>
+        <button class="chip" type="button" data-filter="smart" aria-pressed="false">SMART<span class="chip__num">2</span></button>
+      </div>
+      <div class="cards cards--4" id="shelters">
+        <a class="tile" href="bus-shelter-atlant.html" data-tags="modular">
+          <div class="tile__media tile__media--render"><img src="img/catalog/shelter-elegant.jpg" alt="Остановочный павильон «Элегант»" loading="lazy" width="960" height="720"></div>
+          <div class="tile__body">
+            <h2 class="tile__title tile__title--arrow">Элегант</h2>
+            <p class="tile__text">Модульный павильон с&nbsp;широкой крышей, каркас из&nbsp;алюминиевого профиля.</p>
+            <p class="tile__meta">Габариты, мм: 4996 × 2500 × 1645</p>
+          </div>
+        </a>
+        <a class="tile" href="bus-shelter-atlant.html" data-tags="modular">
+          <div class="tile__media tile__media--render"><img src="img/catalog/shelter-elegant-p.jpg" alt="Остановочный павильон «Элегант П»" loading="lazy" width="960" height="720"></div>
+          <div class="tile__body">
+            <h2 class="tile__title tile__title--arrow">Элегант П</h2>
+            <p class="tile__text">Плоская крыша и&nbsp;увеличенный просвет для информационных панелей.</p>
+            <p class="tile__meta">Габариты, мм: 4996 × 2500 × 1645</p>
+          </div>
+        </a>
+        <a class="tile" href="bus-shelter-atlant.html" data-tags="modular">
+          <div class="tile__media tile__media--render"><img src="img/catalog/shelter-standart.jpg" alt="Остановочный павильон «Стандарт»" loading="lazy" width="960" height="720"></div>
+          <div class="tile__body">
+            <h2 class="tile__title tile__title--arrow">Стандарт</h2>
+            <p class="tile__text">Элегантная зауженная крыша, лаконичный дизайн для любой городской среды.</p>
+            <p class="tile__meta">Габариты, мм: 4996 × 2500 × 1300</p>
+          </div>
+        </a>
+        <a class="tile" href="bus-shelter-atlant.html" data-tags="modular">
+          <div class="tile__media tile__media--render"><img src="img/catalog/shelter-gallant.jpg" alt="Остановочный павильон «Галант»" loading="lazy" width="960" height="720"></div>
+          <div class="tile__body">
+            <h2 class="tile__title tile__title--arrow">Галант</h2>
+            <p class="tile__text">Компактный павильон с&nbsp;зауженной крышей для узких тротуаров.</p>
+            <p class="tile__meta">Габариты, мм: 4996 × 2460 × 1300</p>
+          </div>
+        </a>
+        <a class="tile" href="bus-shelter-atlant.html" data-tags="modular">
+          <div class="tile__media tile__media--render"><img src="img/catalog/shelter-atlant.jpg" alt="Остановочный павильон «Атлант»" loading="lazy" width="960" height="720"></div>
+          <div class="tile__body">
+            <h2 class="tile__title tile__title--arrow">Атлант</h2>
+            <p class="tile__text">Увеличенный просвет между каркасом и&nbsp;крышей для информационной панели.</p>
+            <p class="tile__meta">Габариты, мм: 4996 × 2730 × 1645</p>
+          </div>
+        </a>
+        <a class="tile" href="bus-shelter-atlant.html" data-tags="modular smart">
+          <div class="tile__media tile__media--render"><img src="img/catalog/shelter-atlant-smart.jpg" alt="Остановочный павильон «Атлант SMART»" loading="lazy" width="960" height="720"></div>
+          <div class="tile__body">
+            <h2 class="tile__title tile__title--arrow">Атлант SMART</h2>
+            <p class="tile__text">Повышенная комфортность: фронтальные панели защищают от&nbsp;ветра и&nbsp;сохраняют тепло.</p>
+            <p class="tile__meta">Габариты, мм: 6000 × 2730 × 1645</p>
+          </div>
+        </a>
+        <a class="tile" href="bus-shelter-atlant.html" data-tags="modular">
+          <div class="tile__media tile__media--render"><img src="img/catalog/shelter-compact.jpg" alt="Остановочный павильон «Компакт»" loading="lazy" width="960" height="720"></div>
+          <div class="tile__body">
+            <h2 class="tile__title tile__title--arrow">Компакт</h2>
+            <p class="tile__text">Модульный павильон с&nbsp;плоской крышей и&nbsp;информационной панелью.</p>
+            <p class="tile__meta">Габариты, мм: 5100 × 2730 × 1700</p>
+          </div>
+        </a>
+        <a class="tile" href="bus-shelter-atlant.html" data-tags="city">
+          <div class="tile__media tile__media--render"><img src="img/catalog/shelter-city.jpg" alt="Остановочный павильон «Городской»" loading="lazy" width="960" height="720"></div>
+          <div class="tile__body">
+            <h2 class="tile__title tile__title--arrow">Городской</h2>
+            <p class="tile__text">Павильон городского типа с&nbsp;каркасом из&nbsp;оцинкованной стали.</p>
+            <p class="tile__meta">Габариты, мм: 4115 × 2690 × 1600</p>
+          </div>
+        </a>
+        <a class="tile" href="bus-shelter-atlant.html" data-tags="city smart">
+          <div class="tile__media tile__media--render"><img src="img/catalog/shelter-city-smart.jpg" alt="Остановочный павильон «Городской SMART»" loading="lazy" width="960" height="720"></div>
+          <div class="tile__body">
+            <h2 class="tile__title tile__title--arrow">Городской SMART</h2>
+            <p class="tile__text">Оцинкованный каркас, готовность к&nbsp;SMART-оборудованию «Умного города».</p>
+            <p class="tile__meta">Габариты, мм: 4115 × 2690 × 1600</p>
+          </div>
+        </a>
+        <a class="tile" href="bus-shelter-atlant.html" data-tags="resort">
+          <div class="tile__media tile__media--render"><img src="img/catalog/shelter-chajka.jpg" alt="Остановочный павильон «Чайка»" loading="lazy" width="960" height="720"></div>
+          <div class="tile__body">
+            <h2 class="tile__title tile__title--arrow">Чайка</h2>
+            <p class="tile__text">Изогнутая декоративная крыша, каркас с&nbsp;цинкованием для морского климата.</p>
+            <p class="tile__meta">Габариты, мм: 5200 × 2770 × 1620</p>
+          </div>
+        </a>
+        <a class="tile" href="bus-shelter-atlant.html" data-tags="resort closed">
+          <div class="tile__media tile__media--render"><img src="img/catalog/shelter-albatros.jpg" alt="Остановочный павильон «Альбатрос»" loading="lazy" width="960" height="720"></div>
+          <div class="tile__body">
+            <h2 class="tile__title tile__title--arrow">Альбатрос</h2>
+            <p class="tile__text">Закрытый тип с&nbsp;комбинированной крышей для курортов с&nbsp;ветровыми нагрузками.</p>
+            <p class="tile__meta">Габариты, мм: 5200 × 2770 × 1620</p>
+          </div>
+        </a>
+        <a class="tile" href="bus-shelter-atlant.html" data-tags="suburb">
+          <div class="tile__media tile__media--render"><img src="img/catalog/shelter-region.jpg" alt="Остановочный павильон «Регион»" loading="lazy" width="960" height="720"></div>
+          <div class="tile__body">
+            <h2 class="tile__title tile__title--arrow">Регион</h2>
+            <p class="tile__text">Антивандальные ветрозащитные панели для оживлённых пригородных магистралей.</p>
+            <p class="tile__meta">Габариты, мм: 4100 × 2400 × 1800</p>
+          </div>
+        </a>
+        <a class="tile" href="bus-shelter-atlant.html" data-tags="closed">
+          <div class="tile__media tile__media--render"><img src="img/catalog/shelter-closed.jpg" alt="Остановочный павильон «Закрытый»" loading="lazy" width="960" height="720"></div>
+          <div class="tile__body">
+            <h2 class="tile__title tile__title--arrow">Закрытый</h2>
+            <p class="tile__text">Широкие боковые панели и&nbsp;комбинированная крыша&nbsp;— защита от&nbsp;ветра и&nbsp;осадков.</p>
+            <p class="tile__meta">Габариты, мм: 4140 × 2500 × 1600</p>
+          </div>
+        </a>
+        <a class="tile" href="bus-shelter-atlant.html" data-tags="closed suburb">
+          <div class="tile__media tile__media--render"><img src="img/catalog/shelter-closed-region.jpg" alt="Остановочный павильон «Закрытый Регион»" loading="lazy" width="960" height="720"></div>
+          <div class="tile__body">
+            <h2 class="tile__title tile__title--arrow">Закрытый Регион</h2>
+            <p class="tile__text">Вариативные боковые панели: подъезжающий транспорт видно заранее.</p>
+            <p class="tile__meta">Габариты, мм: 3700 × 2380 × 1500</p>
+          </div>
+        </a>
+        <a class="tile" href="bus-shelter-atlant.html" data-tags="closed">
+          <div class="tile__media tile__media--render"><img src="img/catalog/shelter-mgn.jpg" alt="Остановочный павильон «Закрытый для МГН»" loading="lazy" width="960" height="720"></div>
+          <div class="tile__body">
+            <h2 class="tile__title tile__title--arrow">Закрытый для МГН</h2>
+            <p class="tile__text">Для маломобильных групп: защита от&nbsp;непогоды и&nbsp;обслуживание средств мобильности.</p>
+            <p class="tile__meta">Габариты, мм: 4140 × 2500 × 1600</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. Заявка -->
+  <section class="section section--light" id="request">
+    <div class="container request">
+      <div class="request__info">
+        <p class="eyebrow">Заявка</p>
+        <h2 class="h2 duo">
+          <span>Запросить расчёт</span>
+          <span class="duo__second">стоимости</span>
+        </h2>
+        <p class="request__lead">Опишите задачу или приложите техническое задание. Специалист свяжется с&nbsp;вами, уточнит детали и&nbsp;подготовит расчёт.</p>
+        <dl class="request__contacts">
+          <div>
+            <dt>Бесплатный звонок по&nbsp;России</dt>
+            <dd><a href="tel:+78003332227">8 (800) 333-222-7</a></dd>
+          </div>
+          <div>
+            <dt>Заявки на&nbsp;продукцию</dt>
+            <dd><a href="mailto:op@favor-garant.ru">op@favor-garant.ru</a></dd>
+          </div>
+        </dl>
+      </div>
+
+      <form class="form" id="request-form" novalidate>
+        <div class="form__row">
+          <label class="field">
+            <span class="field__label">Имя <span class="field__req" aria-hidden="true">*</span></span>
+            <input class="field__input" type="text" name="name" autocomplete="name" required>
+          </label>
+          <label class="field">
+            <span class="field__label">Телефон <span class="field__req" aria-hidden="true">*</span></span>
+            <input class="field__input" type="tel" name="phone" autocomplete="tel" required>
+          </label>
+        </div>
+        <div class="form__row">
+          <label class="field">
+            <span class="field__label">Email <span class="field__req" aria-hidden="true">*</span></span>
+            <input class="field__input" type="email" name="email" autocomplete="email" required>
+          </label>
+          <div class="field">
+            <span class="field__label" id="product-label">Что нужно изготовить</span>
+            <select class="field__input" name="product" aria-labelledby="product-label">
+              <option value="">Выберите вариант</option>
+              <option>Остановочный павильон</option>
+              <option>Рекламная тумба</option>
+              <option>Лайтпостер</option>
+              <option>Рекламный щит</option>
+              <option>Оборудование для стрельбищ</option>
+              <option>Нестандартная конструкция</option>
+              <option>Малая архитектурная форма</option>
+              <option>Навигация</option>
+              <option>Услуги: проектирование, металлообработка, монтаж</option>
+              <option>Другое</option>
+            </select>
+          </div>
+        </div>
+        <label class="field">
+          <span class="field__label">Комментарий</span>
+          <textarea class="field__input field__input--area" name="comment" rows="4"></textarea>
+        </label>
+        <label class="file">
+          <input type="file" name="file" class="file__input">
+          <span class="file__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 11.5l-7.8 7.8a5 5 0 0 1-7.1-7.1l8.5-8.5a3.3 3.3 0 0 1 4.7 4.7l-8.5 8.5a1.7 1.7 0 0 1-2.4-2.4l7.8-7.8"/></svg></span>
+          <span class="file__btn">Прикрепить ТЗ или эскиз</span>
+          <span class="file__name">Файл не выбран</span>
+        </label>
+        <div class="form__bottom">
+          <button class="btn btn--primary" type="submit">Отправить заявку</button>
+          <p class="form__note">Отправляя заявку, вы даёте согласие на&nbsp;обработку персональных данных в&nbsp;соответствии с&nbsp;<a href="#">политикой конфиденциальности</a>.</p>
+        </div>
+        <p class="form__status" role="status" hidden></p>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer" id="contacts">
+  <div class="container">
+    <!-- верх: логотип со слоганом и все способы связи в одну строку -->
+    <div class="footer__top">
+      <div class="footer__brand">
+        <img src="img/brand/logo-ru-white.svg" alt="ФАВОР ГАРАНТ" width="180" height="59">
+        <p class="footer__slogan">Создаём стиль Вашего города!</p>
+      </div>
+      <div class="footer__reach">
+        <div class="footer__contact">
+          <a class="footer__phone" href="tel:+78003332227">8 (800) 333-222-7</a>
+          <span class="footer__hint">бесплатный звонок по&nbsp;России</span>
+        </div>
+        <div class="footer__contact">
+          <a class="footer__phone" href="tel:+78126402227">8 (812) 640-222-7</a>
+          <a class="footer__hint footer__mail" href="mailto:info@favor-garant.ru">info@favor-garant.ru</a>
+        </div>
+        <a class="btn btn--light" href="#request-form">Запросить расчёт</a>
+      </div>
+    </div>
+    <!-- низ: три колонки меню и колонка адресов — близкой высоты -->
+    <div class="footer__grid">
+      <nav class="footer__col" aria-label="Продукция">
+        <p class="footer__title">Продукция</p>
+        <ul>
+          <li><a href="index.html#catalog">Остановочные павильоны</a></li>
+          <li><a href="index.html#catalog">Рекламные тумбы</a></li>
+          <li><a href="index.html#catalog">Лайтпостеры</a></li>
+          <li><a href="index.html#catalog">Рекламные щиты</a></li>
+          <li><a href="index.html#catalog">Оборудование для стрельбищ</a></li>
+          <li><a href="index.html#catalog">Нестандартные конструкции</a></li>
+          <li><a href="index.html#catalog">Малые архитектурные формы</a></li>
+          <li><a href="index.html#catalog">Навигация</a></li>
+        </ul>
+      </nav>
+      <nav class="footer__col" aria-label="Услуги">
+        <p class="footer__title">Услуги</p>
+        <ul>
+          <li><a href="index.html#services">Дизайн-бюро</a></li>
+          <li><a href="index.html#services">Конструкторское бюро</a></li>
+          <li><a href="index.html#services">Металлообработка</a></li>
+          <li><a href="index.html#services">Шеф-монтаж</a></li>
+          <li><a href="index.html#services">Монтаж остановочных павильонов</a></li>
+          <li><a href="index.html#services">Экспертиза</a></li>
+        </ul>
+      </nav>
+      <nav class="footer__col" aria-label="Компания">
+        <p class="footer__title">Компания</p>
+        <ul>
+          <li><a href="index.html#about">О компании</a></li>
+          <li><a href="index.html#works">Наши работы</a></li>
+          <li><a href="index.html#news">Новости</a></li>
+          <li><a href="#contacts">Сотрудники</a></li>
+          <li><a href="#contacts">Документы</a></li>
+          <li><a href="#contacts">Вакансии</a></li>
+        </ul>
+      </nav>
+      <div class="footer__col">
+        <p class="footer__title">Адреса</p>
+        <div class="footer__place">
+          <p class="footer__place-name">Офис</p>
+          <p class="footer__address">Санкт-Петербург, ул.&nbsp;Цветочная, д.&nbsp;7, лит.&nbsp;Б, пом.&nbsp;6, м.&nbsp;«Московские ворота»</p>
+          <p class="footer__hours">Пн–Чт 8:00–17:00, Пт 8:00–16:00</p>
+        </div>
+        <div class="footer__place">
+          <p class="footer__place-name">Производство</p>
+          <p class="footer__address">Санкт-Петербург, 3-й Рыбацкий пр., д.&nbsp;3, лит.&nbsp;Е, м.&nbsp;«Рыбацкое»</p>
+          <p class="footer__hours">Пн–Пт 8:00–17:00</p>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© <span id="year">2026</span> ООО «ФАВОР-ГАРАНТ». Все права защищены.</span>
+      <a href="#">Политика конфиденциальности</a>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

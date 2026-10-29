@@ -404,6 +404,36 @@
     update();
   });
 
+  // Каталог: фильтр моделей по чипам (data-tags у карточки)
+  document.querySelectorAll('.filters').forEach((bar) => {
+    const grid = document.getElementById(bar.dataset.target);
+    const chips = [...bar.querySelectorAll('.chip')];
+    chips.forEach((chip) => {
+      chip.addEventListener('click', () => {
+        chips.forEach((c) => c.setAttribute('aria-pressed', String(c === chip)));
+        const tag = chip.dataset.filter;
+        grid.querySelectorAll('[data-tags]').forEach((card) => {
+          card.hidden = tag !== 'all' && !card.dataset.tags.split(' ').includes(tag);
+        });
+      });
+    });
+  });
+
+  // Карточка модели: миниатюры переключают большое фото
+  document.querySelectorAll('.pgallery').forEach((box) => {
+    const main = box.querySelector('.pgallery__main img');
+    const thumbs = [...box.querySelectorAll('.pgallery__thumb')];
+    thumbs.forEach((thumb) => {
+      thumb.addEventListener('click', () => {
+        const img = thumb.querySelector('img');
+        main.src = thumb.dataset.full;
+        main.alt = img.alt;
+        main.classList.toggle('is-render', thumb.hasAttribute('data-render'));
+        thumbs.forEach((t) => t.setAttribute('aria-pressed', String(t === thumb)));
+      });
+    });
+  });
+
   // Форма: проверка обязательных полей. Отправки на сервер в прототипе нет.
   const form = document.getElementById('request-form');
   const status = form.querySelector('.form__status');
