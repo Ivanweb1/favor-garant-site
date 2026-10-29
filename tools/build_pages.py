@@ -164,12 +164,12 @@ def shelter_tile(m):
     return f'''        <article class="tile tile--model" data-tags="{tags}">
           <div class="tile__media tile__media--render"><span class="tile__tags">{badges}</span><img src="img/catalog/shelter-{slug}.jpg" alt="Остановочный павильон «{name}»" loading="lazy" width="960" height="720">{photo}</div>
           <div class="tile__body">
-            <div class="tile__row">
-              <h2 class="tile__title tile__title--arrow"><a class="tile__link" href="bus-shelter-atlant.html">{name}</a></h2>
+            <h2 class="tile__title tile__title--arrow"><a class="tile__link" href="bus-shelter-atlant.html">{name}</a></h2>
+            <p class="tile__text">{text}</p>
+            <div class="tile__meta tile__foot">
+              <p class="tile__dims"><span>Габариты</span>{dims} мм</p>
               <a class="btn btn--outline tile__calc" href="#request-form" data-model="{name}">Рассчитать</a>
             </div>
-            <p class="tile__text">{text}</p>
-            <p class="tile__meta tile__dims"><span>Габариты</span>{dims} мм</p>
           </div>
         </article>'''
 
