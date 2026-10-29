@@ -398,7 +398,7 @@ atlant_main = f'''
           </h2>
           <p class="section-head__text">Павильон с&nbsp;изогнутой крышей из&nbsp;монолитного поликарбоната на&nbsp;городском тротуаре.</p>
         </div>
-        <div class="slider-nav" data-slider="project-track">
+        <div class="slider-nav slider-nav--head" data-slider="project-track">
           <button class="slider-nav__btn" type="button" data-dir="-1" aria-label="Предыдущее фото">
             {ARR % 'prev'}
           </button>
@@ -407,8 +407,18 @@ atlant_main = f'''
           </button>
         </div>
       </div>
-      <div class="project-track" id="project-track">
+      <div class="project-slider">
+        <div class="project-track" id="project-track">
 {project_photos}
+        </div>
+        <div class="slider-nav slider-nav--overlay" data-slider="project-track">
+          <button class="slider-nav__btn" type="button" data-dir="-1" aria-label="Предыдущее фото">
+            {ARR % 'prev'}
+          </button>
+          <button class="slider-nav__btn" type="button" data-dir="1" aria-label="Следующее фото">
+            {ARR % 'next'}
+          </button>
+        </div>
       </div>
     </div>
   </section>

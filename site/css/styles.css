@@ -799,6 +799,13 @@ select.field__input, .select__btn { appearance: none; padding-right: 40px; backg
 .chip[aria-pressed="true"] { border-color: var(--navy); background: var(--navy); color: var(--white); }
 .chip__num { margin-left: 6px; opacity: .55; }
 .tile[hidden] { display: none; }
+/* стрелки поверх ленты фото (телефон): по вертикальному центру, у краёв экрана */
+.project-slider { position: relative; }
+.slider-nav--overlay {
+  display: none; position: absolute; inset: 0 calc(var(--gutter) * -1 + 8px); justify-content: space-between; align-items: center; pointer-events: none;
+}
+.slider-nav--overlay .slider-nav__btn { border-color: transparent; background: rgba(255, 255, 255, .92); box-shadow: 0 6px 16px -8px rgba(10, 10, 30, .5); pointer-events: auto; }
+.slider-nav--overlay .slider-nav__btn:disabled { opacity: 0; }
 /* «Другие модели»: на десктопе сетка и кнопка в шапке; на телефоне лента со стрелками, кнопка под ней */
 .slider-nav--mobile, .others__all-bottom { display: none; }
 /* на белом фоне белой карточке нужна обводка */
@@ -994,11 +1001,9 @@ select.field__input, .select__btn { appearance: none; padding-right: 40px; backg
   .slider-nav { gap: 8px; }
   .slider-nav__btn { width: 40px; height: 40px; }
   .page-head:has(> .slider-nav), .section-head:has(> .slider-nav) { flex-direction: row; align-items: flex-end; justify-content: space-between; gap: 16px; }
-  /* «Выполненные проекты»: заголовок с текстом не оставляет места — стрелки под лентой фото */
-  .project-wrap { display: flex; flex-direction: column; }
-  .project-wrap > .section-head { display: contents; }
-  .project-wrap .project-head { margin-bottom: var(--head-gap); }
-  .project-wrap .slider-nav { order: 3; margin-top: 16px; }
+  /* «Выполненные проекты»: стрелки по центру фото у левого и правого края экрана */
+  .slider-nav--head { display: none; }
+  .slider-nav--overlay { display: flex; }
   /* на телефоне двухцветные заголовки снова в две строки — каждая часть своей строкой */
   .duo--inline > span { display: block; }
   .slider-nav--mobile { display: flex; }
