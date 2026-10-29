@@ -215,7 +215,7 @@ ICON = {
     'bench': '<path d="M3 11h18M4 15h16M6 15v5M18 15v5M6 11V8M18 11V8"/>',
     'brand': '<circle cx="12" cy="10" r="5"/><path d="M9 14.5 8 21l4-2 4 2-1-6.5"/>',
     'size': '<path d="M3 7h18M3 17h18M7 3v4M17 3v4M7 17v4M17 17v4"/>',
-    'smart': '<rect x="7" y="3" width="10" height="18" rx="2"/><path d="M11 18h2"/><path d="M10 8a3 3 0 0 1 4 0M8.5 6.5a5 5 0 0 1 7 0"/>',
+    'swap': '<rect x="3" y="4" width="7" height="16" rx="1"/><rect x="14" y="4" width="7" height="16" rx="1"/><path d="M10 9h4M12 7l2 2-2 2M14 15h-4M12 13l-2 2 2 2"/>',
 }
 
 def feature(icon, title, text, extra=''):
@@ -244,7 +244,7 @@ def cfg_tile(c):
         </div>'''
 
 THUMBS = [
-    ('img/catalog/atlant-render.jpg', 'Остановочный павильон «Атлант»', True),
+    ('img/catalog/atlant-cfg-base.jpg', 'Остановочный павильон «Атлант», стандартная комплектация', True),
     ('img/catalog/atlant-photo-1.jpg', '«Атлант» на объекте, вид спереди', False),
     ('img/catalog/atlant-photo-2.jpg', '«Атлант» на объекте, вид сбоку', False),
     ('img/catalog/atlant-photo-3.jpg', '«Атлант» с лайтпостером на объекте', False),
@@ -259,8 +259,47 @@ ARR = '<svg class="arr arr--%s" width="10" height="11" viewBox="0 0 13 14" aria-
 CHIP_NAMES = {'atlant-cfg-base': 'Стандартная', 'atlant-cfg-light': 'С&nbsp;лайтпостером', 'atlant-cfg-smart': 'SMART',
               'atlant-cfg-6m': '6&nbsp;м', 'atlant-cfg-10m': '10&nbsp;м'}
 cfg_chips = '\n'.join(
-    f'              <button class="chip" type="button" data-full="img/catalog/{img}.jpg" aria-pressed="false">{CHIP_NAMES[img]}</button>'
-    for img, *_ in CONFIGS)
+    f'              <button class="chip" type="button" data-full="img/catalog/{img}.jpg" aria-pressed="{str(n == 0).lower()}">{CHIP_NAMES[img]}</button>'
+    for n, (img, *_) in enumerate(CONFIGS))
+
+# SMART-компоненты: тексты со старой страницы «Элеганта» — оборудование общее для модульных павильонов
+SMART_ICON = {
+    'board': '<rect x="3" y="5" width="18" height="11" rx="1"/><path d="M7 9h4M7 12h7M16 9h1M9 20h6M12 16v4"/>',
+    'light': '<path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9V16h7v-2.1A6 6 0 0 0 12 3z"/>',
+    'wifi': '<path d="M2 9a15 15 0 0 1 20 0M5 12.5a10 10 0 0 1 14 0M8.5 16a5 5 0 0 1 7 0"/><circle cx="12" cy="19" r="1"/>',
+    'usb': '<path d="M12 21V7M12 3l-2.5 4h5zM12 16l-4-2.5V11M12 13l4-2.5V8"/><circle cx="8" cy="10" r="1.2"/><rect x="15" y="6.5" width="2" height="2"/>',
+    'poster': '<rect x="6" y="2" width="12" height="17" rx="1"/><path d="M9 22h6M12 19v3M9 7h6M9 10h6M9 13h3"/>',
+    'sos': '<circle cx="12" cy="12" r="9"/><path d="M8.5 10.5c0-1 .7-1.5 1.5-1.5s1.5.5 1.5 1.5-3 1-3 3h3M14 9v5h2M15.5 9v6"/>',
+    'camera': '<path d="M3 7h12l3 3-3 3H3z"/><path d="M18 10h3M7 13v4M5 17h4"/>',
+    'sign': '<rect x="3" y="6" width="18" height="8" rx="1"/><path d="M7 10h10M12 14v6M9 20h6"/>',
+}
+SMART_PARTS = [
+    ('board', 'Электронное табло прибытия', 'Номера и&nbsp;время ожидания маршрутов городского транспорта'),
+    ('light', 'Подсветка конструкции', 'Светодиодная подсветка павильона в&nbsp;тёмное время суток'),
+    ('wifi', 'Wi-Fi маршрутизатор', 'Пассажиры подключаются к&nbsp;интернету во&nbsp;время ожидания'),
+    ('usb', 'USB-зарядка', 'Для подзарядки телефонов, планшетов и&nbsp;других гаджетов'),
+    ('poster', 'Лайтпостер сити-формат', 'Световой короб с&nbsp;подсветкой для информационного баннера'),
+    ('sos', 'Кнопка экстренного вызова', 'Моментальный вызов единого номера экстренных служб 112'),
+    ('camera', 'Камеры видеонаблюдения', 'Обзор пространства внутри павильона'),
+    ('sign', 'Табличка с&nbsp;названием', 'Название остановки общественного транспорта с&nbsp;подсветкой'),
+]
+smart_parts = '\n'.join(
+    f'''        <li class="smart-part">
+          <span class="smart-part__icon"><svg viewBox="0 0 24 24" aria-hidden="true">{SMART_ICON[i]}</svg></span>
+          <h3 class="smart-part__title">{t}</h3>
+          <p class="smart-part__text">{d}</p>
+        </li>'''
+    for i, t, d in SMART_PARTS)
+
+# Выполненный проект «Атланта» — подпись со старой страницы модели
+PROJECT_PHOTOS = [
+    ('img/catalog/atlant-photo-1.jpg', '«Атлант» на объекте, вид спереди'),
+    ('img/catalog/atlant-photo-4.jpg', '«Атлант» у кирпичного здания'),
+    ('img/catalog/atlant-photo-2.jpg', '«Атлант» на объекте, вид сбоку'),
+    ('img/catalog/atlant-photo-3.jpg', '«Атлант» с лайтпостером на объекте'),
+]
+project_photos = '\n'.join(
+    f'          <img src="{src}" alt="{alt}" loading="lazy">' for src, alt in PROJECT_PHOTOS)
 
 others = [m for m in SHELTERS if m[0] in ('atlant-smart', 'elegant-p', 'compact', 'closed')]
 
@@ -271,7 +310,7 @@ atlant_main = f'''
       <div class="product">
         <div class="pgallery">
           <div class="pgallery__main">
-            <img src="img/catalog/atlant-render.jpg" alt="Остановочный павильон «Атлант»" width="1400" height="1050">
+            <img src="img/catalog/atlant-cfg-base.jpg" alt="Остановочный павильон «Атлант», стандартная комплектация" width="1120" height="840">
             <button class="pgallery__nav pgallery__nav--prev" type="button" aria-label="Предыдущее фото">{ARR % 'prev'}</button>
             <button class="pgallery__nav pgallery__nav--next" type="button" aria-label="Следующее фото">{ARR % 'next'}</button>
             <span class="pgallery__counter" aria-live="polite">1 / {len(THUMBS)}</span>
@@ -330,6 +369,27 @@ atlant_main = f'''
     </div>
   </section>
 
+  <section class="section section--dark">
+    <div class="container warm">
+      <div class="warm__media"><img src="img/catalog/atlant-cfg-6m.jpg" alt="Полузакрытый удлинённый «Атлант»" loading="lazy" width="1120" height="840"></div>
+      <div class="warm__body">
+        <p class="eyebrow">Тёплый стандарт</p>
+        <h2 class="h2 duo duo--light">
+          <span>Павильон</span>
+          <span class="duo__second">повышенной комфортности</span>
+        </h2>
+        <p class="warm__lead">Утеплённая конструкция, эргономичный дизайн и&nbsp;надёжные материалы: фронтальные ветрозащитные панели формируют тепловой барьер, снижают продувание и&nbsp;сохраняют тепло в&nbsp;зоне ожидания.</p>
+        <ul class="warm__list">
+          <li>Защита от&nbsp;холода, ветра и&nbsp;осадков</li>
+          <li>Полная адаптация под требования заказчика</li>
+          <li>Сочетание теплоизоляции и&nbsp;долговечности</li>
+          <li>Готовность к&nbsp;дополнительным опциям и&nbsp;smart-технологиям</li>
+        </ul>
+        <a class="btn btn--light" href="#request-form">Рассчитать тёплый павильон</a>
+      </div>
+    </div>
+  </section>
+
   <section class="section section--light">
     <div class="container">
       <div class="page-head">
@@ -347,7 +407,42 @@ atlant_main = f'''
 {feature('bench', 'Скамья', 'Деревянный брус со&nbsp;специальной антисептической пропиткой. Возможны варианты из&nbsp;пластика, алюминия и&nbsp;других материалов.')}
 {feature('brand', 'Герб или логотип', 'Наносим герб города или логотип компании на&nbsp;вертикальные панели.')}
 {feature('size', 'Увеличенные версии', 'Полузакрытые удлинённые павильоны 6&nbsp;и&nbsp;10&nbsp;м с&nbsp;фронтальными панелями, лайтпостером и&nbsp;пилоном.')}
-{feature('smart', 'SMART-оборудование', 'Конструкция оптимизирована для подключения:', '<ul class="smart-list"><li>Светодиодная подсветка</li><li>Электронное табло</li><li>Видеонаблюдение</li><li>Wi-Fi</li><li>USB</li><li>Кнопка вызова 112</li></ul>')}
+{feature('swap', 'Сменные панели', 'Боковые панели стандартного размера: их&nbsp;можно заменить лайтпостерами для рекламы или информации без изменения конструкции павильона.')}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="page-head">
+        <div>
+          <p class="eyebrow">SMART-оснащение</p>
+          <h2 class="h2 duo">
+            <span>Умная</span>
+            <span class="duo__second">остановка</span>
+          </h2>
+        </div>
+        <p class="page-head__text">Умные модули встраиваются в&nbsp;базовую конструкцию: стандартный павильон превращается в&nbsp;комплекс с&nbsp;информированием, связью и&nbsp;мониторингом, совместимый со&nbsp;стратегией «Умного города».</p>
+      </div>
+      <ul class="smart-parts">
+{smart_parts}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section--light">
+    <div class="container project">
+      <div class="project__body">
+        <p class="eyebrow">Выполненные проекты</p>
+        <h2 class="h2 duo">
+          <span>«Атлант»</span>
+          <span class="duo__second">на&nbsp;объекте</span>
+        </h2>
+        <p class="project__text">Павильон с&nbsp;широкой изогнутой крышей из&nbsp;монолитного поликарбоната и&nbsp;увеличенным просветом для информационной панели с&nbsp;названием остановки.</p>
+        <p class="project__text">Конструкция установлена на&nbsp;тротуаре для комфортного ожидания городского транспорта.</p>
+      </div>
+      <div class="project__photos">
+{project_photos}
       </div>
     </div>
   </section>

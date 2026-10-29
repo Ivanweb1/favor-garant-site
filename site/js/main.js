@@ -434,21 +434,20 @@
       main.alt = slides[index].alt;
       counter.textContent = (index + 1) + ' / ' + slides.length;
       thumbs.forEach((t, n) => t.setAttribute('aria-pressed', String(n === index)));
-      chips.forEach((c) => c.setAttribute('aria-pressed', 'false'));
     }
 
     thumbs.forEach((t, n) => t.addEventListener('click', () => show(n)));
     box.querySelector('.pgallery__nav--prev').addEventListener('click', () => show(index - 1));
     box.querySelector('.pgallery__nav--next').addEventListener('click', () => show(index + 1));
 
-    // комплектация: на главном фото её рендер, миниатюры и стрелки возвращают к фото модели
+    // комплектация всегда выбрана одна (по умолчанию стандартная): её рендер — первое фото галереи
     chips.forEach((chip) => {
       chip.addEventListener('click', () => {
-        main.src = chip.dataset.full;
-        main.alt = 'Комплектация «' + chip.textContent + '»';
-        counter.textContent = chip.textContent;
         chips.forEach((c) => c.setAttribute('aria-pressed', String(c === chip)));
-        thumbs.forEach((t) => t.setAttribute('aria-pressed', 'false'));
+        slides[0] = { src: chip.dataset.full, alt: 'Остановочный павильон «Атлант», комплектация «' + chip.textContent + '»' };
+        thumbs[0].dataset.full = chip.dataset.full;
+        thumbs[0].querySelector('img').src = chip.dataset.full;
+        show(0);
       });
     });
 
