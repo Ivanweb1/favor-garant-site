@@ -83,7 +83,7 @@ def cat_tile(c):
     return f'''        <a class="tile" href="{href}">
           <div class="tile__media"><span class="tile__count">{count}</span><img src="{img}" style="object-position: {pos}" alt="{name}" loading="lazy" width="1400" height="1050"></div>
           <div class="tile__body">
-            <h2 class="tile__title tile__title--arrow">{name}</h2>
+            <h2 class="tile__title">{name}</h2>
             <p class="tile__text">{text}</p>
             <p class="tile__meta">{meta}</p>
           </div>
@@ -92,7 +92,7 @@ def cat_tile(c):
 parts_tile = '''        <a class="tile tile--parts" href="index.html#catalog">
           <div class="tile__art"><span class="tile__count">Магазин</span><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 6l15.6 9v18L24 42 8.4 33V15z"/><circle cx="24" cy="24" r="7"/></svg></div>
           <div class="tile__body">
-            <h2 class="tile__title tile__title--arrow">Комплектующие</h2>
+            <h2 class="tile__title">Комплектующие</h2>
             <p class="tile__text">Запасные части и&nbsp;комплектующие для конструкций&nbsp;— можно заказать онлайн и&nbsp;положить в&nbsp;корзину.</p>
             <p class="tile__meta">Онлайн-заказ · Корзина</p>
           </div>
@@ -164,7 +164,7 @@ def shelter_tile(m):
     return f'''        <article class="tile tile--model" data-tags="{tags}">
           <div class="tile__media tile__media--render"><span class="tile__tags">{badges}</span><img src="img/catalog/shelter-{slug}.jpg" alt="Остановочный павильон «{name}»" loading="lazy" width="960" height="720">{photo}</div>
           <div class="tile__body">
-            <h2 class="tile__title tile__title--arrow"><a class="tile__link" href="bus-shelter-atlant.html">{name}</a></h2>
+            <h2 class="tile__title"><a class="tile__link" href="bus-shelter-atlant.html">{name}</a></h2>
             <p class="tile__text">{text}</p>
             <div class="tile__meta tile__foot">
               <p class="tile__dims"><span>Габариты</span>{dims} мм</p>
