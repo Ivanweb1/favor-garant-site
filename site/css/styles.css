@@ -999,6 +999,8 @@ select.field__input, .select__btn { appearance: none; padding-right: 40px; backg
   .project-wrap > .section-head { display: contents; }
   .project-wrap .project-head { margin-bottom: var(--head-gap); }
   .project-wrap .slider-nav { order: 3; margin-top: 16px; }
+  /* на телефоне двухцветные заголовки снова в две строки — каждая часть своей строкой */
+  .duo--inline > span { display: block; }
   .slider-nav--mobile { display: flex; }
   .others__all { display: none; }
   .others__all-bottom { display: flex; margin-top: 20px; }
