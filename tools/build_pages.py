@@ -155,8 +155,8 @@ PHOTOS = {'elegant', 'elegant-p', 'standart', 'gallant', 'atlant', 'atlant-smart
 
 def shelter_tile(m):
     slug, name, text, dims, tags = m
-    # бейджи типа в углу картинки; тип, совпадающий с названием модели, не дублируем
-    badges = ''.join(f'<span class="tile__count">{TAG_NAMES[t]}</span>' for t in tags.split() if TAG_NAMES[t] not in name)
+    # бейджи типа в углу картинки — у каждой модели, даже если тип совпадает с названием
+    badges = ''.join(f'<span class="tile__count">{TAG_NAMES[t]}</span>' for t in tags.split())
     photo = (f'<img class="tile__photo" src="img/catalog/shelter-{slug}-photo.jpg" alt="" loading="lazy" width="960" height="720">'
              if slug in PHOTOS else '')
     # вся карточка кликабельна через ссылку в заголовке; кнопка «Подробнее» ведёт туда же.
