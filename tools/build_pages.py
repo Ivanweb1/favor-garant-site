@@ -301,7 +301,7 @@ PROJECT_PHOTOS = [
 project_photos = '\n'.join(
     f'        <img src="{src}" alt="{alt}" loading="lazy">' for src, alt in PROJECT_PHOTOS)
 
-others = [m for m in SHELTERS if m[0] in ('atlant-smart', 'elegant-p', 'compact', 'closed')]
+others = [m for m in SHELTERS if m[0] in ('atlant-smart', 'elegant-p', 'closed')]
 
 atlant_main = f'''
   <section class="section section--light page-top page-top--tight">
@@ -462,7 +462,7 @@ atlant_main = f'''
         </div>
         <a class="btn btn--outline" href="bus-shelters.html">Все павильоны</a>
       </div>
-      <div class="cards cards--4 cards--models">
+      <div class="cards cards--models">
 {chr(10).join(shelter_tile(m) for m in others)}
       </div>
     </div>
