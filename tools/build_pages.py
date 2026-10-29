@@ -334,7 +334,7 @@ atlant_main = f'''
       <div class="page-head">
         <div>
           <p class="eyebrow">Конструкция</p>
-          <h2 class="h2 duo">
+          <h2 class="h2 duo duo--inline">
             <span>Материалы</span>
             <span class="duo__second">и&nbsp;оснащение</span>
           </h2>
