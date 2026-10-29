@@ -32,6 +32,9 @@
     if (e.target.closest('a')) setMega(false);
   });
 
+  // Вариант для клиента: подменю в один столбец — открывается по ссылке с ?menu=1col
+  if (new URLSearchParams(location.search).get('menu') === '1col') mega.classList.add('mega--single');
+
   // Слева разделы — справа подразделы выбранного: переключение наведением и фокусом
   const megaCats = [...mega.querySelectorAll('.mega__cat')];
   const megaPanels = [...mega.querySelectorAll('.mega__panel')];
@@ -385,7 +388,8 @@
     e.preventDefault();
     let valid = true;
     form.querySelectorAll('[required]').forEach((input) => {
-      const ok = input.value.trim().length > 0;
+      // email проверяем ещё и на формат
+      const ok = input.value.trim().length > 0 && (input.type !== 'email' || input.checkValidity());
       input.classList.toggle('is-invalid', !ok);
       if (!ok && valid) input.focus();
       valid = valid && ok;
@@ -393,7 +397,7 @@
     status.hidden = false;
     status.textContent = valid
       ? 'Спасибо! Заявка принята, мы свяжемся с вами. (Прототип: заявка никуда не отправляется.)'
-      : 'Заполните имя и телефон.';
+      : 'Заполните имя, телефон и email.';
     if (valid) {
       form.reset();
       fileName.textContent = 'Файл не выбран';

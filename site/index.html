@@ -60,7 +60,17 @@
       <a class="header__phone" href="tel:+78003332227">8 (800) 333-222-7</a>
       <span class="header__address">СПб, ул. Цветочная, д. 7, лит. Б, пом. 6</span>
     </div>
-    <a class="btn btn--primary header__cta" href="#request-form">Заказать звонок</a>
+    <!-- Вход в ЛК и корзина интернет-магазина комплектующих: логику обсуждаем отдельно, пока ссылки-заглушки -->
+    <div class="header__actions">
+      <a class="btn btn--primary header__login" href="#" aria-label="Войти в личный кабинет">
+        <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg>
+        <span>Войти</span>
+      </a>
+      <a class="header__cart" href="#" aria-label="Корзина, товаров: 0">
+        <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2.2l2.3 11h10.8l2-8H6.4"/><circle cx="9.5" cy="19.5" r="1.5"/><circle cx="17" cy="19.5" r="1.5"/></svg>
+        <span class="header__cart-count">0</span>
+      </a>
+    </div>
 
     <button class="burger" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="mobile-menu">
       <span></span><span></span><span></span>
@@ -216,7 +226,7 @@
         <li><a href="#contacts">Контакты</a></li>
       </ul>
       <a class="mobile-menu__phone" href="tel:+78003332227">8 (800) 333-222-7</a>
-      <a class="btn btn--primary btn--block" href="#request-form">Заказать звонок</a>
+      <a class="btn btn--primary btn--block" href="#">Войти в личный кабинет</a>
     </div>
   </div>
 </header>
@@ -282,24 +292,32 @@
   <div class="container">
       <ul class="usp">
         <li class="usp__item">
-          <span class="usp__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21h18M4 21V11l5 3v-3l5 3v-3l5 3V4h2v17"/></svg></span>
-          <h3 class="usp__title">Российское производство</h3>
-          <p class="usp__text">Изготавливаем конструкции на&nbsp;собственном производственном комплексе в&nbsp;Санкт-Петербурге.</p>
+          <a class="usp__link" href="#about">
+            <span class="usp__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21h18M4 21V11l5 3v-3l5 3v-3l5 3V4h2v17"/></svg></span>
+            <h3 class="usp__title">Российское производство</h3>
+            <p class="usp__text">Изготавливаем конструкции на&nbsp;собственном производственном комплексе в&nbsp;Санкт-Петербурге.</p>
+          </a>
         </li>
         <li class="usp__item">
-          <span class="usp__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="7"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9 7 7M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/></svg></span>
-          <h3 class="usp__title">Свой парк оборудования</h3>
-          <p class="usp__text">Лазерная и&nbsp;плазменная резка, гибка, сварка, покраска и&nbsp;ЧПУ-обработка в&nbsp;одном цехе.</p>
+          <a class="usp__link" href="#services">
+            <span class="usp__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="7"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9 7 7M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/></svg></span>
+            <h3 class="usp__title">Свой парк оборудования</h3>
+            <p class="usp__text">Лазерная и&nbsp;плазменная резка, гибка, сварка, покраска и&nbsp;ЧПУ-обработка в&nbsp;одном цехе.</p>
+          </a>
         </li>
         <li class="usp__item">
-          <span class="usp__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 3v18h18z"/><path d="M8 11v6h6z"/></svg></span>
-          <h3 class="usp__title">Нестандартные конструкции</h3>
-          <p class="usp__text">Изготовим металлоконструкции любой сложности по&nbsp;вашим эскизам и&nbsp;чертежам.</p>
+          <a class="usp__link" href="#catalog">
+            <span class="usp__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 3v18h18z"/><path d="M8 11v6h6z"/></svg></span>
+            <h3 class="usp__title">Нестандартные конструкции</h3>
+            <p class="usp__text">Изготовим металлоконструкции любой сложности по&nbsp;вашим эскизам и&nbsp;чертежам.</p>
+          </a>
         </li>
         <li class="usp__item">
-          <span class="usp__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.34-5.66"/><path d="M20 3v4h-4"/></svg></span>
-          <h3 class="usp__title">Полный цикл</h3>
-          <p class="usp__text">Дизайн, проектирование, производство и&nbsp;монтаж&nbsp;— в&nbsp;одной компании.</p>
+          <a class="usp__link" href="#services">
+            <span class="usp__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.34-5.66"/><path d="M20 3v4h-4"/></svg></span>
+            <h3 class="usp__title">Полный цикл</h3>
+            <p class="usp__text">Дизайн, проектирование, производство и&nbsp;монтаж&nbsp;— в&nbsp;одной компании.</p>
+          </a>
         </li>
       </ul>
   </div>
@@ -561,7 +579,7 @@
         <p class="section-head__text">Ведём проект целиком&nbsp;— вам не&nbsp;нужно искать отдельных подрядчиков на&nbsp;каждый этап.</p>
       </div>
 
-      <!-- Путь изделия: этапы слева направо по порядку работ, над карточками — номера на линии таймлайна -->
+      <!-- Путь изделия: 6 этапов слева направо по порядку работ, над карточками — номера на линии таймлайна -->
       <ol class="flow">
         <li class="flow__item">
           <span class="flow__num">01</span>
@@ -610,9 +628,20 @@
         <li class="flow__item">
           <span class="flow__num">05</span>
           <a class="tile" href="#services">
+            <div class="tile__media"><img src="img/photos/25-prod-delivery.jpg" alt="Борт с элементами павильона у остановки" loading="lazy" width="1400" height="1050"></div>
+            <div class="tile__body">
+              <h3 class="tile__title">Доставка</h3>
+              <p class="tile__text">Доставляем конструкции до&nbsp;объекта в&nbsp;разобранном виде, готовыми к&nbsp;сборке.</p>
+              <p class="tile__meta">По&nbsp;всей России · До&nbsp;объекта</p>
+            </div>
+          </a>
+        </li>
+        <li class="flow__item">
+          <span class="flow__num">06</span>
+          <a class="tile" href="#services">
             <div class="tile__media"><img src="img/photos/24-prod-installation.jpg" alt="Бригада монтирует остановочный павильон" loading="lazy" width="1400" height="1050"></div>
             <div class="tile__body">
-              <h3 class="tile__title">Монтаж и&nbsp;шеф-монтаж</h3>
+              <h3 class="tile__title">Монтаж и&nbsp;шеф&#8209;монтаж</h3>
               <p class="tile__text">Устанавливаем павильоны под ключ или контролируем монтаж на&nbsp;объекте.</p>
               <p class="tile__meta">Монтаж под ключ · Шеф-монтаж</p>
             </div>
@@ -867,18 +896,18 @@
       <form class="form" id="request-form" novalidate>
         <div class="form__row">
           <label class="field">
-            <span class="field__label">Имя</span>
+            <span class="field__label">Имя <span class="field__req" aria-hidden="true">*</span></span>
             <input class="field__input" type="text" name="name" autocomplete="name" required>
           </label>
           <label class="field">
-            <span class="field__label">Телефон</span>
+            <span class="field__label">Телефон <span class="field__req" aria-hidden="true">*</span></span>
             <input class="field__input" type="tel" name="phone" autocomplete="tel" required>
           </label>
         </div>
         <div class="form__row">
           <label class="field">
-            <span class="field__label">Email</span>
-            <input class="field__input" type="email" name="email" autocomplete="email">
+            <span class="field__label">Email <span class="field__req" aria-hidden="true">*</span></span>
+            <input class="field__input" type="email" name="email" autocomplete="email" required>
           </label>
           <div class="field">
             <span class="field__label" id="product-label">Что нужно изготовить</span>
