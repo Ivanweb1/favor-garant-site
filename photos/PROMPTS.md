@@ -537,3 +537,73 @@ Composition: step back so the whole shelter frame including its roof is fully vi
 Light: late-summer overcast day, soft even light.
 Style: photorealistic, not CGI, natural colors, slightly cool neutral grade, sharp, straight verticals. No text or logos.
 ```
+
+---
+
+## 10. Карточка модели «Атлант» — блок «Материалы и оснащение» (6 кадров 4:3)
+
+Зачем: в блоке сейчас иконки и текст, а это самые «осязаемые» вещи — крыша, стекло, скамья, герб. Крупный план материала сразу показывает качество. Каждый пункт блока станет карточкой: фото сверху, заголовок и текст под ним.
+
+Кадр: 4:3, файл 1600×1200. Карточка на сайте около 400×300, на телефоне во всю ширину. Главная деталь — в центральных 70% кадра. Верхние и нижние 10% можно обрезать, ничего важного туда не ставим. Текст поверх фото не кладём.
+
+Исходники: фото «Атланта» на объекте — `site/img/catalog/atlant-photo-1.jpg` (вид спереди, улица Соборная), `atlant-photo-4.jpg` (вид сбоку у кирпичного здания), и рендер `atlant-render.jpg`. Загружать **два файла**: фото на объекте и рендер — по ним генератор держит профиль каркаса, форму крыши и цвет.
+
+Общий блок, он уже вставлен в начало каждого промпта ниже:
+- каркас — светлый серебристо-серый алюминиевый профиль с порошковым покрытием, квадратное сечение, как на исходниках;
+- крыша — изогнутые волнами секции прозрачного поликарбоната, как на исходниках;
+- никакого текста, букв, логотипов, водяных знаков FG, людей и машин;
+- реалистичная предметная фотосъёмка, не рендер.
+
+### 60-atlant-roof — «Крыша»
+```
+Aspect ratio 4:3.
+Use the attached photo and render of the "Atlant" bus shelter as the exact reference for the frame and roof. Keep the same light silver-grey square aluminium profiles and the same wave-shaped clear polycarbonate roof sections — do not redesign.
+Shot: close-up from below at a 30° angle of the roof edge where two curved polycarbonate sections meet the aluminium beam. Clear sky with soft clouds seen through the transparent polycarbonate, gentle light refraction on the curves, crisp bolt heads and clean seams. The roof edge crosses the frame diagonally from lower left to upper right and fills the central 70%.
+Light: late-summer morning, soft sun from behind the roof.
+Style: photorealistic architectural detail photography, not CGI, true-to-life colors, slightly cool neutral grade, shallow depth of field, 85 mm lens. No text, letters, logos, watermarks, people or cars.
+```
+
+### 61-atlant-glass — «Ветрозащитные панели»
+```
+Aspect ratio 4:3.
+Use the attached photo and render of the "Atlant" bus shelter as the exact reference. Keep the same silver-grey square aluminium frame — do not redesign.
+Shot: close-up three-quarter view of a corner of the shelter: a vertical aluminium post holding a tall tempered glass side panel. Show the thickness of the glass edge (about 8 mm, slight green tint on the edge), clean rubber gasket and fastening clamps. Through the glass — a softly blurred historic St Petersburg street with trees. The post stands at about one third of the frame width, the glass panel fills the rest.
+Light: overcast bright day, soft reflections on the glass, no glare spots.
+Style: photorealistic product detail photography, not CGI, true-to-life colors, slightly cool neutral grade, 70 mm lens, shallow depth of field. No text, letters, logos, stickers, watermarks, people or cars.
+```
+
+### 62-atlant-bench — «Скамья»
+```
+Aspect ratio 4:3.
+Use the attached photo and render of the "Atlant" bus shelter as the exact reference for the bench: warm honey-coloured wooden slats on curved silver-grey metal brackets, mounted between the shelter posts. Do not redesign.
+Shot: close-up at seat height, slightly from the side: two smooth planed wooden slats with visible wood grain and rounded edges, an antiseptic oil finish with a soft satin sheen, the curved metal bracket underneath and the clean paving below. The bench runs diagonally across the frame; the bracket sits in the central third.
+Light: late-summer afternoon, warm sun from the side, soft shadows.
+Style: photorealistic product detail photography, not CGI, true-to-life colors, 85 mm lens, shallow depth of field. No text, letters, logos, watermarks, people, bags or litter.
+```
+
+### 63-atlant-emblem — «Герб или логотип»
+```
+Aspect ratio 4:3.
+Use the attached photo and render of the "Atlant" bus shelter as the exact reference for the frame and glass. Do not redesign.
+Shot: frontal close-up of a glass side panel with a printed emblem in the middle: a simple heraldic shield shape filled with deep navy #2A2560 and a thin silver outline, with an abstract geometric pattern inside — no letters, no real coat of arms, no animals or crowns. The print is crisp, opaque, slightly glossy, applied to the glass. Around it — clean transparent glass with a softly blurred green park behind. The shield takes about 35% of the frame height and sits in the center.
+Light: bright overcast day, even light, faint reflections.
+Style: photorealistic detail photography, not CGI, true-to-life colors, 70 mm lens. No text, letters, numbers, logos, watermarks, people or cars.
+```
+
+### 64-atlant-long — «Увеличенные версии»
+```
+Aspect ratio 4:3.
+Use the attached photo and render of the "Atlant" bus shelter as the exact reference for the design. Keep the same silver-grey square aluminium frame and the same wave-shaped clear polycarbonate roof — do not change the design, only make it longer.
+Shot: a long semi-enclosed version of the same shelter, about 10 metres long, built from repeated identical modules with glass side and front panels, standing along a wide clean sidewalk of a St Petersburg avenue. Eye-level view from a three-quarter angle so the whole length is visible and recedes into perspective. The shelter fills the central 80% of the frame width.
+Light: late-summer morning, soft sun from the side, gentle long shadows.
+Style: photorealistic architectural photography, not CGI, true-to-life colors, slightly cool neutral grade, straight vertical lines, 35 mm lens. No text, letters, logos, watermarks, people or cars.
+```
+
+### 65-atlant-lightposter — «Сменные панели»
+```
+Aspect ratio 4:3.
+Use the attached photo and render of the "Atlant" bus shelter as the exact reference. Keep the same silver-grey square aluminium frame — do not redesign.
+Shot: three-quarter view of one end of the shelter where the side glass panel is replaced by a city-format lightbox of the same height, built into the same frame. The lightbox glows softly from inside and shows a calm abstract poster in deep navy #2A2560 and light grey shapes — no text, letters or numbers. Next to it, a regular glass side panel, so the two are clearly the same size. The lightbox sits in the central third of the frame.
+Light: early evening blue hour, the lightbox is the brightest element, the street is still visible.
+Style: photorealistic architectural photography, not CGI, true-to-life colors, 50 mm lens. No text, letters, logos, watermarks, people or cars.
+```
