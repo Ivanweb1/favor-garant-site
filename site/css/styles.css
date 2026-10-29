@@ -741,6 +741,12 @@ select.field__input, .select__btn { appearance: none; padding-right: 40px; backg
   font-size: 12px; line-height: 1.2; font-weight: 600; color: var(--navy);
 }
 .tile__media--render .tile__count { background: var(--light); }
+.tile__tags { position: absolute; top: 14px; left: 14px; z-index: 1; display: flex; flex-wrap: wrap; gap: 6px; }
+.tile__tags .tile__count { position: static; }
+.tile__tags:empty { display: none; }
+/* габариты: подпись серым, размеры — фирменным синим */
+.tile__dims { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 12px; font-size: 13px; font-weight: 600; }
+.tile__dims span { font-weight: 500; color: var(--grey); }
 .tile__title--arrow::after {
   content: ""; display: inline-block; width: 9px; height: 10px; margin-left: 8px; background: currentColor;
   -webkit-mask: var(--arrow) center / contain no-repeat; mask: var(--arrow) center / contain no-repeat;
@@ -764,11 +770,11 @@ select.field__input, .select__btn { appearance: none; padding-right: 40px; backg
 /* Фильтры-чипы над сеткой моделей */
 .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
 .chip {
-  padding: 10px 18px; border: 1px solid rgba(42, 37, 96, .2); border-radius: 999px; background: var(--white);
+  padding: 10px 18px; border: 1px solid transparent; border-radius: 999px; background: var(--white);
   font: inherit; font-size: 14px; font-weight: 500; color: var(--navy); cursor: pointer;
   transition: background-color .2s ease, color .2s ease, border-color .2s ease;
 }
-.chip:hover { border-color: var(--navy-bright); color: var(--navy-bright); }
+.chip:hover { color: var(--navy-bright); }
 .chip[aria-pressed="true"] { border-color: var(--navy); background: var(--navy); color: var(--white); }
 .chip__num { margin-left: 6px; opacity: .55; }
 .tile[hidden] { display: none; }
@@ -876,11 +882,13 @@ select.field__input, .select__btn { appearance: none; padding-right: 40px; backg
   .slider-nav { display: none; }
   .cards { grid-template-columns: 1fr; gap: 16px; }
   /* модели на телефоне — по две в ряд, без описания */
-  .cards--4 { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
-  .cards--4 .tile__body { gap: 6px; padding: 12px 12px 14px; }
-  .cards--4 .tile__title { font-size: 15px; }
-  .cards--4 .tile__text { display: none; }
-  .cards--4 .tile__meta { font-size: 11px; }
+  .cards--models { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .cards--models .tile__body { gap: 6px; padding: 12px 12px 14px; }
+  .cards--models .tile__title { font-size: 15px; }
+  .cards--models .tile__text { display: none; }
+  .cards--models .tile__meta { font-size: 11px; }
+  .cards--models .tile__tags { top: 8px; left: 8px; }
+  .cards--models .tile__count { padding: 4px 8px; font-size: 10px; }
   .filters { flex-wrap: nowrap; margin: 0 calc(var(--gutter) * -1) 20px; padding: 0 var(--gutter); overflow-x: auto; scrollbar-width: none; }
   .filters::-webkit-scrollbar { display: none; }
   .chip { flex: none; }

@@ -147,15 +147,20 @@ SHELTERS = [
 FILTERS = [('all', 'Все'), ('modular', 'Модульные'), ('city', 'Городские'), ('resort', 'Курортные'),
            ('suburb', 'Пригородные'), ('closed', 'Закрытые'), ('smart', 'SMART')]
 
+TAG_NAMES = {'modular': 'Модульный', 'city': 'Городской', 'resort': 'Курортный', 'suburb': 'Пригородный',
+             'closed': 'Закрытый', 'smart': 'SMART'}
+
 def shelter_tile(m):
     slug, name, text, dims, tags = m
+    # бейджи типа в углу картинки; тип, совпадающий с названием модели, не дублируем
+    badges = ''.join(f'<span class="tile__count">{TAG_NAMES[t]}</span>' for t in tags.split() if TAG_NAMES[t] not in name)
     # пока готова только эталонная карточка «Атланта» — остальные модели открывают её как образец
     return f'''        <a class="tile" href="bus-shelter-atlant.html" data-tags="{tags}">
-          <div class="tile__media tile__media--render"><img src="img/catalog/shelter-{slug}.jpg" alt="Остановочный павильон «{name}»" loading="lazy" width="960" height="720"></div>
+          <div class="tile__media tile__media--render"><span class="tile__tags">{badges}</span><img src="img/catalog/shelter-{slug}.jpg" alt="Остановочный павильон «{name}»" loading="lazy" width="960" height="720"></div>
           <div class="tile__body">
             <h2 class="tile__title tile__title--arrow">{name}</h2>
             <p class="tile__text">{text}</p>
-            <p class="tile__meta">Габариты, мм: {dims}</p>
+            <p class="tile__meta tile__dims"><span>Габариты</span>{dims} мм</p>
           </div>
         </a>'''
 
@@ -172,7 +177,6 @@ shelters_main = f'''
       {crumbs(('Главная', 'index.html'), ('Продукция', 'catalog.html'), ('Остановочные павильоны', None))}
       <div class="page-head">
         <div>
-          <p class="eyebrow">Продукция</p>
           <h1 class="h2 duo">
             <span>Остановочные</span>
             <span class="duo__second">павильоны</span>
@@ -183,7 +187,7 @@ shelters_main = f'''
       <div class="filters" data-target="shelters" role="group" aria-label="Тип павильона">
 {chips}
       </div>
-      <div class="cards cards--4" id="shelters">
+      <div class="cards cards--models" id="shelters">
 {chr(10).join(shelter_tile(m) for m in SHELTERS)}
       </div>
     </div>
@@ -329,7 +333,7 @@ atlant_main = f'''
         </div>
         <a class="btn btn--outline" href="bus-shelters.html">Все павильоны</a>
       </div>
-      <div class="cards cards--4">
+      <div class="cards cards--4 cards--models">
 {chr(10).join(shelter_tile(m) for m in others)}
       </div>
     </div>
