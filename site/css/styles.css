@@ -840,6 +840,7 @@ select.field__input, .select__btn { appearance: none; padding-right: 40px; backg
 .pinfo__label { font-size: 13px; font-weight: 500; color: var(--muted); }
 .filters--configs { margin: 0; }
 .filters--configs .chip { padding: 8px 16px; }
+.pinfo__config-desc { min-height: 2.9em; font-size: 14px; line-height: 1.45; color: var(--muted); }
 
 .pgallery__thumbs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
 .pgallery__thumb { overflow: hidden; padding: 0; border: 2px solid transparent; border-radius: var(--radius-sm); background: var(--white); cursor: pointer; transition: border-color .2s ease; }

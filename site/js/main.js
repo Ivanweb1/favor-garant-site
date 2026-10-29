@@ -444,6 +444,8 @@
     chips.forEach((chip) => {
       chip.addEventListener('click', () => {
         chips.forEach((c) => c.setAttribute('aria-pressed', String(c === chip)));
+        const desc = document.querySelector('.pinfo__config-desc');
+        if (desc) desc.innerHTML = chip.dataset.desc;
         slides[0] = { src: chip.dataset.full, alt: 'Остановочный павильон «Атлант», комплектация «' + chip.textContent + '»' };
         thumbs[0].dataset.full = chip.dataset.full;
         thumbs[0].querySelector('img').src = chip.dataset.full;

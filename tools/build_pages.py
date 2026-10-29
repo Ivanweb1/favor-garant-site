@@ -227,16 +227,6 @@ CONFIGS = [
     ('atlant-cfg-10m', 'Полузакрытый удлинённый 10&nbsp;м', 'Боковые и&nbsp;фронтальные панели защищают от&nbsp;продувания, плюс лайтпостер и&nbsp;пилон.', 'Увеличенная'),
 ]
 
-def cfg_tile(c):
-    img, name, text, kind = c
-    return f'''        <div class="tile">
-          <div class="tile__media tile__media--render"><span class="tile__count">{kind}</span><img src="img/catalog/{img}.jpg" alt="Комплектация «{re.sub('&nbsp;', ' ', name)}»" loading="lazy" width="700" height="420"></div>
-          <div class="tile__body">
-            <h3 class="tile__title">{name}</h3>
-            <p class="tile__text">{text}</p>
-          </div>
-        </div>'''
-
 THUMBS = [
     ('img/catalog/atlant-cfg-base.jpg', 'Остановочный павильон «Атлант», стандартная комплектация', True),
     ('img/catalog/atlant-photo-1.jpg', '«Атлант» на объекте, вид спереди', False),
@@ -249,12 +239,12 @@ thumbs = '\n'.join(
 
 ARR = '<svg class="arr arr--%s" width="10" height="11" viewBox="0 0 13 14" aria-hidden="true"><path d="M.74.68l11 12M11.74 12.68V1.84M11.74 12.68H1.88" fill="none" stroke="currentColor" stroke-width="2"/></svg>'
 
-# чипы у фото: клик показывает рендер выбранной комплектации (картинки те же, что в блоке «Комплектации»)
+# чипы у фото: клик показывает рендер выбранной комплектации и её описание под чипами
 CHIP_NAMES = {'atlant-cfg-base': 'Стандартная', 'atlant-cfg-light': 'С&nbsp;лайтпостером', 'atlant-cfg-smart': 'SMART',
               'atlant-cfg-6m': '6&nbsp;м', 'atlant-cfg-10m': '10&nbsp;м'}
 cfg_chips = '\n'.join(
-    f'              <button class="chip" type="button" data-full="img/catalog/{img}.jpg" aria-pressed="{str(n == 0).lower()}">{CHIP_NAMES[img]}</button>'
-    for n, (img, *_) in enumerate(CONFIGS))
+    f'              <button class="chip" type="button" data-full="img/catalog/{img}.jpg" data-desc="{text}" aria-pressed="{str(n == 0).lower()}">{CHIP_NAMES[img]}</button>'
+    for n, (img, name, text, kind) in enumerate(CONFIGS))
 
 # SMART-компоненты: тексты со старой страницы «Элеганта» — оборудование общее для модульных павильонов
 SMART_ICON = {
@@ -322,6 +312,7 @@ atlant_main = f'''
             <div class="filters filters--configs" role="group" aria-label="Комплектация">
 {cfg_chips}
             </div>
+            <p class="pinfo__config-desc" aria-live="polite">{CONFIGS[0][2]}</p>
           </div>
           <dl class="specs">
             <div><dt>Габариты, мм</dt><dd>4996 × 2730 × 1645</dd></div>
@@ -334,24 +325,6 @@ atlant_main = f'''
             <a class="link-arrow" href="index.html#services">Монтаж под ключ</a>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container">
-      <div class="page-head">
-        <div>
-          <p class="eyebrow">Комплектации</p>
-          <h2 class="h2 duo">
-            <span>Подберите</span>
-            <span class="duo__second">конфигурацию</span>
-          </h2>
-        </div>
-        <p class="page-head__text">Стандартный вариант, увеличенная версия или модель с&nbsp;информационными панелями, цифровыми табло и&nbsp;USB-зарядками.</p>
-      </div>
-      <div class="cards">
-{chr(10).join(cfg_tile(c) for c in CONFIGS)}
       </div>
     </div>
   </section>
