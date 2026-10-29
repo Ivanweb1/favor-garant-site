@@ -412,7 +412,6 @@ atlant_main = f'''
     <div class="container">
       <div class="page-head">
         <div>
-          <p class="eyebrow">Остановочные павильоны</p>
           <h2 class="h2 duo duo--inline">
             <span>Другие</span>
             <span class="duo__second">модели</span>
