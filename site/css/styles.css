@@ -841,15 +841,6 @@ select.field__input, .select__btn { appearance: none; padding-right: 40px; backg
 .filters--configs { margin: 0; }
 .filters--configs .chip { padding: 8px 16px; }
 
-/* преимущества под кнопками: три белые плашки с иконкой в круге, прижаты к низу колонки */
-.trust { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-top: auto; }
-.trust li {
-  display: flex; align-items: center; gap: 10px; padding: 14px; border-radius: var(--radius-sm);
-  background: var(--white); font-size: 13px; line-height: 1.35; font-weight: 600; color: var(--navy);
-}
-/* иконка слева от текста, без подложки — просто линия фирменного синего */
-.trust__icon { display: grid; flex: none; place-items: center; color: var(--navy); }
-.trust__icon svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
 .pgallery__thumbs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
 .pgallery__thumb { overflow: hidden; padding: 0; border: 2px solid transparent; border-radius: var(--radius-sm); background: var(--white); cursor: pointer; transition: border-color .2s ease; }
 .pgallery__thumb img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
@@ -859,10 +850,11 @@ select.field__input, .select__btn { appearance: none; padding-right: 40px; backg
 .pinfo__lead { font-size: 16px; line-height: 1.6; color: var(--ink); }
 .pinfo__text { font-size: 15px; color: var(--muted); }
 .specs { display: grid; border-top: 1px solid var(--line); }
-.specs > div { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: 16px; padding: 10px 0; border-bottom: 1px solid var(--line); font-size: 14px; }
+.specs > div { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--line); font-size: 14px; }
 .specs dt { color: var(--muted); }
 .specs dd { font-weight: 600; color: var(--navy); }
-.pinfo__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 28px; margin-top: 4px; }
+/* кнопки прижаты к низу колонки — на одной линии с миниатюрами галереи */
+.pinfo__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 28px; margin-top: auto; padding-top: 4px; }
 .pinfo__note { font-size: 12px; color: var(--muted); }
 
 /* Особенности конструкции: материал — значение */
@@ -996,7 +988,6 @@ select.field__input, .select__btn { appearance: none; padding-right: 40px; backg
   .chip { flex: none; }
   .pgallery__thumbs { gap: 8px; }
   .filters--configs { flex-wrap: wrap; margin: 0; padding: 0; overflow: visible; }
-  .trust { grid-template-columns: 1fr; gap: 8px; }
   .smart-parts { gap: 10px; }
   .warm__grid { grid-template-columns: 1fr; }
   .warm__grid li { flex-direction: row; align-items: center; padding: 14px; }
