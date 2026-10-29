@@ -355,7 +355,7 @@ atlant_main = f'''
 
   <section class="section">
     <div class="container">
-      <div class="page-head">
+      <div class="page-head page-head--hotspots">
         <div>
           <p class="eyebrow">SMART-оснащение</p>
           <h2 class="h2 duo">
