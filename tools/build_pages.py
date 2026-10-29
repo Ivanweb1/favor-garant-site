@@ -104,7 +104,6 @@ catalog_main = f'''
       {crumbs(('Главная', 'index.html'), ('Продукция', None))}
       <div class="page-head">
         <div>
-          <p class="eyebrow">Каталог</p>
           <h1 class="h2 duo">
             <span>Продукция</span>
             <span class="duo__second">для городской среды</span>
