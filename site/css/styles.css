@@ -895,7 +895,7 @@ select.field__input, .select__btn { appearance: none; padding-right: 40px; backg
 
 /* выполненные проекты: горизонтальная лента фото, листается стрелками и свайпом */
 .project-head { display: grid; gap: 14px; }
-.project-head .section-head__text { max-width: 560px; }
+.project-head .section-head__text { max-width: none; }
 .project-track { display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; scrollbar-width: none; }
 .project-track::-webkit-scrollbar { display: none; }
 .project-track img { flex: 0 0 calc((100% - 32px) / 2.4); min-width: 0; width: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radius); scroll-snap-align: start; }
