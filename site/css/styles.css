@@ -4,7 +4,9 @@
 :root {
   --navy: #2A2560;
   --navy-deep: #201C4C;
-  --navy-bright: #4A41C9;     /* ховер кнопок: заметно ярче фирменного синего */
+  /* ховер везде мягкий: элемент чуть светлеет, но остаётся в своём цвете */
+  --navy-hover: #3B3585;      /* синие заливки и синий текст при наведении — на тон светлее фирменного */
+  --tint: #ECEBF8;            /* светлые и контурные кнопки при наведении — лёгкая сиреневая подложка */
   --red: #CB0404;
   --warm: #DEDBD2;
   --light: #EEF0F2;
@@ -83,7 +85,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
   display: inline-flex; align-items: center; gap: 10px;
   font-weight: 600; color: var(--navy); transition: color .2s ease;
 }
-a.link-arrow:not(.link-arrow--light):hover { color: var(--navy-bright); }
+a.link-arrow:not(.link-arrow--light):hover { color: var(--navy-hover); }
 .link-arrow::after {
   content: ""; width: 9px; height: 10px; flex: none;
   background: currentColor;
@@ -105,11 +107,11 @@ a.link-arrow:not(.link-arrow--light):hover { color: var(--navy-bright); }
   transition: background-color .2s ease, color .2s ease, border-color .2s ease, box-shadow .2s ease;
 }
 .btn--primary { background: var(--navy); color: var(--white); }
-.btn--primary:hover { background: var(--navy-bright); box-shadow: 0 10px 24px -12px rgba(74, 65, 201, .8); }
+.btn--primary:hover { background: var(--navy-hover); }
 .btn--light { background: var(--white); color: var(--navy); }
-.btn--light:hover { background: var(--navy-bright); color: var(--white); }
+.btn--light:hover { background: var(--tint); }
 .btn--outline { border-color: rgba(42, 37, 96, .35); color: var(--navy); background: transparent; }
-.btn--outline:hover { border-color: var(--navy-bright); background: var(--navy-bright); color: var(--white); }
+.btn--outline:hover { border-color: rgba(42, 37, 96, .5); background: var(--tint); }
 .btn--block { width: 100%; }
 
 /* ---------- Шапка ---------- */
@@ -147,7 +149,7 @@ a.link-arrow:not(.link-arrow--light):hover { color: var(--navy-bright); }
   border: 1px solid rgba(42, 37, 96, .35); border-radius: 50%; color: var(--navy);
   transition: background-color .2s ease, color .2s ease, border-color .2s ease;
 }
-.header__cart:hover { border-color: rgba(42, 37, 96, .5); background: rgba(74, 65, 201, .1); }
+.header__cart:hover { border-color: rgba(42, 37, 96, .5); background: var(--tint); }
 .header__cart-count {
   position: absolute; top: -4px; right: -4px; min-width: 20px; height: 20px; padding: 0 5px;
   border: 2px solid var(--white); border-radius: 999px; background: var(--red);
@@ -216,7 +218,7 @@ a.link-arrow:not(.link-arrow--light):hover { color: var(--navy-bright); }
   transition: background-color .2s ease, color .2s ease, border-color .2s ease;
 }
 /* ховер круглых кнопок с обводкой: лёгкая сиреневая подложка — заметно, но не ярко */
-.burger:hover { border-color: rgba(42, 37, 96, .5); background: rgba(74, 65, 201, .1); }
+.burger:hover { border-color: rgba(42, 37, 96, .5); background: var(--tint); }
 .burger span { display: block; width: 18px; height: 1.8px; border-radius: 2px; background: currentColor; transition: transform .2s ease, opacity .2s ease; }
 .burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(5.8px) rotate(45deg); }
 .burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
@@ -327,9 +329,9 @@ a.link-arrow:not(.link-arrow--light):hover { color: var(--navy-bright); }
   color: var(--grey); transition: transform .2s ease, color .2s ease;
 }
 .usp__title, .usp__icon { transition: color .2s ease, background-color .2s ease; }
-.usp__link:hover .usp__title, .usp__link:hover::after { color: var(--navy-bright); }
+.usp__link:hover .usp__title, .usp__link:hover::after { color: var(--navy-hover); }
 .usp__link:hover::after { transform: rotate(-45deg); }
-.usp__link:hover .usp__icon { background: var(--navy-bright); }
+.usp__link:hover .usp__icon { background: var(--navy-hover); }
 /* текст на 3 строки у всех, чтобы заголовки стояли на одной линии */
 .usp__text { min-height: 4.65em; font-size: 13px; line-height: 1.55; color: var(--muted); }
 
@@ -532,7 +534,7 @@ a.link-arrow:not(.link-arrow--light):hover { color: var(--navy-bright); }
   border: 1px solid rgba(42, 37, 96, .35); border-radius: 50%; background: transparent; color: var(--navy);
   cursor: pointer; transition: background-color .2s ease, color .2s ease, border-color .2s ease, opacity .2s ease;
 }
-.slider-nav__btn:hover { border-color: rgba(42, 37, 96, .5); background: rgba(74, 65, 201, .1); }
+.slider-nav__btn:hover { border-color: rgba(42, 37, 96, .5); background: var(--tint); }
 .slider-nav__btn:disabled { opacity: .35; pointer-events: none; }
 .works__nav { display: flex; gap: 10px; }
 .works__btn {
@@ -540,7 +542,7 @@ a.link-arrow:not(.link-arrow--light):hover { color: var(--navy-bright); }
   border: 1px solid rgba(42, 37, 96, .35); border-radius: 50%; background: transparent; color: var(--navy); cursor: pointer;
   transition: background-color .2s ease, color .2s ease, border-color .2s ease, opacity .2s ease;
 }
-.works__btn:hover:not(:disabled) { border-color: var(--navy); background: var(--navy); color: var(--white); }
+.works__btn:hover:not(:disabled) { border-color: rgba(42, 37, 96, .5); background: var(--tint); }
 .works__btn:disabled { opacity: .3; cursor: default; }
 /* стрелки слайдеров — та же диагональная, повёрнутая вправо или влево */
 .arr--next { transform: rotate(-45deg); }
@@ -734,7 +736,7 @@ select.field__input, .select__btn { appearance: none; padding-right: 40px; backg
 .crumbs a, .crumbs [aria-current] { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
 .crumbs li + li::before { content: ""; width: 4px; height: 4px; border-radius: 50%; background: var(--grey); }
 .crumbs a { transition: color .2s ease; }
-.crumbs a:hover { color: var(--navy-bright); }
+.crumbs a:hover { color: var(--navy); }
 .crumbs [aria-current] { color: var(--ink); }
 .page-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px 48px; margin-bottom: var(--head-gap); }
 .page-head__text { max-width: 440px; font-size: 16px; color: var(--muted); }
@@ -767,14 +769,14 @@ select.field__input, .select__btn { appearance: none; padding-right: 40px; backg
 /* на наведении вместо рендера — фото с объекта */
 .tile__photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .35s ease; }
 .tile--model:hover .tile__photo { opacity: 1; }
-.tile--model:hover .tile__calc { border-color: var(--navy-bright); background: var(--navy-bright); color: var(--white); }
+.tile--model:hover .tile__calc { border-color: rgba(42, 37, 96, .5); background: var(--tint); }
 .tile--model:hover .tile__media img { transform: none; }
 .tile__title--arrow::after {
   content: ""; display: inline-block; width: 9px; height: 10px; margin-left: 8px; background: currentColor;
   -webkit-mask: var(--arrow) center / contain no-repeat; mask: var(--arrow) center / contain no-repeat;
   transition: transform .2s ease;
 }
-.tile:hover .tile__title { color: var(--navy-bright); }
+.tile:hover .tile__title { color: var(--navy-hover); }
 .tile:hover .tile__title--arrow::after { transform: rotate(-45deg); }
 .tile__title { transition: color .2s ease; }
 /* рендеры моделей на белом фоне — без серой подложки и без обрезки */
@@ -796,7 +798,8 @@ select.field__input, .select__btn { appearance: none; padding-right: 40px; backg
   font: inherit; font-size: 14px; font-weight: 500; color: var(--navy); cursor: pointer;
   transition: background-color .2s ease, color .2s ease, border-color .2s ease;
 }
-.chip:hover { color: var(--navy-bright); }
+.chip:hover { background: var(--tint); }
+.chip[aria-pressed="true"]:hover { background: var(--navy-hover); }
 .chip[aria-pressed="true"] { border-color: var(--navy); background: var(--navy); color: var(--white); }
 .chip__num { margin-left: 6px; opacity: .55; }
 .tile[hidden] { display: none; }
@@ -807,7 +810,7 @@ select.field__input, .select__btn { appearance: none; padding-right: 40px; backg
 }
 .slider-nav--overlay .slider-nav__btn { border-color: transparent; background: rgba(255, 255, 255, .92); box-shadow: 0 6px 16px -8px rgba(10, 10, 30, .5); pointer-events: auto; }
 .slider-nav--overlay .slider-nav__btn:disabled { opacity: 0; }
-.slider-nav--overlay .slider-nav__btn:hover { border-color: transparent; background: #ECEBF8; }
+.slider-nav--overlay .slider-nav__btn:hover { border-color: transparent; background: var(--tint); }
 /* «Другие модели»: на десктопе сетка и кнопка в шапке; на телефоне лента со стрелками, кнопка под ней */
 .slider-nav--mobile, .others__all-bottom { display: none; }
 /* на белом фоне белой карточке нужна обводка */
@@ -834,7 +837,7 @@ select.field__input, .select__btn { appearance: none; padding-right: 40px; backg
 .pgallery__main:hover .pgallery__nav { opacity: 1; }
 .pgallery__zoom { top: 14px; right: 14px; width: 40px; height: 40px; }
 .pgallery__zoom svg { fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-.pgallery__nav:hover, .pgallery__zoom:hover { background: var(--navy-bright); color: var(--white); }
+.pgallery__nav:hover, .pgallery__zoom:hover { background: var(--tint); }
 .pgallery__counter {
   position: absolute; bottom: 14px; left: 14px; padding: 6px 12px; border-radius: 999px;
   background: rgba(255, 255, 255, .92); font-size: 12px; font-weight: 600; color: var(--navy);
