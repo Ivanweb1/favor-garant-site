@@ -139,7 +139,8 @@ a.link-arrow:not(.link-arrow--light):hover { color: var(--navy-bright); }
 .header__phone { font-weight: 700; color: var(--navy); white-space: nowrap; }
 .header__address { font-size: 12px; color: var(--muted); white-space: nowrap; }
 .header__actions { display: flex; align-items: center; gap: 10px; }
-.header__login { gap: 8px; min-height: 46px; padding: 0 22px; }
+.header__login { gap: 8px; min-height: 46px; padding: 0 22px; font-weight: 500; }
+.header .header__login svg { stroke-width: 2; }  /* толщина линии иконки ≈ толщине букв «Войти» */
 .header__login svg, .header__cart svg { flex: none; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 .header__cart {
   position: relative; display: grid; place-items: center; width: 46px; height: 46px;
@@ -434,14 +435,19 @@ a.link-arrow:not(.link-arrow--light):hover { color: var(--navy-bright); }
 /* ---------- 4. Производство и услуги ---------- */
 
 /* Путь изделия: 6 этапов слева направо, над карточками — номер на общей линии таймлайна с точкой */
-.flow { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 16px; }
-.flow__item { display: flex; flex-direction: column; }
+/* слайдер: 4 карточки в кадре, листается стрелками и свайпом; поля сверху и снизу — под подъём и тень карточки на ховере */
+.flow {
+  display: flex; gap: 20px; margin: -6px 0 -30px; padding: 6px 0 30px;
+  overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; scrollbar-width: none;
+}
+.flow::-webkit-scrollbar { display: none; }
+.flow__item { display: flex; flex: 0 0 calc((100% - 60px) / 4); flex-direction: column; scroll-snap-align: start; }
 .flow__num {
   position: relative; display: block; padding-bottom: 18px; margin-bottom: 22px;
   font-size: 44px; line-height: 1; font-weight: 700; letter-spacing: -.02em; color: #D5D6E2;
   transition: color .25s ease;
 }
-.flow__num::before { content: ""; position: absolute; left: 0; right: -16px; bottom: 0; height: 1px; background: rgba(42, 37, 96, .2); }
+.flow__num::before { content: ""; position: absolute; left: 0; right: -20px; bottom: 0; height: 1px; background: rgba(42, 37, 96, .2); }
 .flow__item:last-child .flow__num::before { right: 0; }
 .flow__num::after { content: ""; position: absolute; left: 0; bottom: -4px; width: 9px; height: 9px; border-radius: 50%; background: var(--navy); }
 .flow__item:hover .flow__num { color: var(--navy); }
@@ -449,10 +455,6 @@ a.link-arrow:not(.link-arrow--light):hover { color: var(--navy-bright); }
 /* строка с участками прижата к низу — у всех карточек на одной линии */
 .flow .tile__body { display: flex; flex: 1; flex-direction: column; gap: 8px; }
 .flow .tile__meta { margin-top: auto; }
-/* шесть этапов в ряд — карточки уже, текст компактнее */
-.flow .tile__body { padding: 18px 16px 18px; }
-.flow .tile__title { font-size: 16px; }
-.flow .tile__text { font-size: 13px; }
 /* Белые карточки на светлом фоне: фото, текст, чипы с участками и оборудованием */
 .tile {
   display: flex; flex-direction: column; overflow: hidden;
@@ -515,6 +517,16 @@ a.link-arrow:not(.link-arrow--light):hover { color: var(--navy-bright); }
 .works__dot:hover::before { background: rgba(42, 37, 96, .3); }
 .works__dot.is-visible::before { background: var(--navy); }
 .section-head__side { display: flex; flex: none; align-items: center; gap: 24px; }
+/* текст рядом со стрелками уже, чтобы заголовок остался в две строки */
+.section-head__side--slider .section-head__text { max-width: 330px; }
+.slider-nav { display: flex; flex: none; gap: 10px; }
+.slider-nav__btn {
+  display: grid; place-items: center; width: 52px; height: 52px; padding: 0;
+  border: 1px solid rgba(42, 37, 96, .35); border-radius: 50%; background: transparent; color: var(--navy);
+  cursor: pointer; transition: background-color .2s ease, color .2s ease, border-color .2s ease, opacity .2s ease;
+}
+.slider-nav__btn:hover { border-color: var(--navy-bright); background: var(--navy-bright); color: var(--white); }
+.slider-nav__btn:disabled { opacity: .35; pointer-events: none; }
 .works__nav { display: flex; gap: 10px; }
 .works__btn {
   display: grid; place-items: center; width: 52px; height: 52px; padding: 0;
@@ -765,6 +777,7 @@ select.field__input, .select__btn { appearance: none; padding-right: 40px; backg
   .gallery__ui { bottom: 26px; }
   .gallery__caption { max-width: none; padding: 9px 14px; font-size: 13px; }
   .gallery__controls { display: none; }
+  .slider-nav { display: none; }
   .gallery__progress { bottom: 10px; }
   .usp { grid-template-columns: 1fr; padding-top: 0; }
   .usp__item, .usp__item:nth-child(n) { min-height: 0; padding: 22px 0; border-left: 0; }

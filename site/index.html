@@ -576,11 +576,21 @@
             <span class="duo__second">и&nbsp;полный цикл работ</span>
           </h2>
         </div>
-        <p class="section-head__text">Ведём проект целиком&nbsp;— вам не&nbsp;нужно искать отдельных подрядчиков на&nbsp;каждый этап.</p>
+        <div class="section-head__side section-head__side--slider">
+          <p class="section-head__text">Ведём проект целиком&nbsp;— вам не&nbsp;нужно искать отдельных подрядчиков на&nbsp;каждый этап.</p>
+          <div class="slider-nav" data-slider="flow">
+            <button class="slider-nav__btn" type="button" data-dir="-1" aria-label="Предыдущий этап">
+              <svg class="arr arr--prev" width="10" height="11" viewBox="0 0 13 14" aria-hidden="true"><path d="M.74.68l11 12M11.74 12.68V1.84M11.74 12.68H1.88" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+            </button>
+            <button class="slider-nav__btn" type="button" data-dir="1" aria-label="Следующий этап">
+              <svg class="arr arr--next" width="10" height="11" viewBox="0 0 13 14" aria-hidden="true"><path d="M.74.68l11 12M11.74 12.68V1.84M11.74 12.68H1.88" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+            </button>
+          </div>
+        </div>
       </div>
 
-      <!-- Путь изделия: 6 этапов слева направо по порядку работ, над карточками — номера на линии таймлайна -->
-      <ol class="flow">
+      <!-- Путь изделия: 6 этапов слайдером слева направо по порядку работ, над карточками — номера на линии таймлайна -->
+      <ol class="flow" id="flow">
         <li class="flow__item">
           <span class="flow__num">01</span>
           <a class="tile" href="#services">
@@ -639,7 +649,7 @@
         <li class="flow__item">
           <span class="flow__num">06</span>
           <a class="tile" href="#services">
-            <div class="tile__media"><img src="img/photos/24-prod-installation.jpg" alt="Бригада монтирует остановочный павильон" loading="lazy" width="1400" height="1050"></div>
+            <div class="tile__media"><img src="img/photos/24-prod-installation-close.jpg" alt="Бригада собирает каркас остановочного павильона" loading="lazy" width="1400" height="1050"></div>
             <div class="tile__body">
               <h3 class="tile__title">Монтаж и&nbsp;шеф&#8209;монтаж</h3>
               <p class="tile__text">Устанавливаем павильоны под ключ или контролируем монтаж на&nbsp;объекте.</p>

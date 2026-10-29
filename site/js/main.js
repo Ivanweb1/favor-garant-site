@@ -380,6 +380,30 @@
     render();
   });
 
+  // Слайдер этапов производства: стрелки листают на одну карточку, на краях гаснут
+  document.querySelectorAll('.slider-nav').forEach((nav) => {
+    const track = document.getElementById(nav.dataset.slider);
+    const [prev, next] = nav.querySelectorAll('.slider-nav__btn');
+    const step = () => track.firstElementChild.getBoundingClientRect().width + parseFloat(getComputedStyle(track).columnGap || 0);
+    const update = () => {
+      prev.disabled = track.scrollLeft <= 2;
+      next.disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - 2;
+    };
+    // считаем от целевой карточки, а не от текущей позиции — быстрые клики не теряются посреди анимации
+    let target = 0;
+    nav.querySelectorAll('.slider-nav__btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const max = Math.round((track.scrollWidth - track.clientWidth) / step());
+        target = Math.min(max, Math.max(0, target + Number(btn.dataset.dir)));
+        track.scrollTo({ left: target * step() });
+      });
+    });
+    track.addEventListener('scrollend', () => { target = Math.round(track.scrollLeft / step()); });
+    track.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+  });
+
   // Форма: проверка обязательных полей. Отправки на сервер в прототипе нет.
   const form = document.getElementById('request-form');
   const status = form.querySelector('.form__status');
