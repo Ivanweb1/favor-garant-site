@@ -386,7 +386,6 @@ atlant_main = f'''
     <div class="container">
       <div class="section-head">
         <div class="project-head">
-          <p class="eyebrow">Выполненные проекты</p>
           <h2 class="h2 duo duo--inline">
             <span>«Атлант»</span>
             <span class="duo__second">на&nbsp;объекте</span>
