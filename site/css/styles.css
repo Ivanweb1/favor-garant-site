@@ -867,23 +867,7 @@ select.field__input, .select__btn { appearance: none; padding-right: 40px; backg
 .smart-list { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
 .smart-list li { padding: 6px 12px; border: 1px solid var(--line); border-radius: 999px; font-size: 13px; font-weight: 500; color: var(--navy); }
 
-/* ---------- Карточка модели: тёплый стандарт, SMART, выполненные проекты ---------- */
-
-/* фото и текст одной высоты: рендер вписан в белую плашку на всю высоту колонки */
-.warm { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 40px clamp(40px, 6vw, 88px); align-items: stretch; }
-.warm__media { display: grid; place-items: center; overflow: hidden; border-radius: var(--radius); background: var(--white); }
-.warm__media img { width: 100%; height: 100%; min-height: 320px; object-fit: contain; }
-.warm__body { display: flex; flex-direction: column; align-items: flex-start; gap: 22px; padding: 8px 0; }
-.warm__lead { font-size: 16px; line-height: 1.6; color: #C9C7E6; }
-/* четыре свойства — плашками 2×2 с иконкой */
-.warm__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; align-self: stretch; }
-.warm__grid li {
-  display: flex; flex-direction: column; align-items: flex-start; gap: 12px; padding: 18px;
-  border: 1px solid rgba(255, 255, 255, .12); border-radius: var(--radius-sm); background: rgba(255, 255, 255, .05);
-  font-size: 14px; line-height: 1.4; font-weight: 600; color: var(--white);
-}
-.warm__icon { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: rgba(169, 166, 214, .18); color: #C9C7E6; }
-.warm__icon svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+/* ---------- Карточка модели: SMART, выполненные проекты ---------- */
 
 .smart-parts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
 .smart-part { display: flex; flex-direction: column; gap: 8px; padding: 24px; border: 1px solid var(--line); border-radius: var(--radius); transition: border-color .2s ease; }
@@ -948,7 +932,6 @@ select.field__input, .select__btn { appearance: none; padding-right: 40px; backg
   .cards, .cards--4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .product { grid-template-columns: 1fr; }
   .features { grid-template-columns: 1fr; }
-  .warm { grid-template-columns: 1fr; }
   .project-track img { flex-basis: calc((100% - 16px) / 1.6); }
   .smart-parts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .page-head { flex-direction: column; align-items: flex-start; }
@@ -989,9 +972,6 @@ select.field__input, .select__btn { appearance: none; padding-right: 40px; backg
   .pgallery__thumbs { gap: 8px; }
   .filters--configs { flex-wrap: wrap; margin: 0; padding: 0; overflow: visible; }
   .smart-parts { gap: 10px; }
-  .warm__grid { grid-template-columns: 1fr; }
-  .warm__grid li { flex-direction: row; align-items: center; padding: 14px; }
-  .warm__media img { min-height: 0; }
   .smart-part { padding: 16px; }
   .smart-part__icon { width: 40px; height: 40px; margin-bottom: 4px; }
   .smart-part__title { font-size: 14px; }
