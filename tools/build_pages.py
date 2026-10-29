@@ -246,34 +246,22 @@ cfg_chips = '\n'.join(
     f'              <button class="chip" type="button" data-full="img/catalog/{img}.jpg" data-desc="{text}" aria-pressed="{str(n == 0).lower()}">{CHIP_NAMES[img]}</button>'
     for n, (img, name, text, kind) in enumerate(CONFIGS))
 
-# SMART-компоненты: тексты со старой страницы «Элеганта» — оборудование общее для модульных павильонов
-SMART_ICON = {
-    'board': '<rect x="3" y="5" width="18" height="11" rx="1"/><path d="M7 9h4M7 12h7M16 9h1M9 20h6M12 16v4"/>',
-    'light': '<path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9V16h7v-2.1A6 6 0 0 0 12 3z"/>',
-    'wifi': '<path d="M2 9a15 15 0 0 1 20 0M5 12.5a10 10 0 0 1 14 0M8.5 16a5 5 0 0 1 7 0"/><circle cx="12" cy="19" r="1"/>',
-    'usb': '<path d="M12 21V7M12 3l-2.5 4h5zM12 16l-4-2.5V11M12 13l4-2.5V8"/><circle cx="8" cy="10" r="1.2"/><rect x="15" y="6.5" width="2" height="2"/>',
-    'poster': '<rect x="6" y="2" width="12" height="17" rx="1"/><path d="M9 22h6M12 19v3M9 7h6M9 10h6M9 13h3"/>',
-    'sos': '<circle cx="12" cy="12" r="9"/><path d="M8.5 10.5c0-1 .7-1.5 1.5-1.5s1.5.5 1.5 1.5-3 1-3 3h3M14 9v5h2M15.5 9v6"/>',
-    'camera': '<path d="M3 7h12l3 3-3 3H3z"/><path d="M18 10h3M7 13v4M5 17h4"/>',
-    'sign': '<rect x="3" y="6" width="18" height="8" rx="1"/><path d="M7 10h10M12 14v6M9 20h6"/>',
-}
+# SMART-компоненты: фото вырезаны из листа «Элегант П» старого сайта, тексты — со страницы «Элеганта»
 SMART_PARTS = [
     ('board', 'Электронное табло прибытия', 'Номера и&nbsp;время ожидания маршрутов городского транспорта'),
-    ('light', 'Подсветка конструкции', 'Светодиодная подсветка павильона в&nbsp;тёмное время суток'),
-    ('wifi', 'Wi-Fi маршрутизатор', 'Пассажиры подключаются к&nbsp;интернету во&nbsp;время ожидания'),
-    ('usb', 'USB-зарядка', 'Для подзарядки телефонов, планшетов и&nbsp;других гаджетов'),
     ('poster', 'Лайтпостер сити-формат', 'Световой короб с&nbsp;подсветкой для информационного баннера'),
+    ('usb', 'USB-зарядка', 'Для подзарядки телефонов, планшетов и&nbsp;других гаджетов'),
     ('sos', 'Кнопка экстренного вызова', 'Моментальный вызов единого номера экстренных служб 112'),
     ('camera', 'Камеры видеонаблюдения', 'Обзор пространства внутри павильона'),
-    ('sign', 'Табличка с&nbsp;названием', 'Название остановки общественного транспорта с&nbsp;подсветкой'),
+    ('sound', 'Модуль звукового дублирования', 'Озвучивает прогноз прибытия транспорта, надписи продублированы шрифтом Брайля'),
 ]
 smart_parts = '\n'.join(
-    f'''        <li class="smart-part">
-          <span class="smart-part__icon"><svg viewBox="0 0 24 24" aria-hidden="true">{SMART_ICON[i]}</svg></span>
-          <h3 class="smart-part__title">{t}</h3>
-          <p class="smart-part__text">{d}</p>
-        </li>'''
-    for i, t, d in SMART_PARTS)
+    f'''        <div class="smart-card">
+          <img src="img/catalog/smart-{img}.jpg" alt="{t}" loading="lazy" width="960" height="720">
+          <h3 class="smart-card__title">{t}</h3>
+          <p class="smart-card__text">{d}</p>
+        </div>'''
+    for img, t, d in SMART_PARTS)
 
 # Выполненный проект «Атланта» — подпись со старой страницы модели
 PROJECT_PHOTOS = [
@@ -363,9 +351,21 @@ atlant_main = f'''
         </div>
         <p class="page-head__text">Умные модули встраиваются в&nbsp;базовую конструкцию: стандартный павильон превращается в&nbsp;комплекс с&nbsp;информированием, связью и&nbsp;мониторингом, совместимый со&nbsp;стратегией «Умного города».</p>
       </div>
-      <ul class="smart-parts">
+      <div class="smart-grid">
+        <div class="smart-hero">
+          <img src="img/catalog/atlant-cfg-smart.jpg" alt="«Атлант» с лайтпостером SMART" loading="lazy" width="1120" height="840">
+          <p class="smart-hero__caption">«Атлант» с&nbsp;лайтпостером SMART</p>
+        </div>
 {smart_parts}
-      </ul>
+        <div class="smart-more">
+          <h3 class="smart-card__title">Также подключаем</h3>
+          <ul class="smart-more__list">
+            <li>Светодиодная подсветка конструкции</li>
+            <li>Wi-Fi маршрутизатор</li>
+            <li>Табличка с&nbsp;названием остановки и&nbsp;подсветкой</li>
+          </ul>
+        </div>
+      </div>
     </div>
   </section>
 

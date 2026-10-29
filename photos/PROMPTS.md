@@ -607,3 +607,82 @@ Shot: three-quarter view of one end of the shelter where the side glass panel is
 Light: early evening blue hour, the lightbox is the brightest element, the street is still visible.
 Style: photorealistic architectural photography, not CGI, true-to-life colors, 50 mm lens. No text, letters, logos, watermarks, people or cars.
 ```
+
+---
+
+## 11. Карточка модели «Атлант» — блок «Умная остановка» (7 кадров 4:3)
+
+Зачем: сейчас в блоке временные вырезки со старого листа «Элегант П» — мелкие и разного качества. Нужны единые фото: крупный кадр павильона SMART и 6 компонентов прямо на павильоне.
+
+Кадр: 4:3, файл 1600×1200. Главный кадр стоит на сайте крупно (2×2 карточки), остальные — маленькими карточками около 300×225, поэтому деталь должна читаться крупно и занимать центральные 60–70% кадра.
+
+Исходники: рендер `site/img/catalog/atlant-cfg-smart.jpg` (павильон с лайтпостером SMART), фото на объекте `atlant-photo-1.jpg` и вырезка нужного компонента `site/img/catalog/smart-<имя>.jpg`. Загружать все три: рендер и фото держат павильон, вырезка — сам компонент.
+
+Общее для всех кадров:
+- павильон «Атлант»: светлый серебристо-серый алюминиевый каркас, волнистая крыша из прозрачного поликарбоната, как на исходниках;
+- экраны и табло без читаемого текста: только абстрактные светящиеся строки и цветные метки маршрутов, кириллица генератору не даётся;
+- никаких людей крупно, машин, водяных знаков FG, логотипов производителей техники;
+- один свет на всю серию: синий час, ранние сумерки — подсветка и экраны светятся, город ещё виден.
+
+### 70-smart-hero — «Атлант SMART» целиком
+```
+Aspect ratio 4:3.
+Use the attached render and photo of the "Atlant" bus shelter as the exact reference: light silver-grey square aluminium frame, wave-shaped clear polycarbonate roof, a tall city-format digital lightbox with a route map as one side panel, wooden bench. Do not redesign.
+Shot: the complete SMART shelter on a clean wide sidewalk of a historic St Petersburg street, three-quarter eye-level view. Built-in LED roof lighting is on and casts soft light on the bench; the digital lightbox glows with an abstract route-map design; a small LED arrival board under the roof shows glowing green and amber lines. The shelter fills the central 75% of the frame width.
+Light: blue hour, early evening, the shelter is the brightest element, street lamps just turned on.
+Style: photorealistic architectural photography, not CGI, true-to-life colors, slightly cool grade, straight vertical lines, 35 mm lens. No readable text, letters or numbers on screens, no logos, watermarks, people or cars.
+```
+
+### 71-smart-board — электронное табло прибытия
+```
+Aspect ratio 4:3.
+Use the attached render and photo of the "Atlant" bus shelter and the attached board picture as the exact reference. Keep the shelter frame silver-grey aluminium; the board is a slim black LED dot-matrix display mounted under the roof beam.
+Shot: close-up from below at a 20° angle of the arrival board under the roof edge. The display glows with several rows of green and amber LED dot-matrix lines and small coloured route markers, like a real arrival board, but no readable letters or numbers. The polycarbonate roof and the evening sky above it are softly visible. The board fills the central 65% of the frame.
+Light: blue hour, the board is the brightest element.
+Style: photorealistic product detail photography, not CGI, 85 mm lens, shallow depth of field. No readable text, letters, numbers, logos, watermarks or people.
+```
+
+### 72-smart-poster — лайтпостер сити-формат
+```
+Aspect ratio 4:3.
+Use the attached render and photo of the "Atlant" bus shelter and the attached lightbox picture as the exact reference. Keep the same silver-grey aluminium frame — do not redesign.
+Shot: three-quarter view of the shelter end with a city-format lightbox built in as the side panel. It glows evenly from inside and shows a calm abstract poster with soft navy #2A2560, light grey and a touch of warm orange shapes — no text. A sliver of the glass panel and the bench is visible next to it. The lightbox fills the central 60% of the frame.
+Light: blue hour, the lightbox is the brightest element, soft reflections on the paving.
+Style: photorealistic architectural detail photography, not CGI, 50 mm lens. No readable text, letters, numbers, logos, watermarks or people.
+```
+
+### 73-smart-usb — USB-зарядка
+```
+Aspect ratio 4:3.
+Use the attached render and photo of the "Atlant" bus shelter and the attached USB picture as the exact reference. Keep the silver-grey square aluminium post — do not redesign.
+Shot: close-up of a vandal-proof stainless steel USB charging socket set into the shelter post at bench height, with a small glowing blue ring around it. A hand holds a smartphone with a cable plugged into the socket, only the hand and the phone are in frame, the phone screen is dark. Softly blurred bench and evening street behind. The socket sits in the central third of the frame.
+Light: blue hour, warm light from the shelter roof lighting.
+Style: photorealistic product detail photography, not CGI, 85 mm lens, shallow depth of field. No readable text, letters, logos, watermarks; no face.
+```
+
+### 74-smart-sos — кнопка экстренного вызова 112
+```
+Aspect ratio 4:3.
+Use the attached render and photo of the "Atlant" bus shelter and the attached emergency button picture as the exact reference: a red metal box with a white "112" and a round steel push button. Keep the shelter post silver-grey aluminium.
+Shot: close-up three-quarter view of the red emergency call box mounted on the shelter post at chest height. The "112" digits are crisp and white, the steel button is clean, a small speaker grille above it. Softly blurred glass panel and evening street behind. The box fills the central 55% of the frame.
+Light: blue hour, soft light from the shelter roof lighting, gentle reflection on the red paint.
+Style: photorealistic product detail photography, not CGI, 85 mm lens, shallow depth of field. No other text or letters except "112", no logos, watermarks or people.
+```
+
+### 75-smart-camera — камера видеонаблюдения
+```
+Aspect ratio 4:3.
+Use the attached render and photo of the "Atlant" bus shelter and the attached camera picture as the exact reference: a white dome CCTV camera. Keep the shelter frame silver-grey aluminium.
+Shot: close-up from below of the white dome camera mounted under the roof beam inside the shelter, the lens looking down into the waiting area. The polycarbonate roof and evening sky above are softly visible. The camera fills the central 50% of the frame.
+Light: blue hour, soft light from the roof LED lighting.
+Style: photorealistic product detail photography, not CGI, 85 mm lens, shallow depth of field. No brand names, letters, logos, watermarks or people.
+```
+
+### 76-smart-sound — модуль звукового дублирования
+```
+Aspect ratio 4:3.
+Use the attached render and photo of the "Atlant" bus shelter and the attached module picture as the exact reference: a bright yellow metal box with a round steel button, a speaker icon and raised Braille dots. Keep the shelter post silver-grey aluminium.
+Shot: close-up three-quarter view of the yellow audio module mounted on the shelter post at hand height, a finger about to press the steel button. Raised Braille dots are clearly visible; any printed words are replaced by Braille dots only. Softly blurred bench and evening street behind. The module fills the central 55% of the frame.
+Light: blue hour, soft light from the shelter roof lighting.
+Style: photorealistic product detail photography, not CGI, 85 mm lens, shallow depth of field. No readable text or letters, no logos, watermarks; no face.
+```
