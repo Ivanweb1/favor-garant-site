@@ -150,19 +150,28 @@ FILTERS = [('all', 'Все'), ('modular', 'Модульные'), ('city', 'Го�
 TAG_NAMES = {'modular': 'Модульный', 'city': 'Городской', 'resort': 'Курортный', 'suburb': 'Пригородный',
              'closed': 'Закрытый', 'smart': 'SMART'}
 
+# реальные фото с объектов есть не у всех моделей: показываем их на наведении вместо рендера
+PHOTOS = {'elegant', 'elegant-p', 'standart', 'gallant', 'atlant', 'atlant-smart', 'city', 'city-smart', 'closed'}
+
 def shelter_tile(m):
     slug, name, text, dims, tags = m
     # бейджи типа в углу картинки; тип, совпадающий с названием модели, не дублируем
     badges = ''.join(f'<span class="tile__count">{TAG_NAMES[t]}</span>' for t in tags.split() if TAG_NAMES[t] not in name)
+    photo = (f'<img class="tile__photo" src="img/catalog/shelter-{slug}-photo.jpg" alt="" loading="lazy" width="960" height="720">'
+             if slug in PHOTOS else '')
+    # вся карточка кликабельна через ссылку в заголовке; кнопка «Рассчитать» лежит поверх неё.
     # пока готова только эталонная карточка «Атланта» — остальные модели открывают её как образец
-    return f'''        <a class="tile" href="bus-shelter-atlant.html" data-tags="{tags}">
-          <div class="tile__media tile__media--render"><span class="tile__tags">{badges}</span><img src="img/catalog/shelter-{slug}.jpg" alt="Остановочный павильон «{name}»" loading="lazy" width="960" height="720"></div>
+    return f'''        <article class="tile tile--model" data-tags="{tags}">
+          <div class="tile__media tile__media--render"><span class="tile__tags">{badges}</span><img src="img/catalog/shelter-{slug}.jpg" alt="Остановочный павильон «{name}»" loading="lazy" width="960" height="720">{photo}</div>
           <div class="tile__body">
-            <h2 class="tile__title tile__title--arrow">{name}</h2>
+            <div class="tile__row">
+              <h2 class="tile__title tile__title--arrow"><a class="tile__link" href="bus-shelter-atlant.html">{name}</a></h2>
+              <a class="btn btn--outline tile__calc" href="#request-form" data-model="{name}">Рассчитать</a>
+            </div>
             <p class="tile__text">{text}</p>
             <p class="tile__meta tile__dims"><span>Габариты</span>{dims} мм</p>
           </div>
-        </a>'''
+        </article>'''
 
 def count(tag):
     return len(SHELTERS) if tag == 'all' else sum(tag in m[4].split() for m in SHELTERS)

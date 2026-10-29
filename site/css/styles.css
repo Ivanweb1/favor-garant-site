@@ -747,6 +747,15 @@ select.field__input, .select__btn { appearance: none; padding-right: 40px; backg
 /* габариты: подпись серым, размеры — фирменным синим */
 .tile__dims { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 12px; font-size: 13px; font-weight: 600; }
 .tile__dims span { font-weight: 500; color: var(--grey); }
+/* карточка модели: ссылка в заголовке растянута на всю карточку, кнопка «Рассчитать» — поверх */
+.tile--model { position: relative; }
+.tile__link::before { content: ""; position: absolute; inset: 0; z-index: 1; }
+.tile__row { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.tile__calc { position: relative; z-index: 2; flex: none; min-height: 36px; padding: 0 16px; font-size: 13px; }
+/* на наведении вместо рендера — фото с объекта */
+.tile__photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .35s ease; }
+.tile--model:hover .tile__photo { opacity: 1; }
+.tile--model:hover .tile__media img { transform: none; }
 .tile__title--arrow::after {
   content: ""; display: inline-block; width: 9px; height: 10px; margin-left: 8px; background: currentColor;
   -webkit-mask: var(--arrow) center / contain no-repeat; mask: var(--arrow) center / contain no-repeat;
@@ -889,6 +898,9 @@ select.field__input, .select__btn { appearance: none; padding-right: 40px; backg
   .cards--models .tile__meta { font-size: 11px; }
   .cards--models .tile__tags { top: 8px; left: 8px; }
   .cards--models .tile__count { padding: 4px 8px; font-size: 10px; }
+  /* кнопка «Рассчитать» уходит вниз карточки, под габариты */
+  .cards--models .tile__row { display: contents; }
+  .cards--models .tile__calc { order: 9; min-height: 34px; margin-top: 4px; padding: 0 10px; font-size: 12px; }
   .filters { flex-wrap: nowrap; margin: 0 calc(var(--gutter) * -1) 20px; padding: 0 var(--gutter); overflow-x: auto; scrollbar-width: none; }
   .filters::-webkit-scrollbar { display: none; }
   .chip { flex: none; }
