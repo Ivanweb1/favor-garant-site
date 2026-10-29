@@ -389,7 +389,7 @@ atlant_main = f'''
   </section>
 
   <section class="section section--light">
-    <div class="container">
+    <div class="container project-wrap">
       <div class="section-head">
         <div class="project-head">
           <h2 class="h2 duo duo--inline">
@@ -422,11 +422,20 @@ atlant_main = f'''
             <span class="duo__second">модели</span>
           </h2>
         </div>
-        <a class="btn btn--outline" href="bus-shelters.html">Все павильоны</a>
+        <a class="btn btn--outline others__all" href="bus-shelters.html">Все павильоны</a>
+        <div class="slider-nav slider-nav--mobile" data-slider="others-track">
+          <button class="slider-nav__btn" type="button" data-dir="-1" aria-label="Предыдущая модель">
+            {ARR % 'prev'}
+          </button>
+          <button class="slider-nav__btn" type="button" data-dir="1" aria-label="Следующая модель">
+            {ARR % 'next'}
+          </button>
+        </div>
       </div>
-      <div class="cards cards--models">
+      <div class="cards cards--models cards--others" id="others-track">
 {chr(10).join(shelter_tile(m) for m in others)}
       </div>
+      <a class="btn btn--outline btn--block others__all-bottom" href="bus-shelters.html">Все павильоны</a>
     </div>
   </section>
 '''
