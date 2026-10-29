@@ -340,8 +340,16 @@ atlant_main = f'''
             <span class="duo__second">и&nbsp;оснащение</span>
           </h2>
         </div>
+        <div class="slider-nav" data-slider="materials-track">
+          <button class="slider-nav__btn" type="button" data-dir="-1" aria-label="Предыдущий пункт">
+            {ARR % 'prev'}
+          </button>
+          <button class="slider-nav__btn" type="button" data-dir="1" aria-label="Следующий пункт">
+            {ARR % 'next'}
+          </button>
+        </div>
       </div>
-      <div class="cards">
+      <div class="cards-track" id="materials-track">
 {material('roof', 'Крыша', 'Широкая изогнутая крыша из&nbsp;монолитного или сотового поликарбоната.')}
 {material('glass', 'Ветрозащитные панели', 'Триплекс, калёное стекло 6&nbsp;или 8&nbsp;мм или сетка-ПВЛ. Доступны широкие, узкие и&nbsp;комбинированные боковые панели.')}
 {material('bench', 'Скамья', 'Деревянный брус со&nbsp;специальной антисептической пропиткой. Возможны варианты из&nbsp;пластика, алюминия и&nbsp;других материалов.')}
