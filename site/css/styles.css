@@ -733,8 +733,14 @@ select.field__input, .select__btn { appearance: none; padding-right: 40px; backg
 .cards--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 .cards .tile__body { display: flex; flex: 1; flex-direction: column; gap: 8px; }
 .cards .tile__meta { margin-top: auto; }
-.tile__head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
-.tile__count { flex: none; font-size: 13px; font-weight: 500; color: var(--grey); }
+/* бейдж в левом верхнем углу картинки: число моделей или тип комплектации */
+.tile__media, .tile__art { position: relative; }
+.tile__count {
+  position: absolute; top: 14px; left: 14px; z-index: 1; padding: 6px 12px; border-radius: 999px;
+  background: rgba(255, 255, 255, .92); backdrop-filter: blur(6px);
+  font-size: 12px; line-height: 1.2; font-weight: 600; color: var(--navy);
+}
+.tile__media--render .tile__count { background: var(--light); }
 .tile__title--arrow::after {
   content: ""; display: inline-block; width: 9px; height: 10px; margin-left: 8px; background: currentColor;
   -webkit-mask: var(--arrow) center / contain no-repeat; mask: var(--arrow) center / contain no-repeat;

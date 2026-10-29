@@ -81,18 +81,18 @@ CATS = [
 def cat_tile(c):
     name, href, img, pos, text, count, meta = c
     return f'''        <a class="tile" href="{href}">
-          <div class="tile__media"><img src="{img}" style="object-position: {pos}" alt="{name}" loading="lazy" width="1400" height="1050"></div>
+          <div class="tile__media"><span class="tile__count">{count}</span><img src="{img}" style="object-position: {pos}" alt="{name}" loading="lazy" width="1400" height="1050"></div>
           <div class="tile__body">
-            <div class="tile__head"><h2 class="tile__title tile__title--arrow">{name}</h2><span class="tile__count">{count}</span></div>
+            <h2 class="tile__title tile__title--arrow">{name}</h2>
             <p class="tile__text">{text}</p>
             <p class="tile__meta">{meta}</p>
           </div>
         </a>'''
 
 parts_tile = '''        <a class="tile tile--parts" href="index.html#catalog">
-          <div class="tile__art"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 6l15.6 9v18L24 42 8.4 33V15z"/><circle cx="24" cy="24" r="7"/></svg></div>
+          <div class="tile__art"><span class="tile__count">Магазин</span><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 6l15.6 9v18L24 42 8.4 33V15z"/><circle cx="24" cy="24" r="7"/></svg></div>
           <div class="tile__body">
-            <div class="tile__head"><h2 class="tile__title tile__title--arrow">Комплектующие</h2><span class="tile__count">Магазин</span></div>
+            <h2 class="tile__title tile__title--arrow">Комплектующие</h2>
             <p class="tile__text">Запасные части и&nbsp;комплектующие для конструкций&nbsp;— можно заказать онлайн и&nbsp;положить в&nbsp;корзину.</p>
             <p class="tile__meta">Онлайн-заказ · Корзина</p>
           </div>
@@ -224,9 +224,9 @@ CONFIGS = [
 def cfg_tile(c):
     img, name, text, kind = c
     return f'''        <div class="tile">
-          <div class="tile__media tile__media--render"><img src="img/catalog/{img}.jpg" alt="Комплектация «{re.sub('&nbsp;', ' ', name)}»" loading="lazy" width="700" height="420"></div>
+          <div class="tile__media tile__media--render"><span class="tile__count">{kind}</span><img src="img/catalog/{img}.jpg" alt="Комплектация «{re.sub('&nbsp;', ' ', name)}»" loading="lazy" width="700" height="420"></div>
           <div class="tile__body">
-            <div class="tile__head"><h3 class="tile__title">{name}</h3><span class="tile__count">{kind}</span></div>
+            <h3 class="tile__title">{name}</h3>
             <p class="tile__text">{text}</p>
           </div>
         </div>'''
