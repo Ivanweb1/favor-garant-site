@@ -335,7 +335,6 @@ atlant_main = f'''
     <div class="container">
       <div class="page-head">
         <div>
-          <p class="eyebrow">Конструкция</p>
           <h2 class="h2 duo duo--inline">
             <span>Материалы</span>
             <span class="duo__second">и&nbsp;оснащение</span>
@@ -357,7 +356,6 @@ atlant_main = f'''
     <div class="container">
       <div class="page-head page-head--hotspots">
         <div>
-          <p class="eyebrow">SMART-оснащение</p>
           <h2 class="h2 duo">
             <span>Умная</span>
             <span class="duo__second">остановка</span>
