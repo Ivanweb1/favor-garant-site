@@ -862,7 +862,7 @@ select.field__input, .select__btn { appearance: none; padding-right: 40px; backg
 /* ---------- Карточка модели: SMART, выполненные проекты ---------- */
 
 /* SMART: схема павильона с номерами-точками и список; наведение или клик открывает описание компонента */
-.hotspots { display: grid; grid-template-columns: minmax(0, 1.9fr) minmax(0, 1fr); gap: 20px; align-items: stretch; }
+.hotspots { display: grid; grid-template-columns: minmax(0, 2.2fr) minmax(0, 1fr); gap: 20px; align-items: stretch; }
 .hotspots__stage { position: relative; align-self: start; aspect-ratio: 1400 / 819; overflow: hidden; border-radius: var(--radius); background: var(--navy-deep); }
 .hotspots__stage img { width: 100%; height: 100%; object-fit: cover; }
 .hotspots__hint { position: absolute; left: 16px; bottom: 16px; padding: 6px 12px; border-radius: 999px; background: rgba(255, 255, 255, .9); font-size: 12px; font-weight: 500; color: var(--navy); }
@@ -881,15 +881,15 @@ select.field__input, .select__btn { appearance: none; padding-right: 40px; backg
 @keyframes hotspot-pulse { from { opacity: .9; transform: scale(.9); } to { opacity: 0; transform: scale(1.6); } }
 @media (prefers-reduced-motion: reduce) { .hotspot.is-active::after { animation: none; opacity: .5; } }
 /* карточка компонента: фото, номер, название, текст и стрелки внизу */
-.hotspots__card { display: flex; flex-direction: column; padding: 20px 24px 24px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--white); }
-.hotspots__detail { display: flex; flex: 1; flex-direction: column; gap: 8px; }
+.hotspots__card { display: flex; flex-direction: column; padding: 16px 18px 18px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--white); }
+.hotspots__detail { display: flex; flex: 1; flex-direction: column; gap: 6px; }
 .hotspots__detail[hidden] { display: none; }
-.hotspots__media { display: grid; place-items: center; aspect-ratio: 16 / 10; margin-bottom: 12px; overflow: hidden; border-radius: var(--radius-sm); background: var(--light); }
+.hotspots__media { display: grid; place-items: center; aspect-ratio: 4 / 3; margin-bottom: 12px; overflow: hidden; border-radius: var(--radius-sm); background: var(--light); }
 .hotspots__media img { width: 100%; height: 100%; object-fit: cover; }
 .hotspots__count { font-size: 12px; font-weight: 600; letter-spacing: .08em; color: var(--grey); }
-.hotspots__title { font-size: 20px; line-height: 1.25; font-weight: 700; color: var(--navy); }
+.hotspots__title { font-size: 18px; line-height: 1.25; font-weight: 700; color: var(--navy); }
 .hotspots__text { font-size: 14px; line-height: 1.55; color: var(--muted); }
-.hotspots__nav { display: flex; gap: 10px; margin-top: 20px; }
+.hotspots__nav { display: flex; gap: 10px; margin-top: 14px; }
 
 /* выполненные проекты: горизонтальная лента фото, листается стрелками и свайпом */
 .project-head { display: grid; gap: 14px; }
