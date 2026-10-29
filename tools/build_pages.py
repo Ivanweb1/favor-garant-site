@@ -167,7 +167,7 @@ def shelter_tile(m):
             <h2 class="tile__title"><a class="tile__link" href="bus-shelter-atlant.html">{name}</a></h2>
             <p class="tile__text">{text}</p>
             <div class="tile__meta tile__foot">
-              <p class="tile__dims"><span>Габариты</span>{dims} мм</p>
+              <p class="tile__dims"><span>Габариты, мм</span>{dims}</p>
               <a class="btn btn--outline tile__calc" href="bus-shelter-atlant.html" tabindex="-1">Подробнее</a>
             </div>
           </div>

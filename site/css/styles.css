@@ -621,9 +621,9 @@ a.link-arrow:not(.link-arrow--light):hover { color: var(--navy-bright); }
 .request__contacts dd { font-size: 22px; font-weight: 700; color: var(--navy); }
 .request__contacts a:hover { color: var(--red); }
 
-.form { display: grid; gap: 20px; padding: clamp(24px, 3.5vw, 44px); border-radius: var(--radius); background: var(--white); }
+.form { display: grid; grid-template-columns: minmax(0, 1fr); gap: 20px; padding: clamp(24px, 3.5vw, 44px); border-radius: var(--radius); background: var(--white); }
 .form__row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-.field { display: grid; gap: 8px; }
+.field { display: grid; gap: 8px; min-width: 0; }
 .field__label { font-size: 13px; font-weight: 500; color: var(--muted); }
 /* поля — светлой заливкой без рамки, при фокусе белые с синей рамкой */
 .field__input {
@@ -955,7 +955,7 @@ select.field__input, .select__btn { appearance: none; padding-right: 40px; backg
   .flow__num::before { right: -16px; }
   .about { grid-template-columns: 1fr; }
 
-  .request { grid-template-columns: 1fr; }
+  .request { grid-template-columns: minmax(0, 1fr); }
   .cards, .cards--4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .product { grid-template-columns: 1fr; }
   .project-track img { flex-basis: calc((100% - 16px) / 1.6); }
@@ -994,13 +994,14 @@ select.field__input, .select__btn { appearance: none; padding-right: 40px; backg
   .cards--models .tile__count { padding: 4px 8px; font-size: 10px; }
   /* на телефоне «Подробнее» во всю ширину под габаритами */
   .cards--models .tile__foot { flex-direction: column; align-items: stretch; gap: 10px; padding-top: 10px; }
-  .cards--models .tile__dims { font-size: 12px; }
+  .cards--models .tile__dims { font-size: 12px; white-space: nowrap; }
   .cards--models .tile__calc { min-height: 40px; padding: 0 12px; font-size: 13px; }
   .filters { flex-wrap: nowrap; margin: 0 calc(var(--gutter) * -1) 20px; padding: 0 var(--gutter); overflow-x: auto; scrollbar-width: none; }
   .filters::-webkit-scrollbar { display: none; }
   .chip { flex: none; }
   .pgallery__thumbs { gap: 8px; }
-  .filters--configs { flex-wrap: wrap; margin: 0; padding: 0; overflow: visible; }
+  .filters--configs { flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; overflow: visible; }
+  .filters--configs .chip { padding: 7px 12px; font-size: 13px; }
   .hotspot { width: 22px; height: 22px; margin: -11px 0 0 -11px; font-size: 10px; box-shadow: 0 0 0 3px rgba(255, 255, 255, .22); }
   .hotspots__hint { display: none; }
   .hotspots__card { padding: 16px; }
@@ -1028,13 +1029,19 @@ select.field__input, .select__btn { appearance: none; padding-right: 40px; backg
   .news__card { grid-template-columns: 1fr; }
   .news__media img { min-height: 0; aspect-ratio: 16 / 10; }
 
-  .form__row { grid-template-columns: 1fr; }
+  .form__row { grid-template-columns: minmax(0, 1fr); }
   /* на телефоне «Файл не выбран» не помещается — показываем только имя выбранного файла */
   .file:not(.has-file) .file__name { display: none; }
-  .footer__grid { grid-template-columns: 1fr 1fr; }
+  .footer__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px 20px; }
   .footer__brand { flex-direction: column; align-items: flex-start; gap: 16px; }
   .footer__slogan { max-width: none; padding-left: 0; border-left: 0; }
   .footer__reach { flex-direction: column; align-items: flex-start; gap: 20px; }
+}
+
+/* самые узкие телефоны (320–360): габариты в карточке модели помещаются в одну строку */
+@media (max-width: 360px) {
+  .cards--models .tile__body { padding: 10px 10px 12px; }
+  .cards--models .tile__dims { font-size: 11px; letter-spacing: -.01em; }
 }
 
 @media (prefers-reduced-motion: reduce) {
