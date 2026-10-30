@@ -229,17 +229,6 @@ def slider_nav(track, label):
           <button class="slider-nav__btn" type="button" data-dir="1" aria-label="Вперёд: {label}">{ARR_SM % 'next'}</button>
         </div>'''
 
-def split(img, alt, title, body, rev=False, eyebrow='', actions=''):
-    eb = f'<p class="eyebrow">{eyebrow}</p>\n          ' if eyebrow else ''
-    act = f'\n          <div class="split__actions">{actions}</div>' if actions else ''
-    return f'''      <div class="split{' split--rev' if rev else ''}">
-        <div class="split__media"><img src="{img}" alt="{alt}" loading="lazy"></div>
-        <div class="split__text">
-          {eb}<h3 class="split__title">{title}</h3>
-          {body}{act}
-        </div>
-      </div>'''
-
 def checks(*items):
     return '<ul class="checks">' + ''.join(f'<li>{i}</li>' for i in items) + '</ul>'
 
@@ -314,6 +303,7 @@ shelters_landing = f'''
 
   <section class="section section--light">
     <div class="container">
+      <!-- путь павильона: тот же блок этапов, что «Производство и услуги» на главной -->
       <div class="page-head">
         <div>
           <h2 class="h2 duo">
@@ -321,18 +311,54 @@ shelters_landing = f'''
             <span class="duo__second">в&nbsp;Санкт-Петербурге</span>
           </h2>
         </div>
-        <p class="page-head__text">Специализируемся на&nbsp;современных решениях для общественного транспорта: от&nbsp;проекта и&nbsp;производства до&nbsp;монтажа на&nbsp;объекте.</p>
+        <p class="page-head__text">Выполняем полный цикл работ&nbsp;— от&nbsp;проекта и&nbsp;производства до&nbsp;установки павильона в&nbsp;городской среде. Цена монтажа рассчитывается индивидуально.</p>
       </div>
-      <div class="splits">
-{split('img/photos/40-slide-pavilion.jpg', 'Остановочный павильон на городской улице', 'Современный внешний вид в&nbsp;городской среде',
-       '<p>Комфортабельные автобусные павильоны ожидания общественного транспорта. Надёжные каркасы из&nbsp;алюминиевого профиля или стали и&nbsp;широкий размерный ряд для любой локации.</p>')}
-{split('img/photos/20-prod-hall.jpg', 'Цех производственного комплекса', 'Собственное производство в&nbsp;Санкт-Петербурге',
-       '<p>Работаем как с&nbsp;частными заказами, так и&nbsp;с&nbsp;муниципальными объектами. Изготавливаем павильоны в&nbsp;Санкт-Петербурге и&nbsp;доставляем по&nbsp;всей России.</p>', rev=True)}
-{split('img/photos/24-prod-installation-close.jpg', 'Бригада собирает каркас остановочного павильона', 'Профессиональный монтаж павильонов',
-       '<p>Выполняем полный цикл работ&nbsp;— от&nbsp;производства до&nbsp;установки павильонов в&nbsp;городской среде. Цена монтажа рассчитывается индивидуально.</p>\n          ' +
-       checks('Быстрое и&nbsp;качественное проведение монтажа', 'Соблюдение всех нормативных требований', 'Готовность объекта к&nbsp;эксплуатации сразу после установки'),
-       actions='<a class="btn btn--primary" href="#request-form">Оставить заявку</a><a class="link-arrow" href="index.html#services">Монтаж под ключ</a>')}
-      </div>
+      <ol class="flow">
+        <li class="flow__item">
+          <span class="flow__num">01</span>
+          <div class="tile">
+            <div class="tile__media"><img src="img/catalog/atlant-cfg-10m.jpg" alt="Удлинённый полузакрытый павильон «Атлант»" loading="lazy"></div>
+            <div class="tile__body">
+              <h3 class="tile__title">Модель и&nbsp;комплектация</h3>
+              <p class="tile__text">Подбираем модель из&nbsp;каталога или разрабатываем павильон по&nbsp;вашему эскизу, брендбуку и&nbsp;размерам места.</p>
+              <p class="tile__meta">Каталог · Индивидуальный проект · Смета</p>
+            </div>
+          </div>
+        </li>
+        <li class="flow__item">
+          <span class="flow__num">02</span>
+          <div class="tile">
+            <div class="tile__media"><img src="img/photos/20-prod-hall.jpg" alt="Цех производственного комплекса" loading="lazy"></div>
+            <div class="tile__body">
+              <h3 class="tile__title">Собственное производство</h3>
+              <p class="tile__text">Изготавливаем павильоны в&nbsp;Санкт-Петербурге для частных заказчиков и&nbsp;муниципальных объектов.</p>
+              <p class="tile__meta">Каркас из&nbsp;алюминиевого профиля или стали</p>
+            </div>
+          </div>
+        </li>
+        <li class="flow__item">
+          <span class="flow__num">03</span>
+          <div class="tile">
+            <div class="tile__media"><img src="img/photos/25-prod-delivery.jpg" alt="Борт с элементами павильона у остановки" loading="lazy"></div>
+            <div class="tile__body">
+              <h3 class="tile__title">Доставка</h3>
+              <p class="tile__text">Доставляем конструкции до&nbsp;объекта в&nbsp;разобранном виде, готовыми к&nbsp;сборке.</p>
+              <p class="tile__meta">По&nbsp;всей России · До&nbsp;объекта</p>
+            </div>
+          </div>
+        </li>
+        <li class="flow__item">
+          <span class="flow__num">04</span>
+          <div class="tile">
+            <div class="tile__media"><img src="img/photos/24-prod-installation-close.jpg" alt="Бригада собирает каркас остановочного павильона" loading="lazy"></div>
+            <div class="tile__body">
+              <h3 class="tile__title">Монтаж</h3>
+              <p class="tile__text">Устанавливаем павильон с&nbsp;соблюдением нормативных требований&nbsp;— объект готов к&nbsp;эксплуатации сразу после установки.</p>
+              <p class="tile__meta">Монтаж под ключ · Шеф-монтаж</p>
+            </div>
+          </div>
+        </li>
+      </ol>
     </div>
   </section>
 
