@@ -191,7 +191,7 @@ shelters_main = f'''
             <span class="duo__second">павильоны</span>
           </h1>
         </div>
-        <p class="page-head__text">ФАВОР-ГАРАНТ&nbsp;— надёжный партнёр в&nbsp;создании комфортных зон ожидания: от&nbsp;компактных модульных павильонов до&nbsp;закрытых и&nbsp;SMART. Размеры и&nbsp;комплектация адаптируются под ваш регион.</p>
+        <p class="page-head__text">Комфортные зоны ожидания: от&nbsp;компактных модульных павильонов до&nbsp;закрытых и&nbsp;SMART, под ваш регион.</p>
       </div>
       <div class="filters" data-target="shelters" role="group" aria-label="Тип павильона">
 {chips}
