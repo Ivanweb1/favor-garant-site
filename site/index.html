@@ -77,7 +77,8 @@
     </button>
   </div>
 
-  <!-- Выпадающее меню «Продукция»: слева разделы, как в примере клиента, справа подразделы выбранного -->
+  <!-- Выпадающее меню «Продукция»: слева разделы, справа подразделы выбранного.
+       Число столбцов подразделов задаётся у каждого раздела: data-cols="1" | "2" | "3" -->
   <div class="mega" id="mega" hidden>
     <div class="container mega__grid">
       <ul class="mega__cats">
@@ -94,7 +95,7 @@
         <div class="mega__info">
           <p class="mega__title">Остановочные павильоны</p>
           <p class="mega__text">Умные павильоны с современным дизайном для ожидания общественного транспорта.</p>
-          <ul class="mega__subs mega__subs--cols">
+          <ul class="mega__subs" data-cols="3">
             <li><a href="bus-shelters.html">Элегант</a></li>
             <li><a href="bus-shelters.html">Элегант П</a></li>
             <li><a href="bus-shelters.html">Стандарт</a></li>
@@ -119,7 +120,7 @@
         <div class="mega__info">
           <p class="mega__title">Рекламные тумбы</p>
           <p class="mega__text">Тумбы с внутренней светодиодной подсветкой.</p>
-          <ul class="mega__subs">
+          <ul class="mega__subs" data-cols="1">
             <li><a href="#catalog">Круглая рекламная тумба</a></li>
             <li><a href="#catalog">Плоская рекламная тумба</a></li>
             <li><a href="#catalog">Вогнутая рекламная тумба</a></li>
@@ -140,7 +141,7 @@
         <div class="mega__info">
           <p class="mega__title">Рекламные щиты</p>
           <p class="mega__text">Несущие конструкции для рекламы и городской информации.</p>
-          <ul class="mega__subs">
+          <ul class="mega__subs" data-cols="2">
             <li><a href="#catalog">Рекламный щит</a></li>
             <li><a href="#catalog">Триборд</a></li>
             <li><a href="#catalog">Тривижн®</a></li>
@@ -154,7 +155,7 @@
         <div class="mega__info">
           <p class="mega__title">Оборудование для стрельбищ</p>
           <p class="mega__text">Конструкции для стендовой стрельбы по требованиям международной федерации.</p>
-          <ul class="mega__subs">
+          <ul class="mega__subs" data-cols="2">
             <li><a href="#catalog">Пирамиды для ружей</a></li>
             <li><a href="#catalog">Ракушки для метательных машинок</a></li>
           </ul>
@@ -174,7 +175,7 @@
         <div class="mega__info">
           <p class="mega__title">Малые архитектурные формы</p>
           <p class="mega__text">Элементы городской среды.</p>
-          <ul class="mega__subs">
+          <ul class="mega__subs" data-cols="2">
             <li><a href="#catalog">Кабинка для таксофона</a></li>
             <li><a href="#catalog">Кабинка для банкомата</a></li>
             <li><a href="#catalog">Павильон для курения</a></li>
@@ -191,7 +192,7 @@
         <div class="mega__info">
           <p class="mega__title">Навигация</p>
           <p class="mega__text">Информационные указатели и стелы для городской среды.</p>
-          <ul class="mega__subs">
+          <ul class="mega__subs" data-cols="2">
             <li><a href="#catalog">Пилон</a></li>
             <li><a href="#catalog">Указатель</a></li>
             <li><a href="#catalog">Афишный стенд</a></li>

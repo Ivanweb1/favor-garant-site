@@ -58,7 +58,8 @@
     </button>
   </div>
 
-  <!-- Выпадающее меню «Продукция»: слева разделы, как в примере клиента, справа подразделы выбранного -->
+  <!-- Выпадающее меню «Продукция»: слева разделы, справа подразделы выбранного.
+       Число столбцов подразделов задаётся у каждого раздела: data-cols="1" | "2" | "3" -->
   <div class="mega" id="mega" hidden>
     <div class="container mega__grid">
       <ul class="mega__cats">
@@ -75,7 +76,7 @@
         <div class="mega__info">
           <p class="mega__title">Остановочные павильоны</p>
           <p class="mega__text">Умные павильоны с современным дизайном для ожидания общественного транспорта.</p>
-          <ul class="mega__subs mega__subs--cols">
+          <ul class="mega__subs" data-cols="3">
             <li><a href="bus-shelters.html">Элегант</a></li>
             <li><a href="bus-shelters.html">Элегант П</a></li>
             <li><a href="bus-shelters.html">Стандарт</a></li>
@@ -100,7 +101,7 @@
         <div class="mega__info">
           <p class="mega__title">Рекламные тумбы</p>
           <p class="mega__text">Тумбы с внутренней светодиодной подсветкой.</p>
-          <ul class="mega__subs">
+          <ul class="mega__subs" data-cols="1">
             <li><a href="index.html#catalog">Круглая рекламная тумба</a></li>
             <li><a href="index.html#catalog">Плоская рекламная тумба</a></li>
             <li><a href="index.html#catalog">Вогнутая рекламная тумба</a></li>
@@ -121,7 +122,7 @@
         <div class="mega__info">
           <p class="mega__title">Рекламные щиты</p>
           <p class="mega__text">Несущие конструкции для рекламы и городской информации.</p>
-          <ul class="mega__subs">
+          <ul class="mega__subs" data-cols="2">
             <li><a href="index.html#catalog">Рекламный щит</a></li>
             <li><a href="index.html#catalog">Триборд</a></li>
             <li><a href="index.html#catalog">Тривижн®</a></li>
@@ -135,7 +136,7 @@
         <div class="mega__info">
           <p class="mega__title">Оборудование для стрельбищ</p>
           <p class="mega__text">Конструкции для стендовой стрельбы по требованиям международной федерации.</p>
-          <ul class="mega__subs">
+          <ul class="mega__subs" data-cols="2">
             <li><a href="index.html#catalog">Пирамиды для ружей</a></li>
             <li><a href="index.html#catalog">Ракушки для метательных машинок</a></li>
           </ul>
@@ -155,7 +156,7 @@
         <div class="mega__info">
           <p class="mega__title">Малые архитектурные формы</p>
           <p class="mega__text">Элементы городской среды.</p>
-          <ul class="mega__subs">
+          <ul class="mega__subs" data-cols="2">
             <li><a href="index.html#catalog">Кабинка для таксофона</a></li>
             <li><a href="index.html#catalog">Кабинка для банкомата</a></li>
             <li><a href="index.html#catalog">Павильон для курения</a></li>
@@ -172,7 +173,7 @@
         <div class="mega__info">
           <p class="mega__title">Навигация</p>
           <p class="mega__text">Информационные указатели и стелы для городской среды.</p>
-          <ul class="mega__subs">
+          <ul class="mega__subs" data-cols="2">
             <li><a href="index.html#catalog">Пилон</a></li>
             <li><a href="index.html#catalog">Указатель</a></li>
             <li><a href="index.html#catalog">Афишный стенд</a></li>
@@ -402,6 +403,250 @@
             </div>
           </div>
         </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="page-head">
+        <div>
+          <h2 class="h2 duo">
+            <span>Зоны ожидания</span>
+            <span class="duo__second">под ваши задачи</span>
+          </h2>
+        </div>
+        <p class="page-head__text">ФАВОР-ГАРАНТ&nbsp;— надёжный партнёр в&nbsp;создании комфортных зон ожидания. Купите готовое решение или закажите уникальное&nbsp;— реализуем любой проект остановочного комплекса.</p>
+      </div>
+      <div class="cards">
+        <div class="tile tile--step">
+          <div class="tile__body">
+            <span class="tile__num">01</span>
+            <h3 class="tile__title">Готовые решения</h3>
+            <p class="tile__text">Стандартные городские остановки, тёплые павильоны ожидания, модульные комплексы и&nbsp;автопавильоны с&nbsp;современными конструктивными элементами.</p>
+          </div>
+        </div>
+        <div class="tile tile--step">
+          <div class="tile__body">
+            <span class="tile__num">02</span>
+            <h3 class="tile__title">Уникальный проект</h3>
+            <p class="tile__text">Изготовим остановочный павильон под индивидуальный проект и&nbsp;автопавильон по&nbsp;вашему дизайну с&nbsp;учётом всех пожеланий.</p>
+          </div>
+        </div>
+        <div class="tile tile--step">
+          <div class="tile__body">
+            <span class="tile__num">03</span>
+            <h3 class="tile__title">Точный расчёт</h3>
+            <p class="tile__text">Оперативно подготовим смету для стандартных конструкций, рассчитаем автопавильон или многофункциональный остановочный комплекс под ваши задачи.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--light">
+    <div class="container">
+      <div class="page-head">
+        <div>
+          <h2 class="h2 duo">
+            <span>Производство павильонов</span>
+            <span class="duo__second">в&nbsp;Санкт-Петербурге</span>
+          </h2>
+        </div>
+        <p class="page-head__text">Специализируемся на&nbsp;современных решениях для общественного транспорта: от&nbsp;проекта и&nbsp;производства до&nbsp;монтажа на&nbsp;объекте.</p>
+      </div>
+      <div class="splits">
+      <div class="split">
+        <div class="split__media"><img src="img/photos/40-slide-pavilion.jpg" alt="Остановочный павильон на городской улице" loading="lazy"></div>
+        <div class="split__text">
+          <h3 class="split__title">Современный внешний вид в&nbsp;городской среде</h3>
+          <p>Комфортабельные автобусные павильоны ожидания общественного транспорта. Надёжные каркасы из&nbsp;алюминиевого профиля или стали и&nbsp;широкий размерный ряд для любой локации.</p>
+        </div>
+      </div>
+      <div class="split split--rev">
+        <div class="split__media"><img src="img/photos/30-work-smart-stops.jpg" alt="Умные остановки на городской улице" loading="lazy"></div>
+        <div class="split__text">
+          <h3 class="split__title">Умные модули, современные материалы и&nbsp;технологии</h3>
+          <p>Модульные SMART-комплексы с&nbsp;антивандальной защитой и&nbsp;интеллектуальными системами «Умный город» для городских остановок.</p>
+        </div>
+      </div>
+      <div class="split">
+        <div class="split__media"><img src="img/photos/20-prod-hall.jpg" alt="Цех производственного комплекса" loading="lazy"></div>
+        <div class="split__text">
+          <h3 class="split__title">Собственное производство в&nbsp;Санкт-Петербурге</h3>
+          <p>Работаем как с&nbsp;частными заказами, так и&nbsp;с&nbsp;муниципальными объектами. Изготавливаем павильоны в&nbsp;Санкт-Петербурге и&nbsp;доставляем по&nbsp;всей России.</p>
+          <div class="split__actions"><a class="btn btn--primary" href="#request-form">Оставить заявку</a></div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="page-head">
+        <div>
+          <h2 class="h2 duo">
+            <span>Инновационные павильоны</span>
+            <span class="duo__second">для умного города</span>
+          </h2>
+        </div>
+        <p class="page-head__text">Городские остановки разработаны с&nbsp;учётом современных технологических требований. Возможна разработка индивидуальных проектов под ваши задачи.</p>
+      </div>
+      <div class="cards">
+        <div class="tile tile--step">
+          <div class="tile__body">
+            <h3 class="tile__title">Готовность к&nbsp;цифровой инфраструктуре</h3>
+            <ul class="checks"><li>Совместимость с&nbsp;системой «Умный город»</li><li>Простое подключение SMART-компонентов</li><li>Интеграция без конструктивных изменений</li></ul>
+          </div>
+        </div>
+        <div class="tile tile--step">
+          <div class="tile__body">
+            <h3 class="tile__title">Гибкость конструкции</h3>
+            <ul class="checks"><li>Увеличение длины и&nbsp;площади павильона</li><li>Адаптация под любые городские условия</li><li>Замена боковых панелей на&nbsp;рекламные поверхности ситиформата</li></ul>
+          </div>
+        </div>
+        <div class="tile tile--step">
+          <div class="tile__body">
+            <h3 class="tile__title">Технологические преимущества</h3>
+            <ul class="checks"><li>Быстрое обновление функционала</li><li>Простое обслуживание и&nbsp;модернизация</li><li>Сохранение конструктивной целостности при любых изменениях</li></ul>
+          </div>
+        </div>
+      </div>
+      <div class="sub-head">
+        <h3 class="sub-head__title">SMART-оснащение павильона</h3>
+        <div class="slider-nav" data-slider="smart-track">
+          <button class="slider-nav__btn" type="button" data-dir="-1" aria-label="Назад: компонент"><svg class="arr arr--prev" width="10" height="11" viewBox="0 0 13 14" aria-hidden="true"><path d="M.74.68l11 12M11.74 12.68V1.84M11.74 12.68H1.88" fill="none" stroke="currentColor" stroke-width="2"/></svg></button>
+          <button class="slider-nav__btn" type="button" data-dir="1" aria-label="Вперёд: компонент"><svg class="arr arr--next" width="10" height="11" viewBox="0 0 13 14" aria-hidden="true"><path d="M.74.68l11 12M11.74 12.68V1.84M11.74 12.68H1.88" fill="none" stroke="currentColor" stroke-width="2"/></svg></button>
+        </div>
+      </div>
+      <div class="cards-track" id="smart-track">
+        <div class="tile">
+          <div class="tile__media"><img src="img/catalog/smart-board-photo.jpg" alt="Электронное табло прибытия" loading="lazy"></div>
+          <div class="tile__body">
+            <h3 class="tile__title">Электронное табло прибытия</h3>
+            <p class="tile__text">Номера и&nbsp;время ожидания маршрутов городского транспорта.</p>
+          </div>
+        </div>
+        <div class="tile">
+          <div class="tile__media"><img src="img/catalog/smart-light-photo.jpg" alt="Подсветка конструкции" loading="lazy"></div>
+          <div class="tile__body">
+            <h3 class="tile__title">Подсветка конструкции</h3>
+            <p class="tile__text">Светодиодная подсветка павильона в&nbsp;тёмное время суток.</p>
+          </div>
+        </div>
+        <div class="tile">
+          <div class="tile__media"><img src="img/catalog/smart-wifi-photo.jpg" alt="Wi-Fi маршрутизатор" loading="lazy"></div>
+          <div class="tile__body">
+            <h3 class="tile__title">Wi-Fi маршрутизатор</h3>
+            <p class="tile__text">Пассажиры подключаются к&nbsp;интернету во&nbsp;время ожидания.</p>
+          </div>
+        </div>
+        <div class="tile">
+          <div class="tile__media"><img src="img/catalog/smart-usb-photo.jpg" alt="USB-зарядка" loading="lazy"></div>
+          <div class="tile__body">
+            <h3 class="tile__title">USB-зарядка</h3>
+            <p class="tile__text">Для подзарядки телефонов, планшетов и&nbsp;других гаджетов.</p>
+          </div>
+        </div>
+        <div class="tile">
+          <div class="tile__media"><img src="img/catalog/smart-poster-photo.jpg" alt="Лайтпостер сити-формат" loading="lazy"></div>
+          <div class="tile__body">
+            <h3 class="tile__title">Лайтпостер сити-формат</h3>
+            <p class="tile__text">Световой короб с&nbsp;внутренней подсветкой для рекламного баннера.</p>
+          </div>
+        </div>
+        <div class="tile">
+          <div class="tile__media"><img src="img/catalog/smart-sos-photo.jpg" alt="Кнопка экстренного вызова" loading="lazy"></div>
+          <div class="tile__body">
+            <h3 class="tile__title">Кнопка экстренного вызова</h3>
+            <p class="tile__text">Моментальный вызов единого номера экстренных служб 112.</p>
+          </div>
+        </div>
+        <div class="tile">
+          <div class="tile__media"><img src="img/catalog/smart-camera-photo.jpg" alt="Камеры видеонаблюдения" loading="lazy"></div>
+          <div class="tile__body">
+            <h3 class="tile__title">Камеры видеонаблюдения</h3>
+            <p class="tile__text">Обзор пространства внутри остановочного павильона.</p>
+          </div>
+        </div>
+        <div class="tile">
+          <div class="tile__media"><img src="img/catalog/smart-sign-photo.jpg" alt="Табличка" loading="lazy"></div>
+          <div class="tile__body">
+            <h3 class="tile__title">Табличка</h3>
+            <p class="tile__text">Название остановки общественного транспорта с&nbsp;подсветкой.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--light">
+    <div class="container">
+      <div class="splits">
+      <div class="split">
+        <div class="split__media"><img src="img/photos/23-prod-kb.jpg" alt="Инженеры обсуждают чертёж конструкции" loading="lazy"></div>
+        <div class="split__text">
+          <p class="eyebrow">Нестандартные металлоконструкции</p>
+          <h3 class="split__title">Павильон по&nbsp;индивидуальному дизайну</h3>
+          <p>Изготовим остановочный павильон по&nbsp;вашему дизайну, если у&nbsp;вас есть эскиз или брендбук компании.</p>
+          <div class="split__actions"><a class="btn btn--primary" href="#request-form">Обсудить проект</a></div>
+        </div>
+      </div>
+      <div class="split split--rev">
+        <div class="split__media"><img src="img/photos/24-prod-installation-close.jpg" alt="Бригада собирает каркас остановочного павильона" loading="lazy"></div>
+        <div class="split__text">
+          <p class="eyebrow">Монтаж</p>
+          <h3 class="split__title">Профессиональный монтаж павильонов</h3>
+          <p>Выполняем полный цикл работ&nbsp;— от&nbsp;производства до&nbsp;установки павильонов в&nbsp;городской среде. Цена монтажа рассчитывается индивидуально.</p>
+          <ul class="checks"><li>Быстрое и&nbsp;качественное проведение монтажа</li><li>Соблюдение всех нормативных требований</li><li>Готовность объекта к&nbsp;эксплуатации сразу после установки</li></ul>
+          <div class="split__actions"><a class="btn btn--primary" href="#request-form">Оставить заявку</a><a class="link-arrow" href="index.html#services">Монтаж под ключ</a></div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="page-head">
+        <div>
+          <h2 class="h2 duo">
+            <span>Формируем</span>
+            <span class="duo__second">городское пространство</span>
+          </h2>
+        </div>
+        <p class="page-head__text">Создайте единую и&nbsp;функциональную среду с&nbsp;нашей продукцией: ФАВОР-ГАРАНТ&nbsp;— единый поставщик для городской инфраструктуры.</p>
+      </div>
+      <div class="cards cards--4">
+        <a class="tile" href="index.html#catalog">
+          <div class="tile__media"><img src="img/photos/12-cat-lightposters.jpg" alt="Лайтпостер" loading="lazy"></div>
+          <div class="tile__body">
+            <h3 class="tile__title">Лайтпостер</h3>
+            <p class="tile__text">Рекламоноситель городского формата с&nbsp;внутренней подсветкой.</p>
+          </div>
+        </a>
+        <a class="tile" href="index.html#catalog">
+          <div class="tile__media"><img src="img/photos/33-work-pylon-smart.jpg" alt="Навигационный пилон" loading="lazy"></div>
+          <div class="tile__body">
+            <h3 class="tile__title">Навигационный пилон</h3>
+            <p class="tile__text">Двусторонний пилон на&nbsp;опоре: указатель и&nbsp;рекламный носитель.</p>
+          </div>
+        </a>
+        <a class="tile" href="index.html#catalog">
+          <div class="tile__media"><img src="img/photos/17-cat-navigation.jpg" alt="Информационный указатель" loading="lazy"></div>
+          <div class="tile__body">
+            <h3 class="tile__title">Информационный указатель</h3>
+            <p class="tile__text">Отдельностоящая конструкция из&nbsp;алюминиевых профилей и&nbsp;стального проката.</p>
+          </div>
+        </a>
+        <a class="tile" href="index.html#catalog">
+          <div class="tile__media"><img src="img/photos/16-cat-maf.jpg" alt="Малые архитектурные формы" loading="lazy"></div>
+          <div class="tile__body">
+            <h3 class="tile__title">Малые архитектурные формы</h3>
+            <p class="tile__text">Скамьи, торговые павильоны, парковые книжные шкафы и&nbsp;другие элементы городской среды.</p>
+          </div>
+        </a>
       </div>
     </div>
   </section>

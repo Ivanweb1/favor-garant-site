@@ -203,9 +203,181 @@ shelters_main = f'''
   </section>
 '''
 
+# ---------- Раздел «Остановочные павильоны»: лендинг под каталогом ----------
+# Тексты — со страницы favor-garant.ru/bus-shelter (current-site/pages/bus-shelter.md), фото — из img/photos и img/catalog
+
+ARR_SM = '<svg class="arr arr--%s" width="10" height="11" viewBox="0 0 13 14" aria-hidden="true"><path d="M.74.68l11 12M11.74 12.68V1.84M11.74 12.68H1.88" fill="none" stroke="currentColor" stroke-width="2"/></svg>'
+
+def slider_nav(track, label):
+    return f'''<div class="slider-nav" data-slider="{track}">
+          <button class="slider-nav__btn" type="button" data-dir="-1" aria-label="Назад: {label}">{ARR_SM % 'prev'}</button>
+          <button class="slider-nav__btn" type="button" data-dir="1" aria-label="Вперёд: {label}">{ARR_SM % 'next'}</button>
+        </div>'''
+
+def split(img, alt, title, body, rev=False, eyebrow='', actions=''):
+    eb = f'<p class="eyebrow">{eyebrow}</p>\n          ' if eyebrow else ''
+    act = f'\n          <div class="split__actions">{actions}</div>' if actions else ''
+    return f'''      <div class="split{' split--rev' if rev else ''}">
+        <div class="split__media"><img src="{img}" alt="{alt}" loading="lazy"></div>
+        <div class="split__text">
+          {eb}<h3 class="split__title">{title}</h3>
+          {body}{act}
+        </div>
+      </div>'''
+
+def checks(*items):
+    return '<ul class="checks">' + ''.join(f'<li>{i}</li>' for i in items) + '</ul>'
+
+def plain_tile(img, title, text, href=''):
+    tag = f'a class="tile" href="{href}"' if href else 'div class="tile"'
+    end = 'a' if href else 'div'
+    return f'''        <{tag}>
+          <div class="tile__media"><img src="{img}" alt="{re.sub('&nbsp;', ' ', title)}" loading="lazy"></div>
+          <div class="tile__body">
+            <h3 class="tile__title">{title}</h3>
+            <p class="tile__text">{text}</p>
+          </div>
+        </{end}>'''
+
+def step_tile(title, inner, num=''):
+    n = f'<span class="tile__num">{num}</span>\n            ' if num else ''
+    return f'''        <div class="tile tile--step">
+          <div class="tile__body">
+            {n}<h3 class="tile__title">{title}</h3>
+            {inner}
+          </div>
+        </div>'''
+
+WHY = [
+    ('01', 'Готовые решения', 'Стандартные городские остановки, тёплые павильоны ожидания, модульные комплексы и&nbsp;автопавильоны с&nbsp;современными конструктивными элементами.'),
+    ('02', 'Уникальный проект', 'Изготовим остановочный павильон под индивидуальный проект и&nbsp;автопавильон по&nbsp;вашему дизайну с&nbsp;учётом всех пожеланий.'),
+    ('03', 'Точный расчёт', 'Оперативно подготовим смету для стандартных конструкций, рассчитаем автопавильон или многофункциональный остановочный комплекс под ваши задачи.'),
+]
+why_tiles = '\n'.join(step_tile(t, f'<p class="tile__text">{d}</p>', n) for n, t, d in WHY)
+
+# SMART-компоненты — тот же набор, что на старой странице раздела
+SMART_LIST = [
+    ('board', 'Электронное табло прибытия', 'Номера и&nbsp;время ожидания маршрутов городского транспорта.'),
+    ('light', 'Подсветка конструкции', 'Светодиодная подсветка павильона в&nbsp;тёмное время суток.'),
+    ('wifi', 'Wi-Fi маршрутизатор', 'Пассажиры подключаются к&nbsp;интернету во&nbsp;время ожидания.'),
+    ('usb', 'USB-зарядка', 'Для подзарядки телефонов, планшетов и&nbsp;других гаджетов.'),
+    ('poster', 'Лайтпостер сити-формат', 'Световой короб с&nbsp;внутренней подсветкой для рекламного баннера.'),
+    ('sos', 'Кнопка экстренного вызова', 'Моментальный вызов единого номера экстренных служб 112.'),
+    ('camera', 'Камеры видеонаблюдения', 'Обзор пространства внутри остановочного павильона.'),
+    ('sign', 'Табличка', 'Название остановки общественного транспорта с&nbsp;подсветкой.'),
+]
+smart_list = '\n'.join(plain_tile(f'img/catalog/smart-{k}-photo.jpg', t, d) for k, t, d in SMART_LIST)
+
+CITY = [
+    ('img/photos/12-cat-lightposters.jpg', 'Лайтпостер', 'Рекламоноситель городского формата с&nbsp;внутренней подсветкой.'),
+    ('img/photos/33-work-pylon-smart.jpg', 'Навигационный пилон', 'Двусторонний пилон на&nbsp;опоре: указатель и&nbsp;рекламный носитель.'),
+    ('img/photos/17-cat-navigation.jpg', 'Информационный указатель', 'Отдельностоящая конструкция из&nbsp;алюминиевых профилей и&nbsp;стального проката.'),
+    ('img/photos/16-cat-maf.jpg', 'Малые архитектурные формы', 'Скамьи, торговые павильоны, парковые книжные шкафы и&nbsp;другие элементы городской среды.'),
+]
+city_tiles = '\n'.join(plain_tile(i, t, d, href='index.html#catalog') for i, t, d in CITY)
+
+shelters_landing = f'''
+  <section class="section">
+    <div class="container">
+      <div class="page-head">
+        <div>
+          <h2 class="h2 duo">
+            <span>Зоны ожидания</span>
+            <span class="duo__second">под ваши задачи</span>
+          </h2>
+        </div>
+        <p class="page-head__text">ФАВОР-ГАРАНТ&nbsp;— надёжный партнёр в&nbsp;создании комфортных зон ожидания. Купите готовое решение или закажите уникальное&nbsp;— реализуем любой проект остановочного комплекса.</p>
+      </div>
+      <div class="cards">
+{why_tiles}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--light">
+    <div class="container">
+      <div class="page-head">
+        <div>
+          <h2 class="h2 duo">
+            <span>Производство павильонов</span>
+            <span class="duo__second">в&nbsp;Санкт-Петербурге</span>
+          </h2>
+        </div>
+        <p class="page-head__text">Специализируемся на&nbsp;современных решениях для общественного транспорта: от&nbsp;проекта и&nbsp;производства до&nbsp;монтажа на&nbsp;объекте.</p>
+      </div>
+      <div class="splits">
+{split('img/photos/40-slide-pavilion.jpg', 'Остановочный павильон на городской улице', 'Современный внешний вид в&nbsp;городской среде',
+       '<p>Комфортабельные автобусные павильоны ожидания общественного транспорта. Надёжные каркасы из&nbsp;алюминиевого профиля или стали и&nbsp;широкий размерный ряд для любой локации.</p>')}
+{split('img/photos/30-work-smart-stops.jpg', 'Умные остановки на городской улице', 'Умные модули, современные материалы и&nbsp;технологии',
+       '<p>Модульные SMART-комплексы с&nbsp;антивандальной защитой и&nbsp;интеллектуальными системами «Умный город» для городских остановок.</p>', rev=True)}
+{split('img/photos/20-prod-hall.jpg', 'Цех производственного комплекса', 'Собственное производство в&nbsp;Санкт-Петербурге',
+       '<p>Работаем как с&nbsp;частными заказами, так и&nbsp;с&nbsp;муниципальными объектами. Изготавливаем павильоны в&nbsp;Санкт-Петербурге и&nbsp;доставляем по&nbsp;всей России.</p>',
+       actions='<a class="btn btn--primary" href="#request-form">Оставить заявку</a>')}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="page-head">
+        <div>
+          <h2 class="h2 duo">
+            <span>Инновационные павильоны</span>
+            <span class="duo__second">для умного города</span>
+          </h2>
+        </div>
+        <p class="page-head__text">Городские остановки разработаны с&nbsp;учётом современных технологических требований. Возможна разработка индивидуальных проектов под ваши задачи.</p>
+      </div>
+      <div class="cards">
+{step_tile('Готовность к&nbsp;цифровой инфраструктуре', checks('Совместимость с&nbsp;системой «Умный город»', 'Простое подключение SMART-компонентов', 'Интеграция без конструктивных изменений'))}
+{step_tile('Гибкость конструкции', checks('Увеличение длины и&nbsp;площади павильона', 'Адаптация под любые городские условия', 'Замена боковых панелей на&nbsp;рекламные поверхности ситиформата'))}
+{step_tile('Технологические преимущества', checks('Быстрое обновление функционала', 'Простое обслуживание и&nbsp;модернизация', 'Сохранение конструктивной целостности при любых изменениях'))}
+      </div>
+      <div class="sub-head">
+        <h3 class="sub-head__title">SMART-оснащение павильона</h3>
+        {slider_nav('smart-track', 'компонент')}
+      </div>
+      <div class="cards-track" id="smart-track">
+{smart_list}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--light">
+    <div class="container">
+      <div class="splits">
+{split('img/photos/23-prod-kb.jpg', 'Инженеры обсуждают чертёж конструкции', 'Павильон по&nbsp;индивидуальному дизайну',
+       '<p>Изготовим остановочный павильон по&nbsp;вашему дизайну, если у&nbsp;вас есть эскиз или брендбук компании.</p>',
+       eyebrow='Нестандартные металлоконструкции', actions='<a class="btn btn--primary" href="#request-form">Обсудить проект</a>')}
+{split('img/photos/24-prod-installation-close.jpg', 'Бригада собирает каркас остановочного павильона', 'Профессиональный монтаж павильонов',
+       '<p>Выполняем полный цикл работ&nbsp;— от&nbsp;производства до&nbsp;установки павильонов в&nbsp;городской среде. Цена монтажа рассчитывается индивидуально.</p>\n          ' +
+       checks('Быстрое и&nbsp;качественное проведение монтажа', 'Соблюдение всех нормативных требований', 'Готовность объекта к&nbsp;эксплуатации сразу после установки'),
+       rev=True, eyebrow='Монтаж', actions='<a class="btn btn--primary" href="#request-form">Оставить заявку</a><a class="link-arrow" href="index.html#services">Монтаж под ключ</a>')}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="page-head">
+        <div>
+          <h2 class="h2 duo">
+            <span>Формируем</span>
+            <span class="duo__second">городское пространство</span>
+          </h2>
+        </div>
+        <p class="page-head__text">Создайте единую и&nbsp;функциональную среду с&nbsp;нашей продукцией: ФАВОР-ГАРАНТ&nbsp;— единый поставщик для городской инфраструктуры.</p>
+      </div>
+      <div class="cards cards--4">
+{city_tiles}
+      </div>
+    </div>
+  </section>
+'''
+
 page('bus-shelters.html', 'Остановочные павильоны — ФАВОР-ГАРАНТ',
      'Остановочные павильоны от производителя ФАВОР-ГАРАНТ: модульные, городские, курортные, закрытые и SMART. Производство в Санкт-Петербурге, доставка и монтаж по России.',
-     shelters_main)
+     shelters_main + shelters_landing)
 
 # ---------- Эталонная карточка «Атлант» ----------
 
@@ -289,6 +461,56 @@ project_photos = '\n'.join(
 
 others = [m for m in SHELTERS if m[0] in ('atlant-smart', 'elegant-p', 'closed')]
 
+# «С этим павильоном берут»: комплектующие и SMART-модули, кладутся в корзину прямо из карточки.
+# Набор и тексты — из списка SMART-оснащения со старого сайта; цен нет, корзина пока на стороне браузера (заглушка до магазина)
+CART_SVG = '<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2.2l2.3 11h10.8l2-8H6.4"/><circle cx="9.5" cy="19.5" r="1.5"/><circle cx="17" cy="19.5" r="1.5"/></svg>'
+ADDONS = [
+    ('board', 'img/catalog/smart-board-photo.jpg', 'Электронное табло прибытия', 'Номера и&nbsp;время ожидания маршрутов транспорта.'),
+    ('poster', 'img/catalog/smart-poster-photo.jpg', 'Лайтпостер сити-формат', 'Ставится вместо узкой боковой панели, с&nbsp;внутренней подсветкой.'),
+    ('sign', 'img/catalog/smart-sign-photo.jpg', 'Табличка с&nbsp;названием', 'Название остановки с&nbsp;подсветкой.'),
+    ('light', 'img/catalog/smart-light-photo.jpg', 'Подсветка конструкции', 'Светодиодная подсветка павильона в&nbsp;тёмное время суток.'),
+    ('usb', 'img/catalog/smart-usb-photo.jpg', 'USB-зарядка', 'Для телефонов, планшетов и&nbsp;других гаджетов.'),
+    ('wifi', 'img/catalog/smart-wifi-photo.jpg', 'Wi-Fi маршрутизатор', 'Интернет для пассажиров во&nbsp;время ожидания.'),
+    ('camera', 'img/catalog/smart-camera-photo.jpg', 'Камеры видеонаблюдения', 'Обзор пространства внутри павильона.'),
+    ('sos', 'img/catalog/smart-sos-photo.jpg', 'Кнопка экстренного вызова', 'Вызов единого номера экстренных служб 112.'),
+    ('sound', 'img/catalog/smart-sound-photo.jpg', 'Модуль звукового дублирования', 'Озвучивает прогноз прибытия, надписи шрифтом Брайля.'),
+    ('pylon', 'img/photos/33-work-pylon-smart.jpg', 'Навигационный пилон', 'Двусторонний пилон на&nbsp;опоре рядом с&nbsp;павильоном.'),
+]
+addon_tiles = '\n'.join(f'''        <article class="tile tile--addon">
+          <div class="tile__media"><img src="{img}" alt="{re.sub('&nbsp;', ' ', title)}" loading="lazy"></div>
+          <div class="tile__body">
+            <h3 class="tile__title">{title}</h3>
+            <p class="tile__text">{text}</p>
+            <button class="btn btn--outline tile__cart" type="button" data-cart-add="atlant-{key}" aria-pressed="false">{CART_SVG}<span>В&nbsp;корзину</span></button>
+          </div>
+        </article>''' for key, img, title, text in ADDONS)
+
+addons_section = f'''
+  <section class="section" id="addons">
+    <div class="container">
+      <div class="page-head">
+        <div>
+          <h2 class="h2 duo duo--inline">
+            <span>С&nbsp;этим павильоном</span>
+            <span class="duo__second">берут</span>
+          </h2>
+        </div>
+        <div class="slider-nav" data-slider="addons-track">
+          <button class="slider-nav__btn" type="button" data-dir="-1" aria-label="Предыдущий товар">
+            {ARR % 'prev'}
+          </button>
+          <button class="slider-nav__btn" type="button" data-dir="1" aria-label="Следующий товар">
+            {ARR % 'next'}
+          </button>
+        </div>
+      </div>
+      <div class="cards-track" id="addons-track">
+{addon_tiles}
+      </div>
+    </div>
+  </section>
+'''
+
 atlant_main = f'''
   <section class="section section--light page-top page-top--tight">
     <div class="container">
@@ -330,7 +552,7 @@ atlant_main = f'''
       </div>
     </div>
   </section>
-
+{addons_section}
   <section class="section section--light">
     <div class="container">
       <div class="page-head">

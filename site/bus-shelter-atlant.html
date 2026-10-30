@@ -58,7 +58,8 @@
     </button>
   </div>
 
-  <!-- Выпадающее меню «Продукция»: слева разделы, как в примере клиента, справа подразделы выбранного -->
+  <!-- Выпадающее меню «Продукция»: слева разделы, справа подразделы выбранного.
+       Число столбцов подразделов задаётся у каждого раздела: data-cols="1" | "2" | "3" -->
   <div class="mega" id="mega" hidden>
     <div class="container mega__grid">
       <ul class="mega__cats">
@@ -75,7 +76,7 @@
         <div class="mega__info">
           <p class="mega__title">Остановочные павильоны</p>
           <p class="mega__text">Умные павильоны с современным дизайном для ожидания общественного транспорта.</p>
-          <ul class="mega__subs mega__subs--cols">
+          <ul class="mega__subs" data-cols="3">
             <li><a href="bus-shelters.html">Элегант</a></li>
             <li><a href="bus-shelters.html">Элегант П</a></li>
             <li><a href="bus-shelters.html">Стандарт</a></li>
@@ -100,7 +101,7 @@
         <div class="mega__info">
           <p class="mega__title">Рекламные тумбы</p>
           <p class="mega__text">Тумбы с внутренней светодиодной подсветкой.</p>
-          <ul class="mega__subs">
+          <ul class="mega__subs" data-cols="1">
             <li><a href="index.html#catalog">Круглая рекламная тумба</a></li>
             <li><a href="index.html#catalog">Плоская рекламная тумба</a></li>
             <li><a href="index.html#catalog">Вогнутая рекламная тумба</a></li>
@@ -121,7 +122,7 @@
         <div class="mega__info">
           <p class="mega__title">Рекламные щиты</p>
           <p class="mega__text">Несущие конструкции для рекламы и городской информации.</p>
-          <ul class="mega__subs">
+          <ul class="mega__subs" data-cols="2">
             <li><a href="index.html#catalog">Рекламный щит</a></li>
             <li><a href="index.html#catalog">Триборд</a></li>
             <li><a href="index.html#catalog">Тривижн®</a></li>
@@ -135,7 +136,7 @@
         <div class="mega__info">
           <p class="mega__title">Оборудование для стрельбищ</p>
           <p class="mega__text">Конструкции для стендовой стрельбы по требованиям международной федерации.</p>
-          <ul class="mega__subs">
+          <ul class="mega__subs" data-cols="2">
             <li><a href="index.html#catalog">Пирамиды для ружей</a></li>
             <li><a href="index.html#catalog">Ракушки для метательных машинок</a></li>
           </ul>
@@ -155,7 +156,7 @@
         <div class="mega__info">
           <p class="mega__title">Малые архитектурные формы</p>
           <p class="mega__text">Элементы городской среды.</p>
-          <ul class="mega__subs">
+          <ul class="mega__subs" data-cols="2">
             <li><a href="index.html#catalog">Кабинка для таксофона</a></li>
             <li><a href="index.html#catalog">Кабинка для банкомата</a></li>
             <li><a href="index.html#catalog">Павильон для курения</a></li>
@@ -172,7 +173,7 @@
         <div class="mega__info">
           <p class="mega__title">Навигация</p>
           <p class="mega__text">Информационные указатели и стелы для городской среды.</p>
-          <ul class="mega__subs">
+          <ul class="mega__subs" data-cols="2">
             <li><a href="index.html#catalog">Пилон</a></li>
             <li><a href="index.html#catalog">Указатель</a></li>
             <li><a href="index.html#catalog">Афишный стенд</a></li>
@@ -259,6 +260,109 @@
             <a class="link-arrow" href="index.html#services">Монтаж под ключ</a>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="addons">
+    <div class="container">
+      <div class="page-head">
+        <div>
+          <h2 class="h2 duo duo--inline">
+            <span>С&nbsp;этим павильоном</span>
+            <span class="duo__second">берут</span>
+          </h2>
+        </div>
+        <div class="slider-nav" data-slider="addons-track">
+          <button class="slider-nav__btn" type="button" data-dir="-1" aria-label="Предыдущий товар">
+            <svg class="arr arr--prev" width="10" height="11" viewBox="0 0 13 14" aria-hidden="true"><path d="M.74.68l11 12M11.74 12.68V1.84M11.74 12.68H1.88" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+          </button>
+          <button class="slider-nav__btn" type="button" data-dir="1" aria-label="Следующий товар">
+            <svg class="arr arr--next" width="10" height="11" viewBox="0 0 13 14" aria-hidden="true"><path d="M.74.68l11 12M11.74 12.68V1.84M11.74 12.68H1.88" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="cards-track" id="addons-track">
+        <article class="tile tile--addon">
+          <div class="tile__media"><img src="img/catalog/smart-board-photo.jpg" alt="Электронное табло прибытия" loading="lazy"></div>
+          <div class="tile__body">
+            <h3 class="tile__title">Электронное табло прибытия</h3>
+            <p class="tile__text">Номера и&nbsp;время ожидания маршрутов транспорта.</p>
+            <button class="btn btn--outline tile__cart" type="button" data-cart-add="atlant-board" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2.2l2.3 11h10.8l2-8H6.4"/><circle cx="9.5" cy="19.5" r="1.5"/><circle cx="17" cy="19.5" r="1.5"/></svg><span>В&nbsp;корзину</span></button>
+          </div>
+        </article>
+        <article class="tile tile--addon">
+          <div class="tile__media"><img src="img/catalog/smart-poster-photo.jpg" alt="Лайтпостер сити-формат" loading="lazy"></div>
+          <div class="tile__body">
+            <h3 class="tile__title">Лайтпостер сити-формат</h3>
+            <p class="tile__text">Ставится вместо узкой боковой панели, с&nbsp;внутренней подсветкой.</p>
+            <button class="btn btn--outline tile__cart" type="button" data-cart-add="atlant-poster" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2.2l2.3 11h10.8l2-8H6.4"/><circle cx="9.5" cy="19.5" r="1.5"/><circle cx="17" cy="19.5" r="1.5"/></svg><span>В&nbsp;корзину</span></button>
+          </div>
+        </article>
+        <article class="tile tile--addon">
+          <div class="tile__media"><img src="img/catalog/smart-sign-photo.jpg" alt="Табличка с названием" loading="lazy"></div>
+          <div class="tile__body">
+            <h3 class="tile__title">Табличка с&nbsp;названием</h3>
+            <p class="tile__text">Название остановки с&nbsp;подсветкой.</p>
+            <button class="btn btn--outline tile__cart" type="button" data-cart-add="atlant-sign" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2.2l2.3 11h10.8l2-8H6.4"/><circle cx="9.5" cy="19.5" r="1.5"/><circle cx="17" cy="19.5" r="1.5"/></svg><span>В&nbsp;корзину</span></button>
+          </div>
+        </article>
+        <article class="tile tile--addon">
+          <div class="tile__media"><img src="img/catalog/smart-light-photo.jpg" alt="Подсветка конструкции" loading="lazy"></div>
+          <div class="tile__body">
+            <h3 class="tile__title">Подсветка конструкции</h3>
+            <p class="tile__text">Светодиодная подсветка павильона в&nbsp;тёмное время суток.</p>
+            <button class="btn btn--outline tile__cart" type="button" data-cart-add="atlant-light" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2.2l2.3 11h10.8l2-8H6.4"/><circle cx="9.5" cy="19.5" r="1.5"/><circle cx="17" cy="19.5" r="1.5"/></svg><span>В&nbsp;корзину</span></button>
+          </div>
+        </article>
+        <article class="tile tile--addon">
+          <div class="tile__media"><img src="img/catalog/smart-usb-photo.jpg" alt="USB-зарядка" loading="lazy"></div>
+          <div class="tile__body">
+            <h3 class="tile__title">USB-зарядка</h3>
+            <p class="tile__text">Для телефонов, планшетов и&nbsp;других гаджетов.</p>
+            <button class="btn btn--outline tile__cart" type="button" data-cart-add="atlant-usb" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2.2l2.3 11h10.8l2-8H6.4"/><circle cx="9.5" cy="19.5" r="1.5"/><circle cx="17" cy="19.5" r="1.5"/></svg><span>В&nbsp;корзину</span></button>
+          </div>
+        </article>
+        <article class="tile tile--addon">
+          <div class="tile__media"><img src="img/catalog/smart-wifi-photo.jpg" alt="Wi-Fi маршрутизатор" loading="lazy"></div>
+          <div class="tile__body">
+            <h3 class="tile__title">Wi-Fi маршрутизатор</h3>
+            <p class="tile__text">Интернет для пассажиров во&nbsp;время ожидания.</p>
+            <button class="btn btn--outline tile__cart" type="button" data-cart-add="atlant-wifi" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2.2l2.3 11h10.8l2-8H6.4"/><circle cx="9.5" cy="19.5" r="1.5"/><circle cx="17" cy="19.5" r="1.5"/></svg><span>В&nbsp;корзину</span></button>
+          </div>
+        </article>
+        <article class="tile tile--addon">
+          <div class="tile__media"><img src="img/catalog/smart-camera-photo.jpg" alt="Камеры видеонаблюдения" loading="lazy"></div>
+          <div class="tile__body">
+            <h3 class="tile__title">Камеры видеонаблюдения</h3>
+            <p class="tile__text">Обзор пространства внутри павильона.</p>
+            <button class="btn btn--outline tile__cart" type="button" data-cart-add="atlant-camera" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2.2l2.3 11h10.8l2-8H6.4"/><circle cx="9.5" cy="19.5" r="1.5"/><circle cx="17" cy="19.5" r="1.5"/></svg><span>В&nbsp;корзину</span></button>
+          </div>
+        </article>
+        <article class="tile tile--addon">
+          <div class="tile__media"><img src="img/catalog/smart-sos-photo.jpg" alt="Кнопка экстренного вызова" loading="lazy"></div>
+          <div class="tile__body">
+            <h3 class="tile__title">Кнопка экстренного вызова</h3>
+            <p class="tile__text">Вызов единого номера экстренных служб 112.</p>
+            <button class="btn btn--outline tile__cart" type="button" data-cart-add="atlant-sos" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2.2l2.3 11h10.8l2-8H6.4"/><circle cx="9.5" cy="19.5" r="1.5"/><circle cx="17" cy="19.5" r="1.5"/></svg><span>В&nbsp;корзину</span></button>
+          </div>
+        </article>
+        <article class="tile tile--addon">
+          <div class="tile__media"><img src="img/catalog/smart-sound-photo.jpg" alt="Модуль звукового дублирования" loading="lazy"></div>
+          <div class="tile__body">
+            <h3 class="tile__title">Модуль звукового дублирования</h3>
+            <p class="tile__text">Озвучивает прогноз прибытия, надписи шрифтом Брайля.</p>
+            <button class="btn btn--outline tile__cart" type="button" data-cart-add="atlant-sound" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2.2l2.3 11h10.8l2-8H6.4"/><circle cx="9.5" cy="19.5" r="1.5"/><circle cx="17" cy="19.5" r="1.5"/></svg><span>В&nbsp;корзину</span></button>
+          </div>
+        </article>
+        <article class="tile tile--addon">
+          <div class="tile__media"><img src="img/photos/33-work-pylon-smart.jpg" alt="Навигационный пилон" loading="lazy"></div>
+          <div class="tile__body">
+            <h3 class="tile__title">Навигационный пилон</h3>
+            <p class="tile__text">Двусторонний пилон на&nbsp;опоре рядом с&nbsp;павильоном.</p>
+            <button class="btn btn--outline tile__cart" type="button" data-cart-add="atlant-pylon" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2.2l2.3 11h10.8l2-8H6.4"/><circle cx="9.5" cy="19.5" r="1.5"/><circle cx="17" cy="19.5" r="1.5"/></svg><span>В&nbsp;корзину</span></button>
+          </div>
+        </article>
       </div>
     </div>
   </section>

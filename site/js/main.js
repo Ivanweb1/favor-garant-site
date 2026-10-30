@@ -32,8 +32,6 @@
     if (e.target.closest('a')) setMega(false);
   });
 
-  // Вариант для клиента: подменю в один столбец — открывается по ссылке с ?menu=1col
-  if (new URLSearchParams(location.search).get('menu') === '1col') mega.classList.add('mega--single');
 
   // Слева разделы — справа подразделы выбранного: переключение наведением и фокусом
   const megaCats = [...mega.querySelectorAll('.mega__cat')];
@@ -539,6 +537,32 @@
       fileInput.closest('.file').classList.remove('has-file');
     }
   });
+
+  // Корзина комплектующих (прототип): товары хранятся в браузере, счётчик в шапке общий для всех страниц
+  const CART_KEY = 'fg-cart';
+  const readCart = () => { try { return JSON.parse(localStorage.getItem(CART_KEY)) || []; } catch (e) { return []; } };
+  let cart = readCart();
+  const cartLink = document.querySelector('.header__cart');
+  const renderCart = () => {
+    if (cartLink) {
+      cartLink.querySelector('.header__cart-count').textContent = cart.length;
+      cartLink.setAttribute('aria-label', `Корзина, товаров: ${cart.length}`);
+    }
+    document.querySelectorAll('[data-cart-add]').forEach((btn) => {
+      const added = cart.includes(btn.dataset.cartAdd);
+      btn.setAttribute('aria-pressed', String(added));
+      btn.querySelector('span').textContent = added ? 'В корзине' : 'В корзину';
+    });
+  };
+  document.querySelectorAll('[data-cart-add]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const id = btn.dataset.cartAdd;
+      cart = cart.includes(id) ? cart.filter((x) => x !== id) : [...cart, id];
+      try { localStorage.setItem(CART_KEY, JSON.stringify(cart)); } catch (e) { /* без хранилища — только на этой странице */ }
+      renderCart();
+    });
+  });
+  renderCart();
 
   document.getElementById('year').textContent = new Date().getFullYear();
 })();
