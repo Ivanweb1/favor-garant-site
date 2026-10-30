@@ -713,3 +713,12 @@ Shot: three-quarter eye-level view of the front roof beam with the illuminated n
 Light: blue hour, the plate glows softly, the street behind is still visible.
 Style: photorealistic architectural detail photography, not CGI, 50 mm lens. No readable text, letters, numbers, logos, watermarks or people.
 ```
+
+### 80-smart-service — обслуживание и модернизация (лендинг «Остановочные павильоны», карточка «Технологические преимущества»)
+```
+Aspect ratio 4:3.
+Use the attached render and photo of the "Atlant" bus shelter as the exact reference: light silver-grey square aluminium frame, wave-shaped clear polycarbonate roof, wooden bench, narrow side panel with an electronic arrival board. Do not redesign.
+Shot: eye-level three-quarter view of a service technician in a dark navy work jacket and grey trousers (seen from the side, face turned to the work, not to the camera) who has opened the hinged service door of the arrival-board panel and is sliding a new electronic module into place; a small toolbox stands on the paving. The open panel and the technician's hands are in the central 50% of the frame, the rest of the shelter and the bench are visible to the right.
+Light: soft overcast daylight, city street with trees softly out of focus behind.
+Style: photorealistic documentary photography, not CGI, 50 mm lens. No crowds, no other people, no readable text, letters, numbers, logos, brand names or watermarks; screens are blank or show abstract coloured dots only.
+```
