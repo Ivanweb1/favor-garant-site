@@ -184,7 +184,7 @@ shelters_main = f'''
   <section class="section section--light page-top">
     <div class="container">
       {crumbs(('Главная', 'index.html'), ('Продукция', 'catalog.html'), ('Остановочные павильоны', None))}
-      <div class="page-head">
+      <div class="page-head page-head--grid3">
         <div>
           <h1 class="h2 duo">
             <span>Остановочные</span>
