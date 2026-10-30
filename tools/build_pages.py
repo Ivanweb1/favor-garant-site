@@ -254,11 +254,12 @@ def plain_tile(img, title, text, href=''):
           </div>
         </{end}>'''
 
-def step_tile(title, inner, num=''):
-    n = f'<span class="tile__num">{num}</span>\n            ' if num else ''
-    return f'''        <div class="tile tile--step">
+def point_tile(img, alt, title, inner):
+    """карточка-тезис: фото сверху, заголовок и список"""
+    return f'''        <div class="tile tile--point">
+          <div class="tile__media"><img src="{img}" alt="{alt}" loading="lazy"></div>
           <div class="tile__body">
-            {n}<h3 class="tile__title">{title}</h3>
+            <h3 class="tile__title">{title}</h3>
             {inner}
           </div>
         </div>'''
@@ -287,7 +288,7 @@ city_tiles = '\n'.join(plain_tile(i, t, d, href='index.html#catalog') for i, t, 
 shelters_landing = f'''
   <section class="section">
     <div class="container">
-      <div class="page-head">
+      <div class="page-head page-head--grid3">
         <div>
           <h2 class="h2 duo">
             <span>Инновационные павильоны</span>
@@ -297,9 +298,9 @@ shelters_landing = f'''
         <p class="page-head__text">Городские остановки разработаны с&nbsp;учётом современных технологических требований: модульные SMART-комплексы с&nbsp;антивандальной защитой и&nbsp;системами «Умный город».</p>
       </div>
       <div class="cards">
-{step_tile('Готовность к&nbsp;цифровой инфраструктуре', checks('Совместимость с&nbsp;системой «Умный город»', 'Простое подключение SMART-компонентов', 'Интеграция без конструктивных изменений'))}
-{step_tile('Гибкость конструкции', checks('Увеличение длины и&nbsp;площади павильона', 'Адаптация под любые городские условия', 'Замена боковых панелей на&nbsp;рекламные поверхности ситиформата'))}
-{step_tile('Технологические преимущества', checks('Быстрое обновление функционала', 'Простое обслуживание и&nbsp;модернизация', 'Сохранение конструктивной целостности при любых изменениях'))}
+{point_tile('img/catalog/smart-stage-photo.jpg', 'Павильон с табло и электронной схемой маршрутов вечером', 'Готовность к&nbsp;цифровой инфраструктуре', checks('Совместимость с&nbsp;системой «Умный город»', 'Простое подключение SMART-компонентов', 'Интеграция без конструктивных изменений'))}
+{point_tile('img/catalog/atlant-mat-lightposter.jpg', 'Боковая панель павильона заменена лайтпостером', 'Гибкость конструкции', checks('Увеличение длины и&nbsp;площади павильона', 'Адаптация под любые городские условия', 'Замена боковых панелей на&nbsp;рекламные поверхности ситиформата'))}
+{point_tile('img/photos/30-work-smart-stops.jpg', 'Павильон с камерами и информационными экранами', 'Технологические преимущества', checks('Быстрое обновление функционала', 'Простое обслуживание и&nbsp;модернизация', 'Сохранение конструктивной целостности при любых изменениях'))}
       </div>
       <div class="sub-head">
         <h3 class="sub-head__title">SMART-оснащение павильона</h3>
