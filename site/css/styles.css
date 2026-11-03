@@ -1321,7 +1321,6 @@ html.has-modal { overflow: hidden; }
 .tile__more { min-height: 44px; padding: 0 22px; font-size: 14px; }
 /* низ карточки услуги: слева «Подробнее», справа ссылка на заявку */
 .tile__foot--service { margin-top: 14px; padding-top: 0; }
-.tile__foot--service .link-arrow { font-size: 14px; }
 .tile:has(.tile__more) .tile__meta { margin-top: auto; }
 
 /* станочный парк: карточки на тёмном фоне, главный станок — широкой карточкой на две колонки */
