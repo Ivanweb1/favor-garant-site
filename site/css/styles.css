@@ -1141,19 +1141,61 @@ html.has-modal { overflow: hidden; }
 
 /* ---------- О компании ---------- */
 
-.about-hero { overflow: hidden; border-radius: var(--radius); }
-.about-hero img { width: 100%; aspect-ratio: 21 / 9; object-fit: cover; }
-.about--page { margin-bottom: 0; }
+/* фото цеха — во всю ширину окна и не выше экрана под шапкой, как галерея на главной */
+.about-hero { background: var(--navy-deep); }
+.about-hero img {
+  width: 100%; object-fit: cover; object-position: 50% 60%;
+  height: min(56.25vw, calc(100vh - var(--header-h)));
+  height: min(56.25vw, calc(100svh - var(--header-h)));
+  min-height: 320px;
+}
+.about--page { margin-bottom: 0; align-items: stretch; }
 .about--page .about__text { padding-top: 6px; }
+/* фото объекта под заголовком: заполняет левую колонку до низа списка */
+.about--page > div:first-child { display: flex; flex-direction: column; gap: 32px; }
+.about__media { flex: 1; min-height: 280px; overflow: hidden; border-radius: var(--radius); background: var(--light); }
+.about__media img { width: 100%; height: 100%; object-fit: cover; }
 .about--page .checks { margin-top: 8px; }
 .about--page .checks li { font-size: 15px; }
 
-/* принципы: белые карточки с иконкой в синем круге, как преимущества на главной */
-.principles { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
-.principle { display: flex; flex-direction: column; gap: 10px; padding: 24px 24px 28px; border-radius: var(--radius); background: var(--white); }
-.principle .usp__icon { margin-bottom: 18px; }
-.principle__title { font-size: 18px; line-height: 1.3; font-weight: 700; color: var(--navy); }
-.principle__text { font-size: 14px; color: var(--muted); }
+/* принципы: тёмный блок, карточки разного размера — фото КБ высокой слева, веер дипломов, текст, фото станка широкой снизу */
+.page-head__text--light { color: #C9C7E6; }
+.bento {
+  display: grid; grid-template-columns: 1.15fr 1fr 1fr; grid-template-rows: minmax(300px, auto) minmax(300px, auto); gap: 20px;
+}
+.bento__card {
+  position: relative; display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden;
+  min-height: 300px; border-radius: var(--radius); background: rgba(255, 255, 255, .06);
+  border: 1px solid rgba(255, 255, 255, .1);
+}
+.bento__card--tall { grid-row: span 2; }
+.bento__card--wide { grid-column: span 2; }
+.bento__body { position: relative; z-index: 1; display: grid; gap: 10px; padding: 28px; }
+.bento__num { font-size: 13px; font-weight: 600; letter-spacing: .1em; color: #A9A6D6; }
+.bento__title { font-size: clamp(20px, 1.8vw, 24px); line-height: 1.2; font-weight: 700; color: var(--white); }
+.bento__text { max-width: 420px; font-size: 14px; line-height: 1.55; color: #C9C7E6; }
+/* фото на всю карточку, текст поверх затемнения снизу */
+.bento__card--photo { border: 0; }
+.bento__card--photo > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .8s ease; }
+.bento__card--photo::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(23, 22, 43, 0) 30%, rgba(23, 22, 43, .88) 100%);
+}
+.bento__card--photo:hover > img { transform: scale(1.04); }
+.bento__card--photo .bento__text { color: #E2E1F2; }
+/* веер из трёх настоящих дипломов в верхней части карточки */
+.bento__card--docs { justify-content: space-between; }
+.bento__fan { position: relative; height: 170px; margin: 28px 28px 0; }
+.bento__fan img {
+  position: absolute; bottom: 0; left: 50%; width: 104px; aspect-ratio: 1 / 1.414; object-fit: cover;
+  border: 4px solid var(--white); border-radius: 4px; box-shadow: 0 16px 30px -14px rgba(0, 0, 0, .6);
+  transform-origin: 50% 100%; transition: transform .4s ease;
+}
+.bento__fan img:nth-child(1) { transform: translateX(-50%) translateX(-58px) rotate(-12deg); }
+.bento__fan img:nth-child(2) { transform: translateX(-50%) translateX(58px) rotate(12deg); }
+.bento__fan img:nth-child(3) { transform: translateX(-50%) translateY(-8px); }
+.bento__card--docs:hover .bento__fan img:nth-child(1) { transform: translateX(-50%) translateX(-72px) rotate(-16deg); }
+.bento__card--docs:hover .bento__fan img:nth-child(2) { transform: translateX(-50%) translateX(72px) rotate(16deg); }
 
 /* награды: лента сканов в пропорции листа А4 */
 .awards { display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; scrollbar-width: none; }
@@ -1183,17 +1225,26 @@ html.has-modal { overflow: hidden; }
 .person--cta .btn { margin-top: 12px; min-height: 46px; padding: 0 22px; font-size: 14px; }
 
 @media (max-width: 1080px) {
-  .principles, .people { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .people { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .bento { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+  .bento__card--tall { grid-row: auto; grid-column: span 2; min-height: 380px; }
   .award { flex-basis: calc((100% - 40px) / 3); }
-  .about-hero img { aspect-ratio: 16 / 9; }
+  .about__media { flex: none; aspect-ratio: 16 / 9; min-height: 0; }
 }
 @media (max-width: 720px) {
-  .principles, .people { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  .people { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  .bento { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  .bento__card--tall, .bento__card--wide { grid-column: auto; }
+  .bento__card { min-height: 0; }
+  .bento__card--photo { min-height: 340px; }
+  .bento__body { padding: 22px; }
   .person__role { min-height: 0; }
   .person__name { margin-bottom: 8px; }
   .awards { gap: 12px; margin: 0 calc(var(--gutter) * -1); padding: 0 var(--gutter) 4px; scroll-padding: 0 var(--gutter); }
   .award { flex-basis: 58%; padding: 8px; }
-  .about-hero img { aspect-ratio: 4 / 3; }
+  .about-hero img { height: min(75vw, calc(100svh - var(--header-h))); min-height: 0; }
+  .about__media { aspect-ratio: 4 / 3; }
+  .about--page > div:first-child { gap: 24px; }
 }
 
 /* ---------- Адаптив ---------- */

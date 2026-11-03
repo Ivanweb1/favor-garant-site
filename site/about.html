@@ -230,9 +230,10 @@
         </div>
         <p class="page-head__text">Проектируем, производим, оформляем, проводим экспертизу и&nbsp;монтируем металлоконструкции для городской инфраструктуры.</p>
       </div>
-      <div class="about-hero"><img src="img/photos/20-prod-hall.jpg" alt="Производственный цех ФАВОР-ГАРАНТ" width="1600" height="900"></div>
     </div>
   </section>
+  <!-- фото цеха на всю ширину экрана, как галерея первого экрана главной -->
+  <div class="about-hero"><img src="img/photos/20-prod-hall.jpg" alt="Производственный цех ФАВОР-ГАРАНТ" width="1600" height="900"></div>
 
   <!-- 2. Кто мы и участие в программах благоустройства -->
   <section class="section">
@@ -242,6 +243,7 @@
           <span>Завод инновационных</span>
           <span class="duo__second">металлоконструкций</span>
         </h2>
+        <div class="about__media"><img src="img/photos/30-work-smart-stops.jpg" alt="Остановочный павильон с картой города на площади" loading="lazy" width="1400" height="1050"></div>
       </div>
       <div class="about__text">
         <p>ООО «ФАВОР-ГАРАНТ» выполняет комплекс услуг по&nbsp;проектированию, производству, дизайну, экспертизе и&nbsp;монтажу объектов для благоустройства городской инфраструктуры: рекламоносителей, уличной мебели и&nbsp;других металлоконструкций.</p>
@@ -257,37 +259,53 @@
   </section>
 
   <!-- 3. Принципы работы -->
-  <section class="section section--light">
+  <!-- тёмный блок с карточками разного размера (приём из мудборда, кадры b5–b6): фото КБ и станка, веер дипломов -->
+  <section class="section section--dark">
     <div class="container">
       <div class="page-head">
         <div>
-          <h2 class="h2 duo">
+          <h2 class="h2 duo duo--light">
             <span>Почему</span>
             <span class="duo__second">выбирают нас</span>
           </h2>
         </div>
-        <p class="page-head__text">Принципы, по&nbsp;которым работает наш производственный комплекс.</p>
+        <p class="page-head__text page-head__text--light">Принципы, по&nbsp;которым работает наш производственный комплекс.</p>
       </div>
-      <ul class="principles">
-        <li class="principle">
-          <span class="usp__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h16M6 20V9l6-5 6 5v11"/><path d="M10 20v-6h4v6"/></svg></span>
-          <h3 class="principle__title">Профессионализм</h3>
-          <p class="principle__text">Конструкторское бюро с&nbsp;опытными инженерами ведёт полный цикл проектирования: от&nbsp;точных чертежей и&nbsp;3D-моделей до&nbsp;индивидуальных конструкций и&nbsp;технической документации.</p>
+      <ul class="bento">
+        <li class="bento__card bento__card--photo bento__card--tall">
+          <img src="img/photos/23-prod-kb.jpg" alt="" loading="lazy" width="1400" height="1050" style="object-position: 30% 50%">
+          <div class="bento__body">
+            <span class="bento__num">01</span>
+            <h3 class="bento__title">Профессионализм</h3>
+            <p class="bento__text">Конструкторское бюро с&nbsp;опытными инженерами ведёт полный цикл проектирования: от&nbsp;точных чертежей и&nbsp;3D-моделей до&nbsp;технической документации.</p>
+          </div>
         </li>
-        <li class="principle">
-          <span class="usp__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 13l2 2 4-4"/></svg></span>
-          <h3 class="principle__title">Лицензии и&nbsp;СРО</h3>
-          <p class="principle__text">Есть все необходимые сертификаты, компания состоит в&nbsp;саморегулируемых организациях. Проекты и&nbsp;изделия соответствуют ГОСТ, СП и&nbsp;ТУ.</p>
+        <li class="bento__card bento__card--docs">
+          <div class="bento__fan" aria-hidden="true">
+            <img src="img/awards/award-07.jpg" alt="" loading="lazy" width="999" height="1414">
+            <img src="img/awards/award-04.jpg" alt="" loading="lazy" width="1000" height="1402">
+            <img src="img/awards/award-06.jpg" alt="" loading="lazy" width="999" height="1414">
+          </div>
+          <div class="bento__body">
+            <span class="bento__num">02</span>
+            <h3 class="bento__title">Лицензии и&nbsp;СРО</h3>
+            <p class="bento__text">Все необходимые сертификаты и&nbsp;членство в&nbsp;СРО. Проекты и&nbsp;изделия соответствуют ГОСТ, СП и&nbsp;ТУ.</p>
+          </div>
         </li>
-        <li class="principle">
-          <span class="usp__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-4.5"/></svg></span>
-          <h3 class="principle__title">Безопасность и&nbsp;качество</h3>
-          <p class="principle__text">Каждая конструкция проходит многоступенчатый контроль качества и&nbsp;изготавливается из&nbsp;сертифицированных материалов по&nbsp;отработанным технологиям.</p>
+        <li class="bento__card">
+          <div class="bento__body">
+            <span class="bento__num">03</span>
+            <h3 class="bento__title">Безопасность и&nbsp;качество</h3>
+            <p class="bento__text">Каждая конструкция проходит многоступенчатый контроль качества и&nbsp;изготавливается из&nbsp;сертифицированных материалов по&nbsp;отработанным технологиям.</p>
+          </div>
         </li>
-        <li class="principle">
-          <span class="usp__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="7"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9 7 7M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/></svg></span>
-          <h3 class="principle__title">Современное оборудование</h3>
-          <p class="principle__text">Цех оснащён ЧПУ-станками и&nbsp;автоматизированными линиями: изготавливаем металлоконструкции любой сложности с&nbsp;высокой точностью.</p>
+        <li class="bento__card bento__card--photo bento__card--wide">
+          <img src="img/photos/21-prod-metalworking.jpg" alt="" loading="lazy" width="1400" height="1050" style="object-position: 50% 35%">
+          <div class="bento__body">
+            <span class="bento__num">04</span>
+            <h3 class="bento__title">Современное оборудование</h3>
+            <p class="bento__text">ЧПУ-станки и&nbsp;автоматизированные линии: металлоконструкции любой сложности с&nbsp;высокой точностью.</p>
+          </div>
         </li>
       </ul>
     </div>
@@ -303,7 +321,7 @@
             <span class="duo__second">для городской инфраструктуры</span>
           </h2>
         </div>
-        <p class="page-head__text">Администрации городов России, девелоперы и&nbsp;операторы общественного транспорта доверяют нам оснащение городских пространств: остановочные комплексы и&nbsp;весь спектр металлоконструкций для благоустройства.</p>
+        <p class="page-head__text">Нам доверяют оснащение городских пространств администрации городов России, девелоперы и&nbsp;операторы общественного транспорта.</p>
       </div>
     </div>
     <div class="marquee" aria-label="Заказчики">
