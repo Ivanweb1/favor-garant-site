@@ -1315,6 +1315,10 @@ html.has-modal { overflow: hidden; }
 
 /* ---------- Услуги ---------- */
 
+/* карточки услуг: кнопка «Подробнее» прижата к низу, у всех на одной линии */
+.tile__more { align-self: flex-start; margin-top: 14px; min-height: 44px; padding: 0 22px; font-size: 14px; }
+.tile:has(.tile__more) .tile__meta { margin-top: auto; }
+
 /* станочный парк: карточки на тёмном фоне, главный станок — широкой карточкой на две колонки */
 .machines { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
 .machine {
@@ -1322,6 +1326,13 @@ html.has-modal { overflow: hidden; }
   border: 1px solid rgba(255, 255, 255, .1); border-radius: var(--radius); background: rgba(255, 255, 255, .06);
 }
 .machine--wide { grid-column: span 2; grid-row: span 2; padding: 32px; background: rgba(255, 255, 255, .1); }
+/* фото станка со старого сайта — сверху карточки на всю ширину */
+.machine--photo { padding-top: 10px; }
+.machine__photo { width: calc(100% + 28px); margin: 0 -14px 14px; aspect-ratio: 16 / 10; object-fit: cover; border-radius: calc(var(--radius) - 6px); }
+/* в широкой карточке кадр деталей занимает всё место между текстом и параметрами */
+.machine__media { position: relative; flex: 1; min-height: 180px; margin: 20px 0 18px; overflow: hidden; border-radius: calc(var(--radius) - 6px); }
+.machine__media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%; }
+.machine--wide .machine__specs { margin-top: 0; }
 .machine__kind { font-size: 13px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: #A9A6D6; }
 .machine__name { font-size: 20px; line-height: 1.25; font-weight: 700; color: var(--white); }
 .machine--wide .machine__name { font-size: clamp(26px, 2.6vw, 36px); }
@@ -1339,7 +1350,11 @@ html.has-modal { overflow: hidden; }
 /* монтаж под ключ: четыре этапа с номером на линии, как этапы производства на главной */
 .steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
 .step { display: flex; flex-direction: column; }
-.step .flow__num { margin-bottom: 22px; }
+.step__media { order: 1; margin-bottom: 18px; overflow: hidden; border-radius: var(--radius); background: var(--white); }
+.step__media img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; transition: transform .6s ease; }
+.step:hover .step__media img { transform: scale(1.04); }
+.step .flow__num { order: 0; margin-bottom: 22px; }
+.step__title, .step .checks { order: 2; }
 .step .flow__num::before { right: -20px; }
 .step:last-child .flow__num::before { right: 0; }
 .step:hover .flow__num { color: var(--navy); }
