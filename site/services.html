@@ -239,7 +239,7 @@
             <h2 class="tile__title">Дизайн-бюро</h2>
             <p class="tile__text">Превращаем идею заказчика в&nbsp;3D-модель и&nbsp;презентацию с&nbsp;фотореалистичной визуализацией будущего объекта.</p>
             <p class="tile__meta">Моделирование · Макеты · Визуализация · УФ-печать</p>
-            <a class="btn btn--outline tile__more" href="#request-form">Подробнее</a>
+            <div class="tile__foot tile__foot--service"><a class="btn btn--outline tile__more" href="#request-form">Подробнее</a><a class="link-arrow" href="#request-form">Оставить заявку</a></div>
           </div>
         </article>
         <article class="tile" id="kb">
@@ -248,7 +248,7 @@
             <h2 class="tile__title">Конструкторское бюро</h2>
             <p class="tile__text">Готовим конструкторскую документацию для изготовления металлоконструкций по&nbsp;эскизам и&nbsp;идеям заказчика.</p>
             <p class="tile__meta">Проектирование · Прочностной расчёт · Авторский надзор</p>
-            <a class="btn btn--outline tile__more" href="#request-form">Подробнее</a>
+            <div class="tile__foot tile__foot--service"><a class="btn btn--outline tile__more" href="#request-form">Подробнее</a><a class="link-arrow" href="#request-form">Оставить заявку</a></div>
           </div>
         </article>
         <article class="tile">
@@ -257,7 +257,7 @@
             <h2 class="tile__title">Металлообработка</h2>
             <p class="tile__text">Большой парк станков: детали любой сложности серийно и&nbsp;в&nbsp;единичном исполнении.</p>
             <p class="tile__meta">Лазерная и&nbsp;плазменная резка · Гибка · Вальцовка · Покраска</p>
-            <a class="btn btn--outline tile__more" href="#equipment">Подробнее</a>
+            <div class="tile__foot tile__foot--service"><a class="btn btn--outline tile__more" href="#equipment">Подробнее</a><a class="link-arrow" href="#request-form">Оставить заявку</a></div>
           </div>
         </article>
         <article class="tile" id="supervision">
@@ -266,7 +266,7 @@
             <h2 class="tile__title">Шеф-монтаж</h2>
             <p class="tile__text">Специалист выезжает на&nbsp;объект, инструктирует персонал заказчика и&nbsp;контролирует монтаж конструкции.</p>
             <p class="tile__meta">Обследование объекта · Контроль монтажа · Сдача объекта</p>
-            <a class="btn btn--outline tile__more" href="#request-form">Подробнее</a>
+            <div class="tile__foot tile__foot--service"><a class="btn btn--outline tile__more" href="#request-form">Подробнее</a><a class="link-arrow" href="#request-form">Оставить заявку</a></div>
           </div>
         </article>
         <article class="tile">
@@ -275,7 +275,7 @@
             <h2 class="tile__title">Монтаж остановочных павильонов</h2>
             <p class="tile__text">Монтаж остановочных комплексов «под ключ» в&nbsp;Санкт-Петербурге и&nbsp;по&nbsp;всей России.</p>
             <p class="tile__meta">Замеры · Проект · Производство · Доставка и&nbsp;монтаж</p>
-            <a class="btn btn--outline tile__more" href="#montage">Подробнее</a>
+            <div class="tile__foot tile__foot--service"><a class="btn btn--outline tile__more" href="#montage">Подробнее</a><a class="link-arrow" href="#request-form">Оставить заявку</a></div>
           </div>
         </article>
         <article class="tile">
@@ -284,7 +284,7 @@
             <h2 class="tile__title">Экспертиза</h2>
             <p class="tile__text">Проверяем проекты рекламных конструкций на&nbsp;соответствие нормативно-технической документации.</p>
             <p class="tile__meta">Экспертиза проектов · Документация для торгов · Коридор безопасности</p>
-            <a class="btn btn--outline tile__more" href="#expertise">Подробнее</a>
+            <div class="tile__foot tile__foot--service"><a class="btn btn--outline tile__more" href="#expertise">Подробнее</a><a class="link-arrow" href="#request-form">Оставить заявку</a></div>
           </div>
         </article>
       </div>
@@ -301,22 +301,33 @@
             <span class="duo__second">металлообработки</span>
           </h2>
         </div>
-        <p class="page-head__text page-head__text--light">Резка, гибка, сварка и&nbsp;покраска на&nbsp;одной площадке&nbsp;— высокая точность и&nbsp;скорость изготовления.</p>
+        <div class="section-head__side">
+          <p class="page-head__text page-head__text--light">Резка, гибка, сварка и&nbsp;покраска на&nbsp;одной площадке&nbsp;— высокая точность и&nbsp;скорость изготовления.</p>
+          <div class="slider-nav slider-nav--light" data-slider="machines-track">
+          <button class="slider-nav__btn" type="button" data-dir="-1" aria-label="Предыдущий станок">
+            <svg class="arr arr--prev" width="10" height="11" viewBox="0 0 13 14" aria-hidden="true"><path d="M.74.68l11 12M11.74 12.68V1.84M11.74 12.68H1.88" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+          </button>
+          <button class="slider-nav__btn" type="button" data-dir="1" aria-label="Следующий станок">
+            <svg class="arr arr--next" width="10" height="11" viewBox="0 0 13 14" aria-hidden="true"><path d="M.74.68l11 12M11.74 12.68V1.84M11.74 12.68H1.88" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+          </button>
+        </div>
+        </div>
       </div>
-      <ul class="machines">
-        <li class="machine machine--wide">
+      <!-- лента станков: листается стрелками и свайпом -->
+      <ul class="machines" id="machines-track">
+        <li class="machine machine--photo">
+          <img class="machine__photo" src="img/equipment/golden-laser.jpg" alt="Лазерный труборез GOLDEN LASER в цехе" loading="lazy" width="1000" height="750">
           <p class="machine__kind">Лазерная резка труб и&nbsp;профиля</p>
           <h3 class="machine__name">GOLDEN LASER</h3>
-          <p class="machine__text">5-осевая поворотная головка режет фаску под&nbsp;45°&nbsp;— кромки готовы к&nbsp;сварке без ручной обработки. Детали сложной геометрии: трёхмерные контуры, отверстия и&nbsp;скосы любой формы.</p>
-          <div class="machine__media"><img src="img/equipment/parts-closeup.jpg" alt="Детали сложной геометрии после лазерной резки" loading="lazy" width="1024" height="1024"></div>
+          <p class="machine__text">5-осевая головка режет фаску под&nbsp;45°&nbsp;— кромки готовы к&nbsp;сварке без ручной обработки.</p>
           <dl class="machine__specs">
             <div><dt>Мощность лазера</dt><dd>6000 Вт</dd></div>
             <div><dt>Длина профиля</dt><dd>до&nbsp;12&nbsp;000&nbsp;мм</dd></div>
             <div><dt>Описанная окружность</dt><dd>до&nbsp;360&nbsp;мм</dd></div>
           </dl>
-          <p class="machine__tags">Тавр · Двутавр · Швеллер · Уголок · C-, S-, Z-профиль · Трубы любого сечения</p>
         </li>
-        <li class="machine">
+        <li class="machine machine--photo">
+          <img class="machine__photo" src="img/equipment/senfeng.jpg" alt="Лазерная резка трубы на станке Senfeng" loading="lazy" width="932" height="524">
           <p class="machine__kind">Лазерная резка листа</p>
           <h3 class="machine__name">Senfeng SF-3015M3</h3>
           <dl class="machine__specs">
@@ -389,6 +400,36 @@
           </dl>
         </li>
       </ul>
+    </div>
+  </section>
+
+  <!-- Сортамент трубореза: текст и списки со старой страницы /services, справа схемы сечений и примеры деталей -->
+  <section class="section" id="sortament">
+    <div class="container sortament">
+      <div class="sortament__text">
+        <h2 class="h2 duo">
+          <span>Обрабатываемый</span>
+          <span class="duo__second">сортамент</span>
+        </h2>
+        <p class="sortament__lead">Труборез режет профили с&nbsp;диаметром описанной окружности до&nbsp;360&nbsp;мм.</p>
+        <p class="sortament__desc">Лазерная резка труб позволяет изготавливать детали сложнейшей геометрии: трёхмерные контуры, геометрические отверстия и&nbsp;скосы любой формы. Точность и&nbsp;стабильная повторяемость каждого реза подходят для крупносерийного производства, кромки получаются гладкими, без деформаций и&nbsp;острых краёв.</p>
+        <div class="sortament__lists">
+          <div>
+            <h3 class="sortament__title">Прокатный сортамент</h3>
+            <ul class="checks">
+              <li>Тавр</li><li>Двутавр</li><li>Швеллер</li><li>Уголок</li><li>Полособульб</li><li>C-, S- и&nbsp;Z-образный профиль</li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="sortament__title">Труба</h3>
+            <ul class="checks">
+              <li>Круглая</li><li>Квадратная</li><li>Овальная</li><li>Прямоугольная и&nbsp;другие</li>
+            </ul>
+          </div>
+        </div>
+        <a class="btn btn--primary" href="#request-form">Узнать стоимость обработки металла</a>
+      </div>
+      <div class="sortament__media"><img src="img/equipment/sortament.jpg" alt="Сечения профилей и примеры деталей после лазерной резки труб" loading="lazy" width="1196" height="1400"></div>
     </div>
   </section>
 
