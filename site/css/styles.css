@@ -1669,3 +1669,13 @@ html.has-modal { overflow: hidden; }
   .jobs .btn { justify-content: center; }
   .doc--wide { display: flex; }
 }
+
+/* ===== Страница «Новости» ===== */
+/* картинки старых новостей — баннеры с текстом слева, поэтому целиком в родной пропорции 1310×1015, без квадратной обрезки */
+.news--feed { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
+.news--feed .news__card { grid-template-columns: 1fr; grid-template-rows: auto 1fr; }
+.news--feed .news__media img { min-height: 0; aspect-ratio: 1310 / 1015; object-position: 0 50%; }
+.news--feed .news__body { padding: 20px 22px 24px; }
+.news--feed .news__title { font-size: 17px; }
+@media (max-width: 1080px) { .news--feed { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 720px) { .news--feed { grid-template-columns: minmax(0, 1fr); } .news--feed .news__media img { aspect-ratio: 1310 / 1015; } }
