@@ -1193,6 +1193,13 @@ html.has-modal { overflow: hidden; }
 }
 .programs li + li::before { left: 10px; }
 .programs li + li { padding-left: 32px; }
+/* строки разбиты вручную — у всех пунктов ровно две; на средних экранах сетка 2×2 */
+.programs li { white-space: nowrap; }
+@media (max-width: 1320px) {
+  .programs { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 20px; }
+  .programs li:nth-child(3) { border-left: 0; padding-left: 28px; }
+  .programs li:nth-child(3)::before { left: 6px; }
+}
 
 
 /* принципы: тёмный блок, карточки разного размера — фото КБ высокой слева, веер дипломов, текст, фото станка широкой снизу */
@@ -1278,9 +1285,6 @@ html.has-modal { overflow: hidden; }
   .page-head--bento { display: flex; }
   .bento__card--tall { grid-row: auto; grid-column: span 2; min-height: 380px; }
   .award { flex-basis: calc((100% - 40px) / 3); }
-  .programs { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 20px; }
-  .programs li:nth-child(3) { border-left: 0; padding-left: 28px; }
-  .programs li:nth-child(3)::before { left: 6px; }
 }
 @media (max-width: 720px) {
   .people { grid-template-columns: minmax(0, 1fr); gap: 12px; }
@@ -1305,7 +1309,7 @@ html.has-modal { overflow: hidden; }
   .fact__icon { width: 34px; height: 34px; }
   .objects { grid-template-columns: minmax(0, 1fr); gap: 12px; }
   .programs { grid-template-columns: minmax(0, 1fr); row-gap: 0; }
-  .programs li, .programs li + li, .programs li:nth-child(3) { border-left: 0; padding: 14px 0 14px 28px; border-bottom: 1px solid var(--line); }
+  .programs li, .programs li + li, .programs li:nth-child(3) { border-left: 0; padding: 14px 0 14px 28px; border-bottom: 1px solid var(--line); white-space: normal; }
   .programs li::before, .programs li + li::before, .programs li:nth-child(3)::before { left: 0; top: 18px; }
 }
 
