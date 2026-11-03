@@ -1139,6 +1139,63 @@ html.has-modal { overflow: hidden; }
   .order__remove { grid-area: remove; }
 }
 
+/* ---------- О компании ---------- */
+
+.about-hero { overflow: hidden; border-radius: var(--radius); }
+.about-hero img { width: 100%; aspect-ratio: 21 / 9; object-fit: cover; }
+.about--page { margin-bottom: 0; }
+.about--page .about__text { padding-top: 6px; }
+.about--page .checks { margin-top: 8px; }
+.about--page .checks li { font-size: 15px; }
+
+/* принципы: белые карточки с иконкой в синем круге, как преимущества на главной */
+.principles { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
+.principle { display: flex; flex-direction: column; gap: 10px; padding: 24px 24px 28px; border-radius: var(--radius); background: var(--white); }
+.principle .usp__icon { margin-bottom: 18px; }
+.principle__title { font-size: 18px; line-height: 1.3; font-weight: 700; color: var(--navy); }
+.principle__text { font-size: 14px; color: var(--muted); }
+
+/* награды: лента сканов в пропорции листа А4 */
+.awards { display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; scrollbar-width: none; }
+.awards::-webkit-scrollbar { display: none; }
+.award {
+  flex: 0 0 calc((100% - 80px) / 5); min-width: 0; padding: 10px; overflow: hidden;
+  border: 0; border-radius: var(--radius-sm); background: var(--white); cursor: zoom-in; scroll-snap-align: start;
+  transition: box-shadow .25s ease, transform .25s ease;
+}
+.award:hover { transform: translateY(-3px); box-shadow: 0 22px 40px -28px rgba(23, 22, 43, .45); }
+.award img { width: 100%; aspect-ratio: 1 / 1.414; object-fit: cover; border-radius: 4px; }
+/* у ленты место под подъём карточки на ховере */
+.awards { margin: -6px 0 -30px; padding: 6px 0 30px; }
+
+/* контакты специалистов: сетка 4 в ряд, последняя ячейка — синий звонок */
+.people { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
+.person { display: flex; flex-direction: column; gap: 4px; padding: 22px 24px 24px; border: 1px solid var(--line); border-radius: var(--radius); }
+.person__role { min-height: 2.6em; font-size: 13px; line-height: 1.3; color: var(--grey); }
+.person__name { margin-bottom: 14px; font-size: 17px; line-height: 1.3; font-weight: 700; color: var(--navy); }
+.person__phone { margin-top: auto; font-size: 14px; font-weight: 600; color: var(--navy); }
+.person__mail { font-size: 14px; color: var(--muted); }
+.person a { transition: color .2s ease; }
+.person__phone:hover, .person__mail:hover { color: var(--navy-hover); }
+.person--cta { justify-content: flex-end; align-items: flex-start; gap: 8px; border-color: transparent; background: var(--navy); }
+.person--cta .person__name { margin: 0; font-size: 14px; font-weight: 500; color: #C9C7E6; }
+.person__big { font-size: 22px; font-weight: 700; color: var(--white); white-space: nowrap; }
+.person--cta .btn { margin-top: 12px; min-height: 46px; padding: 0 22px; font-size: 14px; }
+
+@media (max-width: 1080px) {
+  .principles, .people { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .award { flex-basis: calc((100% - 40px) / 3); }
+  .about-hero img { aspect-ratio: 16 / 9; }
+}
+@media (max-width: 720px) {
+  .principles, .people { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  .person__role { min-height: 0; }
+  .person__name { margin-bottom: 8px; }
+  .awards { gap: 12px; margin: 0 calc(var(--gutter) * -1); padding: 0 var(--gutter) 4px; scroll-padding: 0 var(--gutter); }
+  .award { flex-basis: 58%; padding: 8px; }
+  .about-hero img { aspect-ratio: 4 / 3; }
+}
+
 /* ---------- Адаптив ---------- */
 
 @media (max-width: 1240px) {

@@ -685,9 +685,9 @@
   });
   if (partSearch) partSearch.addEventListener('input', filterParts);
 
-  // Фото комплектующего на весь экран
+  // Фото комплектующего, скан награды — на весь экран
   let partZoom;
-  document.querySelectorAll('.parts__thumb').forEach((thumb) => {
+  document.querySelectorAll('[data-zoom]').forEach((thumb) => {
     thumb.addEventListener('click', () => {
       if (!partZoom) {
         partZoom = document.createElement('div');
