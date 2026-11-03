@@ -1313,6 +1313,70 @@ html.has-modal { overflow: hidden; }
   .programs li::before, .programs li + li::before, .programs li:nth-child(3)::before { left: 0; top: 18px; }
 }
 
+/* ---------- Услуги ---------- */
+
+/* станочный парк: карточки на тёмном фоне, главный станок — широкой карточкой на две колонки */
+.machines { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.machine {
+  display: flex; flex-direction: column; gap: 6px; padding: 24px 24px 22px;
+  border: 1px solid rgba(255, 255, 255, .1); border-radius: var(--radius); background: rgba(255, 255, 255, .06);
+}
+.machine--wide { grid-column: span 2; grid-row: span 2; padding: 32px; background: rgba(255, 255, 255, .1); }
+.machine__kind { font-size: 13px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: #A9A6D6; }
+.machine__name { font-size: 20px; line-height: 1.25; font-weight: 700; color: var(--white); }
+.machine--wide .machine__name { font-size: clamp(26px, 2.6vw, 36px); }
+.machine__text { max-width: 560px; margin-top: 6px; font-size: 15px; color: #C9C7E6; }
+.machine__specs { display: grid; margin-top: auto; padding-top: 14px; }
+.machine__specs > div { display: flex; justify-content: space-between; gap: 16px; padding: 9px 0; border-top: 1px solid rgba(255, 255, 255, .12); font-size: 14px; }
+.machine__specs dt { color: #A9A6D6; }
+.machine__specs dd { font-weight: 600; color: var(--white); text-align: right; }
+/* у широкой карточки параметры — три крупные цифры в ряд */
+.machine--wide .machine__specs { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; padding-top: 24px; }
+.machine--wide .machine__specs > div { flex-direction: column-reverse; justify-content: flex-end; gap: 4px; padding: 16px 0 0; }
+.machine--wide .machine__specs dd { font-size: clamp(22px, 2vw, 30px); line-height: 1.1; text-align: left; }
+.machine__tags { margin-top: 18px; padding-top: 14px; border-top: 1px solid rgba(255, 255, 255, .12); font-size: 13px; line-height: 1.6; color: #C9C7E6; }
+
+/* монтаж под ключ: четыре этапа с номером на линии, как этапы производства на главной */
+.steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
+.step { display: flex; flex-direction: column; }
+.step .flow__num { margin-bottom: 22px; }
+.step .flow__num::before { right: -20px; }
+.step:last-child .flow__num::before { right: 0; }
+.step:hover .flow__num { color: var(--navy); }
+.step__title { margin-bottom: 12px; font-size: 18px; line-height: 1.3; font-weight: 700; color: var(--navy); }
+.steps__cta { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 28px; margin-top: 40px; }
+
+/* экспертиза: 6 пунктов сеткой 3×2, номер слева сверху, тонкие линии между ячейками */
+.expert { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid var(--line); }
+.expert__item { display: grid; align-content: start; gap: 10px; padding: 28px 28px 32px 0; border-bottom: 1px solid var(--line); }
+.expert__item:not(:nth-child(3n + 1)) { padding-left: 28px; border-left: 1px solid var(--line); }
+.expert__num { font-size: 13px; font-weight: 700; letter-spacing: .08em; color: var(--red); }
+.expert__title { font-size: 18px; line-height: 1.3; font-weight: 700; color: var(--navy); }
+.expert__text { font-size: 14px; color: var(--muted); }
+
+@media (max-width: 1080px) {
+  .machines { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .machine--wide { grid-row: auto; }
+  .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 36px; }
+  .step:nth-child(2) .flow__num::before { right: 0; }
+  .expert { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .expert__item:not(:nth-child(3n + 1)) { padding-left: 0; border-left: 0; }
+  .expert__item:nth-child(even) { padding-left: 28px; border-left: 1px solid var(--line); }
+}
+@media (max-width: 720px) {
+  .machines { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  .machine--wide { grid-column: auto; padding: 24px; }
+  .machine--wide .machine__specs { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .machine--wide .machine__specs > div { flex-direction: row; justify-content: space-between; padding: 9px 0; }
+  .machine--wide .machine__specs dd { font-size: 16px; text-align: right; }
+  .steps { grid-template-columns: minmax(0, 1fr); row-gap: 28px; }
+  .step .flow__num::before { right: 0; }
+  .steps__cta { flex-direction: column; align-items: stretch; }
+  .steps__cta .link-arrow { justify-content: center; }
+  .expert { grid-template-columns: minmax(0, 1fr); }
+  .expert__item, .expert__item:nth-child(even) { padding: 20px 0; border-left: 0; }
+}
+
 /* ---------- Адаптив ---------- */
 
 @media (max-width: 1240px) {
