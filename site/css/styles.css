@@ -1157,15 +1157,23 @@ html.has-modal { overflow: hidden; }
   padding: 8px; border-radius: var(--radius); background: rgba(255, 255, 255, .94); backdrop-filter: blur(8px);
   box-shadow: 0 24px 50px -30px rgba(10, 10, 30, .7);
 }
-.fact { position: relative; display: flex; align-items: center; gap: 14px; padding: 14px 18px; font-size: 14px; line-height: 1.35; font-weight: 600; color: var(--navy); }
+.fact { position: relative; display: flex; align-items: center; gap: 12px; padding: 14px 16px; font-size: 13px; line-height: 1.35; font-weight: 600; color: var(--navy); }
 .fact + .fact::before { content: ""; position: absolute; left: 0; top: 14px; bottom: 14px; width: 1px; background: var(--line); }
 .fact__icon { display: grid; place-items: center; flex: none; width: 40px; height: 40px; border-radius: 50%; background: var(--navy); color: var(--white); }
+/* строки в фактах разбиты вручную; на средних экранах — сетка 2×2, чтобы не было третьей строки */
+.fact > span:last-child { white-space: nowrap; }
+@media (max-width: 1240px) {
+  .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .fact:nth-child(3)::before { content: none; }
+  .fact:nth-child(n + 3) { border-top: 1px solid var(--line); }
+}
 .fact__icon svg { width: 19px; height: 19px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
 .about-hero img {
   width: 100%; object-fit: cover; object-position: 50% 60%;
-  height: min(56.25vw, calc(100vh - var(--header-h)));
-  height: min(56.25vw, calc(100svh - var(--header-h)));
-  min-height: 320px;
+  /* на 30% ниже галереи главной */
+  height: min(39.4vw, calc((100vh - var(--header-h)) * .7));
+  height: min(39.4vw, calc((100svh - var(--header-h)) * .7));
+  min-height: 300px;
 }
 .about--page { margin-bottom: 0; align-items: stretch; }
 /* текст справа — плотной колонкой сверху, без растянутых промежутков; фото слева дотягивается до низа списка */
@@ -1262,9 +1270,6 @@ html.has-modal { overflow: hidden; }
   .bento__card--tall { grid-row: auto; grid-column: span 2; min-height: 380px; }
   .award { flex-basis: calc((100% - 40px) / 3); }
   .about__media { flex: none; aspect-ratio: 16 / 9; min-height: 0; }
-  .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .fact:nth-child(3)::before { content: none; }
-  .fact:nth-child(n + 3) { border-top: 1px solid var(--line); }
 }
 @media (max-width: 720px) {
   .people { grid-template-columns: minmax(0, 1fr); gap: 12px; }
@@ -1277,12 +1282,13 @@ html.has-modal { overflow: hidden; }
   .person__name { margin-bottom: 8px; }
   .awards { gap: 12px; margin: 0 calc(var(--gutter) * -1); padding: 0 var(--gutter) 4px; scroll-padding: 0 var(--gutter); }
   .award { flex-basis: 58%; padding: 8px; }
-  .about-hero img { height: min(75vw, calc(100svh - var(--header-h))); min-height: 0; }
+  .about-hero img { height: min(52.5vw, calc((100svh - var(--header-h)) * .7)); min-height: 0; }
   /* на телефоне факты под фото списком, а не поверх */
   .about-hero::after { content: none; }
   .about-hero__ui { position: static; padding-top: 0; background: var(--light); }
   .facts { grid-template-columns: minmax(0, 1fr); margin-top: -28px; padding: 4px 6px; }
   .fact { padding: 12px 10px; font-size: 13px; }
+  .fact > span:last-child { white-space: normal; }
   .fact + .fact::before { content: none; }
   .fact + .fact { border-top: 1px solid var(--line); }
   .fact__icon { width: 34px; height: 34px; }

@@ -1,0 +1,71 @@
+/* Варианты блока «Завод инновационных металлоконструкций» — только для страницы выбора about-variants.html.
+   После выбора нужный вариант переносится в styles.css, этот файл удаляется. */
+
+.v-label {
+  display: flex; align-items: center; gap: 12px; padding-top: 40px;
+  font-size: 14px; font-weight: 500; color: var(--muted);
+}
+.v-label span { padding: 6px 14px; border-radius: 999px; background: var(--navy); font-size: 13px; font-weight: 700; color: var(--white); }
+.v-label + .section { padding-top: 32px; }
+
+/* Вариант 1: широкое фото, белая карточка с текстом заходит на фото справа снизу */
+.v1__head { margin-bottom: var(--head-gap); }
+.v1__stage { position: relative; }
+.v1__stage > img { width: 72%; aspect-ratio: 16 / 10; object-fit: cover; border-radius: var(--radius); }
+.v1__card {
+  position: absolute; right: 0; bottom: -40px; width: 46%;
+  display: grid; gap: 16px; padding: clamp(24px, 3vw, 40px);
+  border-radius: var(--radius); background: var(--white);
+  box-shadow: 0 30px 60px -30px rgba(23, 22, 43, .35);
+}
+.v1__lead { font-size: 15px; color: var(--muted); }
+.v1 { padding-bottom: calc(var(--section) + 40px); }
+
+/* Вариант 2: три фото-карточки с подписью, под ними программы строкой из 4 колонок */
+.v2__objects { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.v2__obj { position: relative; overflow: hidden; border-radius: var(--radius); }
+.v2__obj img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; transition: transform .6s ease; }
+.v2__obj:hover img { transform: scale(1.04); }
+.v2__obj::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(23, 22, 43, 0) 55%, rgba(23, 22, 43, .7) 100%); }
+.v2__cap { position: absolute; left: 22px; bottom: 18px; z-index: 1; font-size: 18px; font-weight: 700; color: var(--white); }
+.v2__programs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin-top: 32px; border-top: 1px solid var(--line); }
+.v2__programs li { position: relative; padding: 20px 24px 0 28px; font-size: 14px; line-height: 1.45; color: var(--ink); }
+.v2__programs li:first-child { padding-left: 28px; }
+.v2__programs li + li { border-left: 1px solid var(--line); margin-left: 0; }
+.v2__programs li::before {
+  content: ""; position: absolute; left: 6px; top: 24px; width: 14px; height: 14px; background: var(--navy);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M2 7.4l3.2 3.1L12 3.5' fill='none' stroke='black' stroke-width='2'/%3E%3C/svg%3E") center / contain no-repeat;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M2 7.4l3.2 3.1L12 3.5' fill='none' stroke='black' stroke-width='2'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+.v2__programs li + li::before { left: 10px; }
+.v2__programs li + li { padding-left: 32px; }
+
+/* Вариант 3: текст слева, справа 2×2 светлые карточки с иконкой в синем круге */
+.v3__grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 40px 64px; align-items: center; }
+.v3__text { display: grid; gap: 18px; font-size: 16px; color: var(--muted); }
+.v3__text .duo { margin-bottom: 8px; }
+.v3__cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.v3__card { display: flex; flex-direction: column; gap: 28px; min-height: 190px; padding: 22px 22px 24px; border-radius: var(--radius); background: var(--light); }
+.v3__card .fact__icon { width: 48px; height: 48px; }
+.v3__card .fact__icon svg { width: 22px; height: 22px; }
+.v3__card p { margin-top: auto; font-size: 15px; line-height: 1.4; font-weight: 600; color: var(--navy); }
+
+@media (max-width: 1080px) {
+  .v1__stage > img { width: 100%; }
+  .v1__card { position: relative; right: auto; bottom: auto; width: auto; margin: -60px 20px 0; }
+  .v1 { padding-bottom: var(--section); }
+  .v2__programs { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 20px; }
+  .v2__programs li:nth-child(3) { border-left: 0; padding-left: 28px; }
+  .v2__programs li:nth-child(3)::before { left: 6px; }
+  .v3__grid { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 720px) {
+  .v1__card { margin: -40px 10px 0; }
+  .v2__objects { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  .v2__programs { grid-template-columns: minmax(0, 1fr); row-gap: 0; }
+  .v2__programs li, .v2__programs li + li, .v2__programs li:nth-child(3) { border-left: 0; padding: 14px 0 14px 28px; border-bottom: 1px solid var(--line); }
+  .v2__programs li::before, .v2__programs li + li::before, .v2__programs li:nth-child(3)::before { left: 0; top: 18px; }
+  .v3__cards { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+  .v3__card { min-height: 0; flex-direction: row; align-items: center; gap: 14px; padding: 16px; }
+  .v3__card p { margin-top: 0; font-size: 14px; }
+}
