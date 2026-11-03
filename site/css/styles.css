@@ -1367,7 +1367,26 @@ html.has-modal { overflow: hidden; }
 .sortament__desc { font-size: 15px; color: var(--muted); }
 .sortament__lists { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; justify-self: stretch; margin: 8px 0 12px; }
 .sortament__title { margin-bottom: 8px; font-size: 17px; font-weight: 700; color: var(--navy); }
-.sortament__media img { width: 100%; max-height: 640px; object-fit: contain; }
+/* схема сечений: три чертежа, подписи текстом (на картинке они были бы ~9px) */
+.sortament__media { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px 24px; align-items: end; }
+.section-fig { display: grid; justify-items: center; gap: 12px; margin: 0; text-align: center; }
+.section-fig img { width: 100%; max-width: 260px; height: auto; }
+.section-fig figcaption { max-width: 240px; font-size: 14px; line-height: 1.4; color: var(--muted); }
+.section-fig--wide { grid-column: 1 / -1; grid-template-columns: minmax(0, 320px) minmax(0, 220px); justify-content: center; align-items: center; gap: 28px; text-align: left; }
+.section-fig--wide img { max-width: 320px; }
+/* лента деталей под сортаментом: светлая подложка (её цвет запечён в фон картинок parts/), медленная бесконечная прокрутка, пауза при наведении */
+.parts { margin-top: var(--sub-gap); padding: 28px 0 32px; border-radius: var(--radius); background: var(--light); overflow: hidden; }
+.parts__label { margin: 0 32px 14px; font-size: 14px; font-weight: 600; color: var(--muted); }
+.parts__viewport { overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); }
+.parts__track { display: flex; width: max-content; margin: 0; padding: 0; list-style: none; animation: parts-run 60s linear infinite; }
+.parts:hover .parts__track { animation-play-state: paused; }
+.parts__item { flex: 0 0 auto; width: 168px; margin-right: 12px; }
+.parts__item img { display: block; width: 100%; height: auto; }
+@keyframes parts-run { to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) {
+  .parts__track { animation: none; }
+  .parts__viewport { overflow-x: auto; }
+}
 
 /* монтаж под ключ: четыре этапа с номером на линии, как этапы производства на главной */
 .steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
@@ -1396,7 +1415,6 @@ html.has-modal { overflow: hidden; }
   .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 36px; }
   .step:nth-child(2) .flow__num::before { right: 0; }
   .sortament { grid-template-columns: minmax(0, 1fr); }
-  .sortament__media img { max-height: 520px; }
   .expert { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .expert__item:not(:nth-child(3n + 1)) { padding-left: 0; border-left: 0; }
   .expert__item:nth-child(even) { padding-left: 28px; border-left: 1px solid var(--line); }
@@ -1416,6 +1434,12 @@ html.has-modal { overflow: hidden; }
   #equipment .section-head__side .page-head__text { flex: 1 1 100%; }
   .sortament__lists { gap: 20px; }
   .sortament__lead { font-size: 17px; }
+  .parts { padding: 20px 0 24px; }
+  .sortament__media { gap: 24px 16px; }
+  .section-fig--wide { grid-template-columns: minmax(0, 1fr); justify-items: center; text-align: center; gap: 12px; }
+  .section-fig figcaption { font-size: 13px; }
+  .parts__label { margin: 0 20px 10px; }
+  .parts__item { width: 120px; margin-right: 8px; }
   .sortament .btn { width: 100%; white-space: normal; text-align: center; }
   .expert { grid-template-columns: minmax(0, 1fr); }
   .expert__item, .expert__item:nth-child(even) { padding: 20px 0; border-left: 0; }
