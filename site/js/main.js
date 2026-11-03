@@ -684,6 +684,9 @@
     });
   });
   if (partSearch) partSearch.addEventListener('input', filterParts);
+  // группа из ссылки меню «Продукция» → «Комплектующие»: parts.html#al, #st, #anchor
+  const hashChip = partChips.find((c) => '#' + c.dataset.group === location.hash);
+  if (hashChip) hashChip.click();
 
   // Фото комплектующего, скан награды — на весь экран
   let partZoom;
