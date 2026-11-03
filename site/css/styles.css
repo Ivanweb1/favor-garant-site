@@ -1169,22 +1169,31 @@ html.has-modal { overflow: hidden; }
 }
 .fact__icon svg { width: 19px; height: 19px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
 .about-hero img {
-  width: 100%; object-fit: cover; object-position: 50% 60%;
+  width: 100%; object-fit: cover; object-position: 50% 52%;
   /* на 30% ниже галереи главной */
   height: min(39.4vw, calc((100vh - var(--header-h)) * .7));
   height: min(39.4vw, calc((100svh - var(--header-h)) * .7));
   min-height: 300px;
 }
-.about--page { margin-bottom: 0; align-items: stretch; }
-/* текст справа — плотной колонкой сверху, без растянутых промежутков; фото слева дотягивается до низа списка */
-.about--page .about__text { align-content: start; gap: 18px; padding-top: 4px; font-size: 16px; }
-.about--page .checks { margin-top: 10px; }
-/* фото объекта под заголовком: заполняет левую колонку до низа списка */
-.about--page > div:first-child { display: flex; flex-direction: column; gap: 32px; }
-.about__media { flex: 1; min-height: 280px; overflow: hidden; border-radius: var(--radius); background: var(--light); }
-.about__media img { width: 100%; height: 100%; object-fit: cover; }
-.about--page .checks { margin-top: 8px; }
-.about--page .checks li { font-size: 15px; }
+/* что делаем: три фото-карточки с подписью, под ними участие в программах строкой из 4 колонок */
+.objects { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.object { position: relative; overflow: hidden; border-radius: var(--radius); }
+.object img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; transition: transform .6s ease; }
+.object:hover img { transform: scale(1.04); }
+.object::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(23, 22, 43, 0) 55%, rgba(23, 22, 43, .7) 100%); }
+.object__cap { position: absolute; left: 22px; bottom: 18px; z-index: 1; font-size: 18px; font-weight: 700; color: var(--white); }
+.programs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin-top: 32px; border-top: 1px solid var(--line); }
+.programs li { position: relative; padding: 20px 24px 0 28px; font-size: 14px; line-height: 1.45; color: var(--ink); }
+.programs li:first-child { padding-left: 28px; }
+.programs li + li { border-left: 1px solid var(--line); margin-left: 0; }
+.programs li::before {
+  content: ""; position: absolute; left: 6px; top: 24px; width: 14px; height: 14px; background: var(--navy);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M2 7.4l3.2 3.1L12 3.5' fill='none' stroke='black' stroke-width='2'/%3E%3C/svg%3E") center / contain no-repeat;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M2 7.4l3.2 3.1L12 3.5' fill='none' stroke='black' stroke-width='2'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+.programs li + li::before { left: 10px; }
+.programs li + li { padding-left: 32px; }
+
 
 /* принципы: тёмный блок, карточки разного размера — фото КБ высокой слева, веер дипломов, текст, фото станка широкой снизу */
 .page-head__text--light { color: #C9C7E6; }
@@ -1269,7 +1278,9 @@ html.has-modal { overflow: hidden; }
   .page-head--bento { display: flex; }
   .bento__card--tall { grid-row: auto; grid-column: span 2; min-height: 380px; }
   .award { flex-basis: calc((100% - 40px) / 3); }
-  .about__media { flex: none; aspect-ratio: 16 / 9; min-height: 0; }
+  .programs { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 20px; }
+  .programs li:nth-child(3) { border-left: 0; padding-left: 28px; }
+  .programs li:nth-child(3)::before { left: 6px; }
 }
 @media (max-width: 720px) {
   .people { grid-template-columns: minmax(0, 1fr); gap: 12px; }
@@ -1292,8 +1303,10 @@ html.has-modal { overflow: hidden; }
   .fact + .fact::before { content: none; }
   .fact + .fact { border-top: 1px solid var(--line); }
   .fact__icon { width: 34px; height: 34px; }
-  .about__media { aspect-ratio: 4 / 3; }
-  .about--page > div:first-child { gap: 24px; }
+  .objects { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  .programs { grid-template-columns: minmax(0, 1fr); row-gap: 0; }
+  .programs li, .programs li + li, .programs li:nth-child(3) { border-left: 0; padding: 14px 0 14px 28px; border-bottom: 1px solid var(--line); }
+  .programs li::before, .programs li + li::before, .programs li:nth-child(3)::before { left: 0; top: 18px; }
 }
 
 /* ---------- Адаптив ---------- */
