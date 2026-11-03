@@ -1377,17 +1377,17 @@ html.has-modal { overflow: hidden; }
 .section-fig:not(.section-fig--wide) img { height: 230px; object-fit: contain; }
 .section-fig:not(.section-fig--wide) figcaption { min-height: 2.8em; }
 /* лента деталей под сортаментом: светлая подложка (её цвет запечён в фон картинок parts/), медленная бесконечная прокрутка, пауза при наведении */
-.parts { margin-top: var(--sub-gap); padding: 28px 0 32px; border-radius: var(--radius); background: var(--light); overflow: hidden; }
-.parts__label { margin: 0 32px 14px; font-size: 14px; font-weight: 600; color: var(--muted); }
-.parts__viewport { overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); }
-.parts__track { display: flex; width: max-content; margin: 0; padding: 0; list-style: none; animation: parts-run 60s linear infinite; }
-.parts:hover .parts__track { animation-play-state: paused; }
-.parts__item { flex: 0 0 auto; width: 168px; margin-right: 12px; }
-.parts__item img { display: block; width: 100%; height: auto; }
-@keyframes parts-run { to { transform: translateX(-50%); } }
+.cut-parts { margin-top: var(--sub-gap); padding: 28px 0 32px; border-radius: var(--radius); background: var(--light); overflow: hidden; }
+.cut-parts__label { margin: 0 32px 14px; font-size: 14px; font-weight: 600; color: var(--muted); }
+.cut-parts__viewport { overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); }
+.cut-parts__track { display: flex; width: max-content; margin: 0; padding: 0; list-style: none; animation: cut-parts-run 60s linear infinite; }
+.cut-parts:hover .cut-parts__track { animation-play-state: paused; }
+.cut-parts__item { flex: 0 0 auto; width: 168px; margin-right: 12px; }
+.cut-parts__item img { display: block; width: 100%; height: auto; }
+@keyframes cut-parts-run { to { transform: translateX(-50%); } }
 @media (prefers-reduced-motion: reduce) {
-  .parts__track { animation: none; }
-  .parts__viewport { overflow-x: auto; }
+  .cut-parts__track { animation: none; }
+  .cut-parts__viewport { overflow-x: auto; }
 }
 
 /* монтаж под ключ: четыре этапа с номером на линии, как этапы производства на главной */
@@ -1437,13 +1437,13 @@ html.has-modal { overflow: hidden; }
   #equipment .section-head__side .page-head__text { flex: 1 1 100%; }
   .sortament__lists { gap: 20px; }
   .sortament__lead { font-size: 17px; }
-  .parts { padding: 20px 0 24px; }
+  .cut-parts { padding: 20px 0 24px; }
   .sortament__media { gap: 24px 16px; }
   .section-fig--wide { grid-template-columns: minmax(0, 1fr); justify-items: center; text-align: center; gap: 12px; }
   .section-fig figcaption { font-size: 13px; }
   .section-fig:not(.section-fig--wide) img { height: 150px; }
-  .parts__label { margin: 0 20px 10px; }
-  .parts__item { width: 120px; margin-right: 8px; }
+  .cut-parts__label { margin: 0 20px 10px; }
+  .cut-parts__item { width: 120px; margin-right: 8px; }
   .sortament .btn { width: 100%; white-space: normal; text-align: center; }
   .expert { grid-template-columns: minmax(0, 1fr); }
   .expert__item, .expert__item:nth-child(even) { padding: 20px 0; border-left: 0; }
