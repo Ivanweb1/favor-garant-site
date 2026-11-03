@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap&subset=cyrillic" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/styles.css?v=20261103d">
 </head>
 <body>
 
@@ -219,50 +219,66 @@
 
 <main>
 
-  <!-- 1. Новости: четыре последние со старой страницы /news (лента Тильды), карточки как на главной -->
+  <!-- 1. Новости: четыре последние со старой страницы /news (лента Тильды); страницы статей собирает tools/build_news.py -->
   <section class="section page-top">
     <div class="container">
       <ol class="crumbs" aria-label="Навигация по сайту"><li><a href="index.html">Главная</a></li><li><span aria-current="page">Новости</span></li></ol>
       <div class="page-head">
         <div>
-          <h1 class="h2 duo">
+          <h1 class="h2 duo duo--inline">
             <span>Проекты</span>
             <span class="duo__second">и&nbsp;события</span>
           </h1>
         </div>
       </div>
       <div class="news news--feed">
-        <article class="news__card">
-          <div class="news__media"><img src="img/news/52-news-rnp.jpg" alt="Свидетельство о внесении ООО «ФАВОР-ГАРАНТ» в Реестр надёжных партнёров" loading="lazy" width="900" height="900"></div>
+        <a class="news__card" href="news-rnp.html">
+          <div class="news__media"><img src="img/news/52-news-rnp.jpg" alt="Свидетельство о внесении ООО «ФАВОР-ГАРАНТ» в Реестр надёжных партнёров" loading="lazy" width="1200" height="930"></div>
           <div class="news__body">
             <time class="news__tag" datetime="2026-08-21">21.08.2026</time>
-            <h2 class="news__title">ООО «ФАВОР-ГАРАНТ» внесено в&nbsp;Реестр надёжных партнёров (РНП)</h2>
+            <h2 class="news__title">ООО&nbsp;«ФАВОР-ГАРАНТ» внесено в&nbsp;Реестр надёжных партнёров (РНП)</h2>
             <p class="news__text">С&nbsp;гордостью сообщаем вам важную новость: Общество с&nbsp;ограниченной ответственностью «ФАВОР-ГАРАНТ» официально внесено в&nbsp;Реестр надёжных партнёров Торгово-промышленной палаты Российской Федерации.</p>
+            <div class="news__foot">
+              <span class="link-arrow">Читать</span>
+              <span class="news__time"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.25"/><path d="M8 4.5V8l2.5 1.5"/></svg>1&nbsp;мин чтения</span>
+            </div>
           </div>
-        </article>
-        <article class="news__card">
-          <div class="news__media"><img src="img/news/53-news-award.jpg" alt="Команда «ФАВОР-ГАРАНТ» с благодарственным письмом" loading="lazy" width="900" height="900"></div>
+        </a>
+        <a class="news__card" href="news-award.html">
+          <div class="news__media"><img src="img/news/53-news-award.jpg" alt="Команда «ФАВОР-ГАРАНТ» с благодарственным письмом" loading="lazy" width="1200" height="930"></div>
           <div class="news__body">
             <time class="news__tag" datetime="2026-07-13">13.07.2026</time>
             <h2 class="news__title">Признание экспертов и&nbsp;новые горизонты: «ФАВОР-ГАРАНТ» удостоена награды и&nbsp;расширяет производство</h2>
             <p class="news__text">За&nbsp;профессионализм и&nbsp;высокую вовлечённость коллектива руководство РЦК вручило команде «ФАВОР-ГАРАНТ» благодарственное письмо.</p>
+            <div class="news__foot">
+              <span class="link-arrow">Читать</span>
+              <span class="news__time"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.25"/><path d="M8 4.5V8l2.5 1.5"/></svg>1&nbsp;мин чтения</span>
+            </div>
           </div>
-        </article>
-        <article class="news__card">
-          <div class="news__media"><img src="img/news/54-news-temirkanov.jpg" alt="Площадь имени Юрия Темирканова в Петербурге" loading="lazy" width="900" height="900"></div>
+        </a>
+        <a class="news__card" href="news-temirkanov.html">
+          <div class="news__media"><img src="img/news/54-news-temirkanov.jpg" alt="Площадь имени Юрия Темирканова в Петербурге" loading="lazy" width="1200" height="930"></div>
           <div class="news__body">
             <time class="news__tag" datetime="2026-05-08">08.05.2026</time>
             <h2 class="news__title">Великий дирижёр на&nbsp;карте города: площадь имени Юрия Темирканова появилась в&nbsp;Петербурге</h2>
+            <div class="news__foot">
+              <span class="link-arrow">Читать</span>
+              <span class="news__time"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.25"/><path d="M8 4.5V8l2.5 1.5"/></svg>1&nbsp;мин чтения</span>
+            </div>
           </div>
-        </article>
-        <article class="news__card">
-          <div class="news__media"><img src="img/news/55-news-maf-park.jpg" alt="Малые архитектурные формы в парке" loading="lazy" width="900" height="900"></div>
+        </a>
+        <a class="news__card" href="news-maf-park.html">
+          <div class="news__media"><img src="img/news/55-news-maf-park.jpg" alt="Малые архитектурные формы в парке" loading="lazy" width="1200" height="930"></div>
           <div class="news__body">
             <time class="news__tag" datetime="2024-11-15">15.11.2024</time>
             <h2 class="news__title">Проекты благоустройства: организация пространства в&nbsp;парке с&nbsp;помощью МАФ</h2>
             <p class="news__text">Элементы малых архитектурных форм (МАФ) не&nbsp;только функциональны, но&nbsp;и&nbsp;способны значительно изменить восприятие городского пространства.</p>
+            <div class="news__foot">
+              <span class="link-arrow">Читать</span>
+              <span class="news__time"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.25"/><path d="M8 4.5V8l2.5 1.5"/></svg>1&nbsp;мин чтения</span>
+            </div>
           </div>
-        </article>
+        </a>
       </div>
     </div>
   </section>

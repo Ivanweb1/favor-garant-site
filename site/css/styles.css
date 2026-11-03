@@ -1679,3 +1679,36 @@ html.has-modal { overflow: hidden; }
 .news--feed .news__title { font-size: 17px; }
 @media (max-width: 1080px) { .news--feed { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 720px) { .news--feed { grid-template-columns: minmax(0, 1fr); } .news--feed .news__media img { aspect-ratio: 1310 / 1015; } }
+
+/* ===== Страница статьи (news-*.html, собирает tools/build_news.py) ===== */
+.news--three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.news--feed .news__foot { padding-top: 14px; }
+/* в крошках из трёх пунктов (статья) последний тоже сжимается с многоточием — иначе длинный заголовок вылезает за экран */
+.crumbs li:last-child:not(:nth-child(-n+2)) { flex-shrink: 1; }
+.crumbs li:nth-child(2):nth-last-child(2) { flex-shrink: 0; }
+.article { max-width: 780px; margin: 0 auto; }
+.article__head { display: grid; gap: 14px; margin-bottom: clamp(24px, 3vw, 36px); }
+.article__date { font-size: 13px; font-weight: 600; letter-spacing: .1em; color: var(--grey); }
+.article__title { font-size: clamp(28px, 3.4vw, 44px); line-height: 1.15; font-weight: 700; color: var(--navy); }
+.article__cover { margin: 0 0 clamp(28px, 3.5vw, 44px); overflow: hidden; border-radius: var(--radius); background: var(--light); }
+.article__cover img { display: block; width: 100%; height: auto; }
+.article__body { display: grid; gap: 18px; font-size: 17px; line-height: 1.65; color: var(--ink); }
+.article__body h2 { margin-top: 18px; font-size: 24px; line-height: 1.3; font-weight: 700; color: var(--navy); }
+.article__body a { color: var(--navy); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(42, 37, 96, .35); transition: color .2s ease; }
+.article__body a:hover { color: var(--navy-hover); }
+.article__body ul { display: grid; gap: 10px; margin: 0; padding-left: 22px; }
+.article__body li::marker { color: var(--red); }
+.article__lead { font-size: 20px; line-height: 1.5; font-weight: 500; color: var(--navy); }
+.article__note { padding: 22px 26px; border-left: 3px solid var(--red); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; background: var(--light); font-weight: 600; color: var(--navy); }
+.article__sign { margin-top: 6px; }
+.article__figure { margin: 10px 0; overflow: hidden; border-radius: var(--radius); background: var(--light); }
+.article__figure img { display: block; width: 100%; height: auto; }
+.article__back { display: inline-flex; margin-top: clamp(32px, 4vw, 48px); font-size: 15px; }
+@media (max-width: 1080px) { .news--three { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 720px) {
+  .news--three { grid-template-columns: minmax(0, 1fr); }
+  .article__body { font-size: 16px; }
+  .article__body h2 { font-size: 20px; }
+  .article__lead { font-size: 18px; }
+  .article__note { padding: 18px 20px; }
+}
