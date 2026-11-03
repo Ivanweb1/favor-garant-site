@@ -285,11 +285,13 @@
   }
 
   // Имя прикреплённого файла
-  const fileInput = document.querySelector('.file__input');
-  const fileName = document.querySelector('.file__name');
-  fileInput.addEventListener('change', () => {
-    fileName.textContent = fileInput.files.length ? fileInput.files[0].name : 'Файл не выбран';
-    fileInput.closest('.file').classList.toggle('has-file', fileInput.files.length > 0);
+  const setFileName = (input) => {
+    const box = input.closest('.file');
+    box.querySelector('.file__name').textContent = input.files.length ? input.files[0].name : 'Файл не выбран';
+    box.classList.toggle('has-file', input.files.length > 0);
+  };
+  document.querySelectorAll('.file__input').forEach((input) => {
+    input.addEventListener('change', () => setFileName(input));
   });
 
   // Выпадающий список в стилистике сайта поверх обычного select: select скрыт и хранит значение для формы
@@ -513,56 +515,234 @@
     select(0);
   });
 
-  // Форма: проверка обязательных полей. Отправки на сервер в прототипе нет.
-  const form = document.getElementById('request-form');
-  const status = form.querySelector('.form__status');
-
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    let valid = true;
-    form.querySelectorAll('[required]').forEach((input) => {
-      // email проверяем ещё и на формат
-      const ok = input.value.trim().length > 0 && (input.type !== 'email' || input.checkValidity());
-      input.classList.toggle('is-invalid', !ok);
-      if (!ok && valid) input.focus();
-      valid = valid && ok;
+  // Всплывающие окна (заявка на модель, оформление заказа): <dialog>, закрываются крестиком, Esc и кликом по фону
+  const openModal = (id) => {
+    const modal = document.getElementById(id);
+    if (!modal) return;
+    modal.dispatchEvent(new Event('modal:open'));
+    modal.showModal();
+    document.documentElement.classList.add('has-modal');
+  };
+  document.querySelectorAll('dialog.modal').forEach((modal) => {
+    modal.addEventListener('close', () => {
+      document.documentElement.classList.remove('has-modal');
+      // при следующем открытии форма снова чистая
+      const status = modal.querySelector('.form__status');
+      if (status) status.hidden = true;
     });
-    status.hidden = false;
-    status.textContent = valid
-      ? 'Спасибо! Заявка принята, мы свяжемся с вами. (Прототип: заявка никуда не отправляется.)'
-      : 'Заполните имя, телефон и email.';
-    if (valid) {
-      form.reset();
-      fileName.textContent = 'Файл не выбран';
-      fileInput.closest('.file').classList.remove('has-file');
-    }
+    modal.addEventListener('click', (e) => { if (e.target === modal) modal.close(); });
+    modal.querySelectorAll('[data-modal-close]').forEach((btn) => btn.addEventListener('click', () => modal.close()));
+  });
+  document.querySelectorAll('[data-modal-open]').forEach((btn) => {
+    btn.addEventListener('click', (e) => { e.preventDefault(); openModal(btn.dataset.modalOpen); });
   });
 
-  // Корзина комплектующих (прототип): товары хранятся в браузере, счётчик в шапке общий для всех страниц
+  // Заявка на модель: выбранная комплектация подставляется в окно
+  const configChips = document.querySelectorAll('.filters--configs .chip');
+  configChips.forEach((chip) => {
+    chip.addEventListener('click', () => {
+      const name = chip.textContent.replace(/\s+/g, ' ').trim();
+      document.querySelectorAll('[data-config-name]').forEach((el) => { el.textContent = name; });
+      document.querySelectorAll('[data-config-input]').forEach((el) => { el.value = name; });
+      document.querySelectorAll('[data-config-img]').forEach((el) => { el.src = chip.dataset.full; });
+    });
+  });
+
+  // Корзина комплектующих (прототип): хранится в браузере как { id: количество }, счётчик в шапке общий для всех страниц
   const CART_KEY = 'fg-cart';
-  const readCart = () => { try { return JSON.parse(localStorage.getItem(CART_KEY)) || []; } catch (e) { return []; } };
+  const readCart = () => {
+    try {
+      const saved = JSON.parse(localStorage.getItem(CART_KEY));
+      // старый формат — просто список id
+      if (Array.isArray(saved)) return Object.fromEntries(saved.map((id) => [id, 1]));
+      return saved && typeof saved === 'object' ? saved : {};
+    } catch (e) { return {}; }
+  };
   let cart = readCart();
+  const saveCart = () => {
+    try { localStorage.setItem(CART_KEY, JSON.stringify(cart)); } catch (e) { /* без хранилища — только на этой странице */ }
+  };
+  // доп. оборудование из карточки «Атланта» — без цены, менеджер считает отдельно
+  const EXTRA_NAMES = {
+    'atlant-board': 'Электронное табло прибытия', 'atlant-poster': 'Лайтпостер сити-формат', 'atlant-sign': 'Табличка с названием',
+    'atlant-light': 'Подсветка конструкции', 'atlant-usb': 'USB-зарядка', 'atlant-wifi': 'Wi-Fi маршрутизатор',
+    'atlant-camera': 'Камеры видеонаблюдения', 'atlant-sos': 'Кнопка экстренного вызова', 'atlant-sound': 'Модуль звукового дублирования',
+    'atlant-pylon': 'Навигационный пилон',
+  };
+  const partRows = [...document.querySelectorAll('.parts tbody tr[data-id]')];
+  const partInfo = (id) => {
+    const row = partRows.find((r) => r.dataset.id === id);
+    if (row) return { name: row.dataset.name, price: Number(row.dataset.price) };
+    return { name: EXTRA_NAMES[id] || id, price: null };
+  };
+  const money = (n) => n.toLocaleString('ru-RU') + ' ₽';
+  const plural = (n, one, few, many) => {
+    const m10 = n % 10, m100 = n % 100;
+    if (m10 === 1 && m100 !== 11) return one;
+    if (m10 >= 2 && m10 <= 4 && (m100 < 12 || m100 > 14)) return few;
+    return many;
+  };
+
   const cartLink = document.querySelector('.header__cart');
-  const renderCart = () => {
+  const barSum = document.querySelector('.parts-bar__sum');
+  const barBtn = document.querySelector('.parts-bar__btn');
+  const orderList = document.querySelector('.order__list');
+
+  function renderCart() {
+    const ids = Object.keys(cart);
     if (cartLink) {
-      cartLink.querySelector('.header__cart-count').textContent = cart.length;
-      cartLink.setAttribute('aria-label', `Корзина, товаров: ${cart.length}`);
+      cartLink.querySelector('.header__cart-count').textContent = ids.length;
+      cartLink.setAttribute('aria-label', `Корзина, позиций: ${ids.length}`);
     }
     document.querySelectorAll('[data-cart-add]').forEach((btn) => {
-      const added = cart.includes(btn.dataset.cartAdd);
+      const added = btn.dataset.cartAdd in cart;
       btn.setAttribute('aria-pressed', String(added));
       btn.querySelector('span').textContent = added ? 'В корзине' : 'В корзину';
     });
-  };
+    partRows.forEach((row) => {
+      const btn = row.querySelector('.parts__cart');
+      const added = row.dataset.id in cart;
+      btn.setAttribute('aria-pressed', String(added));
+      btn.querySelector('span').textContent = added ? 'В корзине' : 'В корзину';
+      row.classList.toggle('is-added', added);
+      if (added) row.querySelector('.qty__input').value = cart[row.dataset.id];
+    });
+    // итог: позиции и сумма по тем, у кого есть цена
+    const total = ids.reduce((sum, id) => sum + (partInfo(id).price || 0) * cart[id], 0);
+    if (barSum) {
+      barSum.innerHTML = ids.length
+        ? `В корзине ${ids.length} ${plural(ids.length, 'позиция', 'позиции', 'позиций')} <b>на ${money(total)}</b>`
+        : 'Корзина пуста';
+      barBtn.disabled = !ids.length;
+    }
+    if (orderList) {
+      orderList.innerHTML = '';
+      ids.forEach((id) => {
+        const { name, price } = partInfo(id);
+        const li = document.createElement('li');
+        li.className = 'order__item';
+        li.innerHTML = '<span class="order__name"></span><span class="order__qty"></span><span class="order__sum"></span>'
+          + '<button class="order__remove" type="button" aria-label="Убрать из заказа"><svg width="12" height="12" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 2l12 12M14 2L2 14"/></svg></button>';
+        li.querySelector('.order__name').textContent = name;
+        li.querySelector('.order__qty').textContent = price ? `${cart[id]} × ${money(price)}` : `${cart[id]} шт.`;
+        li.querySelector('.order__sum').textContent = price ? money(price * cart[id]) : 'по запросу';
+        li.querySelector('.order__remove').addEventListener('click', () => { delete cart[id]; saveCart(); renderCart(); });
+        orderList.appendChild(li);
+      });
+      document.querySelector('.order__empty').hidden = ids.length > 0;
+      document.querySelector('.order__total').innerHTML = ids.length ? `Итого: <b>${money(total)}</b>` : '';
+      document.querySelector('#order [type="submit"]').disabled = !ids.length;
+    }
+  }
+
   document.querySelectorAll('[data-cart-add]').forEach((btn) => {
     btn.addEventListener('click', () => {
       const id = btn.dataset.cartAdd;
-      cart = cart.includes(id) ? cart.filter((x) => x !== id) : [...cart, id];
-      try { localStorage.setItem(CART_KEY, JSON.stringify(cart)); } catch (e) { /* без хранилища — только на этой странице */ }
+      if (id in cart) delete cart[id]; else cart[id] = 1;
+      saveCart();
       renderCart();
     });
   });
+
+  // Таблица комплектующих: количество, «В корзину», фильтр по группе и поиск
+  partRows.forEach((row) => {
+    const input = row.querySelector('.qty__input');
+    const clamp = (n) => Math.min(999, Math.max(1, Math.round(n) || 1));
+    const setQty = (n) => {
+      input.value = clamp(n);
+      // если позиция уже в корзине — меняем количество и там
+      if (row.dataset.id in cart) { cart[row.dataset.id] = Number(input.value); saveCart(); renderCart(); }
+    };
+    row.querySelectorAll('.qty__btn').forEach((b) => b.addEventListener('click', () => setQty(Number(input.value) + Number(b.dataset.step))));
+    input.addEventListener('change', () => setQty(Number(input.value)));
+    row.querySelector('.parts__cart').addEventListener('click', () => {
+      const id = row.dataset.id;
+      if (id in cart) delete cart[id]; else cart[id] = clamp(Number(input.value));
+      saveCart();
+      renderCart();
+    });
+  });
+
+  const partChips = [...document.querySelectorAll('.parts-tools__filters .chip')];
+  const partSearch = document.querySelector('.parts-search__input');
+  let partGroup = 'all';
+  function filterParts() {
+    const q = partSearch.value.trim().toLowerCase();
+    let shown = 0;
+    partRows.forEach((row) => {
+      const ok = (partGroup === 'all' || row.dataset.group === partGroup) && row.dataset.name.toLowerCase().includes(q);
+      row.hidden = !ok;
+      if (ok) shown++;
+    });
+    document.querySelector('.parts__empty').hidden = shown > 0;
+  }
+  partChips.forEach((chip) => {
+    chip.addEventListener('click', () => {
+      partChips.forEach((c) => c.setAttribute('aria-pressed', String(c === chip)));
+      partGroup = chip.dataset.group;
+      filterParts();
+    });
+  });
+  if (partSearch) partSearch.addEventListener('input', filterParts);
+
+  // Фото комплектующего на весь экран
+  let partZoom;
+  document.querySelectorAll('.parts__thumb').forEach((thumb) => {
+    thumb.addEventListener('click', () => {
+      if (!partZoom) {
+        partZoom = document.createElement('div');
+        partZoom.className = 'lightbox';
+        partZoom.setAttribute('role', 'dialog');
+        partZoom.setAttribute('aria-modal', 'true');
+        partZoom.innerHTML = '<img alt=""><button class="lightbox__close" type="button" aria-label="Закрыть">&times;</button>';
+        document.body.appendChild(partZoom);
+        const close = () => { partZoom.hidden = true; document.body.style.overflow = ''; };
+        partZoom.addEventListener('click', (e) => { if (e.target === partZoom || e.target.closest('.lightbox__close')) close(); });
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !partZoom.hidden) close(); });
+      }
+      const img = partZoom.querySelector('img');
+      img.src = thumb.dataset.zoom;
+      img.alt = thumb.querySelector('img').alt;
+      partZoom.hidden = false;
+      document.body.style.overflow = 'hidden';
+      partZoom.querySelector('.lightbox__close').focus();
+    });
+  });
+
+  // Корзина в шапке ведёт к оформлению заказа; на странице комплектующих — сразу открывает окно
+  if (cartLink && document.getElementById('order')) {
+    cartLink.addEventListener('click', (e) => { e.preventDefault(); openModal('order'); });
+    if (location.hash === '#order') openModal('order');
+  }
+
   renderCart();
+
+  // Формы: проверка обязательных полей. Отправки на сервер в прототипе нет.
+  document.querySelectorAll('form.form').forEach((form) => {
+    const status = form.querySelector('.form__status');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      let valid = true;
+      form.querySelectorAll('.field__input').forEach((input) => {
+        // email проверяем ещё и на формат
+        const filled = input.value.trim().length > 0;
+        const ok = (!input.required || filled) && (input.type !== 'email' || !filled || input.checkValidity());
+        input.classList.toggle('is-invalid', !ok);
+        if (!ok && valid) input.focus();
+        valid = valid && ok;
+      });
+      const required = [...form.querySelectorAll('[required]')].map((i) => i.closest('.field').querySelector('.field__label').firstChild.textContent.trim().toLowerCase());
+      status.hidden = false;
+      status.textContent = valid
+        ? (form.dataset.ok || 'Спасибо! Заявка принята, мы свяжемся с вами. (Прототип: заявка никуда не отправляется.)')
+        : 'Заполните обязательные поля: ' + required.join(', ') + '.';
+      if (valid) {
+        form.reset();
+        form.querySelectorAll('.file__input').forEach(setFileName);
+        if ('clearCart' in form.dataset) { cart = {}; saveCart(); renderCart(); }
+      }
+    });
+  });
 
   document.getElementById('year').textContent = new Date().getFullYear();
 })();
