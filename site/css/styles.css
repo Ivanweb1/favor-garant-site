@@ -1142,7 +1142,25 @@ html.has-modal { overflow: hidden; }
 /* ---------- О компании ---------- */
 
 /* фото цеха — во всю ширину окна и не выше экрана под шапкой, как галерея на главной */
-.about-hero { background: var(--navy-deep); }
+/* шапка страницы перед фото — без большого нижнего поля */
+.page-top--hero { padding-bottom: clamp(24px, 2.6vw, 36px); }
+.page-top--hero .page-head { margin-bottom: 0; }
+.about-hero { position: relative; background: var(--navy-deep); }
+.about-hero::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 40%; pointer-events: none;
+  background: linear-gradient(180deg, rgba(23, 22, 43, 0) 0%, rgba(23, 22, 43, .55) 100%);
+}
+/* плашка фактов внизу фото: белая полупрозрачная, 4 факта в ряд через тонкие линии */
+.about-hero__ui { position: absolute; left: 0; right: 0; bottom: 32px; z-index: 1; }
+.facts {
+  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+  padding: 8px; border-radius: var(--radius); background: rgba(255, 255, 255, .94); backdrop-filter: blur(8px);
+  box-shadow: 0 24px 50px -30px rgba(10, 10, 30, .7);
+}
+.fact { position: relative; display: flex; align-items: center; gap: 14px; padding: 14px 18px; font-size: 14px; line-height: 1.35; font-weight: 600; color: var(--navy); }
+.fact + .fact::before { content: ""; position: absolute; left: 0; top: 14px; bottom: 14px; width: 1px; background: var(--line); }
+.fact__icon { display: grid; place-items: center; flex: none; width: 40px; height: 40px; border-radius: 50%; background: var(--navy); color: var(--white); }
+.fact__icon svg { width: 19px; height: 19px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
 .about-hero img {
   width: 100%; object-fit: cover; object-position: 50% 60%;
   height: min(56.25vw, calc(100vh - var(--header-h)));
@@ -1150,7 +1168,9 @@ html.has-modal { overflow: hidden; }
   min-height: 320px;
 }
 .about--page { margin-bottom: 0; align-items: stretch; }
-.about--page .about__text { padding-top: 6px; }
+/* текст справа — плотной колонкой сверху, без растянутых промежутков; фото слева дотягивается до низа списка */
+.about--page .about__text { align-content: start; gap: 18px; padding-top: 4px; font-size: 16px; }
+.about--page .checks { margin-top: 10px; }
 /* фото объекта под заголовком: заполняет левую колонку до низа списка */
 .about--page > div:first-child { display: flex; flex-direction: column; gap: 32px; }
 .about__media { flex: 1; min-height: 280px; overflow: hidden; border-radius: var(--radius); background: var(--light); }
@@ -1160,6 +1180,10 @@ html.has-modal { overflow: hidden; }
 
 /* принципы: тёмный блок, карточки разного размера — фото КБ высокой слева, веер дипломов, текст, фото станка широкой снизу */
 .page-head__text--light { color: #C9C7E6; }
+/* шапка на сетке карточек: заголовок над первыми двумя, текст ровно над третьей */
+.page-head--bento { display: grid; grid-template-columns: 1.15fr 1fr 1fr; gap: 20px; align-items: end; }
+.page-head--bento > div { grid-column: span 2; }
+.page-head--bento .page-head__text { max-width: none; }
 .bento {
   display: grid; grid-template-columns: 1.15fr 1fr 1fr; grid-template-rows: minmax(300px, auto) minmax(300px, auto); gap: 20px;
 }
@@ -1183,6 +1207,13 @@ html.has-modal { overflow: hidden; }
 }
 .bento__card--photo:hover > img { transform: scale(1.04); }
 .bento__card--photo .bento__text { color: #E2E1F2; }
+/* текстовая карточка: крупная иконка сверху слева, текст прижат к низу */
+.bento__card--icon { justify-content: space-between; }
+.bento__icon {
+  display: grid; place-items: center; width: 72px; height: 72px; margin: 28px 28px 0;
+  border: 1px solid rgba(255, 255, 255, .18); border-radius: 50%; background: rgba(255, 255, 255, .06); color: var(--white);
+}
+.bento__icon svg { width: 32px; height: 32px; fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
 /* веер из трёх настоящих дипломов в верхней части карточки */
 .bento__card--docs { justify-content: space-between; }
 .bento__fan { position: relative; height: 170px; margin: 28px 28px 0; }
@@ -1227,9 +1258,13 @@ html.has-modal { overflow: hidden; }
 @media (max-width: 1080px) {
   .people { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .bento { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+  .page-head--bento { display: flex; }
   .bento__card--tall { grid-row: auto; grid-column: span 2; min-height: 380px; }
   .award { flex-basis: calc((100% - 40px) / 3); }
   .about__media { flex: none; aspect-ratio: 16 / 9; min-height: 0; }
+  .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .fact:nth-child(3)::before { content: none; }
+  .fact:nth-child(n + 3) { border-top: 1px solid var(--line); }
 }
 @media (max-width: 720px) {
   .people { grid-template-columns: minmax(0, 1fr); gap: 12px; }
@@ -1243,6 +1278,14 @@ html.has-modal { overflow: hidden; }
   .awards { gap: 12px; margin: 0 calc(var(--gutter) * -1); padding: 0 var(--gutter) 4px; scroll-padding: 0 var(--gutter); }
   .award { flex-basis: 58%; padding: 8px; }
   .about-hero img { height: min(75vw, calc(100svh - var(--header-h))); min-height: 0; }
+  /* на телефоне факты под фото списком, а не поверх */
+  .about-hero::after { content: none; }
+  .about-hero__ui { position: static; padding-top: 0; background: var(--light); }
+  .facts { grid-template-columns: minmax(0, 1fr); margin-top: -28px; padding: 4px 6px; }
+  .fact { padding: 12px 10px; font-size: 13px; }
+  .fact + .fact::before { content: none; }
+  .fact + .fact { border-top: 1px solid var(--line); }
+  .fact__icon { width: 34px; height: 34px; }
   .about__media { aspect-ratio: 4 / 3; }
   .about--page > div:first-child { gap: 24px; }
 }

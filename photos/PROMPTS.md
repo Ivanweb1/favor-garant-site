@@ -722,3 +722,21 @@ Shot: eye-level three-quarter view of a service technician in a dark navy work j
 Light: soft overcast daylight, city street with trees softly out of focus behind.
 Style: photorealistic documentary photography, not CGI, 50 mm lens. No crowds, no other people, no readable text, letters, numbers, logos, brand names or watermarks; screens are blank or show abstract coloured dots only.
 ```
+
+---
+
+## 12. Страница «О компании» — цех во всю ширину экрана
+
+### 81-about-hall-wide — производственный цех (широкий, 16:9)
+Исходник: `source/20-prod-hall.jpg` (цех, тот же кадр, что на главной). Сейчас на странице растянут вертикальный `20-prod-hall` 1122×1402 — на широком экране он мылится. Нужен горизонтальный кадр не меньше 2560×1440.
+Внизу на фото лежит белая плашка с фактами (на десктопе ~120 px от нижнего края), поэтому нижние 25% кадра — спокойный пол без важных деталей.
+
+```
+Aspect ratio 16:9, high resolution (at least 2560×1440).
+Edit the attached photo of a metal-fabrication hall: extend it left and right to a wide panoramic frame, continuing the walls, roof and floor naturally. Keep the production hall as it is: same central aisle, machines, bus-shelter frames, metal profiles and stacked parts — do not invent new equipment or change the layout. Upscale and sharpen: crisp edges on metal profiles and machines, clean noise-free surfaces, no AI smearing.
+Make the hall look clean and orderly: tidy floor, no trash or random boxes. Remove all diagonal watermark logos. No readable text or logos.
+Composition: deep one-point perspective along the central aisle, camera slightly elevated. The bottom 25% of the frame is a calm clean floor with nothing important — an info panel will be placed there.
+Light: even daylight from the roof windows, cool industrial tones, slightly desaturated, matching the rest of the site.
+Style: photorealistic industrial photography, not CGI, sharp, straight verticals, 35 mm lens.
+```
+Готовый файл — `photos/ai/81-about-hall-wide.png`, на сайт пойдёт как `site/img/photos/81-about-hall-wide.jpg`.
