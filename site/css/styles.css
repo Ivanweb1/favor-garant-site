@@ -1361,19 +1361,21 @@ html.has-modal { overflow: hidden; }
 .machine__tags { margin-top: 18px; padding-top: 14px; border-top: 1px solid rgba(255, 255, 255, .12); font-size: 13px; line-height: 1.6; color: #C9C7E6; }
 
 /* сортамент трубореза: текст и два списка слева, картинка сечений и деталей справа */
-.sortament { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 40px 72px; align-items: center; }
+.sortament { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 40px 72px; align-items: stretch; }
 .sortament__text { display: grid; justify-items: start; gap: 18px; }
 .sortament__lead { margin-top: 6px; font-size: 19px; line-height: 1.45; font-weight: 500; color: var(--ink); }
 .sortament__desc { font-size: 15px; color: var(--muted); }
 .sortament__lists { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; justify-self: stretch; margin: 8px 0 12px; }
 .sortament__title { margin-bottom: 8px; font-size: 17px; font-weight: 700; color: var(--navy); }
 /* схема сечений: три чертежа, подписи текстом (на картинке они были бы ~9px) */
-.sortament__media { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px 24px; align-items: end; }
+.sortament__media { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px 24px; align-content: space-between; align-items: start; }
 .section-fig { display: grid; justify-items: center; gap: 12px; margin: 0; text-align: center; }
 .section-fig img { width: 100%; max-width: 260px; height: auto; }
 .section-fig figcaption { max-width: 240px; font-size: 14px; line-height: 1.4; color: var(--muted); }
 .section-fig--wide { grid-column: 1 / -1; grid-template-columns: minmax(0, 320px) minmax(0, 220px); justify-content: center; align-items: center; gap: 28px; text-align: left; }
 .section-fig--wide img { max-width: 320px; }
+.section-fig:not(.section-fig--wide) img { height: 230px; object-fit: contain; }
+.section-fig:not(.section-fig--wide) figcaption { min-height: 2.8em; }
 /* лента деталей под сортаментом: светлая подложка (её цвет запечён в фон картинок parts/), медленная бесконечная прокрутка, пауза при наведении */
 .parts { margin-top: var(--sub-gap); padding: 28px 0 32px; border-radius: var(--radius); background: var(--light); overflow: hidden; }
 .parts__label { margin: 0 32px 14px; font-size: 14px; font-weight: 600; color: var(--muted); }
@@ -1439,6 +1441,7 @@ html.has-modal { overflow: hidden; }
   .sortament__media { gap: 24px 16px; }
   .section-fig--wide { grid-template-columns: minmax(0, 1fr); justify-items: center; text-align: center; gap: 12px; }
   .section-fig figcaption { font-size: 13px; }
+  .section-fig:not(.section-fig--wide) img { height: 150px; }
   .parts__label { margin: 0 20px 10px; }
   .parts__item { width: 120px; margin-right: 8px; }
   .sortament .btn { width: 100%; white-space: normal; text-align: center; }
