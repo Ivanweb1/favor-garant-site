@@ -570,11 +570,20 @@
     'atlant-pylon': 'Навигационный пилон',
   };
   const partRows = [...document.querySelectorAll('.parts tbody tr[data-id]')];
+  // название и цена позиций запоминаются со страницы комплектующих — их показывает страница оформления заказа.
+  // У гостя цен в таблице нет (data-price не задан), и цены не сохраняются.
+  const INFO_KEY = 'fg-cart-info';
+  let savedInfo = {};
+  try { savedInfo = JSON.parse(localStorage.getItem(INFO_KEY)) || {}; } catch (e) { /* без хранилища */ }
   const partInfo = (id) => {
     const row = partRows.find((r) => r.dataset.id === id);
-    if (row) return { name: row.dataset.name, price: Number(row.dataset.price) };
-    return { name: EXTRA_NAMES[id] || id, price: null };
+    if (row) return { name: row.dataset.name, price: row.dataset.price ? Number(row.dataset.price) : null };
+    return savedInfo[id] || { name: EXTRA_NAMES[id] || id, price: null };
   };
+  if (partRows.length) {
+    partRows.forEach((row) => { savedInfo[row.dataset.id] = partInfo(row.dataset.id); });
+    try { localStorage.setItem(INFO_KEY, JSON.stringify(savedInfo)); } catch (e) { /* без хранилища */ }
+  }
   const money = (n) => n.toLocaleString('ru-RU') + ' ₽';
   const plural = (n, one, few, many) => {
     const m10 = n % 10, m100 = n % 100;
@@ -611,7 +620,7 @@
     const total = ids.reduce((sum, id) => sum + (partInfo(id).price || 0) * cart[id], 0);
     if (barSum) {
       barSum.innerHTML = ids.length
-        ? `В корзине ${ids.length} ${plural(ids.length, 'позиция', 'позиции', 'позиций')} <b>на ${money(total)}</b>`
+        ? `В корзине ${ids.length} ${plural(ids.length, 'позиция', 'позиции', 'позиций')}` + (total ? ` <b>на ${money(total)}</b>` : '')
         : 'Корзина пуста';
       barBtn.disabled = !ids.length;
     }
@@ -630,7 +639,7 @@
         orderList.appendChild(li);
       });
       document.querySelector('.order__empty').hidden = ids.length > 0;
-      document.querySelector('.order__total').innerHTML = ids.length ? `Итого: <b>${money(total)}</b>` : '';
+      document.querySelector('.order__total').innerHTML = ids.length && total ? `Итого: <b>${money(total)}</b>` : '';
       document.querySelector('#order [type="submit"]').disabled = !ids.length;
     }
   }
@@ -712,11 +721,14 @@
     });
   });
 
-  // Корзина в шапке ведёт к оформлению заказа; на странице комплектующих — сразу открывает окно
-  if (cartLink && document.getElementById('order')) {
-    cartLink.addEventListener('click', (e) => { e.preventDefault(); openModal('order'); });
-    if (location.hash === '#order') openModal('order');
+  // Корзина в шапке ведёт к оформлению заказа. Гостю на странице комплектующих — окно «войдите или зарегистрируйтесь»
+  const cartModal = document.querySelector('dialog#order, dialog#auth');
+  if (cartLink && cartModal) {
+    cartLink.addEventListener('click', (e) => { e.preventDefault(); openModal(cartModal.id); });
+    if (location.hash === '#order') openModal(cartModal.id);
   }
+  // «Оформить заказ» у авторизованного — переход на отдельную страницу
+  if (barBtn && barBtn.dataset.go) barBtn.addEventListener('click', () => { location.href = barBtn.dataset.go; });
 
   renderCart();
 

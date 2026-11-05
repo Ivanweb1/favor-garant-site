@@ -1094,11 +1094,19 @@ html.has-modal { overflow: hidden; }
 .order__total { padding-top: 14px; text-align: right; font-size: 15px; color: var(--muted); }
 .order__total:empty { display: none; }
 .order__total b { font-size: 20px; color: var(--navy); }
+/* окно «войдите, чтобы оформить заказ» для гостя */
+.modal__text { margin: 0 0 24px; font-size: 15px; line-height: 1.55; color: var(--muted); }
+.modal__actions { display: flex; flex-wrap: wrap; gap: 12px; }
+/* страница оформления заказа: состав слева, контакты справа */
+.checkout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 24px; align-items: start; }
+.checkout__cart { padding: clamp(20px, 3vw, 32px); border-radius: var(--radius); background: var(--white); }
+.checkout__cart .order { margin-bottom: 0; }
 .form [type="submit"]:disabled { opacity: .45; pointer-events: none; }
 .field__input[type="number"] { -moz-appearance: textfield; appearance: textfield; }
 .field__input[type="number"]::-webkit-outer-spin-button, .field__input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
 
 @media (max-width: 1080px) {
+  .checkout { grid-template-columns: 1fr; }
   .parts td { padding: 12px; }
   .parts th:first-child, .parts td:first-child { width: 100px; padding-left: 14px; }
   .parts__thumb { width: 80px; }
@@ -1139,6 +1147,9 @@ html.has-modal { overflow: hidden; }
   .order__qty { grid-area: qty; }
   .order__sum { grid-area: sum; }
   .order__remove { grid-area: remove; }
+  /* гостевая таблица без цен: под названием сразу количество и корзина */
+  .parts--noprice tbody tr { grid-template-areas: "photo name name" "photo qty buy"; align-items: end; }
+  .modal__actions .btn { flex: 1 1 100%; }
 }
 
 /* ---------- О компании ---------- */

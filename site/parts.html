@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap&subset=cyrillic" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=20261103e">
+  <link rel="stylesheet" href="css/styles.css?v=20261105a">
 </head>
 <body>
 
@@ -42,9 +42,9 @@
       <a class="header__phone" href="tel:+78003332227">8 (800) 333-222-7</a>
       <span class="header__address">СПб, ул. Цветочная, д. 7, лит. Б, пом. 6</span>
     </div>
-    <!-- Вход в ЛК — пока заглушка; корзина ведёт к оформлению заказа комплектующих -->
+    <!-- Гостевая версия: цен нет, оформить заказ можно только после входа. В прототипе «Войти» ведёт на версию для авторизованных parts-lk.html -->
     <div class="header__actions">
-      <a class="btn btn--primary header__login" href="#" aria-label="Войти в личный кабинет">
+      <a class="btn btn--primary header__login" href="parts-lk.html" aria-label="Войти в личный кабинет">
         <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg>
         <span>Войти</span>
       </a>
@@ -226,7 +226,7 @@
         <li><a href="contacts.html">Контакты</a></li>
       </ul>
       <a class="mobile-menu__phone" href="tel:+78003332227">8 (800) 333-222-7</a>
-      <a class="btn btn--primary btn--block" href="#">Войти в личный кабинет</a>
+      <a class="btn btn--primary btn--block" href="parts-lk.html">Войти в личный кабинет</a>
     </div>
   </div>
 </header>
@@ -243,7 +243,7 @@
             <span class="duo__second">для павильонов</span>
           </h1>
         </div>
-        <p class="page-head__text">Запасные части для остановочных павильонов. Выберите группу, укажите количество и&nbsp;добавьте позиции в&nbsp;корзину&nbsp;— заказ уйдёт менеджеру.</p>
+        <p class="page-head__text">Запасные части для остановочных павильонов. Выберите группу, укажите количество и&nbsp;добавьте позиции в&nbsp;корзину&nbsp;— заказ уйдёт менеджеру. Цены и&nbsp;оформление заказа доступны после входа в&nbsp;личный кабинет.</p>
       </div>
 
       <!-- Простая табличная сетка: фильтр по группе и поиск, количество и корзина прямо в строке -->
@@ -261,47 +261,42 @@
       </div>
 
       <div class="parts-wrap">
-        <table class="parts">
+        <table class="parts parts--noprice">
           <thead>
             <tr>
               <th scope="col"><span class="visually-hidden">Фото</span></th>
               <th scope="col">Наименование</th>
               <th scope="col">Ед.</th>
-              <th scope="col">Цена</th>
               <th scope="col">Количество</th>
               <th scope="col"><span class="visually-hidden">Корзина</span></th>
             </tr>
           </thead>
           <tbody>
-            <tr data-id="anchor-al-1" data-group="anchor" data-name="Анкерная группа алюминиевая, тип 1" data-price="7500">
+            <tr data-id="anchor-al-1" data-group="anchor" data-name="Анкерная группа алюминиевая, тип 1">
               <td class="parts__photo"><button class="parts__thumb" type="button" data-zoom="img/parts/anchor-al-1.jpg" aria-label="Увеличить фото"><img src="img/parts/anchor-al-1.jpg" alt="Анкерная группа алюминиевая, тип 1" loading="lazy" width="1200" height="900"></button></td>
               <td class="parts__name"><span class="parts__title">Анкерная группа алюминиевая, тип&nbsp;1</span><span class="parts__group">Анкерные группы</span></td>
               <td class="parts__unit">шт.</td>
-              <td class="parts__price">7&nbsp;500&nbsp;₽</td>
               <td class="parts__qty"><div class="qty"><button class="qty__btn" type="button" data-step="-1" aria-label="Меньше">−</button><input class="qty__input" type="number" min="1" max="999" value="1" inputmode="numeric" aria-label="Количество"><button class="qty__btn" type="button" data-step="1" aria-label="Больше">+</button></div></td>
               <td class="parts__buy"><button class="btn btn--outline tile__cart parts__cart" type="button" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2.2l2.3 11h10.8l2-8H6.4"/><circle cx="9.5" cy="19.5" r="1.5"/><circle cx="17" cy="19.5" r="1.5"/></svg><span>В&nbsp;корзину</span></button></td>
             </tr>
-            <tr data-id="bench-al-3m" data-group="al" data-name="Брус скамьи, длина 3 м" data-price="2543">
+            <tr data-id="bench-al-3m" data-group="al" data-name="Брус скамьи, длина 3 м">
               <td class="parts__photo"><button class="parts__thumb" type="button" data-zoom="img/parts/bench-al-3m.jpg" aria-label="Увеличить фото"><img src="img/parts/bench-al-3m.jpg" alt="Брус скамьи, длина 3 м" loading="lazy" width="1200" height="900"></button></td>
               <td class="parts__name"><span class="parts__title">Брус скамьи, длина 3&nbsp;м</span><span class="parts__group">Для алюминиевых павильонов</span></td>
               <td class="parts__unit">шт.</td>
-              <td class="parts__price">2&nbsp;543&nbsp;₽</td>
               <td class="parts__qty"><div class="qty"><button class="qty__btn" type="button" data-step="-1" aria-label="Меньше">−</button><input class="qty__input" type="number" min="1" max="999" value="1" inputmode="numeric" aria-label="Количество"><button class="qty__btn" type="button" data-step="1" aria-label="Больше">+</button></div></td>
               <td class="parts__buy"><button class="btn btn--outline tile__cart parts__cart" type="button" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2.2l2.3 11h10.8l2-8H6.4"/><circle cx="9.5" cy="19.5" r="1.5"/><circle cx="17" cy="19.5" r="1.5"/></svg><span>В&nbsp;корзину</span></button></td>
             </tr>
-            <tr data-id="bracket-st-1015" data-group="st" data-name="Кронштейн боковой длинный, L = 1015 мм" data-price="5752">
+            <tr data-id="bracket-st-1015" data-group="st" data-name="Кронштейн боковой длинный, L = 1015 мм">
               <td class="parts__photo"><button class="parts__thumb" type="button" data-zoom="img/parts/bracket-st-1015.jpg" aria-label="Увеличить фото"><img src="img/parts/bracket-st-1015.jpg" alt="Кронштейн боковой длинный, L = 1015 мм" loading="lazy" width="1200" height="900"></button></td>
               <td class="parts__name"><span class="parts__title">Кронштейн боковой длинный, L&nbsp;=&nbsp;1015&nbsp;мм</span><span class="parts__group">Для стальных павильонов</span></td>
               <td class="parts__unit">компл.</td>
-              <td class="parts__price">5&nbsp;752&nbsp;₽</td>
               <td class="parts__qty"><div class="qty"><button class="qty__btn" type="button" data-step="-1" aria-label="Меньше">−</button><input class="qty__input" type="number" min="1" max="999" value="1" inputmode="numeric" aria-label="Количество"><button class="qty__btn" type="button" data-step="1" aria-label="Больше">+</button></div></td>
               <td class="parts__buy"><button class="btn btn--outline tile__cart parts__cart" type="button" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2.2l2.3 11h10.8l2-8H6.4"/><circle cx="9.5" cy="19.5" r="1.5"/><circle cx="17" cy="19.5" r="1.5"/></svg><span>В&nbsp;корзину</span></button></td>
             </tr>
-            <tr data-id="glass-st-side-s" data-group="st" data-name="Стекло боковое малое, триплекс 10 мм, 500 × 1865 мм" data-price="11798">
+            <tr data-id="glass-st-side-s" data-group="st" data-name="Стекло боковое малое, триплекс 10 мм, 500 × 1865 мм">
               <td class="parts__photo"><button class="parts__thumb" type="button" data-zoom="img/parts/glass-st-side-s.jpg" aria-label="Увеличить фото"><img src="img/parts/glass-st-side-s.jpg" alt="Стекло боковое малое, триплекс 10 мм" loading="lazy" width="1200" height="900"></button></td>
               <td class="parts__name"><span class="parts__title">Стекло боковое малое, триплекс 10&nbsp;мм, 500&nbsp;×&nbsp;1865&nbsp;мм</span><span class="parts__group">Для стальных павильонов</span></td>
               <td class="parts__unit">шт.</td>
-              <td class="parts__price">11&nbsp;798&nbsp;₽</td>
               <td class="parts__qty"><div class="qty"><button class="qty__btn" type="button" data-step="-1" aria-label="Меньше">−</button><input class="qty__input" type="number" min="1" max="999" value="1" inputmode="numeric" aria-label="Количество"><button class="qty__btn" type="button" data-step="1" aria-label="Больше">+</button></div></td>
               <td class="parts__buy"><button class="btn btn--outline tile__cart parts__cart" type="button" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2.2l2.3 11h10.8l2-8H6.4"/><circle cx="9.5" cy="19.5" r="1.5"/><circle cx="17" cy="19.5" r="1.5"/></svg><span>В&nbsp;корзину</span></button></td>
             </tr>
@@ -313,7 +308,7 @@
       <!-- итог корзины: прилипает к низу экрана, пока видна таблица -->
       <div class="parts-bar">
         <p class="parts-bar__sum" aria-live="polite">Корзина пуста</p>
-        <button class="btn btn--primary parts-bar__btn" type="button" data-modal-open="order">Оформить заказ</button>
+        <button class="btn btn--primary parts-bar__btn" type="button" data-modal-open="auth">Оформить заказ</button>
       </div>
     </div>
   </section>
@@ -399,50 +394,19 @@
   </div>
 </footer>
 
-<!-- Оформление заказа комплектующих: состав корзины и контакты -->
-<dialog class="modal" id="order" aria-labelledby="order-title">
+<!-- Гость нажал «Оформить заказ» или корзину: оформление только для авторизованных (логика Битрикса) -->
+<dialog class="modal" id="auth" aria-labelledby="auth-title">
   <div class="modal__box">
     <button class="modal__close" type="button" data-modal-close aria-label="Закрыть"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 2l12 12M14 2L2 14"/></svg></button>
-    <h2 class="modal__title duo" id="order-title"><span>Оформление</span><span class="duo__second">заказа</span></h2>
-    <div class="order">
-      <ul class="order__list"></ul>
-      <p class="order__empty" hidden>Корзина пуста. Добавьте комплектующие из&nbsp;таблицы.</p>
-      <p class="order__total"></p>
+    <h2 class="modal__title duo" id="auth-title"><span>Войдите,</span><span class="duo__second">чтобы оформить заказ</span></h2>
+    <p class="modal__text">Оформить заказ и&nbsp;увидеть цены на&nbsp;комплектующие могут только авторизованные пользователи. Войдите в&nbsp;личный кабинет или зарегистрируйтесь.</p>
+    <div class="modal__actions">
+      <a class="btn btn--primary" href="parts-lk.html">Войти</a>
+      <a class="btn btn--outline" href="parts-lk.html">Зарегистрироваться</a>
     </div>
-    <form class="form form--modal" novalidate data-clear-cart data-ok="Спасибо! Заказ принят, менеджер свяжется с вами для подтверждения. (Прототип: заказ никуда не отправляется.)">
-      <div class="form__row">
-        <label class="field">
-          <span class="field__label">Имя <span class="field__req" aria-hidden="true">*</span></span>
-          <input class="field__input" type="text" name="name" autocomplete="name" required>
-        </label>
-        <label class="field">
-          <span class="field__label">Телефон <span class="field__req" aria-hidden="true">*</span></span>
-          <input class="field__input" type="tel" name="phone" autocomplete="tel" required>
-        </label>
-      </div>
-      <div class="form__row">
-        <label class="field">
-          <span class="field__label">Email</span>
-          <input class="field__input" type="email" name="email" autocomplete="email">
-        </label>
-        <label class="field">
-          <span class="field__label">Организация</span>
-          <input class="field__input" type="text" name="company" autocomplete="organization">
-        </label>
-      </div>
-      <label class="field">
-        <span class="field__label">Комментарий к&nbsp;заказу</span>
-        <textarea class="field__input field__input--area" name="comment" rows="3"></textarea>
-      </label>
-      <div class="form__bottom">
-        <button class="btn btn--primary" type="submit">Отправить заказ</button>
-        <p class="form__note">Отправляя заказ, вы даёте согласие на&nbsp;обработку персональных данных в&nbsp;соответствии с&nbsp;<a href="#">политикой конфиденциальности</a>.</p>
-      </div>
-      <p class="form__status" role="status" hidden></p>
-    </form>
   </div>
 </dialog>
 
-<script src="js/main.js?v=20261103f"></script>
+<script src="js/main.js?v=20261105a"></script>
 </body>
 </html>
