@@ -1725,3 +1725,20 @@ html.has-modal { overflow: hidden; }
   .article__lead { font-size: 18px; }
   .article__note { padding: 18px 20px; }
 }
+
+/* ---------- 404 ---------- */
+
+.notfound { min-height: 60vh; display: flex; align-items: center; }
+.notfound__row { display: flex; align-items: center; justify-content: space-between; gap: 40px; }
+.notfound__body { max-width: 560px; }
+.notfound__text { margin-top: 20px; font-size: 17px; line-height: 1.6; color: var(--muted); }
+.notfound__actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+.notfound__code {
+  font-size: clamp(120px, 20vw, 280px); line-height: .9; font-weight: 700; letter-spacing: -.04em;
+  font-variant-numeric: lining-nums; color: var(--tint); -webkit-text-stroke: 2px var(--navy); user-select: none;
+}
+@media (max-width: 720px) {
+  .notfound__row { flex-direction: column-reverse; align-items: flex-start; gap: 8px; }
+  .notfound__code { font-size: 96px; }
+  .notfound__actions .btn { flex: 1 1 100%; }
+}
