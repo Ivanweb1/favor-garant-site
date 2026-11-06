@@ -679,7 +679,7 @@ def company_pages():
     cards = ''.join(f'''
         <article class="letter">{AWARDS[n]}<div class="letter__body"><p class="letter__kind">{k}</p><h2 class="letter__from">{nbsp(f)}</h2></div></article>''' for n, f, k in letters)
     company_page('reviews.html', 'Отзывы', ('Отзывы', 'заказчиков'),
-                 'Благодарственные письма от городских комитетов, администраций и организаций, для которых мы работали. Нажмите на письмо, чтобы открыть его целиком.',
+                 'Благодарственные письма от городских комитетов, администраций и организаций, для которых мы работали.',
                  f'''      <div class="letters">{cards}
       </div>''',
                  CLIENTS,
@@ -689,7 +689,7 @@ def company_pages():
     diplomas = ''.join(AWARDS[n] for n in ['01', '02', '03', '05', '06', '07', '08', '09', '10'])
     rnp = img('img/news/56-news-rnp-certificate.jpg', 'Свидетельство о внесении ООО «ФАВОР-ГАРАНТ» в Реестр надёжных партнёров ТПП РФ')
     company_page('certificates.html', 'Сертификаты и лицензии', ('Сертификаты', 'и&nbsp;лицензии'),
-                 'Все необходимые сертификаты и членство в СРО. Проекты и изделия соответствуют ГОСТ, СП и ТУ. Нажмите на документ, чтобы открыть его целиком.',
+                 'Все необходимые сертификаты и членство в СРО. Проекты и изделия соответствуют ГОСТ, СП и ТУ.',
                  f'''      <div class="awards awards--grid">{diplomas}
       </div>''',
                  section(f'''      <div class="page-head page-head--grid3">
@@ -829,7 +829,7 @@ def project_page():
           </h2>
         </div>
       </div>
-      <ol class="tdoc__steps tdoc__steps--wide" style="--cols: 3">{step_html}</ol>
+      <ol class="project-steps">{step_html}</ol>
       <blockquote class="project-quote">
         <p>{nbsp('«Особое место в Сквере финансистов заняли информационный стенд и малая архитектурная форма со счастливым рублём. По легенде, чтобы зарядиться финансовым благополучием, монету нужно потереть левой рукой».')}</p>
         <cite>Пресс-служба Смольного</cite>
@@ -846,7 +846,6 @@ def project_page():
             <span class="duo__second">объекта</span>
           </h2>
         </div>
-        <p class="page-head__text">Нажмите на фото, чтобы открыть его целиком.</p>
       </div>
       <div class="project-gallery">{gallery}</div>
     </div>

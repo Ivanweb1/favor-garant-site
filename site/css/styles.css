@@ -2057,16 +2057,23 @@ a.news__kind:hover { opacity: .8; }
 /* ---------- Страница проекта: теги, цитата, галерея, другие проекты ---------- */
 
 .project__tags li { border-color: transparent; background: var(--white); color: var(--navy); }
-.project-quote { display: grid; gap: 14px; max-width: 900px; margin: clamp(36px, 4vw, 56px) 0 0; padding: 28px 32px; border-left: 3px solid var(--red); border-radius: 0 var(--radius) var(--radius) 0; background: var(--light); }
-.project-quote p { font-size: clamp(17px, 1.5vw, 20px); line-height: 1.55; font-weight: 500; color: var(--navy); }
-.project-quote cite { font-size: 13px; font-style: normal; color: var(--muted); }
+/* задача, решение, результат — карточки одной высоты; цитата — синей полосой на всю ширину сетки */
+.project-steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; counter-reset: pstep; }
+.project-steps li { display: grid; align-content: start; gap: 10px; padding: 28px; border-radius: var(--radius); background: var(--light); counter-increment: pstep; font-size: 15px; line-height: 1.6; color: var(--muted); }
+.project-steps li::before { content: counter(pstep, decimal-leading-zero); font-size: 13px; font-weight: 700; color: var(--red); }
+.project-steps b { font-size: 19px; line-height: 1.3; color: var(--navy); }
+.project-quote { position: relative; display: grid; gap: 16px; margin: 20px 0 0; padding: clamp(28px, 3.5vw, 44px) clamp(28px, 4vw, 56px); border-radius: var(--radius); background: var(--navy); color: var(--white); }
+.project-quote::before { content: "«"; position: absolute; top: -6px; right: clamp(24px, 4vw, 56px); font-size: 140px; line-height: 1; font-weight: 700; color: rgba(255, 255, 255, .08); }
+.project-quote p { max-width: 900px; font-size: clamp(18px, 1.6vw, 22px); line-height: 1.5; font-weight: 500; }
+.project-quote cite { font-size: 13px; font-style: normal; color: #C9C7E6; }
 .project-gallery { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
 .project-gallery__item { display: block; padding: 0; overflow: hidden; border: 0; border-radius: var(--radius); background: var(--white); cursor: zoom-in; }
 .project-gallery__item img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; transition: transform .6s ease; }
 .project-gallery__item:hover img { transform: scale(1.03); }
 @media (max-width: 720px) {
   .project-gallery { grid-template-columns: 1fr; }
-  .project-quote { padding: 22px 20px; }
+  .project-steps { grid-template-columns: 1fr; }
+  .project-steps li { padding: 22px; }
   /* «Другие проекты» на телефоне — лента свайпом, как «Читайте также» у статей */
   .works-grid--others { display: flex; gap: 12px; margin-right: calc(var(--gutter) * -1); padding-right: var(--gutter); overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
   .works-grid--others::-webkit-scrollbar { display: none; }
