@@ -1762,7 +1762,7 @@ html.has-modal { overflow: hidden; }
 .notfound__actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
 .notfound__code {
   font-size: clamp(120px, 20vw, 280px); line-height: .9; font-weight: 700; letter-spacing: -.04em;
-  font-variant-numeric: lining-nums; color: var(--tint); -webkit-text-stroke: 2px var(--navy); user-select: none;
+  font-variant-numeric: lining-nums; color: #D9D7EE; user-select: none; /* сплошная заливка: обводка прорисовывала наложенные части «4» */
 }
 @media (max-width: 720px) {
   .notfound__row { flex-direction: column-reverse; align-items: flex-start; gap: 8px; }
