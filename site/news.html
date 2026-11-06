@@ -5,13 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Прототип на GitHub Pages: не индексировать, чтобы не дублировать favor-garant.ru -->
   <meta name="robots" content="noindex, nofollow">
-  <title>Новости — ФАВОР-ГАРАНТ</title>
+  <title>Новости и блог — ФАВОР-ГАРАНТ</title>
   <meta name="description" content="Новости ФАВОР-ГАРАНТ: проекты благоустройства, награды и события компании.">
   <link rel="icon" href="img/brand/logo-circle.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap&subset=cyrillic" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=20261106a">
+  <link rel="stylesheet" href="css/styles.css?v=20261106b">
 </head>
 <body>
 
@@ -222,7 +222,7 @@
         <li><a href="services.html">Услуги</a></li>
         <li><a href="about.html">О компании</a></li>
         <li><a href="portfolio.html">Наши работы</a></li>
-        <li><a href="news.html">Новости</a></li>
+        <li><a href="news.html">Новости и&nbsp;блог</a></li>
         <li><a href="contacts.html">Контакты</a></li>
       </ul>
       <a class="mobile-menu__phone" href="tel:+78003332227">8 (800) 333-222-7</a>
@@ -233,66 +233,85 @@
 
 <main>
 
-  <!-- 1. Новости: четыре последние со старой страницы /news (лента Тильды); страницы статей собирает tools/build_news.py -->
+  <!-- 1. Новости и блог: четыре статьи со старой страницы /news; страницы статей и эту ленту собирает tools/build_news.py.
+       Фильтры (тип, рубрика, год) и страница пишутся в адрес: news.html?type=blog&tag=maf&year=2024&page=2 -->
   <section class="section page-top">
     <div class="container">
-      <ol class="crumbs" aria-label="Навигация по сайту"><li><a href="index.html">Главная</a></li><li><span aria-current="page">Новости</span></li></ol>
+      <ol class="crumbs" aria-label="Навигация по сайту"><li><a href="index.html">Главная</a></li><li><span aria-current="page">Новости и&nbsp;блог</span></li></ol>
       <div class="page-head">
         <div>
           <h1 class="h2 duo duo--inline">
-            <span>Проекты</span>
-            <span class="duo__second">и&nbsp;события</span>
+            <span>Новости</span>
+            <span class="duo__second">и&nbsp;блог</span>
           </h1>
         </div>
+        <p class="page-head__text">События компании, выполненные проекты и&nbsp;статьи о&nbsp;благоустройстве городской среды.</p>
       </div>
-      <div class="news news--feed">
-        <a class="news__card" href="news-rnp.html">
+      <div class="feed" data-feed data-per-page="9">
+        <div class="feed__bar">
+          <div class="feed__types" role="group" aria-label="Тип материала"><button class="chip" type="button" data-type="all" aria-pressed="true">Все<span class="chip__num">4</span></button><button class="chip" type="button" data-type="news" aria-pressed="false">Новости<span class="chip__num">3</span></button><button class="chip" type="button" data-type="blog" aria-pressed="false">Блог<span class="chip__num">1</span></button></div>
+          <label class="feed__year">
+            <span class="visually-hidden">Архив по годам</span>
+            <svg viewBox="0 0 20 20" aria-hidden="true"><rect x="2.5" y="4" width="15" height="13" rx="2"/><path d="M2.5 8h15M6.5 2v4M13.5 2v4"/></svg>
+            <select class="feed__select" data-year aria-label="Архив по годам"><option value="all">Все годы</option><option value="2026">2026 (3)</option><option value="2024">2024 (1)</option></select>
+          </label>
+        </div>
+        <div class="filters feed__tags" role="group" aria-label="Рубрики"><button class="chip" type="button" data-tag="all" aria-pressed="true">Все рубрики<span class="chip__num">4</span></button><button class="chip" type="button" data-tag="company" aria-pressed="false">О компании<span class="chip__num">2</span></button><button class="chip" type="button" data-tag="production" aria-pressed="false">Производство<span class="chip__num">1</span></button><button class="chip" type="button" data-tag="blagoustroystvo" aria-pressed="false">Благоустройство<span class="chip__num">2</span></button><button class="chip" type="button" data-tag="navigation" aria-pressed="false">Навигация<span class="chip__num">2</span></button><button class="chip" type="button" data-tag="maf" aria-pressed="false">МАФ<span class="chip__num">1</span></button><button class="chip" type="button" data-tag="spb" aria-pressed="false">Санкт-Петербург<span class="chip__num">1</span></button></div>
+        <div class="news news--feed" data-feed-list>
+        <a class="news__card" href="news-rnp.html" data-type="news" data-tags="company" data-year="2026">
           <div class="news__media"><img src="img/news/52-news-rnp.jpg" alt="Свидетельство о внесении ООО «ФАВОР-ГАРАНТ» в Реестр надёжных партнёров" loading="lazy" width="1200" height="930"></div>
           <div class="news__body">
-            <time class="news__tag" datetime="2026-08-21">21.08.2026</time>
-            <h2 class="news__title">ООО&nbsp;«ФАВОР-ГАРАНТ» внесено в&nbsp;Реестр надёжных партнёров (РНП)</h2>
+            <p class="news__meta"><span class="news__kind news__kind--news">Новости</span><time class="news__tag" datetime="2026-08-21">21.08.2026</time></p>
+            <h3 class="news__title">ООО&nbsp;«ФАВОР-ГАРАНТ» внесено в&nbsp;Реестр надёжных партнёров (РНП)</h3>
             <p class="news__text">С&nbsp;гордостью сообщаем вам важную новость: Общество с&nbsp;ограниченной ответственностью «ФАВОР-ГАРАНТ» официально внесено в&nbsp;Реестр надёжных партнёров Торгово-промышленной палаты Российской Федерации.</p>
+            <ul class="news__tags"><li>О компании</li></ul>
             <div class="news__foot">
               <span class="link-arrow">Читать</span>
               <span class="news__time"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.25"/><path d="M8 4.5V8l2.5 1.5"/></svg>1&nbsp;мин чтения</span>
             </div>
           </div>
         </a>
-        <a class="news__card" href="news-award.html">
+        <a class="news__card" href="news-award.html" data-type="news" data-tags="company production" data-year="2026">
           <div class="news__media"><img src="img/news/53-news-award.jpg" alt="Команда «ФАВОР-ГАРАНТ» с благодарственным письмом" loading="lazy" width="1200" height="930"></div>
           <div class="news__body">
-            <time class="news__tag" datetime="2026-07-13">13.07.2026</time>
-            <h2 class="news__title">Признание экспертов и&nbsp;новые горизонты: «ФАВОР-ГАРАНТ» удостоена награды и&nbsp;расширяет производство</h2>
+            <p class="news__meta"><span class="news__kind news__kind--news">Новости</span><time class="news__tag" datetime="2026-07-13">13.07.2026</time></p>
+            <h3 class="news__title">Признание экспертов и&nbsp;новые горизонты: «ФАВОР-ГАРАНТ» удостоена награды и&nbsp;расширяет производство</h3>
             <p class="news__text">За&nbsp;профессионализм и&nbsp;высокую вовлечённость коллектива руководство РЦК вручило команде «ФАВОР-ГАРАНТ» благодарственное письмо.</p>
+            <ul class="news__tags"><li>О компании</li><li>Производство</li></ul>
             <div class="news__foot">
               <span class="link-arrow">Читать</span>
               <span class="news__time"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.25"/><path d="M8 4.5V8l2.5 1.5"/></svg>1&nbsp;мин чтения</span>
             </div>
           </div>
         </a>
-        <a class="news__card" href="news-temirkanov.html">
+        <a class="news__card" href="news-temirkanov.html" data-type="news" data-tags="blagoustroystvo navigation spb" data-year="2026">
           <div class="news__media"><img src="img/news/54-news-temirkanov.jpg" alt="Площадь имени Юрия Темирканова в Петербурге" loading="lazy" width="1200" height="930"></div>
           <div class="news__body">
-            <time class="news__tag" datetime="2026-05-08">08.05.2026</time>
-            <h2 class="news__title">Великий дирижёр на&nbsp;карте города: площадь имени Юрия Темирканова появилась в&nbsp;Петербурге</h2>
+            <p class="news__meta"><span class="news__kind news__kind--news">Новости</span><time class="news__tag" datetime="2026-05-08">08.05.2026</time></p>
+            <h3 class="news__title">Великий дирижёр на&nbsp;карте города: площадь имени Юрия Темирканова появилась в&nbsp;Петербурге</h3>
+            <ul class="news__tags"><li>Благоустройство</li><li>Навигация</li><li>Санкт-Петербург</li></ul>
             <div class="news__foot">
               <span class="link-arrow">Читать</span>
               <span class="news__time"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.25"/><path d="M8 4.5V8l2.5 1.5"/></svg>1&nbsp;мин чтения</span>
             </div>
           </div>
         </a>
-        <a class="news__card" href="news-maf-park.html">
+        <a class="news__card" href="news-maf-park.html" data-type="blog" data-tags="blagoustroystvo maf navigation" data-year="2024">
           <div class="news__media"><img src="img/news/55-news-maf-park.jpg" alt="Малые архитектурные формы в парке" loading="lazy" width="1200" height="930"></div>
           <div class="news__body">
-            <time class="news__tag" datetime="2024-11-15">15.11.2024</time>
-            <h2 class="news__title">Проекты благоустройства: организация пространства в&nbsp;парке с&nbsp;помощью МАФ</h2>
+            <p class="news__meta"><span class="news__kind news__kind--blog">Блог</span><time class="news__tag" datetime="2024-11-15">15.11.2024</time></p>
+            <h3 class="news__title">Проекты благоустройства: организация пространства в&nbsp;парке с&nbsp;помощью МАФ</h3>
             <p class="news__text">Элементы малых архитектурных форм (МАФ) не&nbsp;только функциональны, но&nbsp;и&nbsp;способны значительно изменить восприятие городского пространства.</p>
+            <ul class="news__tags"><li>Благоустройство</li><li>МАФ</li><li>Навигация</li></ul>
             <div class="news__foot">
               <span class="link-arrow">Читать</span>
               <span class="news__time"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.25"/><path d="M8 4.5V8l2.5 1.5"/></svg>1&nbsp;мин чтения</span>
             </div>
           </div>
         </a>
+        </div>
+        <p class="feed__empty" hidden>По&nbsp;выбранным условиям материалов нет. <button class="link-arrow" type="button" data-feed-reset>Сбросить фильтры</button></p>
+        <nav class="pager" aria-label="Страницы ленты" data-feed-pager></nav>
       </div>
     </div>
   </section>
@@ -425,8 +444,11 @@
         <ul>
           <li><a href="about.html">О компании</a></li>
           <li><a href="portfolio.html">Наши работы</a></li>
-          <li><a href="news.html">Новости</a></li>
-          <li><a href="contacts.html#staff">Сотрудники</a></li>
+          <li><a href="news.html">Новости и&nbsp;блог</a></li>
+          <li><a href="team.html">Команда</a></li>
+          <li><a href="reviews.html">Отзывы</a></li>
+          <li><a href="certificates.html">Сертификаты и&nbsp;лицензии</a></li>
+          <li><a href="guarantees.html">Гарантии</a></li>
           <li><a href="contacts.html#documents">Документы</a></li>
           <li><a href="contacts.html#jobs">Вакансии</a></li>
         </ul>
@@ -452,6 +474,6 @@
   </div>
 </footer>
 
-<script src="js/main.js?v=20261106a"></script>
+<script src="js/main.js?v=20261106b"></script>
 </body>
 </html>

@@ -761,6 +761,64 @@
 
   document.getElementById('year').textContent = new Date().getFullYear();
 
+  // Новости и блог: тип, рубрика, год и номер страницы — фильтр по data-атрибутам карточек, состояние в адресе (?type=&tag=&year=&page=)
+  document.querySelectorAll('[data-feed]').forEach((feed) => {
+    const cards = [...feed.querySelectorAll('[data-feed-list] > .news__card')];
+    const pager = feed.querySelector('[data-feed-pager]');
+    const empty = feed.querySelector('.feed__empty');
+    const yearSel = feed.querySelector('[data-year]');
+    const perPage = Number(feed.dataset.perPage) || 9;
+    const params = new URLSearchParams(location.search);
+    const state = {
+      type: params.get('type') || 'all',
+      tag: params.get('tag') || 'all',
+      year: params.get('year') || 'all',
+      page: Math.max(1, Number(params.get('page')) || 1),
+    };
+    const arrow = '<svg class="arr" width="10" height="11" viewBox="0 0 13 14" aria-hidden="true"><path d="M.74.68l11 12M11.74 12.68V1.84M11.74 12.68H1.88" fill="none" stroke="currentColor" stroke-width="2"/></svg>';
+
+    function render(scroll) {
+      const match = cards.filter((c) => (state.type === 'all' || c.dataset.type === state.type)
+        && (state.tag === 'all' || c.dataset.tags.split(' ').includes(state.tag))
+        && (state.year === 'all' || c.dataset.year === state.year));
+      const pages = Math.max(1, Math.ceil(match.length / perPage));
+      state.page = Math.min(state.page, pages);
+      const shown = match.slice((state.page - 1) * perPage, state.page * perPage);
+      cards.forEach((c) => { c.hidden = !shown.includes(c); });
+      empty.hidden = match.length > 0;
+
+      feed.querySelectorAll('[data-type]').forEach((b) => { if (b.tagName === 'BUTTON') b.setAttribute('aria-pressed', String(b.dataset.type === state.type)); });
+      feed.querySelectorAll('button[data-tag]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.tag === state.tag)));
+      if (yearSel) yearSel.value = state.year;
+
+      let html = `<button class="pager__btn pager__btn--prev" type="button" data-page="${state.page - 1}" aria-label="Предыдущая страница"${state.page === 1 ? ' disabled' : ''}>${arrow}</button>`;
+      for (let n = 1; n <= pages; n += 1) {
+        html += `<button class="pager__btn" type="button" data-page="${n}"${n === state.page ? ' aria-current="page"' : ''}>${n}</button>`;
+      }
+      html += `<button class="pager__btn pager__btn--next" type="button" data-page="${state.page + 1}" aria-label="Следующая страница"${state.page === pages ? ' disabled' : ''}>${arrow}</button>`;
+      html += `<span class="pager__info">Показано ${shown.length} из&nbsp;${match.length}</span>`;
+      pager.innerHTML = html;
+      pager.hidden = match.length === 0;
+
+      const q = new URLSearchParams();
+      ['type', 'tag', 'year'].forEach((k) => { if (state[k] !== 'all') q.set(k, state[k]); });
+      if (state.page > 1) q.set('page', state.page);
+      history.replaceState(null, '', location.pathname + (q.toString() ? '?' + q : ''));
+      if (scroll) feed.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    feed.addEventListener('click', (e) => {
+      const btn = e.target.closest('button');
+      if (!btn || !feed.contains(btn)) return;
+      if (btn.dataset.page) { state.page = Number(btn.dataset.page); render(true); return; }
+      if ('feedReset' in btn.dataset) { Object.assign(state, { type: 'all', tag: 'all', year: 'all', page: 1 }); render(); return; }
+      if (btn.dataset.type) { state.type = btn.dataset.type; state.page = 1; render(); }
+      if (btn.dataset.tag) { state.tag = btn.dataset.tag; state.page = 1; render(); }
+    });
+    if (yearSel) yearSel.addEventListener('change', () => { state.year = yearSel.value; state.page = 1; render(); });
+    render();
+  });
+
   // Текстовая страница: подсветка текущего раздела в содержании
   const tocLinks = [...document.querySelectorAll('.toc a[href^="#"]')];
   if (tocLinks.length && 'IntersectionObserver' in window) {

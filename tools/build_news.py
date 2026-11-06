@@ -1,4 +1,5 @@
 # Собирает страницы новостей ФАВОР-ГАРАНТ: site/news-*.html.
+# Также собирает ленту на site/news.html (тип, рубрики, год, пагинация).
 # Шапка, заявка и подвал берутся из site/news.html, тексты статей — со старого сайта (favor-garant.ru/tpost/...).
 # Фото из статей один раз скачиваются в site/img/news/ (если файла ещё нет).
 # Запуск: python tools/build_news.py
@@ -73,6 +74,30 @@ DESCR = {
     'temirkanov': '',
     'maf-park': 'Элементы малых архитектурных форм (МАФ) не&nbsp;только функциональны, но&nbsp;и&nbsp;способны значительно изменить восприятие городского пространства.',
 }
+
+# Тип (новость или статья блога) и рубрики — наша разметка по содержанию статей, у старого сайта их не было.
+TYPES = {'news': 'Новости', 'blog': 'Блог'}
+TAGS = {  # ключ для адреса news.html?tag=... → название рубрики
+    'company': 'О компании',
+    'production': 'Производство',
+    'blagoustroystvo': 'Благоустройство',
+    'navigation': 'Навигация',
+    'maf': 'МАФ',
+    'spb': 'Санкт-Петербург',
+}
+META = {
+    'rnp': ('news', ['company']),
+    'award': ('news', ['company', 'production']),
+    'temirkanov': ('news', ['blagoustroystvo', 'navigation', 'spb']),
+    'maf-park': ('blog', ['blagoustroystvo', 'maf', 'navigation']),
+}
+# «По теме»: куда ведёт статья внутри сайта
+RELATED = {
+    'rnp': [('О компании', 'about.html'), ('Сертификаты и лицензии', 'certificates.html'), ('Контакты и документы', 'contacts.html#documents')],
+    'award': [('Станочный парк', 'services.html#equipment'), ('О компании', 'about.html'), ('Сертификаты и лицензии', 'certificates.html')],
+    'temirkanov': [('Наши работы', 'portfolio.html'), ('Навигация в каталоге', 'catalog.html'), ('Металлообработка', 'services.html#equipment')],
+    'maf-park': [('Малые архитектурные формы', 'catalog.html'), ('Наши работы', 'portfolio.html'), ('Дизайн-бюро', 'services.html#design')],
+}
 CLOCK = '<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.25"/><path d="M8 4.5V8l2.5 1.5"/></svg>'
 
 
@@ -119,12 +144,15 @@ def figures(body):
 
 def card(slug, date, title, cover, alt, body, text=True):
     d, m, y = date.split('.')
+    kind, tags = META[slug]
     t = f'\n            <p class="news__text">{DESCR[slug]}</p>' if text and DESCR[slug] else ''
-    return f'''        <a class="news__card" href="news-{slug}.html">
+    labels = ''.join(f'<li>{TAGS[k]}</li>' for k in tags)
+    return f'''        <a class="news__card" href="news-{slug}.html" data-type="{kind}" data-tags="{' '.join(tags)}" data-year="{y}">
           <div class="news__media"><img src="img/news/{cover}.jpg" alt="{alt}" loading="lazy" width="1200" height="930"></div>
           <div class="news__body">
-            <time class="news__tag" datetime="{y}-{m}-{d}">{date}</time>
+            <p class="news__meta"><span class="news__kind news__kind--{kind}">{TYPES[kind]}</span><time class="news__tag" datetime="{y}-{m}-{d}">{date}</time></p>
             <h3 class="news__title">{nbsp(title)}</h3>{t}
+            <ul class="news__tags">{labels}</ul>
             <div class="news__foot">
               <span class="link-arrow">Читать</span>
               <span class="news__time">{CLOCK}{read_min(body)}&nbsp;мин чтения</span>
@@ -133,45 +161,67 @@ def card(slug, date, title, cover, alt, body, text=True):
         </a>'''
 
 
+def chip(group, key, label, count, pressed=False):
+    return f'<button class="chip" type="button" data-{group}="{key}" aria-pressed="{str(pressed).lower()}">{label}<span class="chip__num">{count}</span></button>'
+
+
 shell = (SITE / 'news.html').read_text(encoding='utf-8')
 head = shell[:shell.index('<main>') + len('<main>\n')]
 tail = shell[shell.index('  <!-- 8. Заявка -->'):]
 
-for slug, date, title, cover, alt, body in ARTICLES:
+for i, (slug, date, title, cover, alt, body) in enumerate(ARTICLES):
     d, m, y = date.split('.')
+    kind, tags = META[slug]
     first = re.sub(r'<[^>]+>', '', re.search(r'<p[^>]*>(.*?)</p>', body, re.S).group(1))
     desc = (first[:157] + '…') if len(first) > 160 else first
-    page_head = head.replace('<title>Новости — ФАВОР-ГАРАНТ</title>', f'<title>{title} — ФАВОР-ГАРАНТ</title>')
+    page_head = re.sub(r'<title>[^<]*</title>', f'<title>{title} — ФАВОР-ГАРАНТ</title>', head)
     page_head = re.sub(r'<meta name="description" content="[^"]*">', f'<meta name="description" content="{desc}">', page_head)
     page_head = page_head.replace('href="news.html" aria-current="page">Новости<', 'href="news.html">Новости<')
-    others = '\n'.join(card(*a, text=False) for a in ARTICLES if a[0] != slug)
+    # «Читайте также»: сначала статьи с общими рубриками, потом остальные по дате
+    others = sorted((a for a in ARTICLES if a[0] != slug), key=lambda a: -len(set(META[a[0]][1]) & set(tags)))
+    others = '\n'.join(card(*a, text=False) for a in others[:3])
+    tag_links = ''.join(f'<li><a href="news.html?tag={k}">{TAGS[k]}</a></li>' for k in tags)
+    related = ''.join(f'<li><a class="link-arrow" href="{h}">{n}</a></li>' for n, h in RELATED[slug])
+    # соседние статьи по дате: ARTICLES идут от новых к старым
+    newer = ARTICLES[i - 1] if i > 0 else None
+    older = ARTICLES[i + 1] if i + 1 < len(ARTICLES) else None
+    pager = ''
+    if older:
+        pager += f'<a class="article-nav__link article-nav__link--prev" href="news-{older[0]}.html"><span>Предыдущая</span>{nbsp(older[2])}</a>'
+    if newer:
+        pager += f'<a class="article-nav__link article-nav__link--next" href="news-{newer[0]}.html"><span>Следующая</span>{nbsp(newer[2])}</a>'
     main = f'''  <!-- Статья: текст и фото со старой страницы новости, собрано tools/build_news.py — правки вносить в скрипт -->
   <section class="section page-top">
     <div class="container">
-      <ol class="crumbs" aria-label="Навигация по сайту"><li><a href="index.html">Главная</a></li><li><a href="news.html">Новости</a></li><li><span aria-current="page">{nbsp(title)}</span></li></ol>
+      <ol class="crumbs" aria-label="Навигация по сайту"><li><a href="index.html">Главная</a></li><li><a href="news.html">Новости и&nbsp;блог</a></li><li><a href="news.html?type={kind}">{TYPES[kind]}</a></li><li><span aria-current="page">{nbsp(title)}</span></li></ol>
       <article class="article">
         <header class="article__head">
-          <time class="article__date" datetime="{y}-{m}-{d}">{date}</time>
+          <p class="news__meta"><a class="news__kind news__kind--{kind}" href="news.html?type={kind}">{TYPES[kind]}</a><time class="article__date" datetime="{y}-{m}-{d}">{date}</time><span class="news__time">{CLOCK}{read_min(body)}&nbsp;мин чтения</span></p>
           <h1 class="article__title">{nbsp(title)}</h1>
+          <ul class="article__tags" aria-label="Рубрики">{tag_links}</ul>
         </header>
         <figure class="article__cover"><img src="img/news/{cover}.jpg" alt="{alt}" width="1200" height="930"></figure>
         <div class="article__body">
 {nbsp(figures(body)).strip()}
         </div>
-        <a class="link-arrow article__back" href="news.html">Все новости</a>
+        <aside class="article__related" aria-label="По теме">
+          <p class="article__related-title">По теме</p>
+          <ul>{related}</ul>
+        </aside>
+        <nav class="article-nav" aria-label="Соседние статьи">{pager}</nav>
       </article>
     </div>
   </section>
 
-  <!-- Другие новости -->
+  <!-- Читайте также: статьи с общими рубриками -->
   <section class="section section--light">
     <div class="container">
       <div class="section-head">
         <h2 class="h2 duo duo--inline">
-          <span>Другие</span>
-          <span class="duo__second">новости</span>
+          <span>Читайте</span>
+          <span class="duo__second">также</span>
         </h2>
-        <a class="btn btn--outline section-head__link" href="news.html">Все новости</a>
+        <a class="btn btn--outline section-head__link" href="news.html">Все новости и&nbsp;статьи</a>
       </div>
       <div class="news news--feed news--three">
 {others}
@@ -180,15 +230,58 @@ for slug, date, title, cover, alt, body in ARTICLES:
   </section>
 
 '''
-    # заявка на светлом фоне сразу после светлых «Других новостей» — переводим её на белый
+    # заявка на светлом фоне сразу после светлого «Читайте также» — переводим её на белый
     page_tail = tail.replace('<section class="section section--light" id="request">', '<section class="section" id="request">', 1)
     (SITE / f'news-{slug}.html').write_text(page_head + '\n' + main + page_tail, encoding='utf-8', newline='')
     print('ok', f'news-{slug}.html')
 
-# карточки на странице «Новости» — содержимое сетки news--feed
+# ---------- страница «Новости и блог»: тип, рубрики, архив по годам, пагинация ----------
+years = sorted({a[1].split('.')[2] for a in ARTICLES}, reverse=True)
+types = chip('type', 'all', 'Все', len(ARTICLES), True) + ''.join(
+    chip('type', k, n, sum(META[a[0]][0] == k for a in ARTICLES)) for k, n in TYPES.items())
+tags = chip('tag', 'all', 'Все рубрики', len(ARTICLES), True) + ''.join(
+    chip('tag', k, n, sum(k in META[a[0]][1] for a in ARTICLES)) for k, n in TAGS.items())
+year_opts = '<option value="all">Все годы</option>' + ''.join(
+    f'<option value="{y}">{y} ({sum(a[1].endswith(y) for a in ARTICLES)})</option>' for y in years)
+cards = '\n'.join(card(*a) for a in ARTICLES)
+top = f'''  <!-- 1. Новости и блог: четыре статьи со старой страницы /news; страницы статей и эту ленту собирает tools/build_news.py.
+       Фильтры (тип, рубрика, год) и страница пишутся в адрес: news.html?type=blog&tag=maf&year=2024&page=2 -->
+  <section class="section page-top">
+    <div class="container">
+      <ol class="crumbs" aria-label="Навигация по сайту"><li><a href="index.html">Главная</a></li><li><span aria-current="page">Новости и&nbsp;блог</span></li></ol>
+      <div class="page-head">
+        <div>
+          <h1 class="h2 duo duo--inline">
+            <span>Новости</span>
+            <span class="duo__second">и&nbsp;блог</span>
+          </h1>
+        </div>
+        <p class="page-head__text">События компании, выполненные проекты и&nbsp;статьи о&nbsp;благоустройстве городской среды.</p>
+      </div>
+      <div class="feed" data-feed data-per-page="9">
+        <div class="feed__bar">
+          <div class="feed__types" role="group" aria-label="Тип материала">{types}</div>
+          <label class="feed__year">
+            <span class="visually-hidden">Архив по годам</span>
+            <svg viewBox="0 0 20 20" aria-hidden="true"><rect x="2.5" y="4" width="15" height="13" rx="2"/><path d="M2.5 8h15M6.5 2v4M13.5 2v4"/></svg>
+            <select class="feed__select" data-year aria-label="Архив по годам">{year_opts}</select>
+          </label>
+        </div>
+        <div class="filters feed__tags" role="group" aria-label="Рубрики">{tags}</div>
+        <div class="news news--feed" data-feed-list>
+{cards}
+        </div>
+        <p class="feed__empty" hidden>По&nbsp;выбранным условиям материалов нет. <button class="link-arrow" type="button" data-feed-reset>Сбросить фильтры</button></p>
+        <nav class="pager" aria-label="Страницы ленты" data-feed-pager></nav>
+      </div>
+    </div>
+  </section>
+
+'''
 news = (SITE / 'news.html').read_text(encoding='utf-8')
-cards = '\n'.join(card(*a).replace('<h3 class="news__title">', '<h2 class="news__title">').replace('</h3>', '</h2>') for a in ARTICLES)
-news = re.sub(r'(<div class="news news--feed">\n).*?(\n      </div>\n    </div>\n  </section>)',
-              lambda m: m.group(1) + cards + m.group(2), news, count=1, flags=re.S)
+start = news.index('  <!-- 1. Новости')
+end = news.index('  <!-- 8. Заявка -->')
+news = news[:start] + top + news[end:]
+news = re.sub(r'<title>[^<]*</title>', '<title>Новости и блог — ФАВОР-ГАРАНТ</title>', news)
 (SITE / 'news.html').write_text(news, encoding='utf-8', newline='')
 print('ok news.html')

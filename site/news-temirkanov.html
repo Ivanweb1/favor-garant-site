@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap&subset=cyrillic" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=20261106a">
+  <link rel="stylesheet" href="css/styles.css?v=20261106b">
 </head>
 <body>
 
@@ -222,7 +222,7 @@
         <li><a href="services.html">Услуги</a></li>
         <li><a href="about.html">О компании</a></li>
         <li><a href="portfolio.html">Наши работы</a></li>
-        <li><a href="news.html">Новости</a></li>
+        <li><a href="news.html">Новости и&nbsp;блог</a></li>
         <li><a href="contacts.html">Контакты</a></li>
       </ul>
       <a class="mobile-menu__phone" href="tel:+78003332227">8 (800) 333-222-7</a>
@@ -236,11 +236,12 @@
   <!-- Статья: текст и фото со старой страницы новости, собрано tools/build_news.py — правки вносить в скрипт -->
   <section class="section page-top">
     <div class="container">
-      <ol class="crumbs" aria-label="Навигация по сайту"><li><a href="index.html">Главная</a></li><li><a href="news.html">Новости</a></li><li><span aria-current="page">Великий дирижёр на&nbsp;карте города: площадь имени Юрия Темирканова появилась в&nbsp;Петербурге</span></li></ol>
+      <ol class="crumbs" aria-label="Навигация по сайту"><li><a href="index.html">Главная</a></li><li><a href="news.html">Новости и&nbsp;блог</a></li><li><a href="news.html?type=news">Новости</a></li><li><span aria-current="page">Великий дирижёр на&nbsp;карте города: площадь имени Юрия Темирканова появилась в&nbsp;Петербурге</span></li></ol>
       <article class="article">
         <header class="article__head">
-          <time class="article__date" datetime="2026-05-08">08.05.2026</time>
+          <p class="news__meta"><a class="news__kind news__kind--news" href="news.html?type=news">Новости</a><time class="article__date" datetime="2026-05-08">08.05.2026</time><span class="news__time"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.25"/><path d="M8 4.5V8l2.5 1.5"/></svg>1&nbsp;мин чтения</span></p>
           <h1 class="article__title">Великий дирижёр на&nbsp;карте города: площадь имени Юрия Темирканова появилась в&nbsp;Петербурге</h1>
+          <ul class="article__tags" aria-label="Рубрики"><li><a href="news.html?tag=blagoustroystvo">Благоустройство</a></li><li><a href="news.html?tag=navigation">Навигация</a></li><li><a href="news.html?tag=spb">Санкт-Петербург</a></li></ul>
         </header>
         <figure class="article__cover"><img src="img/news/54-news-temirkanov.jpg" alt="Площадь имени Юрия Темирканова в Петербурге" width="1200" height="930"></figure>
         <div class="article__body">
@@ -250,49 +251,56 @@
 <p>Качество, которое остаётся в&nbsp;веках — такая же, как память о&nbsp;великих современниках.</p>
 <p>Следите за&nbsp;обновлением городского пространства вместе с&nbsp;нами.</p>
         </div>
-        <a class="link-arrow article__back" href="news.html">Все новости</a>
+        <aside class="article__related" aria-label="По теме">
+          <p class="article__related-title">По теме</p>
+          <ul><li><a class="link-arrow" href="portfolio.html">Наши работы</a></li><li><a class="link-arrow" href="catalog.html">Навигация в каталоге</a></li><li><a class="link-arrow" href="services.html#equipment">Металлообработка</a></li></ul>
+        </aside>
+        <nav class="article-nav" aria-label="Соседние статьи"><a class="article-nav__link article-nav__link--prev" href="news-maf-park.html"><span>Предыдущая</span>Проекты благоустройства: организация пространства в&nbsp;парке с&nbsp;помощью МАФ</a><a class="article-nav__link article-nav__link--next" href="news-award.html"><span>Следующая</span>Признание экспертов и&nbsp;новые горизонты: «ФАВОР-ГАРАНТ» удостоена награды и&nbsp;расширяет производство</a></nav>
       </article>
     </div>
   </section>
 
-  <!-- Другие новости -->
+  <!-- Читайте также: статьи с общими рубриками -->
   <section class="section section--light">
     <div class="container">
       <div class="section-head">
         <h2 class="h2 duo duo--inline">
-          <span>Другие</span>
-          <span class="duo__second">новости</span>
+          <span>Читайте</span>
+          <span class="duo__second">также</span>
         </h2>
-        <a class="btn btn--outline section-head__link" href="news.html">Все новости</a>
+        <a class="btn btn--outline section-head__link" href="news.html">Все новости и&nbsp;статьи</a>
       </div>
       <div class="news news--feed news--three">
-        <a class="news__card" href="news-rnp.html">
-          <div class="news__media"><img src="img/news/52-news-rnp.jpg" alt="Свидетельство о внесении ООО «ФАВОР-ГАРАНТ» в Реестр надёжных партнёров" loading="lazy" width="1200" height="930"></div>
-          <div class="news__body">
-            <time class="news__tag" datetime="2026-08-21">21.08.2026</time>
-            <h3 class="news__title">ООО&nbsp;«ФАВОР-ГАРАНТ» внесено в&nbsp;Реестр надёжных партнёров (РНП)</h3>
-            <div class="news__foot">
-              <span class="link-arrow">Читать</span>
-              <span class="news__time"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.25"/><path d="M8 4.5V8l2.5 1.5"/></svg>1&nbsp;мин чтения</span>
-            </div>
-          </div>
-        </a>
-        <a class="news__card" href="news-award.html">
-          <div class="news__media"><img src="img/news/53-news-award.jpg" alt="Команда «ФАВОР-ГАРАНТ» с благодарственным письмом" loading="lazy" width="1200" height="930"></div>
-          <div class="news__body">
-            <time class="news__tag" datetime="2026-07-13">13.07.2026</time>
-            <h3 class="news__title">Признание экспертов и&nbsp;новые горизонты: «ФАВОР-ГАРАНТ» удостоена награды и&nbsp;расширяет производство</h3>
-            <div class="news__foot">
-              <span class="link-arrow">Читать</span>
-              <span class="news__time"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.25"/><path d="M8 4.5V8l2.5 1.5"/></svg>1&nbsp;мин чтения</span>
-            </div>
-          </div>
-        </a>
-        <a class="news__card" href="news-maf-park.html">
+        <a class="news__card" href="news-maf-park.html" data-type="blog" data-tags="blagoustroystvo maf navigation" data-year="2024">
           <div class="news__media"><img src="img/news/55-news-maf-park.jpg" alt="Малые архитектурные формы в парке" loading="lazy" width="1200" height="930"></div>
           <div class="news__body">
-            <time class="news__tag" datetime="2024-11-15">15.11.2024</time>
+            <p class="news__meta"><span class="news__kind news__kind--blog">Блог</span><time class="news__tag" datetime="2024-11-15">15.11.2024</time></p>
             <h3 class="news__title">Проекты благоустройства: организация пространства в&nbsp;парке с&nbsp;помощью МАФ</h3>
+            <ul class="news__tags"><li>Благоустройство</li><li>МАФ</li><li>Навигация</li></ul>
+            <div class="news__foot">
+              <span class="link-arrow">Читать</span>
+              <span class="news__time"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.25"/><path d="M8 4.5V8l2.5 1.5"/></svg>1&nbsp;мин чтения</span>
+            </div>
+          </div>
+        </a>
+        <a class="news__card" href="news-rnp.html" data-type="news" data-tags="company" data-year="2026">
+          <div class="news__media"><img src="img/news/52-news-rnp.jpg" alt="Свидетельство о внесении ООО «ФАВОР-ГАРАНТ» в Реестр надёжных партнёров" loading="lazy" width="1200" height="930"></div>
+          <div class="news__body">
+            <p class="news__meta"><span class="news__kind news__kind--news">Новости</span><time class="news__tag" datetime="2026-08-21">21.08.2026</time></p>
+            <h3 class="news__title">ООО&nbsp;«ФАВОР-ГАРАНТ» внесено в&nbsp;Реестр надёжных партнёров (РНП)</h3>
+            <ul class="news__tags"><li>О компании</li></ul>
+            <div class="news__foot">
+              <span class="link-arrow">Читать</span>
+              <span class="news__time"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.25"/><path d="M8 4.5V8l2.5 1.5"/></svg>1&nbsp;мин чтения</span>
+            </div>
+          </div>
+        </a>
+        <a class="news__card" href="news-award.html" data-type="news" data-tags="company production" data-year="2026">
+          <div class="news__media"><img src="img/news/53-news-award.jpg" alt="Команда «ФАВОР-ГАРАНТ» с благодарственным письмом" loading="lazy" width="1200" height="930"></div>
+          <div class="news__body">
+            <p class="news__meta"><span class="news__kind news__kind--news">Новости</span><time class="news__tag" datetime="2026-07-13">13.07.2026</time></p>
+            <h3 class="news__title">Признание экспертов и&nbsp;новые горизонты: «ФАВОР-ГАРАНТ» удостоена награды и&nbsp;расширяет производство</h3>
+            <ul class="news__tags"><li>О компании</li><li>Производство</li></ul>
             <div class="news__foot">
               <span class="link-arrow">Читать</span>
               <span class="news__time"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.25"/><path d="M8 4.5V8l2.5 1.5"/></svg>1&nbsp;мин чтения</span>
@@ -431,8 +439,11 @@
         <ul>
           <li><a href="about.html">О компании</a></li>
           <li><a href="portfolio.html">Наши работы</a></li>
-          <li><a href="news.html">Новости</a></li>
-          <li><a href="contacts.html#staff">Сотрудники</a></li>
+          <li><a href="news.html">Новости и&nbsp;блог</a></li>
+          <li><a href="team.html">Команда</a></li>
+          <li><a href="reviews.html">Отзывы</a></li>
+          <li><a href="certificates.html">Сертификаты и&nbsp;лицензии</a></li>
+          <li><a href="guarantees.html">Гарантии</a></li>
           <li><a href="contacts.html#documents">Документы</a></li>
           <li><a href="contacts.html#jobs">Вакансии</a></li>
         </ul>
@@ -458,6 +469,6 @@
   </div>
 </footer>
 
-<script src="js/main.js?v=20261106a"></script>
+<script src="js/main.js?v=20261106b"></script>
 </body>
 </html>

@@ -3,6 +3,7 @@
 #   expertise-*.html — шесть видов экспертизы (тексты со старого сайта /expertise/...),
 #   expertise.html   — хаб раздела «Экспертиза»,
 #   portfolio.html   — «Наши работы» сеткой с фильтром.
+#   team / reviews / certificates / guarantees.html — страницы компании (данные из about.html).
 # Шапка, заявка и подвал берутся из site/services.html — правки шапки/подвала вносить туда (и в остальные страницы), потом перезапускать.
 # Запуск: python tools/build_text_pages.py
 import re
@@ -593,7 +594,121 @@ def portfolio():
     write('portfolio.html', page_head('Наши работы', 'Портфолио ФАВОР-ГАРАНТ: остановочные павильоны, въездные и бренд-стелы, пилоны, рекламные тумбы, МАФ и стрелковые комплексы на объектах.', 'portfolio.html') + '\n' + main + page_tail(False, product=False))
 
 
+# ---------- страницы компании: команда, отзывы, сертификаты, гарантии ----------
+# Команда, заказчики и сканы — из about.html (там же блоки остаются), тексты гарантий — фразы со старого сайта и «О компании».
+
+ABOUT = (SITE / 'about.html').read_text(encoding='utf-8')
+PEOPLE = re.search(r'      <ul class="people">.*?      </ul>', ABOUT, re.S).group(0)
+CLIENTS = ABOUT[ABOUT.index('  <!-- 4. Заказчики -->'):ABOUT.index('  <!-- 5.')]
+AWARDS = {num: html for html, num in re.findall(r'(<button class="award" type="button" data-zoom="img/awards/award-(\d+)\.jpg">.*?</button>)', ABOUT)}
+
+COMPANY = [('О компании', 'about.html'), ('Команда', 'team.html'), ('Отзывы', 'reviews.html'),
+           ('Сертификаты и лицензии', 'certificates.html'), ('Гарантии', 'guarantees.html')]
+
+
+def company_page(file, name, h1, lead, body, desc):
+    nav = ''.join(f'<a href="{h}"' + (' aria-current="page"' if h == file else '') + f'>{n}</a>' for n, h in COMPANY)
+    main = f'''  <!-- Страница компании «{name}»: собрано tools/build_text_pages.py -->
+  <section class="section section--light page-top">
+    <div class="container">
+      {crumbs([('Главная', 'index.html'), ('О компании', 'about.html'), (name, '')])}
+      <div class="page-head">
+        <div>
+          <h1 class="h2 duo">
+            <span>{nbsp(h1[0])}</span>
+            <span class="duo__second">{nbsp(h1[1])}</span>
+          </h1>
+        </div>
+        <p class="page-head__text">{nbsp(lead)}</p>
+      </div>
+      <nav class="company-nav" aria-label="Разделы о компании">{nav}</nav>
+    </div>
+  </section>
+
+{body}'''
+    # заявка — другого фона, чем последний блок страницы
+    last_light = re.findall(r'<section class="section( section--light)?', main)[-1] != ''
+    write(file, page_head(name, desc, 'about.html') + '\n' + main + page_tail(not last_light, product=False))
+
+
+def section(inner, light=False, sid=''):
+    i = f' id="{sid}"' if sid else ''
+    return f'''  <section class="section{' section--light' if light else ''}"{i}>
+    <div class="container">
+{inner}
+    </div>
+  </section>
+
+'''
+
+
+def sub_head(first, second, text=''):
+    t = f'\n        <p class="page-head__text">{nbsp(text)}</p>' if text else ''
+    return f'''      <div class="page-head">
+        <h2 class="h2 duo duo--inline">
+          <span>{nbsp(first)}</span>
+          <span class="duo__second">{nbsp(second)}</span>
+        </h2>{t}
+      </div>'''
+
+
+def company_pages():
+    # Команда
+    company_page('team.html', 'Команда', ('Команда', 'специалистов'),
+                 'Специалисты проконсультируют по выбору, расчёту стоимости и условиям монтажа металлоконструкций.',
+                 section(PEOPLE) + section(f'''{sub_head('Работа', 'в «ФАВОР-ГАРАНТ»', 'Открытые вакансии и контакты отдела кадров — на странице «Контакты».')}
+      <a class="btn btn--primary" href="contacts.html#jobs">Смотреть вакансии</a>''', light=True),
+                 'Команда ФАВОР-ГАРАНТ: руководство, коммерческая служба, отдел закупок и отдел кадров — телефоны и почта специалистов.')
+
+    # Отзывы: благодарственные письма заказчиков + заказчики
+    letters = [('04', 'Комитет по благоустройству Санкт-Петербурга', 'Благодарность'),
+               ('11', 'Администрация Гатчинского муниципального района', 'Благодарность'),
+               ('12', 'Благотворительная организация', 'Благодарственное письмо')]
+    cards = ''.join(f'''
+        <article class="letter">{AWARDS[n]}<div class="letter__body"><p class="letter__kind">{k}</p><h2 class="letter__from">{nbsp(f)}</h2></div></article>''' for n, f, k in letters)
+    company_page('reviews.html', 'Отзывы', ('Отзывы', 'заказчиков'),
+                 'Благодарственные письма от городских комитетов, администраций и организаций, для которых мы работали. Нажмите на письмо, чтобы открыть его целиком.',
+                 section(f'''      <div class="letters">{cards}
+      </div>''') + CLIENTS.replace('<section class="section">', '<section class="section section--light">', 1),
+                 'Отзывы и благодарственные письма заказчиков ФАВОР-ГАРАНТ: Комитет по благоустройству Санкт-Петербурга, администрации районов и организации.')
+
+    # Сертификаты и лицензии
+    diplomas = ''.join(AWARDS[n] for n in ['01', '02', '03', '05', '06', '07', '08', '09', '10'])
+    rnp = img('img/news/56-news-rnp-certificate.jpg', 'Свидетельство о внесении ООО «ФАВОР-ГАРАНТ» в Реестр надёжных партнёров ТПП РФ')
+    company_page('certificates.html', 'Сертификаты и лицензии', ('Сертификаты', 'и&nbsp;лицензии'),
+                 'Все необходимые сертификаты и членство в СРО. Проекты и изделия соответствуют ГОСТ, СП и ТУ.',
+                 section(f'''{sub_head('Реестр', 'надёжных партнёров')}
+      <div class="letters">
+        <article class="letter letter--wide"><button class="award" type="button" data-zoom="img/news/56-news-rnp-certificate.jpg">{rnp}</button><div class="letter__body"><p class="letter__kind">Свидетельство</p><h3 class="letter__from">Реестр надёжных партнёров ТПП&nbsp;РФ</h3><p class="guarantee__text">{nbsp('Реестр ведёт Торгово-промышленная палата РФ. Включение в него подтверждает деловую репутацию и финансовую устойчивость компании; сведения размещены в открытом доступе.')}</p><a class="link-arrow" href="news-rnp.html">Подробнее в&nbsp;новости</a></div></article>
+      </div>''') + section(f'''{sub_head('Награды', 'и&nbsp;дипломы', 'Нажмите на документ, чтобы открыть его целиком.')}
+      <div class="awards awards--grid">{diplomas}
+      </div>''', light=True) + section(f'''{sub_head('Корпоративные', 'документы', 'Юридические данные, политика конфиденциальности и результаты специальной оценки условий труда.')}
+      <a class="btn btn--outline" href="contacts.html#documents">Перейти к&nbsp;документам</a>'''),
+                 'Сертификаты, лицензии, награды и дипломы ФАВОР-ГАРАНТ; свидетельство Реестра надёжных партнёров ТПП РФ.')
+
+    # Гарантии
+    items = [
+        ('line-g-warranty', 'Гарантия от производителя', 'На продукцию действует гарантия завода-изготовителя. Срок гарантии для конкретной конструкции уточнит менеджер.', ''),
+        ('line-g-quality', 'Контроль качества', 'Каждая конструкция проходит многоступенчатый контроль качества и изготавливается из сертифицированных материалов по отработанным технологиям.', ''),
+        ('line-g-norms', 'Соответствие нормам', 'Проекты и изделия соответствуют ГОСТ, СП и ТУ. Есть все необходимые сертификаты и членство в СРО.', ('Сертификаты и лицензии', 'certificates.html')),
+        ('line-g-manual', 'Инструкции по сборке', 'Для всех конструкций можно получить инструкции по установке — у персонального менеджера или по почте.', ('info@favor-garant.ru', 'mailto:info@favor-garant.ru')),
+        ('line-g-montage', 'Шеф-монтаж', 'Специалист выезжает на объект, инструктирует персонал заказчика и контролирует монтаж конструкции.', ('Об услуге', 'services.html#supervision')),
+        ('line-g-delivery', 'Доставка', 'Доставка по Санкт-Петербургу и России. Конструкция приезжает готовой к сборке.', ''),
+    ]
+    cards = ''
+    for icon, t, text, link in items:
+        a = f'<a class="link-arrow guarantee__link" href="{link[1]}">{link[0]}</a>' if link else ''
+        cards += f'''
+        <article class="guarantee"><img class="expert__icon" src="img/icons/{icon}.svg" alt="" width="64" height="64" loading="lazy"><h2 class="guarantee__title">{t}</h2><p class="guarantee__text">{nbsp(text)}</p>{a}</article>'''
+    company_page('guarantees.html', 'Гарантии', ('Гарантии', 'качества'),
+                 'Отвечаем за конструкцию на всех этапах — от проекта и производства до доставки и монтажа.',
+                 section(f'''      <div class="guarantees">{cards}
+      </div>'''),
+                 'Гарантии ФАВОР-ГАРАНТ: гарантия производителя, контроль качества, соответствие ГОСТ, СП и ТУ, инструкции по сборке, шеф-монтаж и доставка.')
+
+
 for p in SERVICES + EXPERTISE:
     text_page(p)
 expertise_hub()
 portfolio()
+company_pages()
