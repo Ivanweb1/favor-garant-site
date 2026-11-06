@@ -688,11 +688,19 @@ def company_pages():
                  'Все необходимые сертификаты и членство в СРО. Проекты и изделия соответствуют ГОСТ, СП и ТУ. Нажмите на документ, чтобы открыть его целиком.',
                  f'''      <div class="awards awards--grid">{diplomas}
       </div>''',
-                 section(f'''{sub_head('Реестр', 'надёжных партнёров')}
-      <div class="letters">
-        <article class="letter letter--wide"><button class="award" type="button" data-zoom="img/news/56-news-rnp-certificate.jpg">{rnp}</button><div class="letter__body"><p class="letter__kind">Свидетельство</p><h3 class="letter__from">Реестр надёжных партнёров ТПП&nbsp;РФ</h3><p class="guarantee__text">{nbsp('Реестр ведёт Торгово-промышленная палата РФ. Включение в него подтверждает деловую репутацию и финансовую устойчивость компании; сведения размещены в открытом доступе.')}</p><a class="link-arrow" href="news-rnp.html">Подробнее в&nbsp;новости</a></div></article>
-      </div>''') + section(f'''{sub_head('Корпоративные', 'документы', 'Юридические данные, политика конфиденциальности и результаты специальной оценки условий труда.')}
-      <a class="btn btn--outline" href="contacts.html#documents">Перейти к&nbsp;документам</a>''', light=True),
+                 section(f'''      <div class="page-head page-head--grid3">
+        <div>
+          <h2 class="h2 duo duo--inline">
+            <span>Реестр</span>
+            <span class="duo__second">и&nbsp;документы</span>
+          </h2>
+        </div>
+        <p class="page-head__text">{nbsp('Свидетельство Торгово-промышленной палаты РФ и корпоративные документы компании.')}</p>
+      </div>
+      <div class="cert-extra">
+        <article class="cert-card cert-card--rnp"><button class="award" type="button" data-zoom="img/news/56-news-rnp-certificate.jpg">{rnp}</button><div class="cert-card__body"><p class="letter__kind">Свидетельство</p><h3 class="cert-card__title">Реестр надёжных партнёров ТПП&nbsp;РФ</h3><p class="guarantee__text">{nbsp('Реестр ведёт Торгово-промышленная палата РФ. Включение в него подтверждает деловую репутацию и финансовую устойчивость компании; сведения размещены в открытом доступе.')}</p><a class="link-arrow cert-card__link" href="news-rnp.html">Подробнее в&nbsp;новости</a></div></article>
+        <article class="cert-card"><img class="expert__icon" src="img/icons/line-g-norms.svg" alt="" width="64" height="64" loading="lazy"><div class="cert-card__body"><h3 class="cert-card__title">Корпоративные документы</h3><p class="guarantee__text">{nbsp('Юридические данные, политика конфиденциальности и результаты специальной оценки условий труда.')}</p><a class="btn btn--outline cert-card__link" href="contacts.html#documents">Перейти к&nbsp;документам</a></div></article>
+      </div>'''),
                  'Сертификаты, лицензии, награды и дипломы ФАВОР-ГАРАНТ; свидетельство Реестра надёжных партнёров ТПП РФ.')
 
     # Гарантии
