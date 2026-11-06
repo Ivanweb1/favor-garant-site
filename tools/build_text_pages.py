@@ -895,11 +895,11 @@ def legal_page(file, name, h1, sections, desc, note_text=''):
     body = '\n'.join(f'<section id="{sid}">\n<h2>{nbsp(t)}</h2>\n{nbsp(html.strip())}\n</section>' for sid, t, html in sections)
     meta = f'\n        <p class="page-head__text">{nbsp(note_text)}</p>' if note_text else ''
     main = f'''  <!-- Юридическая текстовая страница: собрано tools/build_text_pages.py — правки вносить в скрипт -->
-  <section class="section section--light page-top">
+  <section class="section section--light page-top" style="padding-bottom: clamp(32px, 4vw, 48px)">
     <div class="container">
       {crumbs([('Главная', 'index.html'), (name, '')])}
       <div class="page-head" style="margin-bottom: 0">
-        <h1 class="h2 duo">
+        <h1 class="h2 duo duo--inline">
           <span>{nbsp(first)}</span>
           <span class="duo__second">{nbsp(second)}</span>
         </h1>{meta}
@@ -907,7 +907,7 @@ def legal_page(file, name, h1, sections, desc, note_text=''):
     </div>
   </section>
 
-  <section class="section" id="content">
+  <section class="section" id="content" style="padding-top: clamp(40px, 5vw, 64px)">
     <div class="container tdoc">
       <aside class="tdoc__aside">
         <nav class="toc" aria-label="Содержание страницы">
