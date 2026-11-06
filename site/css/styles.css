@@ -1778,6 +1778,8 @@ html.has-modal { overflow: hidden; }
 .lead-hero__title { font-size: clamp(30px, 3.6vw, 50px); line-height: 1.1; font-weight: 700; }
 .lead-hero__text { max-width: 560px; font-size: 17px; line-height: 1.6; color: var(--muted); }
 .lead-hero__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 28px; margin-top: 6px; }
+.lead-hero__phone { font-size: 16px; font-weight: 600; color: var(--navy); transition: color .2s ease; }
+.lead-hero__phone:hover { color: var(--navy-hover); }
 .lead-hero__media { position: relative; aspect-ratio: 4 / 3; overflow: hidden; border-radius: var(--radius); background: var(--light); }
 .lead-hero__media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 /* ключевые параметры полосой под шапкой */

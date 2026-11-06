@@ -171,7 +171,7 @@ def text_page(p):
           <p class="lead-hero__text">{nbsp(p['lead'])}</p>
           <div class="lead-hero__actions">
             <a class="btn btn--primary" href="#request-form">{p['button']}</a>
-            <a class="link-arrow" href="tel:+78003332227">8 (800) 333-222-7</a>
+            <a class="lead-hero__phone" href="tel:+78003332227">8 (800) 333-222-7</a>
           </div>
         </div>
         <div class="lead-hero__media"><img src="{p['photo'][0]}" alt="{p['photo'][1]}" width="{w}" height="{h}"></div>
@@ -811,7 +811,7 @@ def project_page():
           <p class="lead-hero__text">{nbsp('Информационный пилон в индивидуальном дизайне для проекта благоустройства сквера в Санкт-Петербурге.')}</p>
           <div class="lead-hero__actions">
             <a class="btn btn--primary" href="#request-form">Обсудить похожий проект</a>
-            <a class="link-arrow" href="tel:+78003332227">8 (800) 333-222-7</a>
+            <a class="lead-hero__phone" href="tel:+78003332227">8 (800) 333-222-7</a>
           </div>
         </div>
         <div class="lead-hero__media"><img src="img/projects/skver-2.jpg" alt="Информационный пилон в Сквере финансистов" width="{w}" height="{h}"></div>
