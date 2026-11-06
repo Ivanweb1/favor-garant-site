@@ -2028,9 +2028,16 @@ a.news__kind:hover { opacity: .8; }
 @media (max-width: 720px) { .cert-card--rnp { grid-template-columns: 1fr; } .cert-card--rnp .award { max-width: 240px; } .cert-card { padding: 22px; } }
 /* Вакансии: контакт отдела кадров и карточка про работу в компании */
 .vac { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: 20px; }
-.vac__hr { background: var(--white); }
-.vac__hr { align-content: start; }
-.vac__hours { margin-top: auto; padding-top: 14px; font-size: 13px; line-height: 1.5; color: var(--muted); }
+.vac__hr { display: grid; align-content: start; gap: 6px; padding: clamp(24px, 3vw, 32px); border-radius: var(--radius); background: var(--white); }
+.vac__role { font-size: 13px; color: var(--grey); }
+.vac__name { font-size: 19px; line-height: 1.3; font-weight: 700; color: var(--navy); }
+.vac__contacts { display: grid; margin-top: 14px; }
+.vac__contacts > div { display: grid; gap: 2px; padding: 12px 0; border-top: 1px solid var(--line); }
+.vac__contacts dt { font-size: 12px; color: var(--grey); }
+.vac__contacts dd { font-size: 15px; font-weight: 600; color: var(--navy); font-variant-numeric: lining-nums; }
+.vac__contacts a { transition: color .2s ease; }
+.vac__contacts a:hover { color: var(--navy-hover); }
+.vac__contacts .vac__hours { font-size: 14px; font-weight: 500; color: var(--muted); }
 .vac__card { display: grid; align-content: start; gap: 14px; padding: clamp(24px, 3vw, 36px); border-radius: var(--radius); background: var(--white); }
 .vac__title { font-size: clamp(22px, 2vw, 28px); line-height: 1.2; font-weight: 700; color: var(--navy); }
 .vac__actions { display: flex; flex-wrap: wrap; gap: 12px; margin: 6px 0; }
