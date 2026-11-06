@@ -42,8 +42,8 @@ def points(items):
     out = []
     for it in items:
         b, s = it if isinstance(it, tuple) else (it, '')
-        out.append(f'<div class="doc__point"><b>{b}</b>' + (f'<span>{s}</span>' if s else '') + '</div>')
-    return '<div class="doc__points">' + ''.join(out) + '</div>'
+        out.append(f'<div class="tdoc__point"><b>{b}</b>' + (f'<span>{s}</span>' if s else '') + '</div>')
+    return '<div class="tdoc__points">' + ''.join(out) + '</div>'
 
 
 def note(t):
@@ -180,16 +180,16 @@ def text_page(p):
   </section>
 
   <section class="section" id="content">
-    <div class="container doc">
-      <aside class="doc__aside">
+    <div class="container tdoc">
+      <aside class="tdoc__aside">
         <nav class="toc" aria-label="Содержание страницы">
           <p class="toc__title">Содержание</p>
           {toc}
         </nav>
-        <div class="doc__cta">
-          <p class="doc__cta-title">{nbsp(cta_title)}</p>
-          <p class="doc__cta-text">{nbsp(cta_text)}</p>
-          <a class="doc__cta-phone" href="tel:+78003332227">8 (800) 333-222-7</a>
+        <div class="tdoc__cta">
+          <p class="tdoc__cta-title">{nbsp(cta_title)}</p>
+          <p class="tdoc__cta-text">{nbsp(cta_text)}</p>
+          <a class="tdoc__cta-phone" href="tel:+78003332227">8 (800) 333-222-7</a>
           <a class="btn btn--light" href="#request-form">{cta_btn}</a>
         </div>
       </aside>
@@ -237,14 +237,14 @@ SERVICES = [dict(
 '''),
         ('products', 'Что изготавливаем', f'''
 <p>Режем детали для собственной продукции и по чертежам заказчиков.</p>
-<div class="doc__cols">
+<div class="tdoc__cols">
 <div><h3>Декор и навигация</h3>{checks(['Декоративные накладки и панели', 'Таблички, шильды, информационные стенды', 'Объёмные буквы и элементы вывесок', 'Детали навигационных стел и пилонов'])}</div>
 <div><h3>Детали и узлы</h3>{checks(['Фурнитура и крепёжные элементы', 'Элементы малых архитектурных форм', 'Перфорированные и ажурные панели', 'Детали по чертежам заказчика'])}</div>
 </div>
 '''),
         ('equipment', 'Оборудование', f'''
 <p>Резка выполняется на станках производственного комплекса в Санкт-Петербурге.</p>
-<div class="doc__table-wrap"><table class="doc__table">
+<div class="tdoc__table-wrap"><table class="tdoc__table">
 <thead><tr><th>Станок</th><th>Что режет</th><th>Рабочая зона</th></tr></thead>
 <tbody>
 <tr><td>Senfeng SF-3015M3</td><td>Листовой металл, трубы и профиль</td><td>Лист 1500 × 3000 мм, профиль до 6000 мм, трубы Ø до 150 мм</td></tr>
@@ -260,7 +260,7 @@ SERVICES = [dict(
             ('Полный цикл на одной площадке', 'После резки деталь можно согнуть, сварить и покрасить здесь же.'),
         ])),
         ('order', 'Как проходит заказ', '''
-<ol class="doc__steps">
+<ol class="tdoc__steps">
 <li><b>Заявка</b>Присылаете чертёж или эскиз детали и количество.</li>
 <li><b>Расчёт</b>Технолог подбирает режим и рассчитывает стоимость и сроки.</li>
 <li><b>Резка</b>Изготавливаем детали на станке с ЧПУ и проверяем размеры.</li>
@@ -318,7 +318,7 @@ EXPERTISE = [
                  ('check', 'Что проверяем', f'''
 <p class="article__lead">Экспертиза осуществляется оценкой соответствия проекта требованиям действующей нормативно-технической документации.</p>
 {points([('Информативность', 'Проверка полноты и информативности проекта'), ('Качество', 'Проверка релевантности выбора материалов и комплектующих')])}
-<div class="doc__cols">
+<div class="tdoc__cols">
 <div><h3>Проект рекламной конструкции</h3>{checks([
     'Полнота и информативность проекта для оценки безопасности проектируемой конструкции',
     'Обоснованность выбора технических решений в части прочности, надёжности, долговечности и функциональности',
@@ -436,8 +436,8 @@ EXPERTISE = [
 '''),
                  ('definition', 'Что такое коридор безопасности', f'''
 {note('Коридор безопасности — земельные участки (независимо от категории земель), включающие территорию, прилегающую к проезжим частям дорог в населённых пунктах, на которых в целях безопасности дорожного движения запрещается устанавливать рекламные конструкции.')}
-<div class="doc__cols doc__cols--scheme">
-<figure class="doc__scheme">{img('img/expertise/corridor-scheme.png', 'Схема для определения границ коридора безопасности по ГОСТ Р 52044-2003')}<figcaption>Схема для определения границ коридора безопасности по ГОСТ Р 52044-2003</figcaption></figure>
+<div class="tdoc__cols tdoc__cols--scheme">
+<figure class="tdoc__scheme">{img('img/expertise/corridor-scheme.png', 'Схема для определения границ коридора безопасности по ГОСТ Р 52044-2003')}<figcaption>Схема для определения границ коридора безопасности по ГОСТ Р 52044-2003</figcaption></figure>
 <div><h3>Обозначения на схеме</h3>{checks(['<b>DGH</b> — границы коридора безопасности', '<b>PB</b> — край проезжей части', '<b>O’</b> — транспортное средство', '<b>CC’</b> — дорожный знак (светофор)', '<b>R</b> — минимальное расстояние от середины крайней полосы движения, при котором обеспечивается видимость дорожного знака'])}</div>
 </div>
 '''),
@@ -510,7 +510,7 @@ def expertise_hub():
         </h2>
         <p class="page-head__text">Стоимость и&nbsp;сроки рассчитываем для каждого объекта индивидуально.</p>
       </div>
-      <ol class="doc__steps doc__steps--wide" style="--cols: 3">
+      <ol class="tdoc__steps tdoc__steps--wide" style="--cols: 3">
         <li><b>Заключение</b>{nbsp('По результатам экспертизы оформляется заключение, в котором изложены основные выводы.')}</li>
         <li><b>Перечень недостатков</b>{nbsp('Основные выявленные недостатки оформляются приложением к заключению.')}</li>
         <li><b>Повторная экспертиза</b>{nbsp('После устранения недостатков проводится повторная экспертиза документации.')}</li>
@@ -610,13 +610,13 @@ AWARDS = {num: html for html, num in re.findall(r'(<button class="award" type="b
 # страницы компании связаны выпадающим списком «О компании» в шапке и подвалом
 
 
-def company_page(file, name, h1, lead, top, body, desc):
+def company_page(file, name, h1, lead, top, body, desc, cols=3):
     """top — первый блок страницы, стоит прямо под заголовком в серой шапке (как карточки на «Услугах»); body — секции ниже."""
     main = f'''  <!-- Страница компании «{name}»: собрано tools/build_text_pages.py -->
   <section class="section section--light page-top page-top--company">
     <div class="container">
       {crumbs([('Главная', 'index.html'), ('О компании', 'about.html'), (name, '')])}
-      <div class="page-head">
+      <div class="page-head page-head--grid{cols}">
         <div>
           <h1 class="h2 duo">
             <span>{nbsp(h1[0])}</span>
@@ -663,10 +663,10 @@ def company_pages():
                  PEOPLE + '''
       <div class="jobs">
         <p class="jobs__text">По&nbsp;вопросам актуальных вакансий и&nbsp;трудоустройства обращайтесь в&nbsp;отдел по&nbsp;работе с&nbsp;персоналом.</p>
-        <a class="btn btn--outline" href="contacts.html#jobs">Смотреть вакансии</a>
+        <a class="btn btn--outline" href="vacancies.html">Смотреть вакансии</a>
       </div>''',
                  '',
-                 'Команда ФАВОР-ГАРАНТ: руководство, коммерческая служба, отдел закупок и отдел кадров — телефоны и почта специалистов.')
+                 'Команда ФАВОР-ГАРАНТ: руководство, коммерческая служба, отдел закупок и отдел кадров — телефоны и почта специалистов.', cols=4)
 
     # Отзывы: благодарственные письма заказчиков + заказчики
     letters = [('04', 'Комитет по благоустройству Санкт-Петербурга', 'Благодарность'),
@@ -717,8 +717,34 @@ def company_pages():
                  'Гарантии ФАВОР-ГАРАНТ: гарантия производителя, контроль качества, соответствие ГОСТ, СП и ТУ, инструкции по сборке, шеф-монтаж и доставка.')
 
 
+
+def vacancies_page():
+    """Вакансии: тексты и контакт отдела кадров со старой страницы /vakansii (без цифр компании — клиент их не показывает)."""
+    top = f'''      <div class="vac">
+        <article class="vac__card">
+          <h2 class="vac__title">Ваша карьера начинается здесь</h2>
+          <p class="guarantee__text">{nbsp('Реальные объекты по всей России и СНГ, участие в федеральных программах и преображённые города.')}</p>
+          <p class="guarantee__text">{nbsp('Хотите увидеть, в каких проектах вам предстоит участвовать? Ознакомьтесь с нашим портфолио и каталогом продукции, чтобы понять масштаб наших задач и оценить свой будущий фронт работ.')}</p>
+          <div class="vac__actions"><a class="btn btn--primary" href="portfolio.html">Наши работы</a><a class="btn btn--outline" href="catalog.html">Каталог продукции</a></div>
+          <p class="guarantee__text">{nbsp('Узнайте больше о нашей миссии и решаемых задачах — это поможет лучше понять нас и свою будущую роль в команде.')} <a class="link-arrow" href="about.html">О&nbsp;компании</a></p>
+        </article>
+        <article class="person vac__hr">
+          <p class="person__role">Начальник отдела кадров</p>
+          <p class="person__name">Сулимина Ольга Николаевна</p>
+          <a class="person__phone" href="tel:+78126402227,115">8 (812) 640-22-27, доб.&nbsp;115</a>
+          <a class="person__phone" href="tel:+79119221334">+7 (911) 922-13-34</a>
+          <a class="person__mail" href="mailto:sulimina@favor-garant.ru">sulimina@favor-garant.ru</a>
+          <p class="vac__hours">Время для звонков: пн–чт с&nbsp;9:00 до&nbsp;17:00, пт с&nbsp;9:00 до&nbsp;16:00</p>
+        </article>
+      </div>'''
+    company_page('vacancies.html', 'Вакансии', ('Вакансии', 'в&nbsp;«ФАВОР-ГАРАНТ»'),
+                 'По всем вопросам, касающимся актуальных вакансий и процедуры трудоустройства, обращайтесь к специалистам отдела по работе с персоналом.',
+                 top, '',
+                 'Вакансии ФАВОР-ГАРАНТ: контакты отдела кадров и условия обращения по трудоустройству на завод металлоконструкций в Санкт-Петербурге.')
+
 for p in SERVICES + EXPERTISE:
     text_page(p)
 expertise_hub()
 portfolio()
 company_pages()
+vacancies_page()
