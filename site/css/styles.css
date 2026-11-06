@@ -1897,6 +1897,7 @@ a.expert__item:hover .expert__icon { background: var(--tint); }
 }
 @media (max-width: 720px) {
   .lead-hero__actions .btn { flex: 1 1 100%; }
+  .lead-hero__phone { flex: 1 1 100%; text-align: center; }
   .keyfacts { grid-template-columns: 1fr; }
   .keyfacts > div, .keyfacts > div + div { padding: 16px 0 0; border-left: 0; margin-top: 0 !important; }
   .tdoc__cols, .tdoc__points, .tdoc__steps, .tdoc .article__body .tdoc__steps { grid-template-columns: 1fr; }
