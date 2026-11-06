@@ -884,6 +884,62 @@ def project_page():
 '''
     write(file, page_head(name, 'Сквер финансистов в Санкт-Петербурге: информационный пилон индивидуального дизайна ФАВОР-ГАРАНТ для проекта благоустройства.', 'portfolio.html') + '\n' + main + page_tail(False, product=False))
 
+
+# ---------- юридическая текстовая страница (политики, оферты и т.п.) ----------
+# Шаблон: заголовок + разделы с подзаголовками, слева оглавление, без формы заявки.
+# Текст — заглушка, клиент пришлёт свои документы.
+
+def legal_page(file, name, h1, sections, desc, note_text=''):
+    first, second = h1
+    toc = ''.join(f'<a href="#{sid}">{nbsp(t)}</a>' for sid, t, _ in sections)
+    body = '\n'.join(f'<section id="{sid}">\n<h2>{nbsp(t)}</h2>\n{nbsp(html.strip())}\n</section>' for sid, t, html in sections)
+    meta = f'\n        <p class="page-head__text">{nbsp(note_text)}</p>' if note_text else ''
+    main = f'''  <!-- Юридическая текстовая страница: собрано tools/build_text_pages.py — правки вносить в скрипт -->
+  <section class="section section--light page-top">
+    <div class="container">
+      {crumbs([('Главная', 'index.html'), (name, '')])}
+      <div class="page-head" style="margin-bottom: 0">
+        <h1 class="h2 duo">
+          <span>{nbsp(first)}</span>
+          <span class="duo__second">{nbsp(second)}</span>
+        </h1>{meta}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="content">
+    <div class="container tdoc">
+      <aside class="tdoc__aside">
+        <nav class="toc" aria-label="Содержание страницы">
+          <p class="toc__title">Содержание</p>
+          {toc}
+        </nav>
+      </aside>
+      <div class="article__body">
+{body}
+      </div>
+    </div>
+  </section>
+
+'''
+    tail = TAIL[TAIL.index('</main>'):]
+    write(file, page_head(name, desc, '') + '\n' + main + tail)
+
+
+def legal_pages():
+    legal_page('legal.html', 'Пользовательское соглашение', ('Пользовательское', 'соглашение'), [
+        ('general', 'Общие положения', '''
+<p>Настоящий документ определяет условия использования сайта ООО «ФАВОР-ГАРАНТ». Текст раздела — заглушка: здесь будет вводная часть документа, термины и область его действия. Абзац показывает, как выглядит обычный текст средней длины на странице.</p>
+<p>Второй абзац нужен, чтобы видеть расстояние между абзацами внутри одного раздела. Пользуясь сайтом, посетитель соглашается с условиями документа.</p>'''),
+        ('rights', 'Права и обязанности сторон', '''
+<p>Здесь будут перечислены права и обязанности владельца сайта и пользователя. Текст раздела — заглушка, итоговую редакцию пришлёт заказчик.</p>
+<h3>Подзаголовок внутри раздела</h3>
+<p>Так выглядит подзаголовок третьего уровня, если внутри раздела нужно выделить отдельный пункт документа.</p>'''),
+        ('final', 'Заключительные положения', '''
+<p>Здесь будут порядок изменения документа, контакты для обращений и дата вступления в силу. Текст раздела — заглушка.</p>
+<p>По вопросам, связанным с документом, можно написать на <a href="mailto:info@favor-garant.ru">info@favor-garant.ru</a> или позвонить по телефону <a href="tel:+78003332227">8 (800) 333-222-7</a>.</p>'''),
+    ], 'Пользовательское соглашение сайта ООО «ФАВОР-ГАРАНТ»: общие положения, права и обязанности сторон, заключительные положения.')
+
 for p in SERVICES + EXPERTISE:
     text_page(p)
 expertise_hub()
@@ -891,3 +947,4 @@ portfolio()
 project_page()
 company_pages()
 vacancies_page()
+legal_pages()
