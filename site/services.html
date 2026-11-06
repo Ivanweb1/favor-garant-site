@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap&subset=cyrillic" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=20261105c">
+  <link rel="stylesheet" href="css/styles.css?v=20261106a">
 </head>
 <body>
 
@@ -32,7 +32,7 @@
         </li>
         <li class="nav__item"><a class="nav__link" href="services.html" aria-current="page">Услуги</a></li>
         <li class="nav__item"><a class="nav__link" href="about.html">О компании</a></li>
-        <li class="nav__item"><a class="nav__link" href="index.html#works">Наши работы</a></li>
+        <li class="nav__item"><a class="nav__link" href="portfolio.html">Наши работы</a></li>
         <li class="nav__item"><a class="nav__link" href="news.html">Новости</a></li>
         <li class="nav__item"><a class="nav__link" href="contacts.html">Контакты</a></li>
       </ul>
@@ -221,7 +221,7 @@
       <ul class="mobile-menu__list mobile-menu__list--main">
         <li><a href="services.html">Услуги</a></li>
         <li><a href="about.html">О компании</a></li>
-        <li><a href="index.html#works">Наши работы</a></li>
+        <li><a href="portfolio.html">Наши работы</a></li>
         <li><a href="news.html">Новости</a></li>
         <li><a href="contacts.html">Контакты</a></li>
       </ul>
@@ -298,7 +298,7 @@
             <h2 class="tile__title">Экспертиза</h2>
             <p class="tile__text">Проверяем проекты рекламных конструкций на&nbsp;соответствие нормативно-технической документации.</p>
             <p class="tile__meta">Экспертиза проектов · Документация для торгов · Коридор безопасности</p>
-            <div class="tile__foot tile__foot--service"><a class="btn btn--outline tile__more" href="#expertise">Подробнее</a></div>
+            <div class="tile__foot tile__foot--service"><a class="btn btn--outline tile__more" href="expertise.html">Подробнее</a></div>
           </div>
         </article>
       </div>
@@ -491,6 +491,13 @@
         </div>
       </div>
     </div>
+    <!-- направления металлообработки: у каждого своя текстовая страница по шаблону service-laser-brass.html -->
+    <div class="container">
+      <div class="metal-dirs">
+        <h3 class="sortament__title">Направления металлообработки</h3>
+        <div class="siblings"><a class="sibling" href="service-laser-brass.html">Лазерная резка латуни</a><span class="sibling sibling--soon">Лазерная резка листового металла<small>Страница в&nbsp;работе</small></span><span class="sibling sibling--soon">Лазерная резка нержавеющей стали<small>Страница в&nbsp;работе</small></span><span class="sibling sibling--soon">Лазерная резка труб<small>Страница в&nbsp;работе</small></span><span class="sibling sibling--soon">Плазменная резка металла в&nbsp;Санкт-Петербурге<small>Страница в&nbsp;работе</small></span><span class="sibling sibling--soon">Плазменная резка труб<small>Страница в&nbsp;работе</small></span><span class="sibling sibling--soon">Вальцовка листового металла<small>Страница в&nbsp;работе</small></span></div>
+      </div>
+    </div>
   </section>
 
   <!-- 3. Монтаж павильонов под ключ: четыре этапа со старой страницы /ustanovka-ostanovki -->
@@ -554,7 +561,7 @@
     </div>
   </section>
 
-  <!-- 4. Экспертиза: шесть видов работ со старой страницы /expertise -->
+  <!-- 4. Экспертиза: шесть видов работ со старой страницы /expertise, каждый ведёт на свою страницу -->
   <section class="section" id="expertise">
     <div class="container">
       <div class="page-head">
@@ -566,14 +573,14 @@
         </div>
         <p class="page-head__text">Проверяем, соответствуют&nbsp;ли решения и&nbsp;расчёты в&nbsp;проекте действующей нормативно-технической документации.</p>
       </div>
-      <ol class="expert">
-        <li class="expert__item"><img class="expert__icon" src="img/icons/line-exp-review.svg" alt="" width="64" height="64" loading="lazy"><h3 class="expert__title">Экспертиза проектов</h3><p class="expert__text">Проектная документация рекламной конструкции и&nbsp;её&nbsp;электроустановки для разрешений на&nbsp;установку и&nbsp;эксплуатацию.</p></li>
-        <li class="expert__item"><img class="expert__icon" src="img/icons/line-exp-design.svg" alt="" width="64" height="64" loading="lazy"><h3 class="expert__title">Разработка проектной документации</h3><p class="expert__text">Проектирование рекламных конструкций и&nbsp;элементов благоустройства любой сложности.</p></li>
-        <li class="expert__item"><img class="expert__icon" src="img/icons/line-exp-tender.svg" alt="" width="64" height="64" loading="lazy"><h3 class="expert__title">Документация для торгов</h3><p class="expert__text">Дизайнерские и&nbsp;конструктивные решения для участников торгов на&nbsp;torgi.gov.ru.</p></li>
-        <li class="expert__item"><img class="expert__icon" src="img/icons/line-exp-repair.svg" alt="" width="64" height="64" loading="lazy"><h3 class="expert__title">Ремонт и&nbsp;модернизация</h3><p class="expert__text">Мероприятия по&nbsp;ремонту и&nbsp;модернизации рекламных конструкций для продления срока эксплуатации.</p></li>
-        <li class="expert__item"><img class="expert__icon" src="img/icons/line-exp-corridor.svg" alt="" width="64" height="64" loading="lazy"><h3 class="expert__title">Расчёт коридора безопасности</h3><p class="expert__text">Для изменений в&nbsp;утверждённых схемах размещения рекламных конструкций и&nbsp;оформления новых мест.</p></li>
-        <li class="expert__item"><img class="expert__icon" src="img/icons/line-exp-approval.svg" alt="" width="64" height="64" loading="lazy"><h3 class="expert__title">Документация для согласования</h3><p class="expert__text">Пакет для получения разрешения на&nbsp;установку и&nbsp;эксплуатацию рекламной конструкции.</p></li>
-      </ol>
+      <div class="expert">
+        <a class="expert__item" href="expertise-project.html"><img class="expert__icon" src="img/icons/line-exp-review.svg" alt="" width="64" height="64" loading="lazy"><h3 class="expert__title">Экспертиза проектов</h3><p class="expert__text">Проектная документация рекламной конструкции и&nbsp;её&nbsp;электроустановки для разрешений на&nbsp;установку и&nbsp;эксплуатацию.</p></a>
+        <a class="expert__item" href="expertise-documentation.html"><img class="expert__icon" src="img/icons/line-exp-design.svg" alt="" width="64" height="64" loading="lazy"><h3 class="expert__title">Разработка проектной документации</h3><p class="expert__text">Проектирование рекламных конструкций и&nbsp;элементов благоустройства любой сложности.</p></a>
+        <a class="expert__item" href="expertise-bidding.html"><img class="expert__icon" src="img/icons/line-exp-tender.svg" alt="" width="64" height="64" loading="lazy"><h3 class="expert__title">Документация для торгов</h3><p class="expert__text">Дизайнерские и&nbsp;конструктивные решения для участников торгов на&nbsp;torgi.gov.ru.</p></a>
+        <a class="expert__item" href="expertise-repair.html"><img class="expert__icon" src="img/icons/line-exp-repair.svg" alt="" width="64" height="64" loading="lazy"><h3 class="expert__title">Ремонт и&nbsp;модернизация</h3><p class="expert__text">Мероприятия по&nbsp;ремонту и&nbsp;модернизации рекламных конструкций для продления срока эксплуатации.</p></a>
+        <a class="expert__item" href="expertise-corridor.html"><img class="expert__icon" src="img/icons/line-exp-corridor.svg" alt="" width="64" height="64" loading="lazy"><h3 class="expert__title">Расчёт коридора безопасности</h3><p class="expert__text">Для изменений в&nbsp;утверждённых схемах размещения рекламных конструкций и&nbsp;оформления новых мест.</p></a>
+        <a class="expert__item" href="expertise-approval.html"><img class="expert__icon" src="img/icons/line-exp-approval.svg" alt="" width="64" height="64" loading="lazy"><h3 class="expert__title">Документация для согласования</h3><p class="expert__text">Пакет для получения разрешения на&nbsp;установку и&nbsp;эксплуатацию рекламной конструкции.</p></a>
+      </div>
     </div>
   </section>
 
@@ -697,14 +704,14 @@
           <li><a href="services.html#equipment">Металлообработка</a></li>
           <li><a href="services.html#supervision">Шеф-монтаж</a></li>
           <li><a href="services.html#montage">Монтаж остановочных павильонов</a></li>
-          <li><a href="services.html#expertise">Экспертиза</a></li>
+          <li><a href="expertise.html">Экспертиза</a></li>
         </ul>
       </nav>
       <nav class="footer__col" aria-label="Компания">
         <p class="footer__title">Компания</p>
         <ul>
           <li><a href="about.html">О компании</a></li>
-          <li><a href="index.html#works">Наши работы</a></li>
+          <li><a href="portfolio.html">Наши работы</a></li>
           <li><a href="news.html">Новости</a></li>
           <li><a href="contacts.html#staff">Сотрудники</a></li>
           <li><a href="contacts.html#documents">Документы</a></li>
@@ -732,6 +739,6 @@
   </div>
 </footer>
 
-<script src="js/main.js?v=20261105a"></script>
+<script src="js/main.js?v=20261106a"></script>
 </body>
 </html>

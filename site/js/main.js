@@ -760,4 +760,17 @@
   });
 
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Текстовая страница: подсветка текущего раздела в содержании
+  const tocLinks = [...document.querySelectorAll('.toc a[href^="#"]')];
+  if (tocLinks.length && 'IntersectionObserver' in window) {
+    const byId = new Map(tocLinks.map((a) => [a.getAttribute('href').slice(1), a]));
+    const seen = new Set();
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => (e.isIntersecting ? seen.add(e.target.id) : seen.delete(e.target.id)));
+      const first = [...byId.keys()].find((id) => seen.has(id));
+      if (first) tocLinks.forEach((a) => a.classList.toggle('is-active', a === byId.get(first)));
+    }, { rootMargin: '-20% 0px -60% 0px' });
+    byId.forEach((_, id) => { const el = document.getElementById(id); if (el) io.observe(el); });
+  }
 })();
