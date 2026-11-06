@@ -610,9 +610,10 @@ AWARDS = {num: html for html, num in re.findall(r'(<button class="award" type="b
 # страницы компании связаны выпадающим списком «О компании» в шапке и подвалом
 
 
-def company_page(file, name, h1, lead, body, desc):
+def company_page(file, name, h1, lead, top, body, desc):
+    """top — первый блок страницы, стоит прямо под заголовком в серой шапке (как карточки на «Услугах»); body — секции ниже."""
     main = f'''  <!-- Страница компании «{name}»: собрано tools/build_text_pages.py -->
-  <section class="section section--light page-top">
+  <section class="section section--light page-top page-top--company">
     <div class="container">
       {crumbs([('Главная', 'index.html'), ('О компании', 'about.html'), (name, '')])}
       <div class="page-head">
@@ -624,6 +625,7 @@ def company_page(file, name, h1, lead, body, desc):
         </div>
         <p class="page-head__text">{nbsp(lead)}</p>
       </div>
+{top}
     </div>
   </section>
 
@@ -658,8 +660,12 @@ def company_pages():
     # Команда
     company_page('team.html', 'Команда', ('Команда', 'специалистов'),
                  'Специалисты проконсультируют по выбору, расчёту стоимости и условиям монтажа металлоконструкций.',
-                 section(PEOPLE) + section(f'''{sub_head('Работа', 'в «ФАВОР-ГАРАНТ»', 'Открытые вакансии и контакты отдела кадров — на странице «Контакты».')}
-      <a class="btn btn--primary" href="contacts.html#jobs">Смотреть вакансии</a>''', light=True),
+                 PEOPLE + '''
+      <div class="jobs">
+        <p class="jobs__text">По&nbsp;вопросам актуальных вакансий и&nbsp;трудоустройства обращайтесь в&nbsp;отдел по&nbsp;работе с&nbsp;персоналом.</p>
+        <a class="btn btn--outline" href="contacts.html#jobs">Смотреть вакансии</a>
+      </div>''',
+                 '',
                  'Команда ФАВОР-ГАРАНТ: руководство, коммерческая служба, отдел закупок и отдел кадров — телефоны и почта специалистов.')
 
     # Отзывы: благодарственные письма заказчиков + заказчики
@@ -670,22 +676,23 @@ def company_pages():
         <article class="letter">{AWARDS[n]}<div class="letter__body"><p class="letter__kind">{k}</p><h2 class="letter__from">{nbsp(f)}</h2></div></article>''' for n, f, k in letters)
     company_page('reviews.html', 'Отзывы', ('Отзывы', 'заказчиков'),
                  'Благодарственные письма от городских комитетов, администраций и организаций, для которых мы работали. Нажмите на письмо, чтобы открыть его целиком.',
-                 section(f'''      <div class="letters">{cards}
-      </div>''') + CLIENTS.replace('<section class="section">', '<section class="section section--light">', 1),
+                 f'''      <div class="letters">{cards}
+      </div>''',
+                 CLIENTS,
                  'Отзывы и благодарственные письма заказчиков ФАВОР-ГАРАНТ: Комитет по благоустройству Санкт-Петербурга, администрации районов и организации.')
 
-    # Сертификаты и лицензии
+    # Сертификаты и лицензии: дипломы сразу под заголовком, ниже реестр и документы
     diplomas = ''.join(AWARDS[n] for n in ['01', '02', '03', '05', '06', '07', '08', '09', '10'])
     rnp = img('img/news/56-news-rnp-certificate.jpg', 'Свидетельство о внесении ООО «ФАВОР-ГАРАНТ» в Реестр надёжных партнёров ТПП РФ')
     company_page('certificates.html', 'Сертификаты и лицензии', ('Сертификаты', 'и&nbsp;лицензии'),
-                 'Все необходимые сертификаты и членство в СРО. Проекты и изделия соответствуют ГОСТ, СП и ТУ.',
+                 'Все необходимые сертификаты и членство в СРО. Проекты и изделия соответствуют ГОСТ, СП и ТУ. Нажмите на документ, чтобы открыть его целиком.',
+                 f'''      <div class="awards awards--grid">{diplomas}
+      </div>''',
                  section(f'''{sub_head('Реестр', 'надёжных партнёров')}
       <div class="letters">
         <article class="letter letter--wide"><button class="award" type="button" data-zoom="img/news/56-news-rnp-certificate.jpg">{rnp}</button><div class="letter__body"><p class="letter__kind">Свидетельство</p><h3 class="letter__from">Реестр надёжных партнёров ТПП&nbsp;РФ</h3><p class="guarantee__text">{nbsp('Реестр ведёт Торгово-промышленная палата РФ. Включение в него подтверждает деловую репутацию и финансовую устойчивость компании; сведения размещены в открытом доступе.')}</p><a class="link-arrow" href="news-rnp.html">Подробнее в&nbsp;новости</a></div></article>
-      </div>''') + section(f'''{sub_head('Награды', 'и&nbsp;дипломы', 'Нажмите на документ, чтобы открыть его целиком.')}
-      <div class="awards awards--grid">{diplomas}
-      </div>''', light=True) + section(f'''{sub_head('Корпоративные', 'документы', 'Юридические данные, политика конфиденциальности и результаты специальной оценки условий труда.')}
-      <a class="btn btn--outline" href="contacts.html#documents">Перейти к&nbsp;документам</a>'''),
+      </div>''') + section(f'''{sub_head('Корпоративные', 'документы', 'Юридические данные, политика конфиденциальности и результаты специальной оценки условий труда.')}
+      <a class="btn btn--outline" href="contacts.html#documents">Перейти к&nbsp;документам</a>''', light=True),
                  'Сертификаты, лицензии, награды и дипломы ФАВОР-ГАРАНТ; свидетельство Реестра надёжных партнёров ТПП РФ.')
 
     # Гарантии
@@ -704,8 +711,9 @@ def company_pages():
         <article class="guarantee"><img class="expert__icon" src="img/icons/{icon}.svg" alt="" width="64" height="64" loading="lazy"><h2 class="guarantee__title">{t}</h2><p class="guarantee__text">{nbsp(text)}</p>{a}</article>'''
     company_page('guarantees.html', 'Гарантии', ('Гарантии', 'качества'),
                  'Отвечаем за конструкцию на всех этапах — от проекта и производства до доставки и монтажа.',
-                 section(f'''      <div class="guarantees">{cards}
-      </div>'''),
+                 f'''      <div class="guarantees">{cards}
+      </div>''',
+                 '',
                  'Гарантии ФАВОР-ГАРАНТ: гарантия производителя, контроль качества, соответствие ГОСТ, СП и ТУ, инструкции по сборке, шеф-монтаж и доставка.')
 
 
