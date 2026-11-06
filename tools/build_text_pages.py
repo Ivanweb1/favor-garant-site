@@ -486,7 +486,7 @@ def expertise_hub():
   <section class="section section--light page-top">
     <div class="container">
       {crumbs([('Главная', 'index.html'), ('Экспертиза', '')])}
-      <div class="page-head">
+      <div class="page-head page-head--grid3 page-head--flush">
         <div>
           <h1 class="h2 duo">
             <span>Экспертиза</span>
@@ -503,11 +503,13 @@ def expertise_hub():
   <!-- Результат: со старой страницы /project-expertise -->
   <section class="section">
     <div class="container">
-      <div class="page-head">
-        <h2 class="h2 duo duo--inline">
-          <span>Результат</span>
-          <span class="duo__second">экспертизы</span>
-        </h2>
+      <div class="page-head page-head--grid3">
+        <div>
+          <h2 class="h2 duo duo--inline">
+            <span>Результат</span>
+            <span class="duo__second">экспертизы</span>
+          </h2>
+        </div>
         <p class="page-head__text">Стоимость и&nbsp;сроки рассчитываем для каждого объекта индивидуально.</p>
       </div>
       <ol class="tdoc__steps tdoc__steps--wide" style="--cols: 3">

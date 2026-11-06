@@ -979,6 +979,8 @@ select.field__input, .select__btn { appearance: none; padding-right: 40px; backg
 .page-head--grid4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; align-items: end; }
 .page-head--grid4 > div { grid-column: span 3; }
 .page-head--grid4 .page-head__text { max-width: none; }
+/* над сеткой без промежутков между колонками (виды экспертизы) */
+.page-head--flush { column-gap: 0; }
 
 /* подзаголовок внутри секции со стрелками ленты */
 .sub-head { display: flex; align-items: center; justify-content: space-between; gap: 20px; margin: var(--sub-gap) 0 24px; }
@@ -1832,7 +1834,7 @@ html.has-modal { overflow: hidden; }
 .tdoc__scheme figcaption { font-size: 13px; line-height: 1.4; color: var(--muted); }
 /* Услуги: направления металлообработки под лентой деталей */
 .metal-dirs { display: grid; gap: 16px; margin-top: var(--sub-gap); }
-.tdoc__steps li { display: grid; align-content: start; gap: 8px; padding-top: 18px; border-top: 2px solid var(--navy); counter-increment: dstep; font-size: 14px; line-height: 1.5; color: var(--muted); }
+.tdoc__steps li { display: grid; align-content: start; gap: 8px; counter-increment: dstep; font-size: 14px; line-height: 1.5; color: var(--muted); }
 .tdoc__steps li::before { content: counter(dstep, decimal-leading-zero); font-size: 13px; font-weight: 700; color: var(--red); }
 .tdoc__steps b { font-size: 16px; line-height: 1.35; color: var(--navy); }
 
@@ -1895,7 +1897,8 @@ a.expert__item:hover .expert__icon { background: var(--tint); }
   .lead-hero__actions .btn { flex: 1 1 100%; }
   .keyfacts { grid-template-columns: 1fr; }
   .keyfacts > div, .keyfacts > div + div { padding: 16px 0 0; border-left: 0; margin-top: 0 !important; }
-  .tdoc__cols, .tdoc__points, .tdoc .article__body .tdoc__steps { grid-template-columns: 1fr; }
+  .tdoc__cols, .tdoc__points, .tdoc__steps, .tdoc .article__body .tdoc__steps { grid-template-columns: 1fr; }
+  .tdoc__steps { row-gap: 24px; }
   .tdoc__table { font-size: 14px; }
   .tdoc__table th, .tdoc__table td { padding: 12px 14px; }
   .faq__a { padding-right: 0; }
