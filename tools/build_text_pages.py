@@ -550,7 +550,7 @@ FILTERS = [('all', 'Все'), ('pav', 'Остановочные павильон
 
 def portfolio():
     chips = ''.join(
-        f'\n        <button class="chip" type="button" data-filter="{k}" aria-pressed="{str(k == "all").lower()}">{n}<span class="chip__num">{len(WORKS) if k == "all" else sum(w[2] == k for w in WORKS)}</span></button>'
+        f'\n        <button class="chip" type="button" data-tag="{k}" aria-pressed="{str(k == "all").lower()}">{n}<span class="chip__num">{len(WORKS) if k == "all" else sum(w[2] == k for w in WORKS)}</span></button>'
         for k, n in FILTERS)
     cards = ''
     for i, (src, alt, tag, tags, title, text, href) in enumerate(WORKS, 1):
@@ -583,9 +583,14 @@ def portfolio():
         </div>
         <p class="page-head__text">Остановочные павильоны, навигация, рекламные и&nbsp;малые архитектурные формы, которые мы спроектировали, изготовили и&nbsp;установили.</p>
       </div>
-      <div class="filters" data-target="works-grid" role="group" aria-label="Тип конструкции">{chips}
-      </div>
-      <div class="works-grid" id="works-grid">{cards}
+      <!-- фильтр и страницы — тот же компонент, что у ленты новостей: portfolio.html?tag=nav&page=2 -->
+      <div class="feed" data-feed data-per-page="6">
+        <div class="filters" role="group" aria-label="Тип конструкции">{chips}
+        </div>
+        <div class="works-grid" data-feed-list>{cards}
+        </div>
+        <p class="feed__empty" hidden>Работ этого типа пока нет. <button class="link-arrow" type="button" data-feed-reset>Показать все</button></p>
+        <nav class="pager" aria-label="Страницы работ" data-feed-pager></nav>
       </div>
     </div>
   </section>

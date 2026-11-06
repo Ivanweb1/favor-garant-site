@@ -761,9 +761,9 @@
 
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  // Новости и блог: тип, рубрика, год и номер страницы — фильтр по data-атрибутам карточек, состояние в адресе (?type=&tag=&year=&page=)
+  // Лента (новости и блог, наши работы): тип, рубрика, год и номер страницы — фильтр по data-атрибутам карточек, состояние в адресе (?type=&tag=&year=&page=)
   document.querySelectorAll('[data-feed]').forEach((feed) => {
-    const cards = [...feed.querySelectorAll('[data-feed-list] > .news__card')];
+    const cards = [...feed.querySelector('[data-feed-list]').children];
     const pager = feed.querySelector('[data-feed-pager]');
     const empty = feed.querySelector('.feed__empty');
     const yearSel = feed.querySelector('[data-year]');
@@ -805,6 +805,7 @@
       if (state.page > 1) q.set('page', state.page);
       history.replaceState(null, '', location.pathname + (q.toString() ? '?' + q : ''));
       if (scroll) feed.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      document.dispatchEvent(new CustomEvent('feed:render'));
     }
 
     feed.addEventListener('click', (e) => {
@@ -818,6 +819,36 @@
     if (yearSel) yearSel.addEventListener('change', () => { state.year = yearSel.value; state.page = 1; render(); });
     render();
   });
+
+  // Карточки работ: номер и пометки в одну строку — не влезающие пометки прячем, вместо них «+N»
+  const workTags = [...document.querySelectorAll('.work__top .tags')];
+  function fitWorkTags() {
+    workTags.forEach((list) => {
+      list.querySelector('.tags__more')?.remove();
+      list.classList.remove('is-tight');
+      const items = [...list.children];
+      items.forEach((li) => { li.hidden = false; });
+      if (list.scrollWidth <= list.clientWidth) return;
+      const more = document.createElement('li');
+      more.className = 'tags__more';
+      list.append(more);
+      let hiddenCount = 0;
+      for (let i = items.length - 1; i > 0 && list.scrollWidth > list.clientWidth; i -= 1) {
+        items[i].hidden = true;
+        hiddenCount += 1;
+        more.textContent = '+' + hiddenCount;
+        more.title = items.slice(i).map((li) => li.textContent).join(', ');
+      }
+      // даже одна пометка с «+N» не влезает — обрезаем её текст многоточием
+      if (list.scrollWidth > list.clientWidth) list.classList.add('is-tight');
+    });
+  }
+  if (workTags.length) {
+    fitWorkTags();
+    window.addEventListener('resize', fitWorkTags);
+    document.addEventListener('feed:render', fitWorkTags); // карточки со следующей страницы ленты были скрыты и не измерялись
+    if (document.fonts) document.fonts.ready.then(fitWorkTags);
+  }
 
   // Текстовая страница: подсветка текущего раздела в содержании
   const tocLinks = [...document.querySelectorAll('.toc a[href^="#"]')];

@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap&subset=cyrillic" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=20261106b">
+  <link rel="stylesheet" href="css/styles.css?v=20261106c">
 </head>
 <body>
 
@@ -246,15 +246,17 @@
         </div>
         <p class="page-head__text">Остановочные павильоны, навигация, рекламные и&nbsp;малые архитектурные формы, которые мы спроектировали, изготовили и&nbsp;установили.</p>
       </div>
-      <div class="filters" data-target="works-grid" role="group" aria-label="Тип конструкции">
-        <button class="chip" type="button" data-filter="all" aria-pressed="true">Все<span class="chip__num">9</span></button>
-        <button class="chip" type="button" data-filter="pav" aria-pressed="false">Остановочные павильоны<span class="chip__num">2</span></button>
-        <button class="chip" type="button" data-filter="nav" aria-pressed="false">Навигация<span class="chip__num">4</span></button>
-        <button class="chip" type="button" data-filter="tumba" aria-pressed="false">Рекламные тумбы<span class="chip__num">1</span></button>
-        <button class="chip" type="button" data-filter="maf" aria-pressed="false">МАФ<span class="chip__num">1</span></button>
-        <button class="chip" type="button" data-filter="shoot" aria-pressed="false">Стрельбища<span class="chip__num">1</span></button>
-      </div>
-      <div class="works-grid" id="works-grid">
+      <!-- фильтр и страницы — тот же компонент, что у ленты новостей: portfolio.html?tag=nav&page=2 -->
+      <div class="feed" data-feed data-per-page="6">
+        <div class="filters" role="group" aria-label="Тип конструкции">
+        <button class="chip" type="button" data-tag="all" aria-pressed="true">Все<span class="chip__num">9</span></button>
+        <button class="chip" type="button" data-tag="pav" aria-pressed="false">Остановочные павильоны<span class="chip__num">2</span></button>
+        <button class="chip" type="button" data-tag="nav" aria-pressed="false">Навигация<span class="chip__num">4</span></button>
+        <button class="chip" type="button" data-tag="tumba" aria-pressed="false">Рекламные тумбы<span class="chip__num">1</span></button>
+        <button class="chip" type="button" data-tag="maf" aria-pressed="false">МАФ<span class="chip__num">1</span></button>
+        <button class="chip" type="button" data-tag="shoot" aria-pressed="false">Стрельбища<span class="chip__num">1</span></button>
+        </div>
+        <div class="works-grid" data-feed-list>
         <a class="work" href="bus-shelters.html" data-tags="pav">
           <div class="work__media">
             <img class="work__img" src="img/photos/30-work-smart-stops.jpg" alt="Остановочный павильон SMART с картой города" loading="lazy" width="1400" height="933">
@@ -381,6 +383,9 @@
             <p class="work__text">Тумба с&nbsp;внутренней подсветкой на&nbsp;городской улице.</p>
           </div>
         </a>
+        </div>
+        <p class="feed__empty" hidden>Работ этого типа пока нет. <button class="link-arrow" type="button" data-feed-reset>Показать все</button></p>
+        <nav class="pager" aria-label="Страницы работ" data-feed-pager></nav>
       </div>
     </div>
   </section>
@@ -543,6 +548,6 @@
   </div>
 </footer>
 
-<script src="js/main.js?v=20261106b"></script>
+<script src="js/main.js?v=20261106c"></script>
 </body>
 </html>
