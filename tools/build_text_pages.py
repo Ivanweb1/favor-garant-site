@@ -607,12 +607,10 @@ PEOPLE = re.search(r'      <ul class="people">.*?      </ul>', ABOUT, re.S).grou
 CLIENTS = ABOUT[ABOUT.index('  <!-- 4. Заказчики -->'):ABOUT.index('  <!-- 5.')]
 AWARDS = {num: html for html, num in re.findall(r'(<button class="award" type="button" data-zoom="img/awards/award-(\d+)\.jpg">.*?</button>)', ABOUT)}
 
-COMPANY = [('О компании', 'about.html'), ('Команда', 'team.html'), ('Отзывы', 'reviews.html'),
-           ('Сертификаты и лицензии', 'certificates.html'), ('Гарантии', 'guarantees.html')]
+# страницы компании связаны выпадающим списком «О компании» в шапке и подвалом
 
 
 def company_page(file, name, h1, lead, body, desc):
-    nav = ''.join(f'<a href="{h}"' + (' aria-current="page"' if h == file else '') + f'>{n}</a>' for n, h in COMPANY)
     main = f'''  <!-- Страница компании «{name}»: собрано tools/build_text_pages.py -->
   <section class="section section--light page-top">
     <div class="container">
@@ -626,7 +624,6 @@ def company_page(file, name, h1, lead, body, desc):
         </div>
         <p class="page-head__text">{nbsp(lead)}</p>
       </div>
-      <nav class="company-nav" aria-label="Разделы о компании">{nav}</nav>
     </div>
   </section>
 
