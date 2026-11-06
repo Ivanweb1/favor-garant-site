@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap&subset=cyrillic" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=20261106d">
+  <link rel="stylesheet" href="css/styles.css?v=20261106f">
 </head>
 <body>
 
@@ -250,11 +250,10 @@
       <div class="feed" data-feed data-per-page="9">
         <div class="feed__bar">
           <div class="feed__types" role="group" aria-label="Тип материала"><button class="chip" type="button" data-type="all" aria-pressed="true">Все<span class="chip__num">4</span></button><button class="chip" type="button" data-type="news" aria-pressed="false">Новости<span class="chip__num">3</span></button><button class="chip" type="button" data-type="blog" aria-pressed="false">Блог<span class="chip__num">1</span></button></div>
-          <label class="feed__year">
-            <span class="visually-hidden">Архив по годам</span>
+          <div class="feed__year">
             <svg viewBox="0 0 20 20" aria-hidden="true"><rect x="2.5" y="4" width="15" height="13" rx="2"/><path d="M2.5 8h15M6.5 2v4M13.5 2v4"/></svg>
-            <select class="feed__select" data-year aria-label="Архив по годам"><option value="all">Все годы</option><option value="2026">2026 (3)</option><option value="2024">2024 (1)</option></select>
-          </label>
+            <select class="feed__select" name="year" data-year aria-label="Архив по годам"><option value="all">Все годы</option><option value="2026">2026 (3)</option><option value="2024">2024 (1)</option></select>
+          </div>
         </div>
         <div class="filters feed__tags" role="group" aria-label="Рубрики"><button class="chip" type="button" data-tag="all" aria-pressed="true">Все рубрики<span class="chip__num">4</span></button><button class="chip" type="button" data-tag="company" aria-pressed="false">О компании<span class="chip__num">2</span></button><button class="chip" type="button" data-tag="production" aria-pressed="false">Производство<span class="chip__num">1</span></button><button class="chip" type="button" data-tag="blagoustroystvo" aria-pressed="false">Благоустройство<span class="chip__num">2</span></button><button class="chip" type="button" data-tag="navigation" aria-pressed="false">Навигация<span class="chip__num">2</span></button><button class="chip" type="button" data-tag="maf" aria-pressed="false">МАФ<span class="chip__num">1</span></button><button class="chip" type="button" data-tag="spb" aria-pressed="false">Санкт-Петербург<span class="chip__num">1</span></button></div>
         <div class="news news--feed" data-feed-list>
@@ -474,6 +473,6 @@
   </div>
 </footer>
 
-<script src="js/main.js?v=20261106c"></script>
+<script src="js/main.js?v=20261106f"></script>
 </body>
 </html>

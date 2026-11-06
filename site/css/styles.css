@@ -1813,10 +1813,6 @@ html.has-modal { overflow: hidden; }
 .doc__scheme figcaption { font-size: 13px; line-height: 1.4; color: var(--muted); }
 /* Услуги: направления металлообработки под лентой деталей */
 .metal-dirs { display: grid; gap: 16px; margin-top: var(--sub-gap); }
-/* направление, у которого страницы ещё нет */
-.sibling.sibling--soon { flex-direction: column; align-items: flex-start; justify-content: center; gap: 4px; border: 1px dashed rgba(42, 37, 96, .25); background: transparent !important; color: var(--muted); }
-.sibling.sibling--soon::after { display: none; }
-.sibling--soon small { font-size: 12px; font-weight: 500; color: var(--grey); }
 .doc__steps li { display: grid; align-content: start; gap: 8px; padding-top: 18px; border-top: 2px solid var(--navy); counter-increment: dstep; font-size: 14px; line-height: 1.5; color: var(--muted); }
 .doc__steps li::before { content: counter(dstep, decimal-leading-zero); font-size: 13px; font-weight: 700; color: var(--red); }
 .doc__steps b { font-size: 16px; line-height: 1.35; color: var(--navy); }
@@ -1843,6 +1839,12 @@ html.has-modal { overflow: hidden; }
 .sibling[aria-current="page"]::after { display: none; }
 .section:not(.section--light) .sibling { background: var(--light); }
 .section:not(.section--light) .sibling:hover { background: var(--navy); }
+/* иконка направления слева от названия: светлая плашка, на ховере плитки — белая */
+.sibling__label { flex: 1; }
+.sibling__icon { flex: none; box-sizing: border-box; width: 48px; height: 48px; padding: 8px; border-radius: var(--radius-sm); background: var(--light); transition: background-color .2s ease; }
+.section:not(.section--light) .sibling .sibling__icon { background: var(--white); }
+.sibling:hover .sibling__icon, .section:not(.section--light) .sibling:hover .sibling__icon { background: var(--white); }
+.sibling[aria-current="page"] .sibling__icon { background: var(--light); }
 
 /* хаб экспертизы: пункты сетки — ссылки на страницы видов */
 a.expert__item .expert__title { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; transition: color .2s ease; }
@@ -1900,6 +1902,12 @@ a.expert__item:hover .expert__icon { background: var(--tint); }
   transition: border-color .2s ease;
 }
 .feed__select:hover { border-color: rgba(42, 37, 96, .4); }
+/* архив по годам — общий выпадающий список сайта (.select), иконка календаря поверх кнопки */
+.feed__year svg { z-index: 1; }
+.feed__year .select { width: 100%; }
+.feed__select.select__btn { width: 100%; background-position: right 18px center; }
+.feed__select[aria-expanded="true"] { border-color: var(--navy); }
+.feed__year .select__list { min-width: 100%; }
 .feed__tags { margin-bottom: 28px; }
 .feed__tags .chip { padding: 8px 16px; background: var(--light); font-size: 13px; }
 .feed__tags .chip:hover { background: var(--tint); }

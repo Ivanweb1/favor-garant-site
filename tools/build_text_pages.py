@@ -92,13 +92,13 @@ def write(name, html):
 def siblings_block(sib, current, bg):
     first, second, items = sib
     tiles = []
-    for label, href in items:
+    for label, href, *icon in items:
+        ic = f'<img class="sibling__icon" src="img/icons/{icon[0]}.svg" alt="" width="40" height="40" loading="lazy">' if icon else ''
+        text = f'{ic}<span class="sibling__label">{nbsp(label)}</span>'
         if label == current:
-            tiles.append(f'<span class="sibling" aria-current="page">{nbsp(label)}</span>')
-        elif href:
-            tiles.append(f'<a class="sibling" href="{href}">{nbsp(label)}</a>')
-        else:
-            tiles.append(f'<span class="sibling sibling--soon">{nbsp(label)}<small>Страница в&nbsp;работе</small></span>')
+            tiles.append(f'<span class="sibling" aria-current="page">{text}</span>')
+        else:  # страницы ещё нет — плитка активная, ссылка-заглушка
+            tiles.append(f'<a class="sibling" href="{href or "#"}">{text}</a>')
     return f'''  <section class="section{bg}" id="related">
     <div class="container">
       <div class="page-head">
@@ -207,13 +207,13 @@ def text_page(p):
 # Тексты страницы латуни — черновик (свой), цифры только по станкам со старого сайта /metalworking и /services.
 
 METAL = ('Направления', 'металлообработки', [
-    ('Лазерная резка латуни', 'service-laser-brass.html'),
-    ('Лазерная резка листового металла', ''),
-    ('Лазерная резка нержавеющей стали', ''),
-    ('Лазерная резка труб', ''),
-    ('Плазменная резка металла в Санкт-Петербурге', ''),
-    ('Плазменная резка труб', ''),
-    ('Вальцовка листового металла', ''),
+    ('Лазерная резка латуни', 'service-laser-brass.html', 'line-m-laser-brass'),
+    ('Лазерная резка листового металла', '', 'line-m-laser-sheet'),
+    ('Лазерная резка нержавеющей стали', '', 'line-m-laser-steel'),
+    ('Лазерная резка труб', '', 'line-m-laser-tube'),
+    ('Плазменная резка металла в Санкт-Петербурге', '', 'line-m-plasma'),
+    ('Плазменная резка труб', '', 'line-m-plasma-tube'),
+    ('Вальцовка листового металла', '', 'line-m-rolling'),
 ])
 
 SERVICES = [dict(
@@ -298,7 +298,7 @@ EXP = [
     ('expertise-approval.html', 'Документация для согласования', 'line-exp-approval',
      'Пакет для получения разрешения на&nbsp;установку и&nbsp;эксплуатацию рекламной конструкции.'),
 ]
-EXP_SIBLINGS = ('Другие виды', 'экспертизы', [(t, f) for f, t, _, _ in EXP])
+EXP_SIBLINGS = ('Другие виды', 'экспертизы', [(t, f, icon) for f, t, icon, _ in EXP])
 EXP_CTA = ('Нужна экспертиза?', 'Стоимость и сроки рассчитываем для каждого объекта индивидуально.', 'Оставить заявку')
 
 

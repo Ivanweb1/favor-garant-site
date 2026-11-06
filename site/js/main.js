@@ -295,7 +295,7 @@
   });
 
   // Выпадающий список в стилистике сайта поверх обычного select: select скрыт и хранит значение для формы
-  document.querySelectorAll('select.field__input').forEach((select) => {
+  document.querySelectorAll('select.field__input, select.feed__select').forEach((select) => {
     const options = [...select.options].filter((o) => o.value !== '' || o.index > 0);
     const placeholder = select.options[0].value === '' ? select.options[0].textContent : '';
     const wrap = document.createElement('div');
@@ -306,15 +306,17 @@
 
     const btn = document.createElement('button');
     btn.type = 'button';
-    btn.className = 'field__input select__btn';
+    btn.className = (select.classList.contains('feed__select') ? 'feed__select' : 'field__input') + ' select__btn';
     btn.id = select.name + '-button';
     btn.setAttribute('aria-haspopup', 'listbox');
     btn.setAttribute('aria-expanded', 'false');
-    btn.setAttribute('aria-labelledby', select.getAttribute('aria-labelledby') + ' ' + btn.id);
+    if (select.hasAttribute('aria-labelledby')) btn.setAttribute('aria-labelledby', select.getAttribute('aria-labelledby') + ' ' + btn.id);
+    else btn.setAttribute('aria-label', select.getAttribute('aria-label') || '');
     const list = document.createElement('ul');
     list.className = 'select__list';
     list.setAttribute('role', 'listbox');
-    list.setAttribute('aria-labelledby', select.getAttribute('aria-labelledby'));
+    if (select.hasAttribute('aria-labelledby')) list.setAttribute('aria-labelledby', select.getAttribute('aria-labelledby'));
+    else list.setAttribute('aria-label', select.getAttribute('aria-label') || '');
     list.hidden = true;
     const items = options.map((opt, i) => {
       const li = document.createElement('li');
@@ -361,6 +363,7 @@
       close();
     }
 
+    select.addEventListener('select:sync', render);
     btn.addEventListener('click', () => (list.hidden ? open() : close()));
     btn.addEventListener('keydown', (e) => {
       if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
@@ -376,7 +379,7 @@
     });
     btn.addEventListener('blur', close);
     // после сброса формы показываем заглушку снова
-    select.form.addEventListener('reset', () => setTimeout(render));
+    select.form?.addEventListener('reset', () => setTimeout(render)); // у архива по годам формы нет
     render();
   });
 
@@ -789,7 +792,7 @@
 
       feed.querySelectorAll('[data-type]').forEach((b) => { if (b.tagName === 'BUTTON') b.setAttribute('aria-pressed', String(b.dataset.type === state.type)); });
       feed.querySelectorAll('button[data-tag]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.tag === state.tag)));
-      if (yearSel) yearSel.value = state.year;
+      if (yearSel) { yearSel.value = state.year; yearSel.dispatchEvent(new Event('select:sync')); }
 
       let html = `<button class="pager__btn pager__btn--prev" type="button" data-page="${state.page - 1}" aria-label="Предыдущая страница"${state.page === 1 ? ' disabled' : ''}>${arrow}</button>`;
       for (let n = 1; n <= pages; n += 1) {

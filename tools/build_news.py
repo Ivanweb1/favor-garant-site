@@ -261,11 +261,10 @@ top = f'''  <!-- 1. Новости и блог: четыре статьи со �
       <div class="feed" data-feed data-per-page="9">
         <div class="feed__bar">
           <div class="feed__types" role="group" aria-label="Тип материала">{types}</div>
-          <label class="feed__year">
-            <span class="visually-hidden">Архив по годам</span>
+          <div class="feed__year">
             <svg viewBox="0 0 20 20" aria-hidden="true"><rect x="2.5" y="4" width="15" height="13" rx="2"/><path d="M2.5 8h15M6.5 2v4M13.5 2v4"/></svg>
-            <select class="feed__select" data-year aria-label="Архив по годам">{year_opts}</select>
-          </label>
+            <select class="feed__select" name="year" data-year aria-label="Архив по годам">{year_opts}</select>
+          </div>
         </div>
         <div class="filters feed__tags" role="group" aria-label="Рубрики">{tags}</div>
         <div class="news news--feed" data-feed-list>
