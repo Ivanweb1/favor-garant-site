@@ -180,7 +180,6 @@ for i, (slug, date, title, cover, alt, body) in enumerate(ARTICLES):
     # «Читайте также»: сначала статьи с общими рубриками, потом остальные по дате
     others = sorted((a for a in ARTICLES if a[0] != slug), key=lambda a: -len(set(META[a[0]][1]) & set(tags)))
     others = '\n'.join(card(*a, text=False) for a in others[:3])
-    tag_links = ''.join(f'<li><a href="news.html?tag={k}">{TAGS[k]}</a></li>' for k in tags)
     related = ''.join(f'<li><a class="link-arrow" href="{h}">{n}</a></li>' for n, h in RELATED[slug])
     # соседние статьи по дате: ARTICLES идут от новых к старым
     newer = ARTICLES[i - 1] if i > 0 else None
@@ -198,7 +197,6 @@ for i, (slug, date, title, cover, alt, body) in enumerate(ARTICLES):
         <header class="article__head">
           <p class="news__meta"><a class="news__kind news__kind--{kind}" href="news.html?type={kind}">{TYPES[kind]}</a><time class="article__date" datetime="{y}-{m}-{d}">{date}</time><span class="news__time">{CLOCK}{read_min(body)}&nbsp;мин чтения</span></p>
           <h1 class="article__title">{nbsp(title)}</h1>
-          <ul class="article__tags" aria-label="Рубрики">{tag_links}</ul>
         </header>
         <figure class="article__cover"><img src="img/news/{cover}.jpg" alt="{alt}" width="1200" height="930"></figure>
         <div class="article__body">
@@ -217,15 +215,16 @@ for i, (slug, date, title, cover, alt, body) in enumerate(ARTICLES):
   <section class="section section--light">
     <div class="container">
       <div class="section-head">
-        <h2 class="h2 duo duo--inline">
+        <h2 class="h2 duo duo--inline duo--one-line">
           <span>Читайте</span>
           <span class="duo__second">также</span>
         </h2>
-        <a class="btn btn--outline section-head__link" href="news.html">Все новости и&nbsp;статьи</a>
+        <a class="btn btn--outline section-head__link others__all" href="news.html">Все новости и&nbsp;статьи</a>
       </div>
       <div class="news news--feed news--three">
 {others}
       </div>
+      <a class="btn btn--outline btn--block others__all-bottom" href="news.html">Все новости и&nbsp;статьи</a>
     </div>
   </section>
 

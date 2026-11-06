@@ -1984,7 +1984,13 @@ a.news__kind:hover { opacity: .8; }
   .feed__tags { flex-wrap: nowrap; overflow-x: auto; margin-right: calc(var(--gutter) * -1); padding-right: var(--gutter); scrollbar-width: none; }
   .feed__tags .chip { flex: none; }
   .article-nav { grid-template-columns: 1fr; }
-  .article-nav__link--next { grid-column: auto; }
+  /* короткий заголовок «Читайте также» — одной строкой и на телефоне */
+  .duo--one-line > span { display: inline !important; }
+  /* «Читайте также» на телефоне — лента, листается свайпом; край следующей карточки виден справа */
+  .news--three { display: flex; gap: 12px; margin-right: calc(var(--gutter) * -1); padding-right: var(--gutter); overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain; }
+  .news--three::-webkit-scrollbar { display: none; }
+  .news--three > .news__card { flex: 0 0 82%; scroll-snap-align: start; }
+  .article-nav__link--next { grid-column: auto; text-align: left; }
 }
 
 /* ---------- Страницы компании: отзывы, сертификаты, гарантии, команда ---------- */
