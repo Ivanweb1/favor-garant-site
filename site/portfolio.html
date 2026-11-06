@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap&subset=cyrillic" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=20261106r">
+  <link rel="stylesheet" href="css/styles.css?v=20261106s">
 </head>
 <body>
 
@@ -258,19 +258,33 @@
       <!-- фильтр и страницы — тот же компонент, что у ленты новостей: portfolio.html?tag=nav&page=2 -->
       <div class="feed" data-feed data-per-page="6">
         <div class="filters" role="group" aria-label="Тип конструкции">
-        <button class="chip" type="button" data-tag="all" aria-pressed="true">Все<span class="chip__num">9</span></button>
+        <button class="chip" type="button" data-tag="all" aria-pressed="true">Все<span class="chip__num">10</span></button>
         <button class="chip" type="button" data-tag="pav" aria-pressed="false">Остановочные павильоны<span class="chip__num">2</span></button>
-        <button class="chip" type="button" data-tag="nav" aria-pressed="false">Навигация<span class="chip__num">4</span></button>
+        <button class="chip" type="button" data-tag="nav" aria-pressed="false">Навигация<span class="chip__num">5</span></button>
         <button class="chip" type="button" data-tag="tumba" aria-pressed="false">Рекламные тумбы<span class="chip__num">1</span></button>
         <button class="chip" type="button" data-tag="maf" aria-pressed="false">МАФ<span class="chip__num">1</span></button>
         <button class="chip" type="button" data-tag="shoot" aria-pressed="false">Стрельбища<span class="chip__num">1</span></button>
         </div>
         <div class="works-grid" data-feed-list>
+        <a class="work" href="project-skver-finansistov.html" data-tags="nav">
+          <div class="work__media">
+            <img class="work__img" src="img/projects/skver-2.jpg" alt="Информационный пилон в Сквере финансистов" loading="lazy" width="1280" height="960">
+            <div class="work__top">
+              <span class="work__num">01</span>
+              <ul class="tags"><li>Навигация</li><li>Санкт-Петербург</li></ul>
+            </div>
+            <span class="work__go" aria-hidden="true"></span>
+          </div>
+          <div class="work__body">
+            <h2 class="work__title">Сквер финансистов</h2>
+            <p class="work__text">Информационный пилон индивидуального дизайна для благоустройства сквера.</p>
+          </div>
+        </a>
         <a class="work" href="bus-shelters.html" data-tags="pav">
           <div class="work__media">
             <img class="work__img" src="img/photos/30-work-smart-stops.jpg" alt="Остановочный павильон SMART с картой города" loading="lazy" width="1400" height="933">
             <div class="work__top">
-              <span class="work__num">01</span>
+              <span class="work__num">02</span>
               <ul class="tags"><li>Остановочные павильоны</li><li>Санкт-Петербург</li></ul>
             </div>
             <span class="work__go" aria-hidden="true"></span>
@@ -284,7 +298,7 @@
           <div class="work__media">
             <img class="work__img" src="img/photos/31-work-stele-gatchina.jpg" alt="Въездная стела «Гатчина — город воинской славы»" loading="lazy" width="1400" height="933">
             <div class="work__top">
-              <span class="work__num">02</span>
+              <span class="work__num">03</span>
               <ul class="tags"><li>Навигация</li><li>Гатчина</li></ul>
             </div>
             <span class="work__go" aria-hidden="true"></span>
@@ -298,7 +312,7 @@
           <div class="work__media">
             <img class="work__img" src="img/news/54-news-temirkanov.jpg" alt="Информационный стенд на площади имени Юрия Темирканова" loading="lazy" width="1200" height="930">
             <div class="work__top">
-              <span class="work__num">03</span>
+              <span class="work__num">04</span>
               <ul class="tags"><li>Навигация</li><li>Санкт-Петербург</li></ul>
             </div>
             <span class="work__go" aria-hidden="true"></span>
@@ -312,7 +326,7 @@
           <div class="work__media">
             <img class="work__img" src="img/photos/32-work-stele-ponsse.jpg" alt="Монтаж бренд-стелы PONSSE" loading="lazy" width="1400" height="935">
             <div class="work__top">
-              <span class="work__num">04</span>
+              <span class="work__num">05</span>
               <ul class="tags"><li>Навигация</li><li>Бренд-стела</li></ul>
             </div>
             <span class="work__go" aria-hidden="true"></span>
@@ -326,7 +340,7 @@
           <div class="work__media">
             <img class="work__img" src="img/catalog/atlant-photo-1.jpg" alt="Остановочный павильон «Атлант» на объекте" loading="lazy" width="1600" height="901">
             <div class="work__top">
-              <span class="work__num">05</span>
+              <span class="work__num">06</span>
               <ul class="tags"><li>Остановочные павильоны</li></ul>
             </div>
             <span class="work__go" aria-hidden="true"></span>
@@ -340,7 +354,7 @@
           <div class="work__media">
             <img class="work__img" src="img/photos/34-work-shooting-range.jpg" alt="Павильон стрелкового комплекса" loading="lazy" width="1400" height="935">
             <div class="work__top">
-              <span class="work__num">06</span>
+              <span class="work__num">07</span>
               <ul class="tags"><li>Стрельбища</li></ul>
             </div>
             <span class="work__go" aria-hidden="true"></span>
@@ -354,7 +368,7 @@
           <div class="work__media">
             <img class="work__img" src="img/photos/33-work-pylon-smart.jpg" alt="Информационный пилон SMART" loading="lazy" width="1400" height="933">
             <div class="work__top">
-              <span class="work__num">07</span>
+              <span class="work__num">08</span>
               <ul class="tags"><li>Навигация</li><li>Пилон</li></ul>
             </div>
             <span class="work__go" aria-hidden="true"></span>
@@ -368,7 +382,7 @@
           <div class="work__media">
             <img class="work__img" src="img/news/55-news-maf-park.jpg" alt="Малые архитектурные формы в парке" loading="lazy" width="1200" height="930">
             <div class="work__top">
-              <span class="work__num">08</span>
+              <span class="work__num">09</span>
               <ul class="tags"><li>МАФ</li></ul>
             </div>
             <span class="work__go" aria-hidden="true"></span>
@@ -382,7 +396,7 @@
           <div class="work__media">
             <img class="work__img" src="img/photos/35-work-tumba-street.jpg" alt="Круглая рекламная тумба на городской улице" loading="lazy" width="1400" height="933">
             <div class="work__top">
-              <span class="work__num">09</span>
+              <span class="work__num">10</span>
               <ul class="tags"><li>Рекламные тумбы</li></ul>
             </div>
             <span class="work__go" aria-hidden="true"></span>

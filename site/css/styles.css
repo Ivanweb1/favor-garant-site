@@ -2053,3 +2053,22 @@ a.news__kind:hover { opacity: .8; }
   .letters, .guarantees { grid-template-columns: 1fr; }
   .letter--wide { grid-template-columns: 1fr; }
 }
+
+/* ---------- Страница проекта: теги, цитата, галерея, другие проекты ---------- */
+
+.project__tags li { border-color: transparent; background: var(--white); color: var(--navy); }
+.project-quote { display: grid; gap: 14px; max-width: 900px; margin: clamp(36px, 4vw, 56px) 0 0; padding: 28px 32px; border-left: 3px solid var(--red); border-radius: 0 var(--radius) var(--radius) 0; background: var(--light); }
+.project-quote p { font-size: clamp(17px, 1.5vw, 20px); line-height: 1.55; font-weight: 500; color: var(--navy); }
+.project-quote cite { font-size: 13px; font-style: normal; color: var(--muted); }
+.project-gallery { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.project-gallery__item { display: block; padding: 0; overflow: hidden; border: 0; border-radius: var(--radius); background: var(--white); cursor: zoom-in; }
+.project-gallery__item img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; transition: transform .6s ease; }
+.project-gallery__item:hover img { transform: scale(1.03); }
+@media (max-width: 720px) {
+  .project-gallery { grid-template-columns: 1fr; }
+  .project-quote { padding: 22px 20px; }
+  /* «Другие проекты» на телефоне — лента свайпом, как «Читайте также» у статей */
+  .works-grid--others { display: flex; gap: 12px; margin-right: calc(var(--gutter) * -1); padding-right: var(--gutter); overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+  .works-grid--others::-webkit-scrollbar { display: none; }
+  .works-grid--others > .work { flex: 0 0 82%; scroll-snap-align: start; }
+}

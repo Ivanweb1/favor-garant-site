@@ -528,6 +528,8 @@ def expertise_hub():
 # только работы, о которых есть данные: шесть с главной, «Атлант» с карточки модели, две из новостей; ссылки — на связанные страницы
 
 WORKS = [
+    ('img/projects/skver-2.jpg', 'Информационный пилон в Сквере финансистов', 'nav', ['Навигация', 'Санкт-Петербург'],
+     'Сквер финансистов', 'Информационный пилон индивидуального дизайна для благоустройства сквера.', 'project-skver-finansistov.html'),
     ('img/photos/30-work-smart-stops.jpg', 'Остановочный павильон SMART с картой города', 'pav', ['Остановочные павильоны', 'Санкт-Петербург'],
      'Остановочные павильоны SMART', 'Павильон с картой города и информационными экранами.', 'bus-shelters.html'),
     ('img/photos/31-work-stele-gatchina.jpg', 'Въездная стела «Гатчина — город воинской славы»', 'nav', ['Навигация', 'Гатчина'],
@@ -754,9 +756,139 @@ def vacancies_page():
                  top, '',
                  'Вакансии ФАВОР-ГАРАНТ: контакты отдела кадров и условия обращения по трудоустройству на завод металлоконструкций в Санкт-Петербурге.')
 
+# ---------- страница проекта (типовая): «Сквер финансистов» ----------
+# Текст и фото — со старой записи favor-garant.ru/tpost/47v09hpul1 (03.10.2024). Заказчика, сроков и объёма в источнике нет — не пишем.
+
+def work_card(i, src, alt, tag, tags, title, text, href, heading='h3'):
+    tg = ''.join(f'<li>{t}</li>' for t in tags)
+    return f'''
+        <a class="work" href="{href}" data-tags="{tag}">
+          <div class="work__media">
+            {img(src, alt, cls='work__img')}
+            <div class="work__top">
+              <span class="work__num">{i:02d}</span>
+              <ul class="tags">{tg}</ul>
+            </div>
+            <span class="work__go" aria-hidden="true"></span>
+          </div>
+          <div class="work__body">
+            <{heading} class="work__title">{nbsp(title)}</{heading}>
+            <p class="work__text">{nbsp(text)}</p>
+          </div>
+        </a>'''
+
+
+def project_page():
+    file = 'project-skver-finansistov.html'
+    name = 'Сквер финансистов'
+    w, h = size('img/projects/skver-2.jpg')
+    facts = [('Объект', 'Сквер финансистов'), ('Город', 'Санкт-Петербург'), ('Конструкция', 'Информационный пилон индивидуального дизайна'), ('Программа', 'Благоустройство городской среды')]
+    cells = ''.join(f'<div><dt>{dt}</dt><dd>{nbsp(dd)}</dd></div>' for dt, dd in facts)
+    steps = [
+        ('Задача', 'Сквер финансистов неразрывно связан с историей Смольнинской центральной сберегательной кассы №1873, которая с начала 1930-х годов располагалась напротив. Для проекта благоустройства сквера нужен был информационный стенд.'),
+        ('Решение', 'Выполнили информационный пилон в индивидуальном дизайне. Пилон выделяет и подчёркивает важную информацию о месте, служит ориентиром для посетителей и становится элементом образа пространства.'),
+        ('Результат', 'После обновления в сквере появились пешеходные дорожки, удобные скамейки, современное освещение и информационный стенд.'),
+    ]
+    step_html = ''.join(f'<li><b>{t}</b>{nbsp(x)}</li>' for t, x in steps)
+    gallery = ''.join(
+        f'<button class="project-gallery__item" type="button" data-zoom="{src}">{img(src, alt)}</button>'
+        for src, alt in [('img/projects/skver-2.jpg', 'Информационный пилон в Сквере финансистов днём'),
+                         ('img/projects/skver-3.jpg', 'Информационный пилон в Сквере финансистов вечером')])
+    related = [('Навигация и стелы', 'catalog.html', 'line-navigation'), ('Дизайн-бюро', 'services.html#design', 'line-exp-design'), ('Металлообработка', 'services.html#equipment', 'line-m-laser-sheet')]
+    rel = ''.join(f'<a class="sibling" href="{hrf}"><img class="sibling__icon" src="img/icons/{ic}.svg" alt="" width="40" height="40" loading="lazy"><span class="sibling__label">{n}</span></a>' for n, hrf, ic in related)
+    others = ''.join(work_card(i, *w_[:7]) for i, w_ in enumerate([x for x in WORKS if x[6] != file][:3], 1))
+    main = f'''  <!-- Страница проекта (типовая): собрано tools/build_text_pages.py — правки вносить в скрипт -->
+  <section class="section section--light page-top">
+    <div class="container">
+      {crumbs([('Главная', 'index.html'), ('Наши работы', 'portfolio.html'), (name, '')])}
+      <div class="lead-hero">
+        <div class="lead-hero__body">
+          <ul class="tags project__tags"><li>Навигация</li><li>Санкт-Петербург</li></ul>
+          <h1 class="lead-hero__title duo">
+            <span>Сквер</span>
+            <span class="duo__second">финансистов</span>
+          </h1>
+          <p class="lead-hero__text">{nbsp('Информационный пилон в индивидуальном дизайне для проекта благоустройства сквера в Санкт-Петербурге.')}</p>
+          <div class="lead-hero__actions">
+            <a class="btn btn--primary" href="#request-form">Обсудить похожий проект</a>
+            <a class="link-arrow" href="tel:+78003332227">8 (800) 333-222-7</a>
+          </div>
+        </div>
+        <div class="lead-hero__media"><img src="img/projects/skver-2.jpg" alt="Информационный пилон в Сквере финансистов" width="{w}" height="{h}"></div>
+      </div>
+      <dl class="keyfacts" style="--cols: 4">{cells}</dl>
+    </div>
+  </section>
+
+  <section class="section" id="about">
+    <div class="container">
+      <div class="page-head page-head--grid3">
+        <div>
+          <h2 class="h2 duo duo--inline">
+            <span>О&nbsp;проекте</span>
+          </h2>
+        </div>
+      </div>
+      <ol class="tdoc__steps tdoc__steps--wide" style="--cols: 3">{step_html}</ol>
+      <blockquote class="project-quote">
+        <p>{nbsp('«Особое место в Сквере финансистов заняли информационный стенд и малая архитектурная форма со счастливым рублём. По легенде, чтобы зарядиться финансовым благополучием, монету нужно потереть левой рукой».')}</p>
+        <cite>Пресс-служба Смольного</cite>
+      </blockquote>
+    </div>
+  </section>
+
+  <section class="section section--light" id="gallery">
+    <div class="container">
+      <div class="page-head page-head--grid3">
+        <div>
+          <h2 class="h2 duo duo--inline">
+            <span>Фото</span>
+            <span class="duo__second">объекта</span>
+          </h2>
+        </div>
+        <p class="page-head__text">Нажмите на фото, чтобы открыть его целиком.</p>
+      </div>
+      <div class="project-gallery">{gallery}</div>
+    </div>
+  </section>
+
+  <section class="section" id="products">
+    <div class="container">
+      <div class="page-head page-head--grid3">
+        <div>
+          <h2 class="h2 duo duo--inline">
+            <span>Продукция</span>
+            <span class="duo__second">и&nbsp;услуги</span>
+          </h2>
+        </div>
+        <p class="page-head__text">{nbsp('Что мы делаем для таких проектов.')}</p>
+      </div>
+      <div class="siblings">{rel}</div>
+    </div>
+  </section>
+
+  <section class="section section--light" id="others">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="h2 duo duo--inline duo--one-line">
+          <span>Другие</span>
+          <span class="duo__second">проекты</span>
+        </h2>
+        <a class="btn btn--outline section-head__link others__all" href="portfolio.html">Все работы</a>
+      </div>
+      <div class="works-grid works-grid--others">{others}
+      </div>
+      <a class="btn btn--outline btn--block others__all-bottom" href="portfolio.html">Все работы</a>
+    </div>
+  </section>
+
+'''
+    write(file, page_head(name, 'Сквер финансистов в Санкт-Петербурге: информационный пилон индивидуального дизайна ФАВОР-ГАРАНТ для проекта благоустройства.', 'portfolio.html') + '\n' + main + page_tail(False, product=False))
+
 for p in SERVICES + EXPERTISE:
     text_page(p)
 expertise_hub()
 portfolio()
+project_page()
 company_pages()
 vacancies_page()
