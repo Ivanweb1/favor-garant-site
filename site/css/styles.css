@@ -652,6 +652,8 @@ a.link-arrow:not(.link-arrow--light):hover { color: var(--navy-hover); }
 .request__contacts a:hover { color: var(--red); }
 
 .form { display: grid; grid-template-columns: minmax(0, 1fr); gap: 20px; padding: clamp(24px, 3.5vw, 44px); border-radius: var(--radius); background: var(--white); }
+/* заявка на белом фоне: белая карточка формы обводится рамкой, как карточки сотрудников */
+.section:not(.section--light):not(.section--dark) > .container > .form { border: 1px solid var(--line); }
 .form__row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 .field { display: grid; gap: 8px; min-width: 0; }
 .field__label { font-size: 13px; font-weight: 500; color: var(--muted); }
