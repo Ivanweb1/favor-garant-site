@@ -865,4 +865,58 @@
     }, { rootMargin: '-20% 0px -60% 0px' });
     byId.forEach((_, id) => { const el = document.getElementById(id); if (el) io.observe(el); });
   }
+
+  // Видео в блоках (ролики немые): по кругу, пока блок на экране; на телефоне, при «меньше движения» и экономии трафика — только заставка
+  const loops = [...document.querySelectorAll('video.vloop')];
+  const conn = navigator.connection;
+  // проверяем в момент показа, а не при загрузке: ширина могла измениться (поворот планшета, окно)
+  const canAutoplay = () => window.matchMedia('(min-width: 768px)').matches
+    && !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    && !(conn && conn.saveData);
+  if (loops.length && 'IntersectionObserver' in window) {
+    const vio = new IntersectionObserver((entries) => {
+      entries.forEach(({ target: v, isIntersecting }) => {
+        if (isIntersecting && canAutoplay()) {
+          if (!v.src) { v.src = v.dataset.src; }
+          v.play().catch(() => {});
+        } else {
+          v.pause();
+        }
+      });
+    }, { threshold: 0.25 });
+    loops.forEach((v) => { v.muted = true; vio.observe(v); });
+  }
+
+  // Кнопка «Смотреть видео»: окно с плеером с начала и с перемоткой, при закрытии видео останавливается
+  let vmodal;
+  document.querySelectorAll('[data-video]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      if (!vmodal) {
+        vmodal = document.createElement('dialog');
+        vmodal.className = 'vmodal';
+        vmodal.innerHTML = '<button class="modal__close" type="button" aria-label="Закрыть видео">'
+          + '<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 2l12 12M14 2L2 14"/></svg></button>'
+          + '<video controls playsinline></video>';
+        document.body.appendChild(vmodal);
+        const player = vmodal.querySelector('video');
+        vmodal.querySelector('.modal__close').addEventListener('click', () => vmodal.close());
+        vmodal.addEventListener('click', (e) => { if (e.target === vmodal) vmodal.close(); });
+        vmodal.addEventListener('close', () => {
+          player.pause();
+          document.documentElement.classList.remove('has-modal');
+          loops.forEach((v) => { if (v.dataset.wasPlaying) { v.play().catch(() => {}); delete v.dataset.wasPlaying; } });
+        });
+      }
+      const player = vmodal.querySelector('video');
+      player.setAttribute('aria-label', btn.dataset.title || 'Видео');
+      player.poster = btn.dataset.poster || '';
+      if (player.getAttribute('src') !== btn.dataset.video) player.src = btn.dataset.video;
+      player.currentTime = 0;
+      // фоновые видео на паузу, чтобы не грузили сеть и процессор
+      loops.forEach((v) => { if (!v.paused) { v.dataset.wasPlaying = '1'; v.pause(); } });
+      vmodal.showModal();
+      document.documentElement.classList.add('has-modal');
+      player.play().catch(() => {});
+    });
+  });
 })();

@@ -1124,6 +1124,39 @@ html.has-modal { overflow: hidden; }
 /* окно «войдите, чтобы оформить заказ» для гостя */
 .modal__text { margin: 0 0 24px; font-size: 15px; line-height: 1.55; color: var(--muted); }
 .modal__actions { display: flex; flex-wrap: wrap; gap: 12px; }
+/* ---------- Видео: по кругу в блоке, крупно с перемоткой — в окне ---------- */
+
+/* кадр-заставка, пока видео не запущено; на телефоне видео само не играет — только заставка и кнопка */
+.vloop { display: block; width: 100%; height: 100%; object-fit: cover; background: var(--navy-deep); }
+.vframe { position: relative; overflow: hidden; margin: 0 0 var(--head-gap); border-radius: var(--radius); background: var(--navy-deep); aspect-ratio: 21 / 9; }
+.vframe::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, rgba(23, 22, 43, 0) 50%, rgba(23, 22, 43, .6) 100%); }
+/* кнопка «Смотреть видео»: белая пилюля с кругом-плеем, внизу слева */
+.vplay {
+  position: absolute; left: clamp(16px, 2.4vw, 32px); bottom: clamp(16px, 2.4vw, 32px); z-index: 2;
+  display: inline-flex; align-items: center; gap: 12px; padding: 6px 20px 6px 6px;
+  border: 0; border-radius: 999px; background: rgba(255, 255, 255, .94); backdrop-filter: blur(8px);
+  font: 600 14px/1.2 var(--font); color: var(--navy); cursor: pointer; transition: background-color .2s ease;
+}
+.vplay:hover { background: var(--white); }
+.vplay__icon { display: grid; place-items: center; flex: none; width: 40px; height: 40px; border-radius: 50%; background: var(--navy); color: var(--white); transition: background-color .2s ease; }
+.vplay:hover .vplay__icon { background: var(--navy-hover); }
+.vplay__icon svg { width: 14px; height: 14px; margin-left: 3px; fill: currentColor; }
+/* на «О компании» снизу плашка фактов — кнопку ставим наверх справа */
+.about-hero .vloop { height: min(39.4vw, calc((100vh - var(--header-h)) * .7)); height: min(39.4vw, calc((100svh - var(--header-h)) * .7)); min-height: 300px; }
+.about-hero .vplay { left: auto; right: var(--gutter); bottom: auto; top: clamp(16px, 2.4vw, 32px); }
+/* окно с видео: тёмное, на всю ширину до 1200px */
+.vmodal { width: min(1200px, calc(100% - 32px)); max-width: none; padding: 0; border: 0; border-radius: var(--radius); background: #000; overflow: visible; }
+.vmodal::backdrop { background: rgba(10, 10, 24, .85); backdrop-filter: blur(3px); }
+.vmodal[open] { animation: modal-in .25s ease; }
+.vmodal video { display: block; width: 100%; max-height: calc(100vh - 120px); border-radius: var(--radius); background: #000; }
+.vmodal .modal__close { top: -56px; right: 0; border-color: rgba(255, 255, 255, .35); background: transparent; color: var(--white); }
+.vmodal .modal__close:hover { border-color: rgba(255, 255, 255, .7); background: rgba(255, 255, 255, .1); }
+@media (max-width: 720px) {
+  .vframe { aspect-ratio: 16 / 10; }
+  .vplay { padding-right: 16px; font-size: 13px; }
+  .vplay__icon { width: 36px; height: 36px; }
+}
+
 /* страница оформления заказа: состав слева, контакты справа */
 .checkout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 24px; align-items: start; }
 .checkout__cart { padding: clamp(20px, 3vw, 32px); border-radius: var(--radius); background: var(--white); }

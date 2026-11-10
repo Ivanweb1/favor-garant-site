@@ -495,6 +495,11 @@ def expertise_hub():
         </div>
         <p class="page-head__text">Проверяем соответствие принятых в&nbsp;проекте решений и&nbsp;выполненных расчётов требованиям действующей нормативно-технической документации.</p>
       </div>
+      <!-- ролик клиента «Проектирование»: по кругу, крупно — кнопкой -->
+      <figure class="vframe">
+        <video class="vloop" data-src="video/fg-design.mp4" poster="video/fg-design.jpg" muted loop playsinline preload="none" aria-hidden="true"></video>
+        <button class="vplay" type="button" data-video="video/fg-design.mp4" data-poster="video/fg-design.jpg" data-title="Проектирование в ФАВОР-ГАРАНТ"><span class="vplay__icon" aria-hidden="true"><svg viewBox="0 0 12 14"><path d="M0 0l12 7L0 14z"/></svg></span>Смотреть видео</button>
+      </figure>
       <div class="expert">{items}
       </div>
     </div>
