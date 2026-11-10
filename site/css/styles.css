@@ -593,6 +593,8 @@ a.link-arrow:not(.link-arrow--light):hover { color: var(--navy-hover); }
 }
 .about__text { display: grid; gap: 16px; justify-items: start; padding-top: 34px; font-size: 17px; color: var(--muted); }
 .about__text .btn { margin-top: 12px; }
+/* видео под блоком: от кнопки до видео столько же, сколько от текста до кнопки (16 + 12) */
+.about:has(+ .vframe) { margin-bottom: 28px; }
 
 .clients__title { margin-bottom: 24px; font-size: 13px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--grey); }
 
