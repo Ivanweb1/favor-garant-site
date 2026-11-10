@@ -1012,6 +1012,16 @@ select.field__input, .select__btn { appearance: none; padding-right: 40px; backg
 /* над таблицей: чипы групп слева, поиск справа */
 .parts-tools { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px; margin-bottom: 20px; }
 .parts-tools__filters { margin: 0; }
+/* второй ряд — подгруппы: на всю ширину под первым, чипы мельче и с обводкой */
+.parts-tools__subs { flex-basis: 100%; margin: 0; }
+.parts-tools__subs[hidden] { display: none; }
+.chip--sub { padding: 8px 16px; border-color: rgba(42, 37, 96, .2); background: transparent; font-size: 13px; }
+/* на телефоне поиск на всю ширину — ставим его после подгрупп, чтобы подгруппы шли сразу под группами */
+@media (max-width: 720px) { .parts-search { order: 2; } }
+/* инструкция по креплению (PDF) под названием позиции */
+.parts__doc { display: inline-flex; align-items: center; gap: 6px; margin-top: 8px; font-size: 13px; font-weight: 600; color: var(--navy); text-decoration: none; }
+.parts__doc:hover { color: var(--navy-hover); text-decoration: underline; }
+.parts__doc svg { flex: none; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linejoin: round; stroke-linecap: round; }
 .parts-search {
   display: flex; align-items: center; gap: 10px; width: min(100%, 320px); min-height: 46px; padding: 0 16px;
   border: 1px solid transparent; border-radius: 999px; background: var(--white); color: var(--grey);

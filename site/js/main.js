@@ -675,30 +675,53 @@
     });
   });
 
+  // Группы вложенные: у строки data-group="pav/al" — группа «pav», подгруппа «al».
+  // Верхний ряд чипов — группы, второй ряд появляется у группы с подгруппами.
   const partChips = [...document.querySelectorAll('.parts-tools__filters .chip')];
+  const subBars = [...document.querySelectorAll('.parts-tools__subs')];
   const partSearch = document.querySelector('.parts-search__input');
   let partGroup = 'all';
+  const inGroup = (row, g) => g === 'all' || row.dataset.group === g || row.dataset.group.startsWith(g + '/');
+  // счётчики в чипах считаем по строкам, чтобы не расходились с таблицей
+  [...partChips, ...subBars.flatMap((b) => [...b.querySelectorAll('.chip')])].forEach((c) => {
+    const num = c.querySelector('.chip__num');
+    if (num) num.textContent = partRows.filter((r) => inGroup(r, c.dataset.group)).length;
+  });
   function filterParts() {
     const q = partSearch.value.trim().toLowerCase();
     let shown = 0;
     partRows.forEach((row) => {
-      const ok = (partGroup === 'all' || row.dataset.group === partGroup) && row.dataset.name.toLowerCase().includes(q);
+      const ok = inGroup(row, partGroup) && row.dataset.name.toLowerCase().includes(q);
       row.hidden = !ok;
       if (ok) shown++;
     });
-    document.querySelector('.parts__empty').hidden = shown > 0;
+    const empty = document.querySelector('.parts__empty');
+    empty.hidden = shown > 0;
+    empty.textContent = !q && partGroup !== 'all'
+      ? 'В этой группе пока нет позиций.'
+      : 'Ничего не найдено. Измените запрос или выберите другую группу.';
   }
-  partChips.forEach((chip) => {
-    chip.addEventListener('click', () => {
-      partChips.forEach((c) => c.setAttribute('aria-pressed', String(c === chip)));
-      partGroup = chip.dataset.group;
-      filterParts();
+  function selectGroup(g) {
+    partGroup = g;
+    const top = g.split('/')[0];
+    partChips.forEach((c) => c.setAttribute('aria-pressed', String(c.dataset.group === top)));
+    subBars.forEach((bar) => {
+      bar.hidden = bar.dataset.parent !== top;
+      bar.querySelectorAll('.chip').forEach((c) => c.setAttribute('aria-pressed', String(c.dataset.group === g)));
     });
-  });
+    filterParts();
+  }
+  partChips.forEach((chip) => chip.addEventListener('click', () => selectGroup(chip.dataset.group)));
+  subBars.forEach((bar) => bar.querySelectorAll('.chip').forEach((chip) => chip.addEventListener('click', () => selectGroup(chip.dataset.group))));
   if (partSearch) partSearch.addEventListener('input', filterParts);
-  // группа из ссылки меню «Продукция» → «Комплектующие»: parts.html#al, #st, #anchor
-  const hashChip = partChips.find((c) => '#' + c.dataset.group === location.hash);
-  if (hashChip) hashChip.click();
+  // группа из ссылки меню «Продукция» → «Комплектующие»: parts.html#pav, #pav-al, #tri, #other; старые #al, #st, #anchor тоже открываются
+  const oldHash = { al: 'pav/al', st: 'pav/st', anchor: 'pav/al' };
+  const hashGroup = location.hash.slice(1);
+  const wanted = oldHash[hashGroup] || hashGroup.replace('-', '/');
+  if (partChips.length && wanted && [...partChips, ...subBars.flatMap((b) => [...b.querySelectorAll('.chip')])].some((c) => c.dataset.group === wanted)) selectGroup(wanted);
+
+  // PDF-инструкции, которых ещё нет: ссылка-заглушка никуда не ведёт
+  document.querySelectorAll('.parts__doc[data-pdf-pending]').forEach((a) => a.addEventListener('click', (e) => e.preventDefault()));
 
   // Фото комплектующего, скан награды — на весь экран
   let partZoom;

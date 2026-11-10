@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap&subset=cyrillic" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=20261110x">
+  <link rel="stylesheet" href="css/styles.css?v=20261110z">
 </head>
 <body>
 
@@ -191,9 +191,9 @@
           <p class="mega__title">Комплектующие</p>
           <p class="mega__text">Запасные части и&nbsp;комплектующие для конструкций&nbsp;— можно заказать онлайн и&nbsp;положить в&nbsp;корзину.</p>
           <ul class="mega__subs" data-cols="1">
-            <li><a href="parts-lk.html#al">Для алюминиевых павильонов</a></li>
-            <li><a href="parts-lk.html#st">Для стальных павильонов</a></li>
-            <li><a href="parts-lk.html#anchor">Анкерные группы</a></li>
+            <li><a href="parts-lk.html#pav">Для остановочных павильонов</a></li>
+            <li><a href="parts-lk.html#tri">Для тривижн</a></li>
+            <li><a href="parts-lk.html#other">Прочее</a></li>
           </ul>
           <a class="btn btn--outline" href="parts-lk.html">Смотреть раздел</a>
         </div>
@@ -259,14 +259,25 @@
       <div class="parts-tools">
         <div class="filters parts-tools__filters" role="group" aria-label="Группа комплектующих">
           <button class="chip" type="button" data-group="all" aria-pressed="true">Все<span class="chip__num">4</span></button>
-          <button class="chip" type="button" data-group="al" aria-pressed="false">Для алюминиевых павильонов<span class="chip__num">1</span></button>
-          <button class="chip" type="button" data-group="st" aria-pressed="false">Для стальных павильонов<span class="chip__num">2</span></button>
-          <button class="chip" type="button" data-group="anchor" aria-pressed="false">Анкерные группы<span class="chip__num">1</span></button>
+          <button class="chip" type="button" data-group="pav" aria-pressed="false">Для остановочных павильонов<span class="chip__num">4</span></button>
+          <button class="chip" type="button" data-group="tri" aria-pressed="false">Для тривижн<span class="chip__num">0</span></button>
+          <button class="chip" type="button" data-group="other" aria-pressed="false">Прочее<span class="chip__num">0</span></button>
         </div>
         <label class="parts-search">
           <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
           <input class="parts-search__input" type="search" placeholder="Поиск по названию" aria-label="Поиск по названию">
         </label>
+        <!-- вложенные группы: второй ряд появляется, когда выбрана группа верхнего уровня с подгруппами -->
+        <div class="filters parts-tools__subs" role="group" aria-label="Подгруппа" data-parent="pav" hidden>
+          <button class="chip chip--sub" type="button" data-group="pav" aria-pressed="true">Все для павильонов</button>
+          <button class="chip chip--sub" type="button" data-group="pav/al" aria-pressed="false">Для алюминиевых<span class="chip__num">2</span></button>
+          <button class="chip chip--sub" type="button" data-group="pav/st" aria-pressed="false">Для стальных<span class="chip__num">2</span></button>
+        </div>
+        <div class="filters parts-tools__subs" role="group" aria-label="Подгруппа" data-parent="tri" hidden>
+          <button class="chip chip--sub" type="button" data-group="tri" aria-pressed="true">Все для тривижн</button>
+          <button class="chip chip--sub" type="button" data-group="tri/bottom" aria-pressed="false">Короб нижний<span class="chip__num">0</span></button>
+          <button class="chip chip--sub" type="button" data-group="tri/top" aria-pressed="false">Короб верхний<span class="chip__num">0</span></button>
+        </div>
       </div>
 
       <div class="parts-wrap">
@@ -282,15 +293,15 @@
             </tr>
           </thead>
           <tbody>
-            <tr data-id="anchor-al-1" data-group="anchor" data-name="Анкерная группа алюминиевая, тип 1" data-price="7500">
+            <tr data-id="anchor-al-1" data-group="pav/al" data-name="Анкерная группа алюминиевая, тип 1" data-price="7500">
               <td class="parts__photo"><button class="parts__thumb" type="button" data-zoom="img/parts/anchor-al-1.jpg" aria-label="Увеличить фото"><img src="img/parts/anchor-al-1.jpg" alt="Анкерная группа алюминиевая, тип 1" loading="lazy" width="1200" height="900"></button></td>
-              <td class="parts__name"><span class="parts__title">Анкерная группа алюминиевая, тип&nbsp;1</span><span class="parts__group">Анкерные группы</span></td>
+              <td class="parts__name"><span class="parts__title">Анкерная группа алюминиевая, тип&nbsp;1</span><span class="parts__group">Для алюминиевых павильонов</span><a class="parts__doc" href="#" data-pdf-pending title="Файл инструкции пришлёт клиент"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H6v18h12V7z"/><path d="M14 3v4h4M9 13h6M9 17h6"/></svg>Инструкция по&nbsp;креплению, PDF</a></td>
               <td class="parts__unit">шт.</td>
               <td class="parts__price">7&nbsp;500&nbsp;₽</td>
               <td class="parts__qty"><div class="qty"><button class="qty__btn" type="button" data-step="-1" aria-label="Меньше">−</button><input class="qty__input" type="number" min="1" max="999" value="1" inputmode="numeric" aria-label="Количество"><button class="qty__btn" type="button" data-step="1" aria-label="Больше">+</button></div></td>
               <td class="parts__buy"><button class="btn btn--outline tile__cart parts__cart" type="button" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2.2l2.3 11h10.8l2-8H6.4"/><circle cx="9.5" cy="19.5" r="1.5"/><circle cx="17" cy="19.5" r="1.5"/></svg><span>В&nbsp;корзину</span></button></td>
             </tr>
-            <tr data-id="bench-al-3m" data-group="al" data-name="Брус скамьи, длина 3 м" data-price="2543">
+            <tr data-id="bench-al-3m" data-group="pav/al" data-name="Брус скамьи, длина 3 м" data-price="2543">
               <td class="parts__photo"><button class="parts__thumb" type="button" data-zoom="img/parts/bench-al-3m.jpg" aria-label="Увеличить фото"><img src="img/parts/bench-al-3m.jpg" alt="Брус скамьи, длина 3 м" loading="lazy" width="1200" height="900"></button></td>
               <td class="parts__name"><span class="parts__title">Брус скамьи, длина 3&nbsp;м</span><span class="parts__group">Для алюминиевых павильонов</span></td>
               <td class="parts__unit">шт.</td>
@@ -298,7 +309,7 @@
               <td class="parts__qty"><div class="qty"><button class="qty__btn" type="button" data-step="-1" aria-label="Меньше">−</button><input class="qty__input" type="number" min="1" max="999" value="1" inputmode="numeric" aria-label="Количество"><button class="qty__btn" type="button" data-step="1" aria-label="Больше">+</button></div></td>
               <td class="parts__buy"><button class="btn btn--outline tile__cart parts__cart" type="button" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2.2l2.3 11h10.8l2-8H6.4"/><circle cx="9.5" cy="19.5" r="1.5"/><circle cx="17" cy="19.5" r="1.5"/></svg><span>В&nbsp;корзину</span></button></td>
             </tr>
-            <tr data-id="bracket-st-1015" data-group="st" data-name="Кронштейн боковой длинный, L = 1015 мм" data-price="5752">
+            <tr data-id="bracket-st-1015" data-group="pav/st" data-name="Кронштейн боковой длинный, L = 1015 мм" data-price="5752">
               <td class="parts__photo"><button class="parts__thumb" type="button" data-zoom="img/parts/bracket-st-1015.jpg" aria-label="Увеличить фото"><img src="img/parts/bracket-st-1015.jpg" alt="Кронштейн боковой длинный, L = 1015 мм" loading="lazy" width="1200" height="900"></button></td>
               <td class="parts__name"><span class="parts__title">Кронштейн боковой длинный, L&nbsp;=&nbsp;1015&nbsp;мм</span><span class="parts__group">Для стальных павильонов</span></td>
               <td class="parts__unit">компл.</td>
@@ -306,7 +317,7 @@
               <td class="parts__qty"><div class="qty"><button class="qty__btn" type="button" data-step="-1" aria-label="Меньше">−</button><input class="qty__input" type="number" min="1" max="999" value="1" inputmode="numeric" aria-label="Количество"><button class="qty__btn" type="button" data-step="1" aria-label="Больше">+</button></div></td>
               <td class="parts__buy"><button class="btn btn--outline tile__cart parts__cart" type="button" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2.2l2.3 11h10.8l2-8H6.4"/><circle cx="9.5" cy="19.5" r="1.5"/><circle cx="17" cy="19.5" r="1.5"/></svg><span>В&nbsp;корзину</span></button></td>
             </tr>
-            <tr data-id="glass-st-side-s" data-group="st" data-name="Стекло боковое малое, триплекс 10 мм, 500 × 1865 мм" data-price="11798">
+            <tr data-id="glass-st-side-s" data-group="pav/st" data-name="Стекло боковое малое, триплекс 10 мм, 500 × 1865 мм" data-price="11798">
               <td class="parts__photo"><button class="parts__thumb" type="button" data-zoom="img/parts/glass-st-side-s.jpg" aria-label="Увеличить фото"><img src="img/parts/glass-st-side-s.jpg" alt="Стекло боковое малое, триплекс 10 мм" loading="lazy" width="1200" height="900"></button></td>
               <td class="parts__name"><span class="parts__title">Стекло боковое малое, триплекс 10&nbsp;мм, 500&nbsp;×&nbsp;1865&nbsp;мм</span><span class="parts__group">Для стальных павильонов</span></td>
               <td class="parts__unit">шт.</td>
@@ -412,6 +423,6 @@
 </footer>
 
 
-<script src="js/main.js?v=20261110w"></script>
+<script src="js/main.js?v=20261110y"></script>
 </body>
 </html>
