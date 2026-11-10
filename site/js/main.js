@@ -714,8 +714,8 @@
   partChips.forEach((chip) => chip.addEventListener('click', () => selectGroup(chip.dataset.group)));
   subBars.forEach((bar) => bar.querySelectorAll('.chip').forEach((chip) => chip.addEventListener('click', () => selectGroup(chip.dataset.group))));
   if (partSearch) partSearch.addEventListener('input', filterParts);
-  // группа из ссылки меню «Продукция» → «Комплектующие»: parts.html#pav, #pav-al, #tri, #other; старые #al, #st, #anchor тоже открываются
-  const oldHash = { al: 'pav/al', st: 'pav/st', anchor: 'pav/al' };
+  // группа из ссылки меню «Продукция» → «Комплектующие»: parts.html#pav, #pav-al, #tri, #tri-top, #anchor; старые #al, #st тоже открываются
+  const oldHash = { al: 'pav/al', st: 'pav/st', other: 'tri/other' };
   const hashGroup = location.hash.slice(1);
   const wanted = oldHash[hashGroup] || hashGroup.replace('-', '/');
   if (partChips.length && wanted && [...partChips, ...subBars.flatMap((b) => [...b.querySelectorAll('.chip')])].some((c) => c.dataset.group === wanted)) selectGroup(wanted);
