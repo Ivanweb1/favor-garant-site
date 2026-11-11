@@ -133,6 +133,16 @@
     if (auth) $('[data-auth-name]', cartPage).textContent = auth.company || `ИНН ${auth.inn}`;
     $('[data-logout]', cartPage)?.addEventListener('click', () => { signOut(); location.reload(); });
     if (auth && params.get('welcome')) $('[data-welcome]', cartPage).hidden = false;
+    // пришли из «Повторить»: что добавили и что перенесли в описание
+    const repeated = store.get('fg-cart-repeat', null);
+    if (repeated) {
+      const box = $('[data-repeated]', cartPage);
+      box.hidden = false;
+      $('[data-repeated-num]', box).textContent = repeated.num;
+      $('[data-repeated-missing]', box).hidden = !repeated.missing.length;
+      $('[data-repeated-missing] span', box).textContent = repeated.missing.join('; ');
+      store.del('fg-cart-repeat');
+    }
 
     const render = () => {
       const ids = Object.keys(cart);
@@ -500,8 +510,12 @@
     // отправка: номер заявки и статус «Новая»; корзина, описание и файлы очищаются
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
+      const sendError = $('[data-send-error]', orderPage);
+      sendError.hidden = true;
       if (!validate(form)) return;
       await fakeRequest($('[data-submit]', orderPage), 900);
+      // ошибка отправки: данные формы и корзина не теряются, можно отправить ещё раз
+      if (params.get('fail') && !form.dataset.failed) { form.dataset.failed = '1'; sendError.hidden = false; sendError.focus(); return; }
       const pick = (role) => {
         const panel = $('.org-form', boxOf(role));
         if (panel.hidden) return orgById(role, state[role]);
@@ -597,11 +611,13 @@
         make('104382', 3, 'work', [item('glass-st-side-s', 4), item('bracket-st-1015', 2)], { note: 'Стёкла для двух павильонов, монтаж своими силами.', files: [{ name: 'schema-pavilion.pdf', size: 420000 }] }),
         make('104217', 9, 'delivery', [item('bench-al-3m', 6)], { track: '1029384756' }),
         make('103955', 24, 'shipped', [item('anchor-al-1', 8)], { receive: 'pickup', address: '' }),
-        make('103801', 40, 'cancelled', [item('bench-al-3m', 2), item('bracket-st-1015', 1)]),
+        make('103801', 40, 'cancelled', [item('bench-al-3m', 2), item('bracket-st-1015', 1),
+          { id: 'seal-old', name: 'Уплотнитель стекла, 10 м', unit: 'шт.', qty: 3, price: 890 }]),
       ];
     };
     let orders = store.get('fg-orders', []);
-    if (!orders.some((o) => o.demo)) { orders = [...orders, ...demoOrders()]; store.set('fg-orders', orders); }
+    // примеры версии 2 (с позицией, снятой с каталога); старые примеры заменяем
+    if (!orders.some((o) => o.demo === 2)) { orders = [...orders.filter((o) => !o.demo), ...demoOrders().map((o) => ({ ...o, demo: 2 }))]; store.set('fg-orders', orders); }
     orders.sort((a, b) => b.date.localeCompare(a.date));
 
     const statusChip = (el, s) => { el.className = `status status--${s}`; el.textContent = STATUS[s].name; };
@@ -631,6 +647,7 @@
     };
 
     const renderOrder = (o) => {
+      current = o;
       const q = (k) => $(`[data-o="${k}"]`, accPage);
       q('num').textContent = o.num;
       statusChip(q('status'), o.status);
@@ -697,6 +714,50 @@
     };
 
     renderList();
+
+    /* ---------- Повтор и отмена (ТЗ, экран 6) ---------- */
+
+    let current = null;
+    const saveOrders = () => store.set('fg-orders', orders);
+    // «Повторить»: состав — в текущую корзину (количества суммируются), описание и файлы — к описанию и файлам корзины.
+    // Позиции, которых больше нет в каталоге, переносим в описание названием. Заявку клиент оформляет сам из корзины.
+    $('[data-o="repeat"]', accPage).addEventListener('click', async (e) => {
+      const o = current;
+      await fakeRequest(e.currentTarget, 400);
+      const cart = store.get('fg-cart', {});
+      const missing = [];
+      o.items.forEach((i) => {
+        if (PARTS[i.id]) cart[i.id] = Math.min(999, (cart[i.id] || 0) + i.qty);
+        else missing.push(`${i.name} — ${i.qty} ${i.unit}`);
+      });
+      const notes = [store.get('fg-cart-note', ''), o.note, missing.length && `Из заказа № ${o.num}, нет в каталоге: ${missing.join('; ')}`].filter(Boolean);
+      const files = store.get('fg-cart-files', []);
+      (o.files || []).forEach((f) => { if (!files.some((x) => x.name === f.name && x.size === f.size)) files.push(f); });
+      store.set('fg-cart', cart);
+      store.set('fg-cart-note', notes.join('\n\n').slice(0, 2000));
+      store.set('fg-cart-files', files);
+      store.set('fg-cart-repeat', { num: o.num, missing });
+      location.href = 'cart.html';
+    });
+
+    // «Отменить заявку»: с подтверждением; доступна до передачи в доставку или выдачи
+    const cancelModal = $('#cancel-modal');
+    $('[data-o="cancel"]', accPage).addEventListener('click', () => {
+      $('[data-cancel-num]', cancelModal).textContent = current.num;
+      cancelModal.showModal();
+      document.documentElement.classList.add('has-modal');
+      $('[data-cancel-no]', cancelModal).focus();
+    });
+    $('[data-cancel-yes]', cancelModal).addEventListener('click', async (e) => {
+      await fakeRequest(e.currentTarget, 600);
+      current.status = 'cancelled';
+      saveOrders();
+      cancelModal.close();
+      renderOrder(current);
+      renderList();
+      say(`Заявка № ${current.num} отменена`);
+    });
+    $('[data-cancel-no]', cancelModal).addEventListener('click', () => cancelModal.close());
 
     // разделы: #orders (по умолчанию), #order-<номер>, #profile, #orgs
     const tabs = $$('[data-tab]', accPage);

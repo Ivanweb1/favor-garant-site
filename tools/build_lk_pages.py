@@ -122,6 +122,8 @@ cart = f'''      <div class="page-head">
 
       <div data-page="cart">
         <div class="notice notice--ok" data-welcome hidden style="margin-bottom: 20px"><span>Вы вошли в&nbsp;кабинет. Корзина, описание и&nbsp;файлы сохранены, цены обновлены.</span></div>
+        <div class="notice" data-repeated hidden style="margin-bottom: 20px" role="status"><span><b>Добавили позиции из&nbsp;заказа №&nbsp;<span data-repeated-num></span>.</b> Если что-то уже было в&nbsp;корзине, количества сложились. Описание и&nbsp;файлы заказа тоже здесь&nbsp;— проверьте и&nbsp;оформите новую заявку.
+          <span data-repeated-missing hidden style="display: block; margin-top: 6px">Нет в&nbsp;каталоге, перенесли в&nbsp;описание: <span></span></span></span></div>
 
         <div class="cart" data-cart-full hidden>
           <div class="cart__main">
@@ -482,6 +484,7 @@ order = f'''      <div class="page-head">
               <p data-osum-note class="osum__note"><b>Описание:</b> <span></span></p>
               <p data-osum-files><b>Файлы:</b> <span></span></p>
             </div>
+            <div class="notice notice--warn" data-send-error hidden role="alert" tabindex="-1"><span><b>Не&nbsp;удалось отправить заявку.</b> Данные сохранены&nbsp;— проверьте соединение и&nbsp;отправьте ещё раз. Если не&nbsp;получится, позвоните: <a class="lk-link" href="{PHONE_HREF}">{PHONE}</a>.</span></div>
             <button class="btn btn--primary btn--block" type="submit" form="order-form" data-submit>Отправить заявку</button>
             <p class="form__note">Отправляя заявку, вы&nbsp;подтверждаете, что ознакомились с&nbsp;<a href="{POLICY}">Политикой обработки персональных данных</a>.</p>
             <p class="osum__pay">Счёт и&nbsp;оплата&nbsp;— вне сайта, после проверки заявки менеджером.</p>
@@ -657,6 +660,19 @@ account = f'''      <div class="page-head">
           </section>
         </div>
       </div>
+
+      <!-- Подтверждение отмены заявки -->
+      <dialog class="modal" id="cancel-modal" aria-labelledby="cancel-modal-title">
+        <div class="modal__box">
+          <button class="modal__close" type="button" data-modal-close aria-label="Закрыть"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 2l12 12M14 2L2 14"/></svg></button>
+          <h2 class="modal__title" id="cancel-modal-title">Отменить заявку №&nbsp;<span data-cancel-num></span>?</h2>
+          <p class="modal__text">Менеджер перестанет её&nbsp;обрабатывать. Вернуть отменённую заявку нельзя, но&nbsp;её&nbsp;состав можно добавить в&nbsp;корзину кнопкой «Повторить».</p>
+          <div class="modal__actions">
+            <button class="btn btn--danger" type="button" data-cancel-yes>Да, отменить</button>
+            <button class="btn btn--outline" type="button" data-cancel-no>Не&nbsp;отменять</button>
+          </div>
+        </div>
+      </dialog>
 
       <!-- Добавление и редактирование организации: полная форма реквизитов, как в заявке -->
       <dialog class="modal modal--wide" id="org-modal" aria-labelledby="org-modal-title">

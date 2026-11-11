@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap&subset=cyrillic" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=20261111l">
+  <link rel="stylesheet" href="css/styles.css?v=20261111m">
 </head>
 <body>
 
@@ -417,6 +417,19 @@
         </div>
       </div>
 
+      <!-- Подтверждение отмены заявки -->
+      <dialog class="modal" id="cancel-modal" aria-labelledby="cancel-modal-title">
+        <div class="modal__box">
+          <button class="modal__close" type="button" data-modal-close aria-label="Закрыть"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 2l12 12M14 2L2 14"/></svg></button>
+          <h2 class="modal__title" id="cancel-modal-title">Отменить заявку №&nbsp;<span data-cancel-num></span>?</h2>
+          <p class="modal__text">Менеджер перестанет её&nbsp;обрабатывать. Вернуть отменённую заявку нельзя, но&nbsp;её&nbsp;состав можно добавить в&nbsp;корзину кнопкой «Повторить».</p>
+          <div class="modal__actions">
+            <button class="btn btn--danger" type="button" data-cancel-yes>Да, отменить</button>
+            <button class="btn btn--outline" type="button" data-cancel-no>Не&nbsp;отменять</button>
+          </div>
+        </div>
+      </dialog>
+
       <!-- Добавление и редактирование организации: полная форма реквизитов, как в заявке -->
       <dialog class="modal modal--wide" id="org-modal" aria-labelledby="org-modal-title">
         <div class="modal__box">
@@ -568,7 +581,7 @@
 </footer>
 
 
-<script src="js/lk.js?v=20261111l"></script>
-<script src="js/main.js?v=20261111l"></script>
+<script src="js/lk.js?v=20261111m"></script>
+<script src="js/main.js?v=20261111m"></script>
 </body>
 </html>
