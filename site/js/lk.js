@@ -1,7 +1,8 @@
 /* Личный кабинет (прототип по ТЗ дизайнеру, экраны 1–2): корзина, вход, регистрация, восстановление доступа.
    Сервера нет: всё хранится в браузере. Письма на почту заменены пунктирной подсказкой «Прототип: …».
    Ключи: fg-cart { id: количество } — общий с main.js, fg-cart-note — описание, fg-cart-files — имена файлов,
-   fg-auth { inn, company } — признак входа. */
+   fg-auth { inn, company } — признак входа, fg-profile — реквизиты своей организации,
+   fg-orgs — сохранённые плательщики и грузополучатели, fg-orders — отправленные заявки. */
 (function () {
   const store = {
     get(key, fallback) { try { const v = JSON.parse(localStorage.getItem(key)); return v ?? fallback; } catch (e) { return fallback; } },
@@ -28,6 +29,19 @@
   const signIn = (data) => store.set('fg-auth', data);
   const signOut = () => store.del('fg-auth');
   const auth = store.get('fg-auth', null);
+
+  // Реквизиты — как в шаблоне заявки: организация, ИНН/КПП, город и адрес доставки, контактное лицо, телефон, email
+  const REQ = ['company', 'inn', 'kpp', 'city', 'address', 'person', 'phone', 'email'];
+  const readReq = (form) => Object.fromEntries(REQ.filter((k) => form[k]).map((k) => [k, form[k].value.trim()]));
+  // прототип: при входе по ИНН без регистрации в этом браузере подставляем пример профиля
+  const DEMO_PROFILE = {
+    company: 'ООО «Пример»', inn: '7801234567', kpp: '780101001', city: 'Санкт-Петербург', address: 'ул. Примерная, д. 1',
+    person: 'Иванов Иван Иванович', phone: '+7 900 000-00-00', email: 'zakaz@example.ru',
+  };
+  const setProfile = (data) => {
+    store.set('fg-profile', data);
+    signIn({ inn: data.inn, company: data.company });
+  };
 
   // Комплектующие (прототип): в каталоге гостя цен нет, поэтому корзина берёт их отсюда — значения из parts-lk.html.
   // На сайте цены и единицы отдаёт сервер только вошедшему клиенту.
@@ -230,7 +244,8 @@
       await fakeRequest($('[type="submit"]', form));
       // прототип: неверный пароль показываем, если он короче 8 символов
       if (form.password.value.length < 8) { err.hidden = false; form.password.focus(); return; }
-      signIn({ inn: form.inn.value.trim(), company: '' });
+      const saved = store.get('fg-profile', null);
+      setProfile(saved && saved.inn === form.inn.value.trim() ? saved : { ...DEMO_PROFILE, inn: form.inn.value.trim() });
       location.href = nextUrl();
     });
   }
@@ -270,7 +285,7 @@
         if (!validate(form)) return;
         await fakeRequest($('[type="submit"]', form));
         if (form.dataset.step === 'invite') {
-          signIn({ inn: form.inn.value, company: form.company.value });
+          setProfile({ ...DEMO_PROFILE, company: form.company.value, inn: form.inn.value, email: form.email.value });
           location.href = nextUrl();
         } else show(recPage, 'done');
       });
@@ -290,8 +305,7 @@
       steps[0].parentElement.dataset.label = `Шаг ${n + 1} из ${steps.length} · ${steps[n].textContent.trim()}`;
     };
     go('data');
-    let company = '';
-    let inn = '';
+    let profile = null;
 
     // ИНН уже зарегистрирован (прототип: 7801234567 считается занятым) — подсказка войти или восстановить пароль
     const TAKEN = ['7801234567'];
@@ -303,8 +317,7 @@
       if (!validate(dataForm)) return;
       await fakeRequest($('[type="submit"]', dataForm));
       if (TAKEN.includes(dataForm.inn.value)) { taken.hidden = false; taken.scrollIntoView({ behavior: 'smooth', block: 'center' }); return; }
-      company = dataForm.company.value.trim();
-      inn = dataForm.inn.value;
+      profile = readReq(dataForm);
       $$('[data-email]', regPage).forEach((el) => { el.textContent = dataForm.email.value.trim(); });
       go('confirm');
     });
@@ -318,7 +331,8 @@
       if (!validate(e.currentTarget)) return;
       await fakeRequest($('[type="submit"]', e.currentTarget));
       // кабинет создан, клиент уже вошёл — остался необязательный шаг
-      signIn({ inn, company });
+      setProfile(profile);
+      store.set('fg-orgs', []);
       go('consignee');
     });
     const finish = () => { location.href = nextUrl(); };
@@ -327,7 +341,208 @@
       e.preventDefault();
       if (!validate(e.currentTarget)) return;
       await fakeRequest($('[type="submit"]', e.currentTarget));
+      // грузополучатель — только запись в справочнике кабинета, свой кабинет ему не создаётся
+      store.set('fg-orgs', [{ id: `o${Date.now()}`, role: 'consignee', ...readReq(e.currentTarget) }]);
       finish();
+    });
+  }
+
+  /* ---------- Оформление заявки (ТЗ, экран 3) ---------- */
+
+  const orderPage = $('[data-page="order"]');
+  if (orderPage) {
+    // оформлять может только вошедший клиент: гостя — ко входу, после входа он вернётся в корзину
+    if (!auth) { location.replace('login.html?next=cart'); return; }
+    const cart = store.get('fg-cart', {});
+    const ids = Object.keys(cart);
+    if (!ids.length) { show(orderPage, 'empty'); return; }
+    show(orderPage, 'form');
+
+    const profile = store.get('fg-profile', null) || { ...DEMO_PROFILE, inn: auth.inn };
+    const orgs = store.get('fg-orgs', []);
+    const form = $('#order-form');
+
+    // сводка справа: состав, итог, описание и файлы из корзины
+    let total = 0;
+    const list = $('.osum__list', orderPage);
+    ids.forEach((id) => {
+      const p = partOf(id);
+      const li = document.createElement('li');
+      li.className = 'osum__item';
+      li.innerHTML = '<span class="osum__name"></span><span class="osum__qty"></span><span class="osum__sum"></span>';
+      $('.osum__name', li).textContent = p.name;
+      $('.osum__qty', li).textContent = p.price ? `${cart[id]} ${p.unit} × ${money(p.price)}` : `${cart[id]} ${p.unit}`;
+      const sum = $('.osum__sum', li);
+      if (p.price) { sum.textContent = money(p.price * cart[id]); total += p.price * cart[id]; } else { sum.textContent = 'по запросу'; sum.classList.add('osum__sum--muted'); }
+      list.appendChild(li);
+    });
+    $('[data-osum-count]', orderPage).textContent = `${ids.length} ${plural(ids.length, 'позиция', 'позиции', 'позиций')}`;
+    $('[data-osum-total]', orderPage).textContent = money(total);
+    const note = store.get('fg-cart-note', '');
+    const files = store.get('fg-cart-files', []);
+    $('.osum__extra', orderPage).hidden = !note && !files.length;
+    $('[data-osum-note]', orderPage).hidden = !note;
+    $('[data-osum-note] span', orderPage).textContent = note;
+    $('[data-osum-files]', orderPage).hidden = !files.length;
+    $('[data-osum-files] span', orderPage).textContent = files.map((f) => f.name).join(', ');
+
+    // плательщик и грузополучатель: карточки, по умолчанию своя организация; «Изменить реквизиты» и «Добавить»
+    const own = { id: 'own', ...profile };
+    const state = { payer: 'own', consignee: 'own' };
+    const drafts = { payer: null, consignee: null }; // изменённые свои реквизиты для этой заявки
+    const orgsFor = (role) => [own, ...orgs.filter((o) => o.role === role)];
+    const orgById = (role, id) => orgsFor(role).find((o) => o.id === id);
+    const metaOf = (o) => [`ИНН ${o.inn}`, o.kpp && `КПП ${o.kpp}`].filter(Boolean).join(' · ');
+    const boxOf = (role) => $(`[data-org-role="${role}"]`, orderPage);
+    const panelData = (panel) => Object.fromEntries($$('input[data-req]', panel).map((f) => [f.dataset.req, f.value.trim()]));
+
+    const renderOrgs = (role) => {
+      const wrap = $('.orgs', boxOf(role));
+      wrap.innerHTML = '';
+      orgsFor(role).forEach((o) => {
+        const label = document.createElement('label');
+        label.className = 'org';
+        label.innerHTML = `<input class="org__input" type="radio" name="${role}-org"><span class="org__name"></span><span class="org__meta"></span>`
+          + (o.id === 'own' ? '<span class="org__tag">Ваша организация</span>' : '');
+        const input = $('input', label);
+        input.value = o.id;
+        input.checked = state[role] === o.id;
+        const shown = o.id === 'own' && drafts[role] ? { ...o, ...drafts[role] } : o;
+        $('.org__name', label).textContent = shown.company;
+        $('.org__meta', label).textContent = metaOf(shown);
+        input.addEventListener('change', () => { state[role] = o.id; closeOrgForm(role); syncAddress(); });
+        wrap.appendChild(label);
+      });
+      const add = document.createElement('button');
+      add.type = 'button';
+      add.className = 'org org--add';
+      add.textContent = role === 'payer' ? 'Добавить плательщика' : 'Добавить грузополучателя';
+      add.addEventListener('click', () => openOrgForm(role, 'new'));
+      wrap.appendChild(add);
+    };
+
+    function openOrgForm(role, mode) {
+      const box = boxOf(role);
+      const panel = $('.org-form', box);
+      if (mode === 'new') { state[role] = 'new'; $$(`[name="${role}-org"]`, box).forEach((r) => { r.checked = false; }); }
+      const src = mode === 'new' ? {} : { ...orgById(role, state[role]), ...(state[role] === 'own' ? drafts[role] : null) };
+      $$('input[data-req]', panel).forEach((f) => {
+        f.value = src[f.dataset.req] || '';
+        f.readOnly = mode !== 'new' && f.dataset.req === 'inn';
+        setError(f, '');
+      });
+      $('.org-form__title', panel).textContent = mode === 'new'
+        ? (role === 'payer' ? 'Новый плательщик' : 'Новый грузополучатель') : 'Реквизиты для этой заявки';
+      $('[data-save-org]', panel).hidden = mode !== 'new';
+      panel.hidden = false;
+      $('.org-edit', box).hidden = true;
+      $$('input[data-req]', panel).find((f) => !f.readOnly)?.focus();
+    }
+    function closeOrgForm(role) {
+      const box = boxOf(role);
+      $('.org-form', box).hidden = true;
+      $('.org-edit', box).hidden = false;
+    }
+    ['payer', 'consignee'].forEach((role) => {
+      const box = boxOf(role);
+      $('.org-edit', box).addEventListener('click', () => openOrgForm(role, 'edit'));
+      $('[data-org-cancel]', box).addEventListener('click', () => {
+        if (state[role] === 'new') state[role] = 'own';
+        else if (state[role] === 'own') drafts[role] = null;
+        renderOrgs(role); closeOrgForm(role); syncAddress();
+      });
+      $$('.org-form input[data-req]', box).forEach((f) => f.addEventListener('input', () => {
+        if (state[role] === 'own') { drafts[role] = panelData($('.org-form', box)); renderOrgs(role); }
+        checkChanges();
+      }));
+      renderOrgs(role);
+    });
+
+    // способ получения: доставка — город и адрес (у выбранного грузополучателя, если они сохранены), самовывоз — без адреса
+    const delivery = $('[data-delivery]', orderPage);
+    const pickup = $('[data-pickup]', orderPage);
+    $$('[name="receive"]', orderPage).forEach((r) => r.addEventListener('change', () => {
+      delivery.hidden = form.receive.value !== 'delivery';
+      pickup.hidden = form.receive.value === 'delivery';
+      checkChanges();
+    }));
+    function syncAddress() {
+      const c = state.consignee === 'new' ? null : orgById('consignee', state.consignee);
+      form.city.value = c?.city || profile.city || '';
+      form.address.value = c?.address || profile.address || '';
+      checkChanges();
+    }
+
+    // контактное лицо — из профиля
+    form.person.value = profile.person || '';
+    form.phone.value = profile.phone || '';
+    form.email.value = profile.email || '';
+
+    // предложение сохранить изменённые реквизиты: появляется, когда свои данные в заявке отличаются от профиля
+    const offer = $('[data-save-offer]', orderPage);
+    function changedParts() {
+      const changed = [];
+      ['payer', 'consignee'].forEach((role) => {
+        const d = drafts[role];
+        if (state[role] === 'own' && d && (d.company !== profile.company || d.kpp !== (profile.kpp || ''))) changed.push('реквизиты организации');
+      });
+      if (form.receive.value === 'delivery' && state.consignee === 'own'
+        && (form.city.value.trim() !== (profile.city || '') || form.address.value.trim() !== (profile.address || ''))) changed.push('адрес доставки');
+      if (['person', 'phone', 'email'].some((k) => form[k].value.trim() !== (profile[k] || ''))) changed.push('контактные данные');
+      return [...new Set(changed)];
+    }
+    function checkChanges() {
+      const changed = changedParts();
+      offer.hidden = !changed.length;
+      $('[data-save-what]', offer).textContent = changed.join(', ');
+      if (!changed.length) $('input', offer).checked = false;
+    }
+    ['city', 'address', 'person', 'phone', 'email'].forEach((k) => form[k].addEventListener('input', checkChanges));
+    syncAddress();
+
+    // отправка: номер заявки и статус «Новая»; корзина, описание и файлы очищаются
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!validate(form)) return;
+      await fakeRequest($('[data-submit]', orderPage), 900);
+      const pick = (role) => {
+        const panel = $('.org-form', boxOf(role));
+        if (panel.hidden) return orgById(role, state[role]);
+        const data = panelData(panel);
+        if (state[role] === 'new' && $('[data-save-org] input', panel).checked) orgs.push({ id: `o${Date.now()}${role}`, role, ...data });
+        return data;
+      };
+      const payer = pick('payer');
+      const consignee = pick('consignee');
+      store.set('fg-orgs', orgs);
+      // профиль меняем только по галочке; реквизиты прошлых заявок хранятся в самих заявках и не меняются
+      if ($('input', offer).checked) {
+        const next = { ...profile, person: form.person.value.trim(), phone: form.phone.value.trim(), email: form.email.value.trim() };
+        ['payer', 'consignee'].forEach((role) => { if (state[role] === 'own' && drafts[role]) Object.assign(next, { company: drafts[role].company, kpp: drafts[role].kpp }); });
+        if (form.receive.value === 'delivery' && state.consignee === 'own') Object.assign(next, { city: form.city.value.trim(), address: form.address.value.trim() });
+        setProfile(next);
+      }
+      const num = String(Date.now()).slice(-6);
+      const orders = store.get('fg-orders', []);
+      orders.unshift({
+        num, date: new Date().toISOString(), status: 'new', total, note, files,
+        items: ids.map((id) => ({ id, name: partOf(id).name, unit: partOf(id).unit, qty: cart[id], price: partOf(id).price })),
+        payer: { company: payer.company, inn: payer.inn, kpp: payer.kpp },
+        consignee: { company: consignee.company, inn: consignee.inn, kpp: consignee.kpp },
+        receive: form.receive.value,
+        address: form.receive.value === 'delivery' ? `${form.city.value.trim()}, ${form.address.value.trim()}` : '',
+        contact: { person: form.person.value.trim(), phone: form.phone.value.trim(), email: form.email.value.trim() },
+      });
+      store.set('fg-orders', orders);
+      ['fg-cart', 'fg-cart-note', 'fg-cart-files'].forEach((k) => store.del(k));
+      const headCount = $('.header__cart-count');
+      if (headCount) headCount.textContent = '0';
+      $('[data-order-num]', orderPage).textContent = num;
+      $('[data-order-items]', orderPage).textContent = `${ids.length} ${plural(ids.length, 'позиция', 'позиции', 'позиций')}`;
+      $('[data-order-total]', orderPage).textContent = total ? money(total) : 'по запросу';
+      $('[data-order-receive]', orderPage).textContent = form.receive.value === 'delivery' ? 'Доставка' : 'Самовывоз';
+      $('[data-order-email]', orderPage).textContent = form.email.value.trim();
+      show(orderPage, 'done');
     });
   }
 })();

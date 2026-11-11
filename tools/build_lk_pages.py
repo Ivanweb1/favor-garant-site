@@ -1,6 +1,6 @@
 """Страницы личного кабинета по «ТЗ дизайнеру · оставшиеся экраны» (экраны 1–2):
 корзина (cart.html), вход (login.html), восстановление доступа и активация по приглашению (recovery.html),
-регистрация (register.html). Логика — site/js/lk.js.
+регистрация (register.html), оформление заявки (order.html, экран 3). Логика — site/js/lk.js.
 
 Шапку и подвал берём из parts.html (гостевая шапка: «Войти» → login.html, корзина → cart.html).
 Правки этих страниц вносить сюда и пересобирать.
@@ -402,3 +402,126 @@ register = f'''      <div class="auth auth--wide" data-page="register">
       </div>'''
 
 page('register.html', 'Регистрация', 'Регистрация организации в личном кабинете ФАВОР-ГАРАНТ.', [('Вход', 'login.html'), ('Регистрация', '')], register)
+
+
+# ---------- Оформление заявки (ТЗ, экран 3) ----------
+
+def opt_check(attr, name, text, checked=False):
+    """Необязательная галочка (не согласие): сохранить организацию, сохранить изменения в профиле."""
+    return f'''<label class="check" {attr}>
+              <input class="check__input" type="checkbox" name="{name}"{' checked' if checked else ''}>
+              <span class="check__box">{TICK}</span>
+              <span class="check__text">{text}</span>
+            </label>'''
+
+
+def org_step(num, role, title, text):
+    p = role
+    return f'''          <fieldset class="ostep" data-org-role="{role}">
+            <legend class="visually-hidden">{title}</legend>
+            <div class="ostep__head">
+              <p class="ostep__title" aria-hidden="true"><span class="ostep__num">{num}</span>{title}</p>
+              <button class="org-edit" type="button">Изменить реквизиты</button>
+            </div>
+            <p class="ostep__text">{text}</p>
+            <div class="orgs" role="radiogroup" aria-label="{title}"></div>
+            <div class="org-form" hidden>
+              <p class="org-form__title"></p>
+              {field('Название компании', p + '_company', auto='off', extra=' data-req="company"')}
+              <div class="form__row">
+                {field('ИНН', p + '_inn', auto='off', extra=' inputmode="numeric" maxlength="12" data-inn data-req="inn"')}
+                {field('КПП', p + '_kpp', req=False, auto='off', extra=' inputmode="numeric" maxlength="9" data-kpp data-req="kpp"', hint='Если есть')}
+              </div>
+              {opt_check('data-save-org', p + '_save', 'Сохранить в&nbsp;кабинете, чтобы выбирать в&nbsp;следующих заявках', checked=True)}
+              <div class="org-form__actions">
+                <button class="lk-link" type="button" data-org-cancel style="border: 0; background: none; font: inherit; font-size: 14px; cursor: pointer">Отменить</button>
+              </div>
+              <p class="auth__legal">Добавление организации не&nbsp;открывает ей доступ к&nbsp;вашему кабинету. <a href="{POLICY}">Политика обработки персональных данных</a>.</p>
+            </div>
+          </fieldset>'''
+
+
+order = f'''      <div class="page-head">
+        <div>
+          <h1 class="h2 duo"><span>Оформление</span><span class="duo__second">заявки</span></h1>
+        </div>
+        <p class="page-head__text">Реквизиты подставлены из&nbsp;профиля&nbsp;— проверьте их&nbsp;и&nbsp;при необходимости измените для этой заявки.</p>
+      </div>
+
+      <div data-page="order">
+        <div class="checkout2" data-screen="form" hidden>
+          <form class="checkout2__form" id="order-form" data-flow="order" novalidate>
+{org_step(1, 'payer', 'Плательщик', 'По&nbsp;умолчанию&nbsp;— ваша организация. Можно выбрать другую из&nbsp;сохранённых или добавить новую.')}
+{org_step(2, 'consignee', 'Грузополучатель', 'Организация, которая принимает товар. По&nbsp;умолчанию&nbsp;— ваша.')}
+
+            <fieldset class="ostep">
+              <legend class="visually-hidden">Способ получения</legend>
+              <p class="ostep__title" aria-hidden="true"><span class="ostep__num">3</span>Способ получения</p>
+              <div class="seg" role="radiogroup" aria-label="Способ получения">
+                <span class="seg__item"><input class="seg__input" type="radio" name="receive" value="delivery" id="receive-delivery" checked><label class="seg__label" for="receive-delivery">Доставка</label></span>
+                <span class="seg__item"><input class="seg__input" type="radio" name="receive" value="pickup" id="receive-pickup"><label class="seg__label" for="receive-pickup">Самовывоз</label></span>
+              </div>
+              <div class="form__row" data-delivery>
+                {field('Город', 'city', auto='address-level2')}
+                {field('Адрес доставки', 'address', auto='street-address', extra=' placeholder="Улица, дом, корпус"')}
+              </div>
+              <div class="notice" data-pickup hidden><span>Адрес и&nbsp;время самовывоза менеджер согласует после проверки заявки.</span></div>
+            </fieldset>
+
+            <fieldset class="ostep">
+              <legend class="visually-hidden">Контактное лицо</legend>
+              <p class="ostep__title" aria-hidden="true"><span class="ostep__num">4</span>Контактное лицо</p>
+              {field('Ф. И. О.', 'person', auto='name')}
+              <div class="form__row">
+                {field('Телефон', 'phone', kind='tel', auto='tel')}
+                {field('Email для связи', 'email', kind='email', auto='email')}
+              </div>
+            </fieldset>
+
+            <div class="ostep" data-save-offer hidden>
+              {opt_check('', 'save_profile', 'Сохранить изменения в&nbsp;профиле: <span data-save-what></span><small>Реквизиты прошлых заявок не&nbsp;изменятся.</small>')}
+            </div>
+          </form>
+
+          <aside class="osum" aria-label="Состав заявки">
+            <div class="osum__head">
+              <p class="osum__title">Заявка</p>
+              <a class="lk-link" href="cart.html" style="font-size: 14px">Изменить в&nbsp;корзине</a>
+            </div>
+            <ul class="osum__list"></ul>
+            <p class="osum__total"><span data-osum-count></span><b data-osum-total></b></p>
+            <div class="osum__extra">
+              <p data-osum-note class="osum__note"><b>Описание:</b> <span></span></p>
+              <p data-osum-files><b>Файлы:</b> <span></span></p>
+            </div>
+            <button class="btn btn--primary btn--block" type="submit" form="order-form" data-submit>Отправить заявку</button>
+            <p class="form__note">Отправляя заявку, вы&nbsp;подтверждаете, что ознакомились с&nbsp;<a href="{POLICY}">Политикой обработки персональных данных</a>.</p>
+            <p class="osum__pay">Счёт и&nbsp;оплата&nbsp;— вне сайта, после проверки заявки менеджером.</p>
+          </aside>
+        </div>
+
+        <div class="result" data-screen="done" hidden>
+          <span class="auth__icon" aria-hidden="true">{CHECK}</span>
+          <p class="result__title">Заявка №&nbsp;<span data-order-num></span> отправлена</p>
+          <span class="status status--new">Новая</span>
+          <p class="result__text">Копию заявки отправили на&nbsp;<b data-order-email></b>. Когда менеджер возьмёт её&nbsp;в&nbsp;работу, статус изменится.</p>
+          <dl class="result__facts">
+            <div><dt>Состав</dt><dd data-order-items></dd></div>
+            <div><dt>Сумма</dt><dd data-order-total></dd></div>
+            <div><dt>Получение</dt><dd data-order-receive></dd></div>
+          </dl>
+          <div class="auth__actions" style="justify-content: center">
+            <a class="btn btn--primary" href="parts-lk.html">В&nbsp;каталог комплектующих</a>
+          </div>
+        </div>
+
+        <div class="cart__main empty" data-screen="empty" hidden>
+          <span class="empty__icon" aria-hidden="true"><svg width="32" height="32" viewBox="0 0 24 24"><path d="M3 4h2.2l2.3 11h10.8l2-8H6.4"/><circle cx="9.5" cy="19.5" r="1.5"/><circle cx="17" cy="19.5" r="1.5"/></svg></span>
+          <p class="empty__title">Нечего оформлять</p>
+          <p class="empty__text">Заявка оформляется на&nbsp;комплектующие из&nbsp;каталога. Добавьте позиции в&nbsp;корзину.</p>
+          <a class="btn btn--primary" href="parts-lk.html">Перейти в&nbsp;каталог</a>
+        </div>
+      </div>'''
+
+page('order.html', 'Оформление заявки', 'Оформление заявки на комплектующие ФАВОР-ГАРАНТ.',
+     [('Комплектующие', 'parts-lk.html'), ('Корзина', 'cart.html'), ('Оформление', '')], order)

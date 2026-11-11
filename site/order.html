@@ -5,12 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Прототип на GitHub Pages: не индексировать, чтобы не дублировать favor-garant.ru -->
   <meta name="robots" content="noindex, nofollow">
-  <title>Оформление заказа — ФАВОР-ГАРАНТ</title>
+  <title>Оформление заявки — ФАВОР-ГАРАНТ</title>
+  <meta name="description" content="Оформление заявки на комплектующие ФАВОР-ГАРАНТ.">
   <link rel="icon" href="img/brand/logo-circle.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap&subset=cyrillic" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=20261111f">
+  <link rel="stylesheet" href="css/styles.css?v=20261111g">
 </head>
 <body>
 
@@ -41,11 +42,11 @@
       <a class="header__phone" href="tel:+78003332227">8 (800) 333-222-7</a>
       <span class="header__address">СПб, ул. Цветочная, д. 7, лит. Б, пом. 6</span>
     </div>
-    <!-- Версия для авторизованных: вместо «Войти» — вход в кабинет (логика ЛК — позже), корзина ведёт на страницу оформления order.html -->
+    <!-- Гостевая версия: цен нет. Корзина доступна гостю, оформление — после входа (cart.html → login.html → обратно в корзину) -->
     <div class="header__actions">
-      <a class="btn btn--primary header__login" href="#" aria-label="Личный кабинет">
+      <a class="btn btn--primary header__login" href="login.html" aria-label="Войти в личный кабинет">
         <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg>
-        <span>Кабинет</span>
+        <span>Войти</span>
       </a>
       <a class="header__cart" href="cart.html" aria-label="Корзина, товаров: 0">
         <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2.2l2.3 11h10.8l2-8H6.4"/><circle cx="9.5" cy="19.5" r="1.5"/><circle cx="17" cy="19.5" r="1.5"/></svg>
@@ -71,7 +72,7 @@
         <li><a class="mega__cat" href="index.html#catalog" data-cat="custom"><img src="img/icons/line-custom.svg" alt="" width="40" height="22"><span>Нестандартные конструкции</span></a></li>
         <li><a class="mega__cat" href="index.html#catalog" data-cat="maf"><img src="img/icons/line-maf.svg" alt="" width="40" height="22"><span>Малые архитектурные формы</span></a></li>
         <li><a class="mega__cat" href="index.html#catalog" data-cat="nav"><img src="img/icons/line-navigation.svg" alt="" width="40" height="22"><span>Навигация</span></a></li>
-        <li><a class="mega__cat" href="parts-lk.html" data-cat="parts"><img src="img/icons/line-parts.svg" alt="" width="40" height="22"><span>Комплектующие</span></a></li>
+        <li><a class="mega__cat" href="parts.html" data-cat="parts"><img src="img/icons/line-parts.svg" alt="" width="40" height="22"><span>Комплектующие</span></a></li>
       </ul>
       <div class="mega__panel" data-panel="pav">
         <div class="mega__info">
@@ -190,11 +191,11 @@
           <p class="mega__title">Комплектующие</p>
           <p class="mega__text">Запасные части и&nbsp;комплектующие для конструкций&nbsp;— можно заказать онлайн и&nbsp;положить в&nbsp;корзину.</p>
           <ul class="mega__subs" data-cols="1">
-            <li><a href="parts-lk.html#pav">Остановки</a></li>
-            <li><a href="parts-lk.html#tri">Тривижны</a></li>
-            <li><a href="parts-lk.html#anchor">Анкеры</a></li>
+            <li><a href="parts.html#pav">Остановки</a></li>
+            <li><a href="parts.html#tri">Тривижны</a></li>
+            <li><a href="parts.html#anchor">Анкеры</a></li>
           </ul>
-          <a class="btn btn--outline" href="parts-lk.html">Смотреть раздел</a>
+          <a class="btn btn--outline" href="parts.html">Смотреть раздел</a>
         </div>
         <img class="mega__photo" style="--pos: 50% 50%" src="img/parts/menu-collage.jpg" alt="" loading="lazy" width="1200" height="1400">
       </div>
@@ -215,7 +216,7 @@
         <li><a href="index.html#catalog">Нестандартные конструкции</a></li>
         <li><a href="index.html#catalog">Малые архитектурные формы</a></li>
         <li><a href="index.html#catalog">Навигация</a></li>
-        <li><a href="parts-lk.html">Комплектующие</a></li>
+        <li><a href="parts.html">Комплектующие</a></li>
       </ul>
       <ul class="mobile-menu__list mobile-menu__list--main">
         <li><a href="services.html">Услуги</a></li>
@@ -234,65 +235,197 @@
         <li><a href="vacancies.html">Вакансии</a></li>
       </ul>
       <a class="mobile-menu__phone" href="tel:+78003332227">8 (800) 333-222-7</a>
-      <a class="btn btn--primary btn--block" href="#">Личный кабинет</a>
+      <a class="btn btn--primary btn--block" href="login.html">Войти в личный кабинет</a>
     </div>
   </div>
 </header>
 
 <main>
+
+  <!-- Оформление заявки: собрано tools/build_lk_pages.py — правки вносить в скрипт -->
   <section class="section section--light page-top">
     <div class="container">
-      <ol class="crumbs" aria-label="Навигация по сайту"><li><a href="index.html">Главная</a></li><li><a href="catalog.html">Продукция</a></li><li><a href="parts-lk.html">Комплектующие</a></li><li><span aria-current="page">Оформление заказа</span></li></ol>
+      <ol class="crumbs" aria-label="Навигация по сайту"><li><a href="index.html">Главная</a></li><li><a href="parts-lk.html">Комплектующие</a></li><li><a href="cart.html">Корзина</a></li><li><span aria-current="page">Оформление</span></li></ol>
       <div class="page-head">
         <div>
-          <h1 class="h2 duo">
-            <span>Оформление</span>
-            <span class="duo__second">заказа</span>
-          </h1>
+          <h1 class="h2 duo"><span>Оформление</span><span class="duo__second">заявки</span></h1>
         </div>
-        <p class="page-head__text">Проверьте состав заказа и&nbsp;контакты&nbsp;— менеджер свяжется с&nbsp;вами для подтверждения.</p>
+        <p class="page-head__text">Реквизиты подставлены из&nbsp;профиля&nbsp;— проверьте их&nbsp;и&nbsp;при необходимости измените для этой заявки.</p>
       </div>
 
-      <!-- Отдельная страница оформления (логика Битрикса). Поля контактов — как в прежнем окне заказа; что подставлять из ЛК, решим, когда придёт логика кабинета -->
-      <div class="checkout" id="order">
-        <div class="checkout__cart">
-          <div class="order">
-            <ul class="order__list"></ul>
-            <p class="order__empty" hidden>Корзина пуста. Добавьте позиции на&nbsp;странице <a href="parts-lk.html">комплектующих</a>.</p>
-            <p class="order__total"></p>
-          </div>
-        </div>
-      <form class="form checkout__form" novalidate data-clear-cart data-ok="Спасибо! Заказ принят, менеджер свяжется с вами для подтверждения. (Прототип: заказ никуда не отправляется.)">
-        <div class="form__row">
-          <label class="field">
-            <span class="field__label">Имя <span class="field__req" aria-hidden="true">*</span></span>
-            <input class="field__input" type="text" name="name" autocomplete="name" required>
+      <div data-page="order">
+        <div class="checkout2" data-screen="form" hidden>
+          <form class="checkout2__form" id="order-form" data-flow="order" novalidate>
+          <fieldset class="ostep" data-org-role="payer">
+            <legend class="visually-hidden">Плательщик</legend>
+            <div class="ostep__head">
+              <p class="ostep__title" aria-hidden="true"><span class="ostep__num">1</span>Плательщик</p>
+              <button class="org-edit" type="button">Изменить реквизиты</button>
+            </div>
+            <p class="ostep__text">По&nbsp;умолчанию&nbsp;— ваша организация. Можно выбрать другую из&nbsp;сохранённых или добавить новую.</p>
+            <div class="orgs" role="radiogroup" aria-label="Плательщик"></div>
+            <div class="org-form" hidden>
+              <p class="org-form__title"></p>
+              <label class="field">
+            <span class="field__label">Название компании <span class="field__req" aria-hidden="true">*</span></span>
+            <input class="field__input" type="text" name="payer_company" autocomplete="off" required data-req="company">
+            <span class="field__error" aria-live="polite"></span>
           </label>
-          <label class="field">
+              <div class="form__row">
+                <label class="field">
+            <span class="field__label">ИНН <span class="field__req" aria-hidden="true">*</span></span>
+            <input class="field__input" type="text" name="payer_inn" autocomplete="off" required inputmode="numeric" maxlength="12" data-inn data-req="inn">
+            <span class="field__error" aria-live="polite"></span>
+          </label>
+                <label class="field">
+            <span class="field__label">КПП</span>
+            <input class="field__input" type="text" name="payer_kpp" autocomplete="off" inputmode="numeric" maxlength="9" data-kpp data-req="kpp">
+            <span class="field__hint">Если есть</span>
+            <span class="field__error" aria-live="polite"></span>
+          </label>
+              </div>
+              <label class="check" data-save-org>
+              <input class="check__input" type="checkbox" name="payer_save" checked>
+              <span class="check__box"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+              <span class="check__text">Сохранить в&nbsp;кабинете, чтобы выбирать в&nbsp;следующих заявках</span>
+            </label>
+              <div class="org-form__actions">
+                <button class="lk-link" type="button" data-org-cancel style="border: 0; background: none; font: inherit; font-size: 14px; cursor: pointer">Отменить</button>
+              </div>
+              <p class="auth__legal">Добавление организации не&nbsp;открывает ей доступ к&nbsp;вашему кабинету. <a href="privacy.html">Политика обработки персональных данных</a>.</p>
+            </div>
+          </fieldset>
+          <fieldset class="ostep" data-org-role="consignee">
+            <legend class="visually-hidden">Грузополучатель</legend>
+            <div class="ostep__head">
+              <p class="ostep__title" aria-hidden="true"><span class="ostep__num">2</span>Грузополучатель</p>
+              <button class="org-edit" type="button">Изменить реквизиты</button>
+            </div>
+            <p class="ostep__text">Организация, которая принимает товар. По&nbsp;умолчанию&nbsp;— ваша.</p>
+            <div class="orgs" role="radiogroup" aria-label="Грузополучатель"></div>
+            <div class="org-form" hidden>
+              <p class="org-form__title"></p>
+              <label class="field">
+            <span class="field__label">Название компании <span class="field__req" aria-hidden="true">*</span></span>
+            <input class="field__input" type="text" name="consignee_company" autocomplete="off" required data-req="company">
+            <span class="field__error" aria-live="polite"></span>
+          </label>
+              <div class="form__row">
+                <label class="field">
+            <span class="field__label">ИНН <span class="field__req" aria-hidden="true">*</span></span>
+            <input class="field__input" type="text" name="consignee_inn" autocomplete="off" required inputmode="numeric" maxlength="12" data-inn data-req="inn">
+            <span class="field__error" aria-live="polite"></span>
+          </label>
+                <label class="field">
+            <span class="field__label">КПП</span>
+            <input class="field__input" type="text" name="consignee_kpp" autocomplete="off" inputmode="numeric" maxlength="9" data-kpp data-req="kpp">
+            <span class="field__hint">Если есть</span>
+            <span class="field__error" aria-live="polite"></span>
+          </label>
+              </div>
+              <label class="check" data-save-org>
+              <input class="check__input" type="checkbox" name="consignee_save" checked>
+              <span class="check__box"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+              <span class="check__text">Сохранить в&nbsp;кабинете, чтобы выбирать в&nbsp;следующих заявках</span>
+            </label>
+              <div class="org-form__actions">
+                <button class="lk-link" type="button" data-org-cancel style="border: 0; background: none; font: inherit; font-size: 14px; cursor: pointer">Отменить</button>
+              </div>
+              <p class="auth__legal">Добавление организации не&nbsp;открывает ей доступ к&nbsp;вашему кабинету. <a href="privacy.html">Политика обработки персональных данных</a>.</p>
+            </div>
+          </fieldset>
+
+            <fieldset class="ostep">
+              <legend class="visually-hidden">Способ получения</legend>
+              <p class="ostep__title" aria-hidden="true"><span class="ostep__num">3</span>Способ получения</p>
+              <div class="seg" role="radiogroup" aria-label="Способ получения">
+                <span class="seg__item"><input class="seg__input" type="radio" name="receive" value="delivery" id="receive-delivery" checked><label class="seg__label" for="receive-delivery">Доставка</label></span>
+                <span class="seg__item"><input class="seg__input" type="radio" name="receive" value="pickup" id="receive-pickup"><label class="seg__label" for="receive-pickup">Самовывоз</label></span>
+              </div>
+              <div class="form__row" data-delivery>
+                <label class="field">
+            <span class="field__label">Город <span class="field__req" aria-hidden="true">*</span></span>
+            <input class="field__input" type="text" name="city" autocomplete="address-level2" required>
+            <span class="field__error" aria-live="polite"></span>
+          </label>
+                <label class="field">
+            <span class="field__label">Адрес доставки <span class="field__req" aria-hidden="true">*</span></span>
+            <input class="field__input" type="text" name="address" autocomplete="street-address" required placeholder="Улица, дом, корпус">
+            <span class="field__error" aria-live="polite"></span>
+          </label>
+              </div>
+              <div class="notice" data-pickup hidden><span>Адрес и&nbsp;время самовывоза менеджер согласует после проверки заявки.</span></div>
+            </fieldset>
+
+            <fieldset class="ostep">
+              <legend class="visually-hidden">Контактное лицо</legend>
+              <p class="ostep__title" aria-hidden="true"><span class="ostep__num">4</span>Контактное лицо</p>
+              <label class="field">
+            <span class="field__label">Ф. И. О. <span class="field__req" aria-hidden="true">*</span></span>
+            <input class="field__input" type="text" name="person" autocomplete="name" required>
+            <span class="field__error" aria-live="polite"></span>
+          </label>
+              <div class="form__row">
+                <label class="field">
             <span class="field__label">Телефон <span class="field__req" aria-hidden="true">*</span></span>
             <input class="field__input" type="tel" name="phone" autocomplete="tel" required>
+            <span class="field__error" aria-live="polite"></span>
           </label>
-        </div>
-        <div class="form__row">
-          <label class="field">
-            <span class="field__label">Email</span>
-            <input class="field__input" type="email" name="email" autocomplete="email">
+                <label class="field">
+            <span class="field__label">Email для связи <span class="field__req" aria-hidden="true">*</span></span>
+            <input class="field__input" type="email" name="email" autocomplete="email" required>
+            <span class="field__error" aria-live="polite"></span>
           </label>
-          <label class="field">
-            <span class="field__label">Организация</span>
-            <input class="field__input" type="text" name="company" autocomplete="organization">
-          </label>
+              </div>
+            </fieldset>
+
+            <div class="ostep" data-save-offer hidden>
+              <label class="check" >
+              <input class="check__input" type="checkbox" name="save_profile">
+              <span class="check__box"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+              <span class="check__text">Сохранить изменения в&nbsp;профиле: <span data-save-what></span><small>Реквизиты прошлых заявок не&nbsp;изменятся.</small></span>
+            </label>
+            </div>
+          </form>
+
+          <aside class="osum" aria-label="Состав заявки">
+            <div class="osum__head">
+              <p class="osum__title">Заявка</p>
+              <a class="lk-link" href="cart.html" style="font-size: 14px">Изменить в&nbsp;корзине</a>
+            </div>
+            <ul class="osum__list"></ul>
+            <p class="osum__total"><span data-osum-count></span><b data-osum-total></b></p>
+            <div class="osum__extra">
+              <p data-osum-note class="osum__note"><b>Описание:</b> <span></span></p>
+              <p data-osum-files><b>Файлы:</b> <span></span></p>
+            </div>
+            <button class="btn btn--primary btn--block" type="submit" form="order-form" data-submit>Отправить заявку</button>
+            <p class="form__note">Отправляя заявку, вы&nbsp;подтверждаете, что ознакомились с&nbsp;<a href="privacy.html">Политикой обработки персональных данных</a>.</p>
+            <p class="osum__pay">Счёт и&nbsp;оплата&nbsp;— вне сайта, после проверки заявки менеджером.</p>
+          </aside>
         </div>
-        <label class="field">
-          <span class="field__label">Комментарий к&nbsp;заказу</span>
-          <textarea class="field__input field__input--area" name="comment" rows="3"></textarea>
-        </label>
-        <div class="form__bottom">
-          <button class="btn btn--primary" type="submit">Оформить заказ</button>
-          <p class="form__note">Оформляя заказ, вы даёте согласие на&nbsp;обработку персональных данных в&nbsp;соответствии с&nbsp;<a href="privacy.html">политикой конфиденциальности</a>.</p>
+
+        <div class="result" data-screen="done" hidden>
+          <span class="auth__icon" aria-hidden="true"><svg width="30" height="30" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+          <p class="result__title">Заявка №&nbsp;<span data-order-num></span> отправлена</p>
+          <span class="status status--new">Новая</span>
+          <p class="result__text">Копию заявки отправили на&nbsp;<b data-order-email></b>. Когда менеджер возьмёт её&nbsp;в&nbsp;работу, статус изменится.</p>
+          <dl class="result__facts">
+            <div><dt>Состав</dt><dd data-order-items></dd></div>
+            <div><dt>Сумма</dt><dd data-order-total></dd></div>
+            <div><dt>Получение</dt><dd data-order-receive></dd></div>
+          </dl>
+          <div class="auth__actions" style="justify-content: center">
+            <a class="btn btn--primary" href="parts-lk.html">В&nbsp;каталог комплектующих</a>
+          </div>
         </div>
-        <p class="form__status" role="status" hidden></p>
-      </form>
+
+        <div class="cart__main empty" data-screen="empty" hidden>
+          <span class="empty__icon" aria-hidden="true"><svg width="32" height="32" viewBox="0 0 24 24"><path d="M3 4h2.2l2.3 11h10.8l2-8H6.4"/><circle cx="9.5" cy="19.5" r="1.5"/><circle cx="17" cy="19.5" r="1.5"/></svg></span>
+          <p class="empty__title">Нечего оформлять</p>
+          <p class="empty__text">Заявка оформляется на&nbsp;комплектующие из&nbsp;каталога. Добавьте позиции в&nbsp;корзину.</p>
+          <a class="btn btn--primary" href="parts-lk.html">Перейти в&nbsp;каталог</a>
+        </div>
       </div>
     </div>
   </section>
@@ -332,7 +465,7 @@
           <li><a href="index.html#catalog">Нестандартные конструкции</a></li>
           <li><a href="index.html#catalog">Малые архитектурные формы</a></li>
           <li><a href="index.html#catalog">Навигация</a></li>
-          <li><a href="parts-lk.html">Комплектующие</a></li>
+          <li><a href="parts.html">Комплектующие</a></li>
         </ul>
       </nav>
       <nav class="footer__col" aria-label="Услуги">
@@ -382,6 +515,7 @@
 </footer>
 
 
-<script src="js/main.js?v=20261111f"></script>
+<script src="js/lk.js?v=20261111g"></script>
+<script src="js/main.js?v=20261111g"></script>
 </body>
 </html>
