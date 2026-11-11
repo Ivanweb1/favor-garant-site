@@ -290,7 +290,7 @@
     box.querySelector('.file__name').textContent = input.files.length ? input.files[0].name : 'Файл не выбран';
     box.classList.toggle('has-file', input.files.length > 0);
   };
-  document.querySelectorAll('.file__input').forEach((input) => {
+  document.querySelectorAll('.file__input:not([multiple])').forEach((input) => {
     input.addEventListener('change', () => setFileName(input));
   });
 
@@ -747,19 +747,26 @@
     });
   });
 
-  // Корзина в шапке ведёт к оформлению заказа. Гостю на странице комплектующих — окно «войдите или зарегистрируйтесь»
-  const cartModal = document.querySelector('dialog#order, dialog#auth');
-  if (cartLink && cartModal) {
-    cartLink.addEventListener('click', (e) => { e.preventDefault(); openModal(cartModal.id); });
-    if (location.hash === '#order') openModal(cartModal.id);
-  }
-  // «Оформить заказ» у авторизованного — переход на отдельную страницу
+  // «Перейти в корзину» под таблицей комплектующих — на страницу корзины cart.html (гостю тоже: вход спросим при оформлении)
   if (barBtn && barBtn.dataset.go) barBtn.addEventListener('click', () => { location.href = barBtn.dataset.go; });
+
+  // Вход (прототип): после входа или регистрации в браузере лежит fg-auth — кнопка «Войти» в шапке становится «Кабинет».
+  // Экранов кабинета пока нет: login.html у вошедшего показывает, под какой организацией он вошёл, и кнопку «Выйти»
+  let authed = null;
+  try { authed = JSON.parse(localStorage.getItem('fg-auth')); } catch (e) { /* без хранилища — гость */ }
+  if (authed) {
+    document.querySelectorAll('.header__login[href="login.html"]').forEach((a) => {
+      a.querySelector('span').textContent = 'Кабинет';
+      a.setAttribute('aria-label', 'Личный кабинет');
+    });
+    document.querySelectorAll('.mobile-menu .btn--block[href="login.html"]').forEach((a) => { a.textContent = 'Личный кабинет'; });
+  }
 
   renderCart();
 
   // Формы: проверка обязательных полей. Отправки на сервер в прототипе нет.
-  document.querySelectorAll('form.form').forEach((form) => {
+  // У форм кабинета (data-flow: вход, регистрация, корзина) своя логика — в js/lk.js
+  document.querySelectorAll('form.form:not([data-flow])').forEach((form) => {
     const status = form.querySelector('.form__status');
     form.addEventListener('submit', (e) => {
       e.preventDefault();
