@@ -535,6 +535,7 @@
       const headCount = $('.header__cart-count');
       if (headCount) headCount.textContent = '0';
       $('[data-order-num]', orderPage).textContent = num;
+      $('[data-order-link]', orderPage).href = `account.html#order-${num}`;
       $('[data-order-items]', orderPage).textContent = `${ids.length} ${plural(ids.length, 'позиция', 'позиции', 'позиций')}`;
       $('[data-order-total]', orderPage).textContent = total ? money(total) : 'по запросу';
       $('[data-order-receive]', orderPage).textContent = form.receive.value === 'delivery' ? 'Доставка' : 'Самовывоз';
@@ -565,12 +566,149 @@
     renderHead();
     $('[data-logout]', accPage).addEventListener('click', () => { signOut(); location.href = 'index.html'; });
 
-    // разделы: #profile и #orgs
+
+    /* ---------- Мои заказы (ТЗ, экран 5) ---------- */
+
+    const STATUS = {
+      new: { name: 'Новая', hint: 'Заказ отправлен' },
+      work: { name: 'В работе', hint: 'Заявкой занимается менеджер' },
+      delivery: { name: 'Доставка', hint: 'Передан транспортной компании' },
+      shipped: { name: 'Отгружен', hint: 'Заказ завершён' },
+      cancelled: { name: 'Отменён', hint: 'Заявка отменена' },
+    };
+    // ход заказа: при самовывозе этапа «Доставка» нет — итоговый статус ставят после выдачи
+    const FLOW = { delivery: ['new', 'work', 'delivery', 'shipped'], pickup: ['new', 'work', 'shipped'] };
+    const date = (iso) => new Date(iso).toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
+    const shortDate = (iso) => new Date(iso).toLocaleDateString('ru-RU');
+
+    // Прототип: примеры заказов в остальных статусах, чтобы показать все состояния. На сайте список отдаёт сервер.
+    const demoOrders = () => {
+      const day = (n) => new Date(Date.now() - n * 864e5).toISOString();
+      const item = (id, qty) => ({ id, name: PARTS[id].name, unit: PARTS[id].unit, qty, price: PARTS[id].price });
+      const sum = (items) => items.reduce((t, i) => t + i.price * i.qty, 0);
+      const org = { company: profile.company, inn: profile.inn, kpp: profile.kpp };
+      const contact = { person: profile.person, phone: profile.phone, email: profile.email };
+      const address = [profile.city, profile.address].filter(Boolean).join(', ');
+      const make = (num, days, status, items, extra) => ({
+        num, date: day(days), status, items, total: sum(items), note: '', files: [], payer: org, consignee: org,
+        receive: 'delivery', address, contact, demo: true, ...extra,
+      });
+      return [
+        make('104382', 3, 'work', [item('glass-st-side-s', 4), item('bracket-st-1015', 2)], { note: 'Стёкла для двух павильонов, монтаж своими силами.', files: [{ name: 'schema-pavilion.pdf', size: 420000 }] }),
+        make('104217', 9, 'delivery', [item('bench-al-3m', 6)], { track: '1029384756' }),
+        make('103955', 24, 'shipped', [item('anchor-al-1', 8)], { receive: 'pickup', address: '' }),
+        make('103801', 40, 'cancelled', [item('bench-al-3m', 2), item('bracket-st-1015', 1)]),
+      ];
+    };
+    let orders = store.get('fg-orders', []);
+    if (!orders.some((o) => o.demo)) { orders = [...orders, ...demoOrders()]; store.set('fg-orders', orders); }
+    orders.sort((a, b) => b.date.localeCompare(a.date));
+
+    const statusChip = (el, s) => { el.className = `status status--${s}`; el.textContent = STATUS[s].name; };
+    const brief = (o) => {
+      const first = o.items.slice(0, 2).map((i) => `${i.name} — ${i.qty} ${i.unit}`).join('; ');
+      return o.items.length > 2 ? `${first} и ещё ${o.items.length - 2}` : first;
+    };
+
+    const renderList = () => {
+      const list = $('.olist', accPage);
+      list.innerHTML = '';
+      $('[data-orders-empty]', accPage).hidden = orders.length > 0;
+      $('[data-demo-note]', accPage).hidden = !orders.some((o) => o.demo);
+      orders.forEach((o) => {
+        const a = document.createElement('a');
+        a.className = 'orow';
+        a.href = `#order-${o.num}`;
+        a.innerHTML = '<span class="orow__id"><span class="orow__num"></span><span class="orow__date"></span></span>'
+          + '<span class="orow__items"></span><span class="status"></span><span class="orow__sum"></span>';
+        $('.orow__num', a).textContent = `№ ${o.num}`;
+        $('.orow__date', a).textContent = `от ${shortDate(o.date)}`;
+        $('.orow__items', a).textContent = brief(o);
+        statusChip($('.status', a), o.status);
+        $('.orow__sum', a).textContent = o.total ? money(o.total) : 'по запросу';
+        list.appendChild(a);
+      });
+    };
+
+    const renderOrder = (o) => {
+      const q = (k) => $(`[data-o="${k}"]`, accPage);
+      q('num').textContent = o.num;
+      statusChip(q('status'), o.status);
+      q('date').textContent = `от ${date(o.date)}`;
+      // ход заказа
+      const flow = FLOW[o.receive] || FLOW.delivery;
+      const steps = $('.ostatus', accPage);
+      steps.style.setProperty('--n', flow.length);
+      steps.hidden = o.status === 'cancelled';
+      steps.innerHTML = '';
+      const cur = flow.indexOf(o.status);
+      flow.forEach((s, i) => {
+        const li = document.createElement('li');
+        li.className = i < cur ? 'is-done' : i === cur ? 'is-current' : '';
+        if (i === cur) li.setAttribute('aria-current', 'step');
+        li.innerHTML = `${STATUS[s].name}<small>${s === 'shipped' && o.receive === 'pickup' ? 'Выдан на самовывозе' : STATUS[s].hint}</small>`;
+        steps.appendChild(li);
+      });
+      steps.dataset.label = `${STATUS[o.status].name} · ${STATUS[o.status].hint}`;
+      q('cancelled-note').hidden = o.status !== 'cancelled';
+      // состав с ценами на дату заявки
+      q('price-head').textContent = `Цена на ${shortDate(o.date)}`;
+      const body = $('.otable tbody', accPage);
+      body.innerHTML = '';
+      o.items.forEach((i) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = '<td></td><td data-cell="qty"></td><td data-cell="price"></td><td data-cell="sum"></td>';
+        const [n, qty, price, sum] = $$('td', tr);
+        n.textContent = i.name;
+        qty.textContent = `${i.qty} ${i.unit}`;
+        price.textContent = i.price ? money(i.price) : '—';
+        sum.textContent = i.price ? money(i.price * i.qty) : 'по запросу';
+        body.appendChild(tr);
+      });
+      q('total').textContent = o.total ? money(o.total) : 'по запросу';
+      q('extra').hidden = !o.note && !o.files?.length;
+      q('note').hidden = !o.note;
+      $('span', q('note')).textContent = o.note || '';
+      q('files').hidden = !o.files?.length;
+      $('span', q('files')).textContent = (o.files || []).map((f) => f.name).join(', ');
+      // получатели и получение
+      const orgLine = (el, org) => {
+        el.innerHTML = '<b></b><small></small>';
+        $('b', el).textContent = org.company;
+        $('small', el).textContent = [`ИНН ${org.inn}`, org.kpp && `КПП ${org.kpp}`].filter(Boolean).join(' · ');
+      };
+      orgLine(q('payer'), o.payer);
+      orgLine(q('consignee'), o.consignee);
+      q('receive').innerHTML = '<b></b><small></small>';
+      $('b', q('receive')).textContent = o.receive === 'pickup' ? 'Самовывоз' : 'Доставка';
+      $('small', q('receive')).textContent = o.receive === 'pickup' ? 'Адрес и время согласует менеджер' : o.address;
+      q('track-row').hidden = !(o.receive === 'delivery' && o.track);
+      q('track').textContent = o.track || '';
+      q('track-link').title = 'Прототип: на сайте ссылка ведёт на страницу отслеживания транспортной компании';
+      q('contact').innerHTML = '<b></b><small></small>';
+      $('b', q('contact')).textContent = o.contact.person;
+      $('small', q('contact')).textContent = [o.contact.phone, o.contact.email].filter(Boolean).join(' · ');
+      // действия: «Отменить» — пока заказ не передан в доставку и не выдан
+      const canCancel = o.status === 'new' || o.status === 'work';
+      q('cancel').hidden = !canCancel;
+      q('hint').textContent = canCancel
+        ? 'Отменить можно, пока заказ не передан в доставку или не выдан.'
+        : '«Повторить» добавит позиции этого заказа в корзину.';
+    };
+
+    renderList();
+
+    // разделы: #orders (по умолчанию), #order-<номер>, #profile, #orgs
     const tabs = $$('[data-tab]', accPage);
     const openTab = () => {
-      const name = location.hash === '#orgs' ? 'orgs' : 'profile';
+      const h = location.hash.slice(1);
+      const order = h.startsWith('order-') && orders.find((o) => o.num === h.slice(6));
+      const name = order ? 'order' : ['profile', 'orgs'].includes(h) ? h : 'orders';
+      if (order) renderOrder(order);
       $$('[data-screen]', accPage).forEach((s) => { s.hidden = s.dataset.screen !== name; });
-      tabs.forEach((t) => { if (t.dataset.tab === name) t.setAttribute('aria-current', 'page'); else t.removeAttribute('aria-current'); });
+      const tab = name === 'order' ? 'orders' : name;
+      tabs.forEach((t) => { if (t.dataset.tab === tab) t.setAttribute('aria-current', 'page'); else t.removeAttribute('aria-current'); });
+      if (name === 'order') window.scrollTo({ top: 0 });
     };
     window.addEventListener('hashchange', openTab);
     openTab();

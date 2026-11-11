@@ -6,12 +6,12 @@
   <!-- Прототип на GitHub Pages: не индексировать, чтобы не дублировать favor-garant.ru -->
   <meta name="robots" content="noindex, nofollow">
   <title>Личный кабинет — ФАВОР-ГАРАНТ</title>
-  <meta name="description" content="Личный кабинет ФАВОР-ГАРАНТ: реквизиты организации, плательщики и грузополучатели.">
+  <meta name="description" content="Личный кабинет ФАВОР-ГАРАНТ: заказы, реквизиты организации, плательщики и грузополучатели.">
   <link rel="icon" href="img/brand/logo-circle.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap&subset=cyrillic" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=20261111j">
+  <link rel="stylesheet" href="css/styles.css?v=20261111l">
 </head>
 <body>
 
@@ -255,6 +255,7 @@
       <div class="acc" data-page="account">
         <nav class="acc-nav" aria-label="Разделы кабинета">
           <div class="acc-nav__org"><span class="acc-nav__name" data-acc-name></span><span class="acc-nav__inn" data-acc-inn></span></div>
+          <a class="acc-nav__link" href="#orders" data-tab="orders"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7.5L12 3l9 4.5v9L12 21l-9-4.5z"/><path d="M3 7.5l9 4.5 9-4.5M12 12v9"/></svg>Мои заказы</a>
           <a class="acc-nav__link" href="#profile" data-tab="profile"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 21V5l8-2v18M12 9h8v12M7 8h2M7 12h2M7 16h2M15 13h2M15 17h2M2 21h20"/></svg>Моя организация</a>
           <a class="acc-nav__link" href="#orgs" data-tab="orgs"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="8" r="3.5"/><circle cx="17" cy="15" r="3"/><path d="M2.5 20c.6-3.4 2.8-5.5 5.5-5.5 1.4 0 2.6.5 3.6 1.4M13 21c.3-1.7 1.9-3 4-3s3.7 1.3 4 3"/></svg>Плательщики и&nbsp;грузополучатели</a>
           <a class="acc-nav__link" href="cart.html"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2.2l2.3 11h10.8l2-8H6.4"/><circle cx="9.5" cy="19.5" r="1.5"/><circle cx="17" cy="19.5" r="1.5"/></svg>Корзина</a>
@@ -262,6 +263,62 @@
         </nav>
 
         <div class="acc__main">
+          <!-- Мои заказы: только заказы своей организации; заказы по связанным ИНН не показываем -->
+          <section class="acc__main" data-screen="orders" hidden>
+            <div>
+              <h2 class="acc__title">Мои заказы</h2>
+              <p class="acc__lead">Заявки вашей организации. Откройте заказ, чтобы посмотреть состав, получателя и&nbsp;трек-номер.</p>
+            </div>
+            <div class="olist"></div>
+            <div class="cart__main empty" data-orders-empty hidden>
+              <span class="empty__icon" aria-hidden="true"><svg width="32" height="32" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7.5L12 3l9 4.5v9L12 21l-9-4.5z"/><path d="M3 7.5l9 4.5 9-4.5M12 12v9"/></svg></span>
+              <p class="empty__title">Заказов пока нет</p>
+              <p class="empty__text">Выберите комплектующие в&nbsp;каталоге и&nbsp;оформите заявку&nbsp;— она появится здесь со&nbsp;статусом «Новая».</p>
+              <a class="btn btn--primary" href="parts-lk.html">Перейти в&nbsp;каталог</a>
+            </div>
+            <p class="proto" data-demo-note hidden>Прототип: заказы со&nbsp;статусами «В&nbsp;работе», «Доставка», «Отгружен» и&nbsp;«Отменён»&nbsp;— примеры, чтобы показать все состояния.</p>
+          </section>
+
+          <!-- Детали заказа: состав с ценами на дату заявки, примечание и файлы, плательщик, грузополучатель, получение, трек -->
+          <section class="acc__main" data-screen="order" hidden>
+            <a class="lk-back odet__back" href="#orders">Все заказы</a>
+            <div class="odet__head">
+              <h2 class="acc__title">Заказ №&nbsp;<span data-o="num"></span></h2>
+              <span class="status" data-o="status"></span>
+              <span class="odet__date" data-o="date"></span>
+            </div>
+            <ol class="ostatus" aria-label="Ход заказа"></ol>
+            <div class="notice" data-o="cancelled-note" hidden><span>Заявка отменена. Позиции можно снова добавить в&nbsp;корзину кнопкой «Повторить».</span></div>
+            <div class="odet__grid">
+              <div class="ostep">
+                <p class="ostep__title">Состав</p>
+                <table class="otable">
+                  <thead><tr><th scope="col">Наименование</th><th scope="col">Кол-во</th><th scope="col" data-o="price-head">Цена</th><th scope="col">Сумма</th></tr></thead>
+                  <tbody></tbody>
+                  <tfoot><tr><td>Итого</td><td></td><td data-cell="price"></td><td data-cell="sum"><b data-o="total"></b></td></tr></tfoot>
+                </table>
+                <div class="osum__extra" data-o="extra">
+                  <p data-o="note"><b>Примечание:</b> <span></span></p>
+                  <p data-o="files"><b>Файлы:</b> <span></span></p>
+                </div>
+              </div>
+              <div class="ostep">
+                <dl class="oinfo">
+                  <div><dt>Плательщик</dt><dd data-o="payer"></dd></div>
+                  <div><dt>Грузополучатель</dt><dd data-o="consignee"></dd></div>
+                  <div><dt>Способ получения</dt><dd data-o="receive"></dd></div>
+                  <div data-o="track-row" hidden><dt>Трек-номер</dt><dd class="track"><span class="track__num" data-o="track"></span><a class="lk-link" data-o="track-link" href="#" target="_blank" rel="noopener">Отследить</a></dd></div>
+                  <div><dt>Контактное лицо</dt><dd data-o="contact"></dd></div>
+                </dl>
+              </div>
+            </div>
+            <div class="ostep odet__actions">
+              <button class="btn btn--primary" type="button" data-o="repeat">Повторить</button>
+              <button class="btn btn--outline" type="button" data-o="cancel">Отменить заявку</button>
+              <p class="odet__hint" data-o="hint"></p>
+            </div>
+          </section>
+
           <!-- Моя организация: название и КПП можно изменить, ИНН кабинета — только просмотр -->
           <form class="acc__main" data-screen="profile" data-flow="profile" id="profile-form" novalidate hidden>
             <div>
@@ -511,7 +568,7 @@
 </footer>
 
 
-<script src="js/lk.js?v=20261111j"></script>
-<script src="js/main.js?v=20261111j"></script>
+<script src="js/lk.js?v=20261111l"></script>
+<script src="js/main.js?v=20261111l"></script>
 </body>
 </html>

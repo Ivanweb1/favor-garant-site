@@ -1,6 +1,6 @@
 """Страницы личного кабинета по «ТЗ дизайнеру · оставшиеся экраны» (экраны 1–2):
 корзина (cart.html), вход (login.html), восстановление доступа и активация по приглашению (recovery.html),
-регистрация (register.html), оформление заявки (order.html, экран 3), кабинет — моя организация и справочники (account.html, экран 4). Логика — site/js/lk.js.
+регистрация (register.html), оформление заявки (order.html, экран 3), кабинет — моя организация и справочники (account.html, экраны 4–5: заказы, профиль, справочники). Логика — site/js/lk.js.
 
 Шапку и подвал берём из parts.html (гостевая шапка: «Войти» → login.html, корзина → cart.html).
 Правки этих страниц вносить сюда и пересобирать.
@@ -499,7 +499,8 @@ order = f'''      <div class="page-head">
             <div><dt>Получение</dt><dd data-order-receive></dd></div>
           </dl>
           <div class="auth__actions" style="justify-content: center">
-            <a class="btn btn--primary" href="parts-lk.html">В&nbsp;каталог комплектующих</a>
+            <a class="btn btn--primary" href="account.html" data-order-link>Перейти к&nbsp;заказу</a>
+            <a class="btn btn--outline" href="parts-lk.html">В&nbsp;каталог комплектующих</a>
           </div>
         </div>
 
@@ -519,6 +520,7 @@ page('order.html', 'Оформление заявки', 'Оформление з
 
 ICON_ORG = '<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 21V5l8-2v18M12 9h8v12M7 8h2M7 12h2M7 16h2M15 13h2M15 17h2M2 21h20"/></svg>'
 ICON_LINK = '<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="8" r="3.5"/><circle cx="17" cy="15" r="3"/><path d="M2.5 20c.6-3.4 2.8-5.5 5.5-5.5 1.4 0 2.6.5 3.6 1.4M13 21c.3-1.7 1.9-3 4-3s3.7 1.3 4 3"/></svg>'
+ICON_BOX = '<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7.5L12 3l9 4.5v9L12 21l-9-4.5z"/><path d="M3 7.5l9 4.5 9-4.5M12 12v9"/></svg>'
 ICON_CART = '<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2.2l2.3 11h10.8l2-8H6.4"/><circle cx="9.5" cy="19.5" r="1.5"/><circle cx="17" cy="19.5" r="1.5"/></svg>'
 ICON_OUT = '<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h5v16h-5M10 8l-4 4 4 4M6 12h11"/></svg>'
 
@@ -543,6 +545,7 @@ account = f'''      <div class="page-head">
       <div class="acc" data-page="account">
         <nav class="acc-nav" aria-label="Разделы кабинета">
           <div class="acc-nav__org"><span class="acc-nav__name" data-acc-name></span><span class="acc-nav__inn" data-acc-inn></span></div>
+          <a class="acc-nav__link" href="#orders" data-tab="orders">{ICON_BOX}Мои заказы</a>
           <a class="acc-nav__link" href="#profile" data-tab="profile">{ICON_ORG}Моя организация</a>
           <a class="acc-nav__link" href="#orgs" data-tab="orgs">{ICON_LINK}Плательщики и&nbsp;грузополучатели</a>
           <a class="acc-nav__link" href="cart.html">{ICON_CART}Корзина</a>
@@ -550,6 +553,62 @@ account = f'''      <div class="page-head">
         </nav>
 
         <div class="acc__main">
+          <!-- Мои заказы: только заказы своей организации; заказы по связанным ИНН не показываем -->
+          <section class="acc__main" data-screen="orders" hidden>
+            <div>
+              <h2 class="acc__title">Мои заказы</h2>
+              <p class="acc__lead">Заявки вашей организации. Откройте заказ, чтобы посмотреть состав, получателя и&nbsp;трек-номер.</p>
+            </div>
+            <div class="olist"></div>
+            <div class="cart__main empty" data-orders-empty hidden>
+              <span class="empty__icon" aria-hidden="true">{ICON_BOX.replace('width="20" height="20"', 'width="32" height="32"')}</span>
+              <p class="empty__title">Заказов пока нет</p>
+              <p class="empty__text">Выберите комплектующие в&nbsp;каталоге и&nbsp;оформите заявку&nbsp;— она появится здесь со&nbsp;статусом «Новая».</p>
+              <a class="btn btn--primary" href="parts-lk.html">Перейти в&nbsp;каталог</a>
+            </div>
+            <p class="proto" data-demo-note hidden>Прототип: заказы со&nbsp;статусами «В&nbsp;работе», «Доставка», «Отгружен» и&nbsp;«Отменён»&nbsp;— примеры, чтобы показать все состояния.</p>
+          </section>
+
+          <!-- Детали заказа: состав с ценами на дату заявки, примечание и файлы, плательщик, грузополучатель, получение, трек -->
+          <section class="acc__main" data-screen="order" hidden>
+            <a class="lk-back odet__back" href="#orders">Все заказы</a>
+            <div class="odet__head">
+              <h2 class="acc__title">Заказ №&nbsp;<span data-o="num"></span></h2>
+              <span class="status" data-o="status"></span>
+              <span class="odet__date" data-o="date"></span>
+            </div>
+            <ol class="ostatus" aria-label="Ход заказа"></ol>
+            <div class="notice" data-o="cancelled-note" hidden><span>Заявка отменена. Позиции можно снова добавить в&nbsp;корзину кнопкой «Повторить».</span></div>
+            <div class="odet__grid">
+              <div class="ostep">
+                <p class="ostep__title">Состав</p>
+                <table class="otable">
+                  <thead><tr><th scope="col">Наименование</th><th scope="col">Кол-во</th><th scope="col" data-o="price-head">Цена</th><th scope="col">Сумма</th></tr></thead>
+                  <tbody></tbody>
+                  <tfoot><tr><td>Итого</td><td></td><td data-cell="price"></td><td data-cell="sum"><b data-o="total"></b></td></tr></tfoot>
+                </table>
+                <div class="osum__extra" data-o="extra">
+                  <p data-o="note"><b>Примечание:</b> <span></span></p>
+                  <p data-o="files"><b>Файлы:</b> <span></span></p>
+                </div>
+              </div>
+              <div class="ostep">
+                <dl class="oinfo">
+                  <div><dt>Плательщик</dt><dd data-o="payer"></dd></div>
+                  <div><dt>Грузополучатель</dt><dd data-o="consignee"></dd></div>
+                  <div><dt>Способ получения</dt><dd data-o="receive"></dd></div>
+                  <div data-o="track-row" hidden><dt>Трек-номер</dt><dd class="track"><span class="track__num" data-o="track"></span><a class="lk-link" data-o="track-link" href="#" target="_blank" rel="noopener">Отследить</a></dd></div>
+                  <div><dt>Контактное лицо</dt><dd data-o="contact"></dd></div>
+                </dl>
+              </div>
+            </div>
+            <div class="ostep odet__actions">
+              <button class="btn btn--primary" type="button" data-o="repeat">Повторить</button>
+              <button class="btn btn--outline" type="button" data-o="cancel">Отменить заявку</button>
+              <p class="odet__hint" data-o="hint"></p>
+            </div>
+          </section>
+
           <!-- Моя организация: название и КПП можно изменить, ИНН кабинета — только просмотр -->
           <form class="acc__main" data-screen="profile" data-flow="profile" id="profile-form" novalidate hidden>
             <div>
@@ -616,5 +675,5 @@ account = f'''      <div class="page-head">
       </dialog>
       <p class="toast" role="status" hidden><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span></span></p>'''
 
-page('account.html', 'Личный кабинет', 'Личный кабинет ФАВОР-ГАРАНТ: реквизиты организации, плательщики и грузополучатели.',
+page('account.html', 'Личный кабинет', 'Личный кабинет ФАВОР-ГАРАНТ: заказы, реквизиты организации, плательщики и грузополучатели.',
      [('Личный кабинет', '')], account)
