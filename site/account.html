@@ -1,0 +1,517 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Прототип на GitHub Pages: не индексировать, чтобы не дублировать favor-garant.ru -->
+  <meta name="robots" content="noindex, nofollow">
+  <title>Личный кабинет — ФАВОР-ГАРАНТ</title>
+  <meta name="description" content="Личный кабинет ФАВОР-ГАРАНТ: реквизиты организации, плательщики и грузополучатели.">
+  <link rel="icon" href="img/brand/logo-circle.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap&subset=cyrillic" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css?v=20261111j">
+</head>
+<body>
+
+<!-- Шапка -->
+<header class="header" id="top">
+  <div class="container header__row">
+    <a class="header__logo" href="index.html" aria-label="ФАВОР-ГАРАНТ — на главную">
+      <img src="img/brand/logo-ru.svg" alt="ФАВОР ГАРАНТ" width="160" height="53">
+    </a>
+
+    <nav class="nav" aria-label="Основное меню">
+      <ul class="nav__list">
+        <li class="nav__item nav__item--mega">
+          <button class="nav__link nav__toggle" type="button" aria-expanded="false" aria-controls="mega">
+            Продукция
+            <svg class="nav__chevron" width="10" height="6" viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+          </button>
+        </li>
+        <li class="nav__item"><a class="nav__link" href="services.html">Услуги</a></li>
+        <li class="nav__item nav__item--drop"><a class="nav__link" href="about.html">О компании<svg class="nav__chevron" width="10" height="6" viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></a><ul class="nav__drop" aria-label="О компании"><li><a href="team.html">Команда</a></li><li><a href="reviews.html">Отзывы</a></li><li><a href="certificates.html">Сертификаты и&nbsp;лицензии</a></li><li><a href="guarantees.html">Гарантии</a></li><li><a href="contacts.html#documents">Документы</a></li><li><a href="vacancies.html">Вакансии</a></li></ul></li>
+        <li class="nav__item"><a class="nav__link" href="portfolio.html">Наши работы</a></li>
+        <li class="nav__item"><a class="nav__link" href="news.html">Новости</a></li>
+        <li class="nav__item"><a class="nav__link" href="contacts.html">Контакты</a></li>
+      </ul>
+    </nav>
+
+    <div class="header__contacts">
+      <a class="header__phone" href="tel:+78003332227">8 (800) 333-222-7</a>
+      <span class="header__address">СПб, ул. Цветочная, д. 7, лит. Б, пом. 6</span>
+    </div>
+    <!-- Гостевая версия: цен нет. Корзина доступна гостю, оформление — после входа (cart.html → login.html → обратно в корзину) -->
+    <div class="header__actions">
+      <a class="btn btn--primary header__login" href="login.html" aria-label="Войти в личный кабинет">
+        <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg>
+        <span>Войти</span>
+      </a>
+      <a class="header__cart" href="cart.html" aria-label="Корзина, товаров: 0">
+        <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2.2l2.3 11h10.8l2-8H6.4"/><circle cx="9.5" cy="19.5" r="1.5"/><circle cx="17" cy="19.5" r="1.5"/></svg>
+        <span class="header__cart-count">0</span>
+      </a>
+    </div>
+
+    <button class="burger" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="mobile-menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <!-- Выпадающее меню «Продукция»: слева разделы, справа подразделы выбранного.
+       Число столбцов подразделов задаётся у каждого раздела: data-cols="1" | "2" | "3" -->
+  <div class="mega" id="mega" hidden>
+    <div class="container mega__grid">
+      <ul class="mega__cats">
+        <li><a class="mega__cat is-active" href="bus-shelters.html" data-cat="pav"><img src="img/icons/line-pavilion.svg" alt="" width="40" height="22"><span>Остановочные павильоны</span></a></li>
+        <li><a class="mega__cat" href="index.html#catalog" data-cat="tumb"><img src="img/icons/line-tumba.svg" alt="" width="40" height="22"><span>Рекламные тумбы</span></a></li>
+        <li><a class="mega__cat" href="index.html#catalog" data-cat="light"><img src="img/icons/line-lightbox.svg" alt="" width="40" height="22"><span>Лайтпостеры</span></a></li>
+        <li><a class="mega__cat" href="index.html#catalog" data-cat="bill"><img src="img/icons/line-billboard.svg" alt="" width="40" height="22"><span>Рекламные щиты</span></a></li>
+        <li><a class="mega__cat" href="index.html#catalog" data-cat="shoot"><img src="img/icons/line-shooting.svg" alt="" width="40" height="22"><span>Оборудование для стрельбищ</span></a></li>
+        <li><a class="mega__cat" href="index.html#catalog" data-cat="custom"><img src="img/icons/line-custom.svg" alt="" width="40" height="22"><span>Нестандартные конструкции</span></a></li>
+        <li><a class="mega__cat" href="index.html#catalog" data-cat="maf"><img src="img/icons/line-maf.svg" alt="" width="40" height="22"><span>Малые архитектурные формы</span></a></li>
+        <li><a class="mega__cat" href="index.html#catalog" data-cat="nav"><img src="img/icons/line-navigation.svg" alt="" width="40" height="22"><span>Навигация</span></a></li>
+        <li><a class="mega__cat" href="parts.html" data-cat="parts"><img src="img/icons/line-parts.svg" alt="" width="40" height="22"><span>Комплектующие</span></a></li>
+      </ul>
+      <div class="mega__panel" data-panel="pav">
+        <div class="mega__info">
+          <p class="mega__title">Остановочные павильоны</p>
+          <p class="mega__text">Умные павильоны с современным дизайном для ожидания общественного транспорта.</p>
+          <ul class="mega__subs" data-cols="3">
+            <li><a href="bus-shelters.html">Элегант</a></li>
+            <li><a href="bus-shelters.html">Элегант П</a></li>
+            <li><a href="bus-shelters.html">Стандарт</a></li>
+            <li><a href="bus-shelters.html">Галант</a></li>
+            <li><a href="bus-shelter-atlant.html">Атлант</a></li>
+            <li><a href="bus-shelters.html">Атлант SMART</a></li>
+            <li><a href="bus-shelters.html">Компакт</a></li>
+            <li><a href="bus-shelters.html">Городской</a></li>
+            <li><a href="bus-shelters.html">Городской SMART</a></li>
+            <li><a href="bus-shelters.html">Чайка</a></li>
+            <li><a href="bus-shelters.html">Альбатрос</a></li>
+            <li><a href="bus-shelters.html">Регион</a></li>
+            <li><a href="bus-shelters.html">Закрытый</a></li>
+            <li><a href="bus-shelters.html">Закрытый Регион</a></li>
+            <li><a href="bus-shelters.html">Закрытый для МГН</a></li>
+          </ul>
+          <a class="btn btn--outline" href="bus-shelters.html">Смотреть раздел</a>
+        </div>
+        <img class="mega__photo" style="--pos: 50% 50%" src="img/photos/10-cat-pavilions.jpg" alt="" loading="lazy" width="1400" height="1050">
+      </div>
+      <div class="mega__panel" data-panel="tumb" hidden>
+        <div class="mega__info">
+          <p class="mega__title">Рекламные тумбы</p>
+          <p class="mega__text">Тумбы с внутренней светодиодной подсветкой.</p>
+          <ul class="mega__subs" data-cols="1">
+            <li><a href="index.html#catalog">Круглая рекламная тумба</a></li>
+            <li><a href="index.html#catalog">Плоская рекламная тумба</a></li>
+            <li><a href="index.html#catalog">Вогнутая рекламная тумба</a></li>
+          </ul>
+          <a class="btn btn--outline" href="index.html#catalog">Смотреть раздел</a>
+        </div>
+        <img class="mega__photo" style="--pos: 100% 50%" src="img/photos/11-cat-tumby.jpg" alt="" loading="lazy" width="1400" height="1050">
+      </div>
+      <div class="mega__panel" data-panel="light" hidden>
+        <div class="mega__info">
+          <p class="mega__title">Лайтпостеры</p>
+          <p class="mega__text">Конструкции сити-формата с двумя информационными поверхностями и подсветкой.</p>
+          <a class="btn btn--outline" href="index.html#catalog">Смотреть раздел</a>
+        </div>
+        <img class="mega__photo" style="--pos: 50% 50%" src="img/photos/12-cat-lightposters.jpg" alt="" loading="lazy" width="1400" height="1050">
+      </div>
+      <div class="mega__panel" data-panel="bill" hidden>
+        <div class="mega__info">
+          <p class="mega__title">Рекламные щиты</p>
+          <p class="mega__text">Несущие конструкции для рекламы и городской информации.</p>
+          <ul class="mega__subs" data-cols="2">
+            <li><a href="index.html#catalog">Рекламный щит</a></li>
+            <li><a href="index.html#catalog">Триборд</a></li>
+            <li><a href="index.html#catalog">Тривижн®</a></li>
+            <li><a href="index.html#catalog">Скроллер</a></li>
+          </ul>
+          <a class="btn btn--outline" href="index.html#catalog">Смотреть раздел</a>
+        </div>
+        <img class="mega__photo" style="--pos: 0% 50%" src="img/photos/13-cat-billboards.jpg" alt="" loading="lazy" width="1400" height="1050">
+      </div>
+      <div class="mega__panel" data-panel="shoot" hidden>
+        <div class="mega__info">
+          <p class="mega__title">Оборудование для стрельбищ</p>
+          <p class="mega__text">Конструкции для стендовой стрельбы по требованиям международной федерации.</p>
+          <ul class="mega__subs" data-cols="2">
+            <li><a href="index.html#catalog">Пирамиды для ружей</a></li>
+            <li><a href="index.html#catalog">Ракушки для метательных машинок</a></li>
+          </ul>
+          <a class="btn btn--outline" href="index.html#catalog">Смотреть раздел</a>
+        </div>
+        <img class="mega__photo" style="--pos: 50% 50%" src="img/photos/14-menu-shooting.jpg" alt="" loading="lazy" width="1120" height="1400">
+      </div>
+      <div class="mega__panel" data-panel="custom" hidden>
+        <div class="mega__info">
+          <p class="mega__title">Нестандартные конструкции</p>
+          <p class="mega__text">Металлоконструкции по эскизам и чертежам заказчика — от деталей до сборки готовых изделий.</p>
+          <a class="btn btn--outline" href="index.html#catalog">Смотреть раздел</a>
+        </div>
+        <img class="mega__photo" style="--pos: 50% 50%" src="img/photos/15-menu-custom.jpg" alt="" loading="lazy" width="1120" height="1400">
+      </div>
+      <div class="mega__panel" data-panel="maf" hidden>
+        <div class="mega__info">
+          <p class="mega__title">Малые архитектурные формы</p>
+          <p class="mega__text">Элементы городской среды.</p>
+          <ul class="mega__subs" data-cols="2">
+            <li><a href="index.html#catalog">Кабинка для таксофона</a></li>
+            <li><a href="index.html#catalog">Кабинка для банкомата</a></li>
+            <li><a href="index.html#catalog">Павильон для курения</a></li>
+            <li><a href="index.html#catalog">Павильон для мусорных баков</a></li>
+            <li><a href="index.html#catalog">Торговый павильон</a></li>
+            <li><a href="index.html#catalog">Книжный шкаф</a></li>
+            <li><a href="index.html#catalog">Скамья</a></li>
+          </ul>
+          <a class="btn btn--outline" href="index.html#catalog">Смотреть раздел</a>
+        </div>
+        <img class="mega__photo" style="--pos: 50% 50%" src="img/photos/16-menu-maf.jpg" alt="" loading="lazy" width="1120" height="1400">
+      </div>
+      <div class="mega__panel" data-panel="nav" hidden>
+        <div class="mega__info">
+          <p class="mega__title">Навигация</p>
+          <p class="mega__text">Информационные указатели и стелы для городской среды.</p>
+          <ul class="mega__subs" data-cols="2">
+            <li><a href="index.html#catalog">Пилон</a></li>
+            <li><a href="index.html#catalog">Указатель</a></li>
+            <li><a href="index.html#catalog">Афишный стенд</a></li>
+            <li><a href="index.html#catalog">Бренд-стела</a></li>
+            <li><a href="index.html#catalog">Въездная стела</a></li>
+          </ul>
+          <a class="btn btn--outline" href="index.html#catalog">Смотреть раздел</a>
+        </div>
+        <img class="mega__photo" style="--pos: 50% 50%" src="img/photos/17-cat-navigation.jpg" alt="" loading="lazy" width="1400" height="1050">
+      </div>
+      <div class="mega__panel" data-panel="parts" hidden>
+        <div class="mega__info">
+          <p class="mega__title">Комплектующие</p>
+          <p class="mega__text">Запасные части и&nbsp;комплектующие для конструкций&nbsp;— можно заказать онлайн и&nbsp;положить в&nbsp;корзину.</p>
+          <ul class="mega__subs" data-cols="1">
+            <li><a href="parts.html#pav">Остановки</a></li>
+            <li><a href="parts.html#tri">Тривижны</a></li>
+            <li><a href="parts.html#anchor">Анкеры</a></li>
+          </ul>
+          <a class="btn btn--outline" href="parts.html">Смотреть раздел</a>
+        </div>
+        <img class="mega__photo" style="--pos: 50% 50%" src="img/parts/menu-collage.jpg" alt="" loading="lazy" width="1200" height="1400">
+      </div>
+    </div>
+  </div>
+
+  <!-- Мобильное меню -->
+  <div class="mobile-menu" id="mobile-menu" hidden>
+    <div class="container">
+      <p class="mobile-menu__label">Продукция</p>
+      <ul class="mobile-menu__list">
+        <li><a href="catalog.html">Весь каталог</a></li>
+        <li><a href="bus-shelters.html">Остановочные павильоны</a></li>
+        <li><a href="index.html#catalog">Рекламные тумбы</a></li>
+        <li><a href="index.html#catalog">Лайтпостеры</a></li>
+        <li><a href="index.html#catalog">Рекламные щиты</a></li>
+        <li><a href="index.html#catalog">Оборудование для стрельбищ</a></li>
+        <li><a href="index.html#catalog">Нестандартные конструкции</a></li>
+        <li><a href="index.html#catalog">Малые архитектурные формы</a></li>
+        <li><a href="index.html#catalog">Навигация</a></li>
+        <li><a href="parts.html">Комплектующие</a></li>
+      </ul>
+      <ul class="mobile-menu__list mobile-menu__list--main">
+        <li><a href="services.html">Услуги</a></li>
+        <li><a href="about.html">О компании</a></li>
+        <li><a href="portfolio.html">Наши работы</a></li>
+        <li><a href="news.html">Новости и&nbsp;блог</a></li>
+        <li><a href="contacts.html">Контакты</a></li>
+      </ul>
+      <p class="mobile-menu__label">О&nbsp;компании</p>
+      <ul class="mobile-menu__list">
+        <li><a href="team.html">Команда</a></li>
+        <li><a href="reviews.html">Отзывы</a></li>
+        <li><a href="certificates.html">Сертификаты и&nbsp;лицензии</a></li>
+        <li><a href="guarantees.html">Гарантии</a></li>
+        <li><a href="contacts.html#documents">Документы</a></li>
+        <li><a href="vacancies.html">Вакансии</a></li>
+      </ul>
+      <a class="mobile-menu__phone" href="tel:+78003332227">8 (800) 333-222-7</a>
+      <a class="btn btn--primary btn--block" href="login.html">Войти в личный кабинет</a>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- Личный кабинет: собрано tools/build_lk_pages.py — правки вносить в скрипт -->
+  <section class="section section--light page-top">
+    <div class="container">
+      <ol class="crumbs" aria-label="Навигация по сайту"><li><a href="index.html">Главная</a></li><li><span aria-current="page">Личный кабинет</span></li></ol>
+      <div class="page-head">
+        <div>
+          <h1 class="h2 duo"><span>Личный</span><span class="duo__second">кабинет</span></h1>
+        </div>
+      </div>
+
+      <div class="acc" data-page="account">
+        <nav class="acc-nav" aria-label="Разделы кабинета">
+          <div class="acc-nav__org"><span class="acc-nav__name" data-acc-name></span><span class="acc-nav__inn" data-acc-inn></span></div>
+          <a class="acc-nav__link" href="#profile" data-tab="profile"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 21V5l8-2v18M12 9h8v12M7 8h2M7 12h2M7 16h2M15 13h2M15 17h2M2 21h20"/></svg>Моя организация</a>
+          <a class="acc-nav__link" href="#orgs" data-tab="orgs"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="8" r="3.5"/><circle cx="17" cy="15" r="3"/><path d="M2.5 20c.6-3.4 2.8-5.5 5.5-5.5 1.4 0 2.6.5 3.6 1.4M13 21c.3-1.7 1.9-3 4-3s3.7 1.3 4 3"/></svg>Плательщики и&nbsp;грузополучатели</a>
+          <a class="acc-nav__link" href="cart.html"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2.2l2.3 11h10.8l2-8H6.4"/><circle cx="9.5" cy="19.5" r="1.5"/><circle cx="17" cy="19.5" r="1.5"/></svg>Корзина</a>
+          <button class="acc-nav__link acc-nav__link--out" type="button" data-logout><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h5v16h-5M10 8l-4 4 4 4M6 12h11"/></svg>Выйти</button>
+        </nav>
+
+        <div class="acc__main">
+          <!-- Моя организация: название и КПП можно изменить, ИНН кабинета — только просмотр -->
+          <form class="acc__main" data-screen="profile" data-flow="profile" id="profile-form" novalidate hidden>
+            <div>
+              <h2 class="acc__title">Моя организация</h2>
+              <p class="acc__lead">Эти данные подставляются в&nbsp;новые заявки.</p>
+            </div>
+            <fieldset class="ostep">
+              <legend class="visually-hidden">Организация</legend>
+              <p class="ostep__title" aria-hidden="true">Организация</p>
+              <label class="field">
+            <span class="field__label">Название компании <span class="field__req" aria-hidden="true">*</span></span>
+            <input class="field__input" type="text" name="company" autocomplete="organization" required>
+            <span class="field__error" aria-live="polite"></span>
+          </label>
+              <div class="form__row">
+                <label class="field">
+            <span class="field__label">ИНН</span>
+            <input class="field__input" type="text" name="inn" readonly>
+            <span class="field__hint">ИНН кабинета изменить нельзя. Если он&nbsp;неверный&nbsp;— позвоните: <a class="lk-link" href="tel:+78126402227">8 (812) 640-222-7</a></span>
+            <span class="field__error" aria-live="polite"></span>
+          </label>
+                <label class="field">
+            <span class="field__label">КПП</span>
+            <input class="field__input" type="text" name="kpp" autocomplete="off" inputmode="numeric" maxlength="9" data-kpp>
+            <span class="field__hint">Если есть</span>
+            <span class="field__error" aria-live="polite"></span>
+          </label>
+              </div>
+            </fieldset>
+            <fieldset class="ostep">
+              <legend class="visually-hidden">Адрес доставки</legend>
+              <p class="ostep__title" aria-hidden="true">Адрес доставки</p>
+              <div class="form__row">
+                <label class="field">
+            <span class="field__label">Город <span class="field__req" aria-hidden="true">*</span></span>
+            <input class="field__input" type="text" name="city" autocomplete="address-level2" required>
+            <span class="field__error" aria-live="polite"></span>
+          </label>
+                <label class="field">
+            <span class="field__label">Адрес доставки <span class="field__req" aria-hidden="true">*</span></span>
+            <input class="field__input" type="text" name="address" autocomplete="street-address" required placeholder="Улица, дом, корпус">
+            <span class="field__error" aria-live="polite"></span>
+          </label>
+              </div>
+            </fieldset>
+            <fieldset class="ostep">
+              <legend class="visually-hidden">Контактное лицо</legend>
+              <p class="ostep__title" aria-hidden="true">Контактное лицо</p>
+              <label class="field">
+            <span class="field__label">Ф. И. О. <span class="field__req" aria-hidden="true">*</span></span>
+            <input class="field__input" type="text" name="person" autocomplete="name" required>
+            <span class="field__error" aria-live="polite"></span>
+          </label>
+              <div class="form__row">
+                <label class="field">
+            <span class="field__label">Телефон <span class="field__req" aria-hidden="true">*</span></span>
+            <input class="field__input" type="tel" name="phone" autocomplete="tel" required>
+            <span class="field__error" aria-live="polite"></span>
+          </label>
+                <label class="field">
+            <span class="field__label">Email <span class="field__req" aria-hidden="true">*</span></span>
+            <input class="field__input" type="email" name="email" autocomplete="email" required>
+            <span class="field__hint">На&nbsp;него приходят письма о&nbsp;заявках и&nbsp;восстановлении пароля</span>
+            <span class="field__error" aria-live="polite"></span>
+          </label>
+              </div>
+            </fieldset>
+            <div class="ostep acc-save">
+              <button class="btn btn--primary" type="submit" data-save disabled>Сохранить изменения</button>
+              <p class="form__note">Изменения применятся к&nbsp;новым заявкам, реквизиты отправленных заявок останутся прежними. Данные обрабатываем по&nbsp;<a href="privacy.html">Политике обработки персональных данных</a>.</p>
+            </div>
+          </form>
+
+          <section class="acc__main" data-screen="orgs" hidden>
+            <div>
+              <h2 class="acc__title">Плательщики и&nbsp;грузополучатели</h2>
+              <p class="acc__lead">Сохранённые организации можно выбрать при оформлении заявки. Своего кабинета и&nbsp;доступа к&nbsp;вашему у&nbsp;них нет.</p>
+            </div>
+            <div class="ostep" data-dir="consignee">
+              <div class="dir__head">
+                <p class="ostep__title">Грузополучатели</p>
+                <button class="btn btn--outline" type="button" data-add="consignee">Добавить грузополучателя</button>
+              </div>
+              <div class="dir__list"></div>
+              <p class="dir__empty" hidden>Грузополучателей пока нет. По&nbsp;умолчанию товар получает ваша организация.</p>
+            </div>
+            <div class="ostep" data-dir="payer">
+              <div class="dir__head">
+                <p class="ostep__title">Плательщики</p>
+                <button class="btn btn--outline" type="button" data-add="payer">Добавить плательщика</button>
+              </div>
+              <div class="dir__list"></div>
+              <p class="dir__empty" hidden>Плательщиков пока нет. По&nbsp;умолчанию платит ваша организация.</p>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <!-- Добавление и редактирование организации: полная форма реквизитов, как в заявке -->
+      <dialog class="modal modal--wide" id="org-modal" aria-labelledby="org-modal-title">
+        <div class="modal__box">
+          <button class="modal__close" type="button" data-modal-close aria-label="Закрыть"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 2l12 12M14 2L2 14"/></svg></button>
+          <h2 class="modal__title" id="org-modal-title"></h2>
+          <form class="form form--modal" data-flow="org" novalidate>
+            <div class="form__row">
+          <label class="field">
+            <span class="field__label">ИНН <span class="field__req" aria-hidden="true">*</span></span>
+            <input class="field__input" type="text" name="inn" autocomplete="off" required inputmode="numeric" maxlength="12" data-inn>
+            <span class="field__hint">10 цифр у организации, 12 — у ИП</span>
+            <span class="field__error" aria-live="polite"></span>
+          </label>
+          <label class="field">
+            <span class="field__label">КПП</span>
+            <input class="field__input" type="text" name="kpp" autocomplete="off" inputmode="numeric" maxlength="9" data-kpp>
+            <span class="field__hint">Если есть</span>
+            <span class="field__error" aria-live="polite"></span>
+          </label>
+        </div>
+        <label class="field">
+            <span class="field__label">Название компании <span class="field__req" aria-hidden="true">*</span></span>
+            <input class="field__input" type="text" name="company" autocomplete="organization" required placeholder="ООО «Название»">
+            <span class="field__error" aria-live="polite"></span>
+          </label>
+        <div class="form__row">
+          <label class="field">
+            <span class="field__label">Город <span class="field__req" aria-hidden="true">*</span></span>
+            <input class="field__input" type="text" name="city" autocomplete="address-level2" required>
+            <span class="field__error" aria-live="polite"></span>
+          </label>
+          <label class="field">
+            <span class="field__label">Адрес доставки <span class="field__req" aria-hidden="true">*</span></span>
+            <input class="field__input" type="text" name="address" autocomplete="street-address" required placeholder="Улица, дом, корпус">
+            <span class="field__error" aria-live="polite"></span>
+          </label>
+        </div>
+        <label class="field">
+            <span class="field__label">Ф. И. О. контактного лица <span class="field__req" aria-hidden="true">*</span></span>
+            <input class="field__input" type="text" name="person" autocomplete="name" required>
+            <span class="field__error" aria-live="polite"></span>
+          </label>
+        <div class="form__row">
+          <label class="field">
+            <span class="field__label">Телефон <span class="field__req" aria-hidden="true">*</span></span>
+            <input class="field__input" type="tel" name="phone" autocomplete="tel" required placeholder="+7">
+            <span class="field__error" aria-live="polite"></span>
+          </label>
+          <label class="field">
+            <span class="field__label">Email для связи <span class="field__req" aria-hidden="true">*</span></span>
+            <input class="field__input" type="email" name="email" autocomplete="email" required>
+            <span class="field__error" aria-live="polite"></span>
+          </label>
+        </div>
+            <div class="form__bottom">
+              <button class="btn btn--primary" type="submit">Сохранить</button>
+              <button class="btn btn--outline" type="button" data-modal-close>Отмена</button>
+              <p class="form__note">Организация не&nbsp;получит доступ к&nbsp;вашему кабинету. Данные контактного лица обрабатываем по&nbsp;<a href="privacy.html">Политике обработки персональных данных</a>.</p>
+            </div>
+          </form>
+        </div>
+      </dialog>
+      <p class="toast" role="status" hidden><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span></span></p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer" id="contacts">
+  <div class="container">
+    <!-- верх: логотип со слоганом и все способы связи в одну строку -->
+    <div class="footer__top">
+      <div class="footer__brand">
+        <img src="img/brand/logo-ru-white.svg" alt="ФАВОР ГАРАНТ" width="180" height="59">
+        <p class="footer__slogan">Создаём стиль Вашего города!</p>
+      </div>
+      <div class="footer__reach">
+        <div class="footer__contact">
+          <a class="footer__phone" href="tel:+78003332227">8 (800) 333-222-7</a>
+          <span class="footer__hint">бесплатный звонок по&nbsp;России</span>
+        </div>
+        <div class="footer__contact">
+          <a class="footer__phone" href="tel:+78126402227">8 (812) 640-222-7</a>
+          <a class="footer__hint footer__mail" href="mailto:info@favor-garant.ru">info@favor-garant.ru</a>
+        </div>
+        <a class="btn btn--light" href="index.html#request-form">Запросить расчёт</a>
+      </div>
+    </div>
+    <!-- низ: три колонки меню и колонка адресов — близкой высоты -->
+    <div class="footer__grid">
+      <nav class="footer__col" aria-label="Продукция">
+        <p class="footer__title">Продукция</p>
+        <ul>
+          <li><a href="index.html#catalog">Остановочные павильоны</a></li>
+          <li><a href="index.html#catalog">Рекламные тумбы</a></li>
+          <li><a href="index.html#catalog">Лайтпостеры</a></li>
+          <li><a href="index.html#catalog">Рекламные щиты</a></li>
+          <li><a href="index.html#catalog">Оборудование для стрельбищ</a></li>
+          <li><a href="index.html#catalog">Нестандартные конструкции</a></li>
+          <li><a href="index.html#catalog">Малые архитектурные формы</a></li>
+          <li><a href="index.html#catalog">Навигация</a></li>
+          <li><a href="parts.html">Комплектующие</a></li>
+        </ul>
+      </nav>
+      <nav class="footer__col" aria-label="Услуги">
+        <p class="footer__title">Услуги</p>
+        <ul>
+          <li><a href="services.html#design">Дизайн-бюро</a></li>
+          <li><a href="services.html#kb">Конструкторское бюро</a></li>
+          <li><a href="services.html#equipment">Металлообработка</a></li>
+          <li><a href="services.html#supervision">Шеф-монтаж</a></li>
+          <li><a href="services.html#montage">Монтаж остановочных павильонов</a></li>
+          <li><a href="expertise.html">Экспертиза</a></li>
+        </ul>
+      </nav>
+      <nav class="footer__col" aria-label="Компания">
+        <p class="footer__title">Компания</p>
+        <ul>
+          <li><a href="about.html">О компании</a></li>
+          <li><a href="portfolio.html">Наши работы</a></li>
+          <li><a href="news.html">Новости и&nbsp;блог</a></li>
+          <li><a href="team.html">Команда</a></li>
+          <li><a href="reviews.html">Отзывы</a></li>
+          <li><a href="certificates.html">Сертификаты и&nbsp;лицензии</a></li>
+          <li><a href="guarantees.html">Гарантии</a></li>
+          <li><a href="contacts.html#documents">Документы</a></li>
+          <li><a href="vacancies.html">Вакансии</a></li>
+        </ul>
+      </nav>
+      <div class="footer__col">
+        <p class="footer__title">Адреса</p>
+        <div class="footer__place">
+          <p class="footer__place-name">Офис</p>
+          <p class="footer__address">Санкт-Петербург, ул.&nbsp;Цветочная, д.&nbsp;7, лит.&nbsp;Б, пом.&nbsp;6, м.&nbsp;«Московские ворота»</p>
+          <p class="footer__hours">Пн–Чт 8:00–17:00, Пт 8:00–16:00</p>
+        </div>
+        <div class="footer__place">
+          <p class="footer__place-name">Производство</p>
+          <p class="footer__address">Санкт-Петербург, 3-й Рыбацкий пр., д.&nbsp;3, лит.&nbsp;Е, м.&nbsp;«Рыбацкое»</p>
+          <p class="footer__hours">Пн–Пт 8:00–17:00</p>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© <span id="year">2026</span> ООО «ФАВОР-ГАРАНТ». Все права защищены.</span>
+      <a href="https://drive.google.com/file/d/1dkEf90s82Ht6KTWSdpOS4K0z9laep-Co/view?usp=sharing" target="_blank" rel="noopener">Политика конфиденциальности</a>
+    </div>
+  </div>
+</footer>
+
+
+<script src="js/lk.js?v=20261111j"></script>
+<script src="js/main.js?v=20261111j"></script>
+</body>
+</html>

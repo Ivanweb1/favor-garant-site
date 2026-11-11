@@ -20,7 +20,7 @@
   };
   const params = new URLSearchParams(location.search);
   // куда вернуть после входа: из корзины — в корзину, иначе — в каталог комплектующих
-  const nextUrl = () => (params.get('next') === 'cart' || Object.keys(store.get('fg-cart', {})).length ? 'cart.html?welcome=1' : 'parts-lk.html');
+  const nextUrl = () => (params.get('next') === 'account' ? 'account.html' : params.get('next') === 'cart' || Object.keys(store.get('fg-cart', {})).length ? 'cart.html?welcome=1' : 'parts-lk.html');
   const withNext = (url) => (params.get('next') ? `${url}?next=${encodeURIComponent(params.get('next'))}` : url);
   const fakeRequest = (btn, ms = 700) => new Promise((resolve) => {
     btn?.classList.add('is-loading');
@@ -230,11 +230,8 @@
 
   const loginPage = $('[data-page="login"]');
   if (loginPage) {
-    if (auth) {
-      show(loginPage, 'signed');
-      $('[data-auth-name]', loginPage).textContent = auth.company || `ИНН ${auth.inn}`;
-      $('[data-logout]', loginPage).addEventListener('click', () => { signOut(); location.reload(); });
-    }
+    // уже вошёл — сразу в кабинет
+    if (auth) { location.replace('account.html'); return; }
     const form = $('form', loginPage);
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -544,5 +541,125 @@
       $('[data-order-email]', orderPage).textContent = form.email.value.trim();
       show(orderPage, 'done');
     });
+  }
+
+  /* ---------- Кабинет: моя организация и справочники (ТЗ, экран 4) ---------- */
+
+  const accPage = $('[data-page="account"]');
+  if (accPage) {
+    if (!auth) { location.replace('login.html?next=account'); return; }
+    let profile = store.get('fg-profile', null) || { ...DEMO_PROFILE, inn: auth.inn };
+    let orgs = store.get('fg-orgs', []);
+    const toast = $('.toast');
+    let toastTimer = 0;
+    const say = (text) => {
+      $('span', toast).textContent = text;
+      toast.hidden = false;
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => { toast.hidden = true; }, 2600);
+    };
+    const renderHead = () => {
+      $('[data-acc-name]', accPage).textContent = profile.company;
+      $('[data-acc-inn]', accPage).textContent = `ИНН ${profile.inn}`;
+    };
+    renderHead();
+    $('[data-logout]', accPage).addEventListener('click', () => { signOut(); location.href = 'index.html'; });
+
+    // разделы: #profile и #orgs
+    const tabs = $$('[data-tab]', accPage);
+    const openTab = () => {
+      const name = location.hash === '#orgs' ? 'orgs' : 'profile';
+      $$('[data-screen]', accPage).forEach((s) => { s.hidden = s.dataset.screen !== name; });
+      tabs.forEach((t) => { if (t.dataset.tab === name) t.setAttribute('aria-current', 'page'); else t.removeAttribute('aria-current'); });
+    };
+    window.addEventListener('hashchange', openTab);
+    openTab();
+
+    // моя организация: «Сохранить» активна, только когда что-то изменили
+    const form = $('#profile-form');
+    const KEYS = ['company', 'kpp', 'city', 'address', 'person', 'phone', 'email'];
+    const fill = () => { REQ.forEach((k) => { if (form[k]) form[k].value = profile[k] || ''; }); };
+    const dirty = () => KEYS.some((k) => form[k].value.trim() !== (profile[k] || ''));
+    const saveBtn = $('[data-save]', form);
+    fill();
+    form.addEventListener('input', () => { saveBtn.disabled = !dirty(); });
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!validate(form)) return;
+      await fakeRequest(saveBtn);
+      profile = { ...profile, ...Object.fromEntries(KEYS.map((k) => [k, form[k].value.trim()])) };
+      setProfile(profile);
+      renderHead();
+      saveBtn.disabled = true;
+      say('Изменения сохранены');
+    });
+
+    // справочники: список, добавление и правка в окне, удаление с подтверждением
+    const modal = $('#org-modal');
+    const orgForm = $('form', modal);
+    let editing = null; // { role, id } — id нет у новой записи
+    const save = () => store.set('fg-orgs', orgs);
+    const ICON_EDIT = '<svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16zM13.5 6.5l4 4"/></svg>';
+    const ICON_DEL = '<svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/></svg>';
+
+    const renderDir = (role) => {
+      const box = $(`[data-dir="${role}"]`, accPage);
+      const list = $('.dir__list', box);
+      const items = orgs.filter((o) => o.role === role);
+      list.innerHTML = '';
+      $('.dir__empty', box).hidden = items.length > 0;
+      items.forEach((o) => {
+        const row = document.createElement('article');
+        row.className = 'orgrow';
+        row.innerHTML = '<p class="orgrow__name"></p><p class="orgrow__meta"></p>'
+          + `<div class="orgrow__actions"><button class="icon-btn" type="button" data-edit>${ICON_EDIT}</button><button class="icon-btn" type="button" data-del>${ICON_DEL}</button></div>`;
+        $('.orgrow__name', row).textContent = o.company;
+        const meta = $('.orgrow__meta', row);
+        [[`ИНН ${o.inn}`, o.kpp && `КПП ${o.kpp}`].filter(Boolean).join(' · '), [o.city, o.address].filter(Boolean).join(', '), [o.person, o.phone].filter(Boolean).join(', ')]
+          .filter(Boolean).forEach((t) => { const s = document.createElement('span'); s.textContent = t; meta.appendChild(s); });
+        $('[data-edit]', row).setAttribute('aria-label', `Изменить: ${o.company}`);
+        $('[data-del]', row).setAttribute('aria-label', `Удалить: ${o.company}`);
+        $('[data-edit]', row).addEventListener('click', () => openOrg(role, o));
+        $('[data-del]', row).addEventListener('click', () => {
+          if ($('.orgrow__confirm', row)) return;
+          const c = document.createElement('div');
+          c.className = 'orgrow__confirm';
+          c.innerHTML = '<span>Удалить из&nbsp;справочника? В&nbsp;отправленных заявках она останется.</span>'
+            + '<button class="btn btn--danger" type="button">Удалить</button><button class="btn btn--outline" type="button">Отмена</button>';
+          const [yes, no] = $$('button', c);
+          yes.addEventListener('click', () => { orgs = orgs.filter((x) => x.id !== o.id); save(); renderDir(role); say('Организация удалена'); });
+          no.addEventListener('click', () => c.remove());
+          row.appendChild(c);
+          no.focus();
+        });
+        list.appendChild(row);
+      });
+    };
+
+    function openOrg(role, org) {
+      editing = { role, id: org?.id };
+      $('#org-modal-title').textContent = org
+        ? 'Изменить реквизиты'
+        : (role === 'payer' ? 'Новый плательщик' : 'Новый грузополучатель');
+      REQ.forEach((k) => { orgForm[k].value = org?.[k] || ''; setError(orgForm[k], ''); });
+      modal.showModal();
+      document.documentElement.classList.add('has-modal');
+      orgForm.company.focus();
+    }
+    $$('[data-add]', accPage).forEach((b) => b.addEventListener('click', () => openOrg(b.dataset.add, null)));
+    orgForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!validate(orgForm)) return;
+      await fakeRequest($('[type="submit"]', orgForm), 500);
+      const data = readReq(orgForm);
+      if (editing.id) orgs = orgs.map((o) => (o.id === editing.id ? { ...o, ...data } : o));
+      else orgs.push({ id: `o${Date.now()}`, role: editing.role, ...data });
+      save();
+      renderDir(editing.role);
+      modal.close();
+      say(editing.id ? 'Реквизиты обновлены' : 'Организация добавлена');
+    });
+    renderDir('consignee');
+    renderDir('payer');
   }
 })();

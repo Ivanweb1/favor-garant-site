@@ -656,7 +656,7 @@ a.link-arrow:not(.link-arrow--light):hover { color: var(--navy-hover); }
 .form { display: grid; grid-template-columns: minmax(0, 1fr); gap: 20px; padding: clamp(24px, 3.5vw, 44px); border-radius: var(--radius); background: var(--white); }
 /* заявка на белом фоне: белая карточка формы обводится рамкой, как карточки сотрудников */
 .section:not(.section--light):not(.section--dark) > .container > .form { border: 1px solid var(--line); }
-.form__row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.form__row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: start; }
 .field { display: grid; gap: 8px; min-width: 0; }
 .field__label { font-size: 13px; font-weight: 500; color: var(--muted); }
 /* поля — светлой заливкой без рамки, при фокусе белые с синей рамкой */
@@ -2369,4 +2369,61 @@ a.news__kind:hover { opacity: .8; }
   .seg { justify-self: stretch; }
   .seg__label { padding: 10px 12px; }
   .result__facts { grid-template-columns: 1fr; }
+}
+
+/* ---------- ЛК: кабинет — профиль и связанные организации (ТЗ, экран 4) ---------- */
+
+.acc { display: grid; grid-template-columns: 280px minmax(0, 1fr); gap: 24px; align-items: start; }
+.acc-nav { position: sticky; top: calc(var(--header-h) + 16px); display: grid; gap: 4px; padding: 16px; border-radius: var(--radius); background: var(--white); }
+.acc-nav__org { display: grid; gap: 4px; margin-bottom: 8px; padding: 8px 12px 18px; border-bottom: 1px solid var(--line); }
+.acc-nav__name { font-size: 16px; font-weight: 700; line-height: 1.3; color: var(--navy); }
+.acc-nav__inn { font-size: 13px; color: var(--muted); font-variant-numeric: lining-nums tabular-nums; }
+.acc-nav__link { display: flex; align-items: center; gap: 12px; padding: 12px; border: 0; border-radius: var(--radius-sm); background: none; font: inherit; font-size: 14px; font-weight: 600; color: var(--muted); text-align: left; cursor: pointer; transition: background-color .2s ease, color .2s ease; }
+.acc-nav__link svg { flex: none; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.acc-nav__link:hover { background: #F5F6F8; color: var(--navy); }
+.acc-nav__link[aria-current="page"] { background: var(--light); color: var(--navy); }
+.acc-nav__link--out { margin-top: 8px; border-top: 1px solid var(--line); border-radius: 0 0 var(--radius-sm) var(--radius-sm); padding-top: 16px; }
+.acc__main { display: grid; gap: 16px; min-width: 0; }
+.acc__title { font-size: clamp(22px, 2.2vw, 28px); line-height: 1.2; font-weight: 700; color: var(--navy); }
+.acc__lead { margin-top: -6px; font-size: 14px; line-height: 1.55; color: var(--muted); }
+.acc .ostep .field__input[readonly] + .field__hint { color: var(--muted); }
+.acc-save { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; }
+.acc-save .form__note { flex: 1 1 280px; }
+.acc-save .btn:disabled { opacity: .45; pointer-events: none; }
+
+/* справочник организаций: группа с кнопкой «Добавить», карточки записей */
+.dir__head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 20px; }
+.dir__list { display: grid; gap: 10px; }
+.dir__empty { padding: 20px; border: 1px dashed rgba(42, 37, 96, .25); border-radius: var(--radius-sm); font-size: 14px; color: var(--muted); text-align: center; }
+.orgrow { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6px 20px; padding: 18px 20px; border-radius: var(--radius-sm); background: #F7F7FC; }
+.orgrow__name { font-size: 16px; font-weight: 600; line-height: 1.35; color: var(--navy); }
+.orgrow__meta { grid-column: 1; display: flex; flex-wrap: wrap; gap: 2px 16px; font-size: 13px; line-height: 1.5; color: var(--muted); font-variant-numeric: lining-nums tabular-nums; }
+.orgrow__actions { grid-column: 2; grid-row: 1 / span 2; align-self: center; display: flex; gap: 6px; }
+.icon-btn { display: grid; place-items: center; width: 40px; height: 40px; padding: 0; border: 1px solid rgba(42, 37, 96, .18); border-radius: 50%; background: var(--white); color: var(--navy); cursor: pointer; transition: background-color .2s ease, border-color .2s ease; }
+.icon-btn:hover { border-color: rgba(42, 37, 96, .4); background: var(--tint); }
+.icon-btn svg { fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.orgrow__confirm { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; margin-top: 8px; padding-top: 14px; border-top: 1px solid var(--line); font-size: 14px; color: var(--ink); }
+.orgrow__confirm .btn { min-height: 40px; padding: 0 18px; font-size: 13px; }
+.btn--danger { background: var(--red); color: var(--white); }
+.btn--danger:hover { background: #A80303; }
+
+/* окно добавления организации */
+.modal--wide { width: min(760px, calc(100% - 32px)); }
+.modal .form--modal .field__input { background-color: #F5F6F8; }
+
+/* всплывающее «Сохранено» */
+.toast { position: fixed; left: 50%; bottom: 24px; z-index: 60; display: flex; align-items: center; gap: 10px; padding: 14px 22px; border-radius: 999px; background: var(--navy); color: var(--white); font-size: 14px; font-weight: 600; box-shadow: 0 18px 40px -20px rgba(23, 22, 43, .7); transform: translate(-50%, 0); transition: opacity .25s ease, transform .25s ease; }
+.toast[hidden] { display: flex; opacity: 0; transform: translate(-50%, 16px); pointer-events: none; }
+.toast svg { fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+
+@media (max-width: 1080px) {
+  .acc { grid-template-columns: 1fr; }
+  .acc-nav { position: static; grid-auto-flow: column; grid-auto-columns: max-content; overflow-x: auto; padding: 8px; scrollbar-width: none; }
+  .acc-nav::-webkit-scrollbar { display: none; }
+  .acc-nav__org { display: none; }
+  .acc-nav__link--out { margin: 0; padding-top: 12px; border: 0; border-radius: var(--radius-sm); }
+}
+@media (max-width: 720px) {
+  .orgrow { grid-template-columns: 1fr; padding: 16px; }
+  .orgrow__actions { grid-column: 1; grid-row: auto; justify-self: start; }
 }

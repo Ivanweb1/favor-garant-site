@@ -1,6 +1,6 @@
 """Страницы личного кабинета по «ТЗ дизайнеру · оставшиеся экраны» (экраны 1–2):
 корзина (cart.html), вход (login.html), восстановление доступа и активация по приглашению (recovery.html),
-регистрация (register.html), оформление заявки (order.html, экран 3). Логика — site/js/lk.js.
+регистрация (register.html), оформление заявки (order.html, экран 3), кабинет — моя организация и справочники (account.html, экран 4). Логика — site/js/lk.js.
 
 Шапку и подвал берём из parts.html (гостевая шапка: «Войти» → login.html, корзина → cart.html).
 Правки этих страниц вносить сюда и пересобирать.
@@ -210,18 +210,6 @@ login = f'''      <div class="auth" data-page="login">
           </div>
         </section>
 
-        <section data-screen="signed" hidden>
-          <div class="form auth__center">
-            <span class="auth__icon" aria-hidden="true">{CHECK}</span>
-            <p class="auth__title">Вы вошли в&nbsp;кабинет</p>
-            <p class="auth__sub" style="margin-top: 0">Организация: <b data-auth-name></b>. Разделы кабинета&nbsp;— профиль и&nbsp;заказы&nbsp;— появятся на&nbsp;следующих экранах.</p>
-            <div class="auth__actions">
-              <a class="btn btn--primary" href="cart.html">Корзина</a>
-              <a class="btn btn--outline" href="parts-lk.html">Каталог комплектующих</a>
-            </div>
-            <button class="lk-link" type="button" data-logout style="border: 0; background: none; font: inherit; font-size: 14px; cursor: pointer">Выйти</button>
-          </div>
-        </section>
       </div>'''
 
 page('login.html', 'Вход в личный кабинет', 'Вход в личный кабинет ФАВОР-ГАРАНТ по ИНН и паролю.', [('Вход', '')], login)
@@ -525,3 +513,108 @@ order = f'''      <div class="page-head">
 
 page('order.html', 'Оформление заявки', 'Оформление заявки на комплектующие ФАВОР-ГАРАНТ.',
      [('Комплектующие', 'parts-lk.html'), ('Корзина', 'cart.html'), ('Оформление', '')], order)
+
+
+# ---------- Кабинет: моя организация и справочники (ТЗ, экран 4) ----------
+
+ICON_ORG = '<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 21V5l8-2v18M12 9h8v12M7 8h2M7 12h2M7 16h2M15 13h2M15 17h2M2 21h20"/></svg>'
+ICON_LINK = '<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="8" r="3.5"/><circle cx="17" cy="15" r="3"/><path d="M2.5 20c.6-3.4 2.8-5.5 5.5-5.5 1.4 0 2.6.5 3.6 1.4M13 21c.3-1.7 1.9-3 4-3s3.7 1.3 4 3"/></svg>'
+ICON_CART = '<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2.2l2.3 11h10.8l2-8H6.4"/><circle cx="9.5" cy="19.5" r="1.5"/><circle cx="17" cy="19.5" r="1.5"/></svg>'
+ICON_OUT = '<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h5v16h-5M10 8l-4 4 4 4M6 12h11"/></svg>'
+
+
+def dir_group(role, title, add, empty):
+    return f'''            <div class="ostep" data-dir="{role}">
+              <div class="dir__head">
+                <p class="ostep__title">{title}</p>
+                <button class="btn btn--outline" type="button" data-add="{role}">{add}</button>
+              </div>
+              <div class="dir__list"></div>
+              <p class="dir__empty" hidden>{empty}</p>
+            </div>'''
+
+
+account = f'''      <div class="page-head">
+        <div>
+          <h1 class="h2 duo"><span>Личный</span><span class="duo__second">кабинет</span></h1>
+        </div>
+      </div>
+
+      <div class="acc" data-page="account">
+        <nav class="acc-nav" aria-label="Разделы кабинета">
+          <div class="acc-nav__org"><span class="acc-nav__name" data-acc-name></span><span class="acc-nav__inn" data-acc-inn></span></div>
+          <a class="acc-nav__link" href="#profile" data-tab="profile">{ICON_ORG}Моя организация</a>
+          <a class="acc-nav__link" href="#orgs" data-tab="orgs">{ICON_LINK}Плательщики и&nbsp;грузополучатели</a>
+          <a class="acc-nav__link" href="cart.html">{ICON_CART}Корзина</a>
+          <button class="acc-nav__link acc-nav__link--out" type="button" data-logout>{ICON_OUT}Выйти</button>
+        </nav>
+
+        <div class="acc__main">
+          <!-- Моя организация: название и КПП можно изменить, ИНН кабинета — только просмотр -->
+          <form class="acc__main" data-screen="profile" data-flow="profile" id="profile-form" novalidate hidden>
+            <div>
+              <h2 class="acc__title">Моя организация</h2>
+              <p class="acc__lead">Эти данные подставляются в&nbsp;новые заявки.</p>
+            </div>
+            <fieldset class="ostep">
+              <legend class="visually-hidden">Организация</legend>
+              <p class="ostep__title" aria-hidden="true">Организация</p>
+              {field('Название компании', 'company', auto='organization')}
+              <div class="form__row">
+                {field('ИНН', 'inn', req=False, extra=' readonly', hint=f'ИНН кабинета изменить нельзя. Если он&nbsp;неверный&nbsp;— позвоните: <a class="lk-link" href="{PHONE_HREF}">{PHONE}</a>')}
+                {field('КПП', 'kpp', req=False, auto='off', extra=' inputmode="numeric" maxlength="9" data-kpp', hint='Если есть')}
+              </div>
+            </fieldset>
+            <fieldset class="ostep">
+              <legend class="visually-hidden">Адрес доставки</legend>
+              <p class="ostep__title" aria-hidden="true">Адрес доставки</p>
+              <div class="form__row">
+                {field('Город', 'city', auto='address-level2')}
+                {field('Адрес доставки', 'address', auto='street-address', extra=' placeholder="Улица, дом, корпус"')}
+              </div>
+            </fieldset>
+            <fieldset class="ostep">
+              <legend class="visually-hidden">Контактное лицо</legend>
+              <p class="ostep__title" aria-hidden="true">Контактное лицо</p>
+              {field('Ф. И. О.', 'person', auto='name')}
+              <div class="form__row">
+                {field('Телефон', 'phone', kind='tel', auto='tel')}
+                {field('Email', 'email', kind='email', auto='email', hint='На&nbsp;него приходят письма о&nbsp;заявках и&nbsp;восстановлении пароля')}
+              </div>
+            </fieldset>
+            <div class="ostep acc-save">
+              <button class="btn btn--primary" type="submit" data-save disabled>Сохранить изменения</button>
+              <p class="form__note">Изменения применятся к&nbsp;новым заявкам, реквизиты отправленных заявок останутся прежними. Данные обрабатываем по&nbsp;<a href="{POLICY}">Политике обработки персональных данных</a>.</p>
+            </div>
+          </form>
+
+          <section class="acc__main" data-screen="orgs" hidden>
+            <div>
+              <h2 class="acc__title">Плательщики и&nbsp;грузополучатели</h2>
+              <p class="acc__lead">Сохранённые организации можно выбрать при оформлении заявки. Своего кабинета и&nbsp;доступа к&nbsp;вашему у&nbsp;них нет.</p>
+            </div>
+{dir_group('consignee', 'Грузополучатели', 'Добавить грузополучателя', 'Грузополучателей пока нет. По&nbsp;умолчанию товар получает ваша организация.')}
+{dir_group('payer', 'Плательщики', 'Добавить плательщика', 'Плательщиков пока нет. По&nbsp;умолчанию платит ваша организация.')}
+          </section>
+        </div>
+      </div>
+
+      <!-- Добавление и редактирование организации: полная форма реквизитов, как в заявке -->
+      <dialog class="modal modal--wide" id="org-modal" aria-labelledby="org-modal-title">
+        <div class="modal__box">
+          <button class="modal__close" type="button" data-modal-close aria-label="Закрыть"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 2l12 12M14 2L2 14"/></svg></button>
+          <h2 class="modal__title" id="org-modal-title"></h2>
+          <form class="form form--modal" data-flow="org" novalidate>
+            {requisites()}
+            <div class="form__bottom">
+              <button class="btn btn--primary" type="submit">Сохранить</button>
+              <button class="btn btn--outline" type="button" data-modal-close>Отмена</button>
+              <p class="form__note">Организация не&nbsp;получит доступ к&nbsp;вашему кабинету. Данные контактного лица обрабатываем по&nbsp;<a href="{POLICY}">Политике обработки персональных данных</a>.</p>
+            </div>
+          </form>
+        </div>
+      </dialog>
+      <p class="toast" role="status" hidden><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span></span></p>'''
+
+page('account.html', 'Личный кабинет', 'Личный кабинет ФАВОР-ГАРАНТ: реквизиты организации, плательщики и грузополучатели.',
+     [('Личный кабинет', '')], account)

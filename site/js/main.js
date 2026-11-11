@@ -751,15 +751,15 @@
   if (barBtn && barBtn.dataset.go) barBtn.addEventListener('click', () => { location.href = barBtn.dataset.go; });
 
   // Вход (прототип): после входа или регистрации в браузере лежит fg-auth — кнопка «Войти» в шапке становится «Кабинет».
-  // Экранов кабинета пока нет: login.html у вошедшего показывает, под какой организацией он вошёл, и кнопку «Выйти»
   let authed = null;
   try { authed = JSON.parse(localStorage.getItem('fg-auth')); } catch (e) { /* без хранилища — гость */ }
   if (authed) {
     document.querySelectorAll('.header__login[href="login.html"]').forEach((a) => {
       a.querySelector('span').textContent = 'Кабинет';
       a.setAttribute('aria-label', 'Личный кабинет');
+      a.href = 'account.html';
     });
-    document.querySelectorAll('.mobile-menu .btn--block[href="login.html"]').forEach((a) => { a.textContent = 'Личный кабинет'; });
+    document.querySelectorAll('.mobile-menu .btn--block[href="login.html"]').forEach((a) => { a.textContent = 'Личный кабинет'; a.href = 'account.html'; });
   }
 
   renderCart();
