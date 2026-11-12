@@ -533,7 +533,7 @@ def dir_group(role, title, add, empty):
 
 account = f'''      <div class="page-head">
         <div>
-          <h1 class="h2 duo"><span>Личный</span><span class="duo__second">кабинет</span></h1>
+          <h1 class="h2 duo"><span>Личный <span class="duo__second">кабинет</span></span></h1>
         </div>
       </div>
 
