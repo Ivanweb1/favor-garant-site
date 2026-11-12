@@ -768,6 +768,7 @@
   // У форм кабинета (data-flow: вход, регистрация, корзина) своя логика — в js/lk.js
   document.querySelectorAll('form.form:not([data-flow])').forEach((form) => {
     const status = form.querySelector('.form__status');
+    form.querySelectorAll('.check__input[required]').forEach((cb) => cb.addEventListener('change', () => cb.closest('.check').classList.toggle('is-invalid', !cb.checked)));
     form.addEventListener('submit', (e) => {
       e.preventDefault();
       let valid = true;
@@ -779,11 +780,20 @@
         if (!ok && valid) input.focus();
         valid = valid && ok;
       });
-      const required = [...form.querySelectorAll('[required]')].map((i) => i.closest('.field').querySelector('.field__label').firstChild.textContent.trim().toLowerCase());
+      const fieldsOk = valid;
+      // галочка согласия на обработку персональных данных — обязательна
+      let consentOk = true;
+      form.querySelectorAll('.check__input[required]').forEach((cb) => {
+        cb.closest('.check').classList.toggle('is-invalid', !cb.checked);
+        consentOk = consentOk && cb.checked;
+      });
+      valid = valid && consentOk;
+      const required = [...form.querySelectorAll('.field [required]')].map((i) => i.closest('.field').querySelector('.field__label').firstChild.textContent.trim().toLowerCase());
       status.hidden = false;
       status.textContent = valid
-        ? (form.dataset.ok || 'Спасибо! Заявка принята, мы свяжемся с вами. (Прототип: заявка никуда не отправляется.)')
-        : 'Заполните обязательные поля: ' + required.join(', ') + '.';
+        ? (form.dataset.ok || 'Спасибо! Заявка принята, мы свяжемся с вами.')
+        : !fieldsOk ? 'Заполните обязательные поля: ' + required.join(', ') + '.'
+        : 'Подтвердите согласие на обработку персональных данных.';
       if (valid) {
         form.reset();
         form.querySelectorAll('.file__input').forEach(setFileName);

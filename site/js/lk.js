@@ -92,7 +92,9 @@
 
   function validate(form) {
     let first = null;
-    $$('input, textarea', form).forEach((input) => {
+    // поля формы и связанные с ней снаружи через атрибут form (галочка согласия на «Оформлении заявки»)
+    const inputs = [...$$('input, textarea', form), ...(form.id ? $$(`input[form="${form.id}"]`) : [])];
+    inputs.forEach((input) => {
       if (input.disabled || input.closest('[hidden]')) return;
       const v = input.type === 'checkbox' ? input.checked : input.value.trim();
       let err = '';

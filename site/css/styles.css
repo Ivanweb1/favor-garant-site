@@ -711,6 +711,7 @@ select.field__input, .select__btn { appearance: none; padding-right: 40px; backg
 /* кнопка и согласие — отдельной строкой под линией */
 .form__bottom { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 28px; margin-top: 4px; padding-top: 24px; border-top: 1px solid var(--line); }
 .form__note { flex: 1 1 260px; font-size: 12px; line-height: 1.55; color: var(--muted); }
+.form__consent { flex: 1 1 260px; font-size: 13px; color: var(--muted); }
 .form__note a { text-decoration: underline; }
 .form__note a:hover { color: var(--navy); }
 .form__status { padding: 14px 16px; border-radius: var(--radius-sm); background: var(--light); font-size: 14px; font-weight: 600; color: var(--navy); }
@@ -2386,7 +2387,7 @@ a.news__kind:hover { opacity: .8; }
 .acc-nav__link--out { margin-top: 8px; border-top: 1px solid var(--line); border-radius: 0 0 var(--radius-sm) var(--radius-sm); padding-top: 16px; }
 .acc__main { display: grid; gap: 16px; min-width: 0; }
 .acc__title { font-size: clamp(22px, 2.2vw, 28px); line-height: 1.2; font-weight: 700; color: var(--navy); }
-.acc__lead { margin-top: -6px; font-size: 14px; line-height: 1.55; color: var(--muted); }
+.acc__lead { margin-top: 8px; font-size: 14px; line-height: 1.55; color: var(--muted); }
 .acc .ostep .field__input[readonly] + .field__hint { color: var(--muted); }
 .acc-save { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; }
 .acc-save .form__note { flex: 1 1 280px; }
