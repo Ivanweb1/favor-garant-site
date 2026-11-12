@@ -579,11 +579,11 @@
       toastTimer = setTimeout(() => { toast.hidden = true; }, 2600);
     };
     const renderHead = () => {
-      $('[data-acc-name]', accPage).textContent = profile.company;
-      $('[data-acc-inn]', accPage).textContent = `ИНН ${profile.inn}`;
+      $$('[data-acc-name]', accPage).forEach((el) => { el.textContent = profile.company; });
+      $$('[data-acc-inn]', accPage).forEach((el) => { el.textContent = `ИНН ${profile.inn}`; });
     };
     renderHead();
-    $('[data-logout]', accPage).addEventListener('click', () => { signOut(); location.href = 'index.html'; });
+    $$('[data-logout]', accPage).forEach((b) => b.addEventListener('click', () => { signOut(); location.href = 'index.html'; }));
 
 
     /* ---------- Мои заказы (ТЗ, экран 5) ---------- */
