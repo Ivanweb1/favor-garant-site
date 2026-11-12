@@ -2533,7 +2533,7 @@ a.news__kind:hover { opacity: .8; }
   .acc-mhead__org .acc-nav__name { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-size: 15px; }
   .acc-mhead__out { display: inline-flex; flex: none; align-self: stretch; align-items: center; gap: 6px; padding: 4px 0 4px 16px; border: 0; border-left: 1px solid var(--line); background: none; font: inherit; font-size: 13px; font-weight: 600; color: var(--muted); cursor: pointer; }
   .acc-mhead__out svg { fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
-  .acc-nav { position: fixed; top: auto; left: 0; right: 0; bottom: 0; z-index: 40; grid-auto-flow: row; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; overflow: visible; padding: 6px 4px calc(6px + env(safe-area-inset-bottom)); border-radius: 0; border-top: 1px solid var(--line); background: var(--white); box-shadow: 0 -10px 30px -20px rgba(23, 22, 43, .35); }
+  .acc-nav { position: fixed; top: auto; left: 0; right: 0; bottom: 0; z-index: 40; grid-auto-flow: row; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; overflow: visible; padding: 6px 4px calc(6px + env(safe-area-inset-bottom)); border-radius: 0; border-top: 1px solid var(--line); background: var(--white); box-shadow: 0 -10px 30px -20px rgba(23, 22, 43, .35); }
   .acc-nav .acc-nav__org, .acc-nav .acc-nav__full, .acc-nav .acc-nav__link--out { display: none; }
   .acc-nav__short { display: block; }
   .acc-nav__link { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-width: 0; padding: 4px 2px; border-radius: 0; background: none; font-size: 11px; font-weight: 500; line-height: 1.2; text-align: center; }
