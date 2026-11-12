@@ -113,7 +113,7 @@ def page(file, title, desc, crumbs, main):
 
 # ---------- Корзина (ТЗ, экран 1) ----------
 
-cart = f'''      <div class="page-head">
+cart = f'''      <div class="page-head page-head--cart">
         <div>
           <h1 class="h2 duo"><span>Корзина</span><span class="duo__second">комплектующих</span></h1>
         </div>

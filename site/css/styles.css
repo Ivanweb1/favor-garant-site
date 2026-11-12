@@ -765,6 +765,7 @@ select.field__input, .select__btn { appearance: none; padding-right: 40px; backg
 .crumbs [aria-current] { color: var(--ink); }
 .page-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px 48px; margin-bottom: var(--head-gap); }
 .page-head__text { max-width: 440px; font-size: 16px; color: var(--muted); }
+@media (min-width: 1081px) { .page-head--cart { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: 24px; } .page-head--cart .page-head__text { max-width: none; } }
 
 /* Плитки разделов: те же белые карточки .tile, сетка 3 в ряд */
 .cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
