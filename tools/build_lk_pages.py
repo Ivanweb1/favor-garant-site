@@ -192,7 +192,7 @@ page('cart.html', 'Корзина', 'Корзина комплектующих �
 login = f'''      <div class="auth" data-page="login">
         <section data-screen="form">
           <div class="auth__head">
-            <h1 class="h2 duo"><span>Вход</span></h1>
+            <h1 class="h2 duo"><span>Вход в&nbsp;кабинет</span></h1>
             <p class="auth__lead">Для организаций и&nbsp;ИП. После входа видны цены комплектующих и&nbsp;оформление заявки.</p>
           </div>
           <form class="form" data-flow="login" novalidate>
