@@ -626,9 +626,20 @@
     orders.sort((a, b) => b.date.localeCompare(a.date));
 
     const statusChip = (el, s) => { el.className = `status status--${s}`; el.textContent = STATUS[s].name; };
-    const brief = (o) => {
-      const first = o.items.slice(0, 2).map((i) => `${i.name} — ${i.qty} ${i.unit}`).join('; ');
-      return o.items.length > 2 ? `${first} и ещё ${o.items.length - 2}` : first;
+    // состав в списке: до двух позиций, каждая своей строкой, остальное — строкой «и ещё N»
+    const brief = (el, o) => {
+      el.textContent = '';
+      o.items.slice(0, 2).forEach((i) => {
+        const line = document.createElement('span');
+        line.className = 'orow__line';
+        line.textContent = `${i.name} — ${i.qty} ${i.unit}`;
+        el.appendChild(line);
+      });
+      if (o.items.length > 2) {
+        const more = document.createElement('small');
+        more.textContent = `и ещё ${o.items.length - 2}`;
+        el.appendChild(more);
+      }
     };
 
     const renderList = () => {
@@ -644,7 +655,7 @@
           + '<span class="orow__items"></span><span class="status"></span><span class="orow__sum"></span>';
         $('.orow__num', a).textContent = `№ ${o.num}`;
         $('.orow__date', a).textContent = `от ${shortDate(o.date)}`;
-        $('.orow__items', a).textContent = brief(o);
+        brief($('.orow__items', a), o);
         statusChip($('.status', a), o.status);
         $('.orow__sum', a).textContent = o.total ? money(o.total) : 'по запросу';
         list.appendChild(a);
