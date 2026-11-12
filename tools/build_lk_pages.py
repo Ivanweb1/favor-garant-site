@@ -517,7 +517,6 @@ ICON_ORG = '<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><
 ICON_LINK = '<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="8" r="3.5"/><circle cx="17" cy="15" r="3"/><path d="M2.5 20c.6-3.4 2.8-5.5 5.5-5.5 1.4 0 2.6.5 3.6 1.4M13 21c.3-1.7 1.9-3 4-3s3.7 1.3 4 3"/></svg>'
 ICON_BOX = '<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7.5L12 3l9 4.5v9L12 21l-9-4.5z"/><path d="M3 7.5l9 4.5 9-4.5M12 12v9"/></svg>'
 ICON_CART = '<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2.2l2.3 11h10.8l2-8H6.4"/><circle cx="9.5" cy="19.5" r="1.5"/><circle cx="17" cy="19.5" r="1.5"/></svg>'
-ICON_PLUS = '<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>'
 ICON_OUT = '<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h5v16h-5M10 8l-4 4 4 4M6 12h11"/></svg>'
 
 
@@ -545,7 +544,6 @@ account = f'''      <div class="page-head">
           <div class="acc-nav__org"><span class="acc-nav__name" data-acc-name></span><span class="acc-nav__inn" data-acc-inn></span></div>
           <a class="acc-nav__link" href="#orders" data-tab="orders">{ICON_BOX}<span class="acc-nav__full">Мои заказы</span><span class="acc-nav__short">Заказы</span></a>
           <a class="acc-nav__link" href="#profile" data-tab="profile">{ICON_ORG}<span class="acc-nav__full">Моя организация</span><span class="acc-nav__short">Профиль</span></a>
-          <a class="acc-nav__link acc-nav__link--new" href="parts-lk.html">{ICON_PLUS}<span class="acc-nav__short">Заявка</span></a>
           <a class="acc-nav__link" href="#orgs" data-tab="orgs">{ICON_LINK}<span class="acc-nav__full">Плательщики и&nbsp;грузополучатели</span><span class="acc-nav__short">Организации</span></a>
           <a class="acc-nav__link" href="cart.html">{ICON_CART}<span class="acc-nav__full">Корзина</span><span class="acc-nav__short">Корзина</span></a>
           <button class="acc-nav__link acc-nav__link--out" type="button" data-logout>{ICON_OUT}Выйти</button>
