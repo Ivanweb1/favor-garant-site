@@ -477,8 +477,8 @@ order = f'''      <div class="page-head">
               <p data-osum-files><b>Файлы:</b> <span></span></p>
             </div>
             <div class="notice notice--warn" data-send-error hidden role="alert" tabindex="-1"><span><b>Не&nbsp;удалось отправить заявку.</b> Данные сохранены&nbsp;— проверьте соединение и&nbsp;отправьте ещё раз. Если не&nbsp;получится, позвоните: <a class="lk-link" href="{PHONE_HREF}">{PHONE}</a>.</span></div>
-            {check('consent', f'Даю <a href="{CONSENT}" target="_blank">согласие на&nbsp;обработку персональных данных</a> и&nbsp;ознакомлен с&nbsp;<a href="{POLICY}">Политикой обработки персональных данных</a>', attrs=' form="order-form"')}
             <button class="btn btn--primary btn--block" type="submit" form="order-form" data-submit>Отправить заявку</button>
+            {check('consent', f'Даю <a href="{CONSENT}" target="_blank">согласие на&nbsp;обработку персональных данных</a> и&nbsp;ознакомлен с&nbsp;<a href="{POLICY}">Политикой обработки персональных данных</a>', attrs=' form="order-form"')}
             <p class="osum__pay">Счёт и&nbsp;оплата&nbsp;— вне сайта, после проверки заявки менеджером.</p>
           </aside>
         </div>

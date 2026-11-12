@@ -717,7 +717,7 @@
       $('small', q('receive')).textContent = o.receive === 'pickup' ? 'Адрес и время согласует менеджер' : o.address;
       q('track-row').hidden = !(o.receive === 'delivery' && o.track);
       q('track').textContent = o.track || '';
-      q('track-link').title = 'Прототип: на сайте ссылка ведёт на страницу отслеживания транспортной компании';
+      // ссылка отслеживания: на сайте — страница транспортной компании с этим трек-номером
       q('contact').innerHTML = '<b></b><small></small>';
       $('b', q('contact')).textContent = o.contact.person;
       $('small', q('contact')).textContent = [o.contact.phone, o.contact.email].filter(Boolean).join(' · ');
