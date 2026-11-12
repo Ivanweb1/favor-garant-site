@@ -261,7 +261,8 @@
 
   const recPage = $('[data-page="recovery"]');
   if (recPage) {
-    const start = params.get('invite') ? 'invite' : params.get('expired') ? 'expired' : 'email';
+    // ссылка из письма: ?token=… — форма нового пароля, ?expired=1 — устаревшая ссылка, ?invite=1 — активация
+    const start = params.get('invite') ? 'invite' : params.get('expired') ? 'expired' : params.get('token') ? 'password' : 'email';
     show(recPage, start);
     let email = '';
     let timer = 0;
@@ -311,10 +312,11 @@
       steps.forEach((li, k) => { li.classList.toggle('is-done', k < n); li.classList.toggle('is-current', k === n); if (k === n) li.setAttribute('aria-current', 'step'); else li.removeAttribute('aria-current'); });
       steps[0].parentElement.dataset.label = `Шаг ${n + 1} из ${steps.length} · ${steps[n].textContent.trim()}`;
     };
-    go('data');
-    let profile = null;
+    // ссылка подтверждения из письма: register.html?confirmed=1 — сразу шаг пароля
+    let profile = (() => { try { return JSON.parse(sessionStorage.getItem('fg-reg')); } catch (_) { return null; } })() || DEMO_PROFILE;
+    go(params.get('confirmed') ? 'password' : 'data');
 
-    // ИНН уже зарегистрирован (прототип: 7801234567 считается занятым) — подсказка войти или восстановить пароль
+    // ИНН уже зарегистрирован (в макете занятым считается 7801234567) — подсказка войти или восстановить пароль
     const TAKEN = ['7801234567'];
     const dataForm = $('form[data-step="data"]', regPage);
     dataForm.addEventListener('submit', async (e) => {
@@ -325,6 +327,7 @@
       await fakeRequest($('[type="submit"]', dataForm));
       if (TAKEN.includes(dataForm.inn.value)) { taken.hidden = false; taken.scrollIntoView({ behavior: 'smooth', block: 'center' }); return; }
       profile = readReq(dataForm);
+      try { sessionStorage.setItem('fg-reg', JSON.stringify(profile)); } catch (_) { /* приватный режим */ }
       $$('[data-email]', regPage).forEach((el) => { el.textContent = dataForm.email.value.trim(); });
       go('confirm');
     });
@@ -630,7 +633,7 @@
       const list = $('.olist', accPage);
       list.innerHTML = '';
       $('[data-orders-empty]', accPage).hidden = orders.length > 0;
-      $('[data-demo-note]', accPage).hidden = !orders.some((o) => o.demo);
+      const demoNote = $('[data-demo-note]', accPage); if (demoNote) demoNote.hidden = !orders.some((o) => o.demo);
       orders.forEach((o) => {
         const a = document.createElement('a');
         a.className = 'orow';

@@ -239,7 +239,6 @@ recovery = f'''      <div class="auth" data-page="recovery">
               <button class="btn btn--outline" type="button" data-resend>Отправить ещё раз</button>
               <button class="btn btn--outline" type="button" data-go="email">Другой email</button>
             </div>
-            <p class="proto">Прототип вместо письма: <button type="button" data-go="password">открыть ссылку</button> <button type="button" data-go="expired">открыть устаревшую ссылку</button></p>
           </div>
         </section>
 
@@ -331,7 +330,6 @@ register = f'''      <div class="auth auth--wide" data-page="register">
               <button class="btn btn--primary" type="submit">Продолжить</button>
               <p class="form__note">Уже есть кабинет? <a href="login.html" data-keep-next>Войти</a>. Данные обрабатываем по&nbsp;<a href="{POLICY}">Политике обработки персональных данных</a>.</p>
             </div>
-            <p class="proto">Прототип: ИНН 7801234567 считается уже зарегистрированным.</p>
           </form>
         </section>
 
@@ -345,7 +343,6 @@ register = f'''      <div class="auth auth--wide" data-page="register">
               <button class="btn btn--outline" type="button" data-go="data">Изменить email</button>
             </div>
             <p class="auth__legal" data-resent hidden>Письмо отправлено повторно.</p>
-            <p class="proto">Прототип вместо письма: <button type="button" data-go="password">открыть ссылку подтверждения</button></p>
           </div>
         </section>
 
@@ -564,7 +561,6 @@ account = f'''      <div class="page-head">
               <p class="empty__text">Выберите комплектующие в&nbsp;каталоге и&nbsp;оформите заявку&nbsp;— она появится здесь со&nbsp;статусом «Новая».</p>
               <a class="btn btn--primary" href="parts-lk.html">Перейти в&nbsp;каталог</a>
             </div>
-            <p class="proto" data-demo-note hidden>Прототип: заказы со&nbsp;статусами «В&nbsp;работе», «Доставка», «Отгружен» и&nbsp;«Отменён»&nbsp;— примеры, чтобы показать все состояния.</p>
           </section>
 
           <!-- Детали заказа: состав с ценами на дату заявки, примечание и файлы, плательщик, грузополучатель, получение, трек -->
