@@ -2512,3 +2512,14 @@ a.news__kind:hover { opacity: .8; }
   .otable tfoot tr { align-items: baseline; }
   .otable tfoot td:first-child { grid-column: 1; font-weight: 500; color: var(--muted); }
 }
+
+/* Кабинет: правая часть — одна белая плашка, как меню слева; разделы внутри — серые плашки, поля на них белые */
+.acc > .acc__main { padding: clamp(20px, 3vw, 32px); border-radius: var(--radius); background: var(--white); }
+.acc .ostep, .acc .orow { background: var(--light); }
+.acc .ostep .field__input:not([readonly]) { background: var(--white); }
+.acc .ostep .field__input[readonly] { background: rgba(255, 255, 255, .5); }
+.acc .orgrow, .acc .osum__extra { background: var(--white); }
+@media (max-width: 720px) {
+  .acc > .acc__main { padding: 16px; }
+  .acc .ostep { padding: 16px; }
+}
