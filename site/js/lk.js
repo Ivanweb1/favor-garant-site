@@ -28,6 +28,8 @@
   });
   const signIn = (data) => store.set('fg-auth', data);
   const signOut = () => store.del('fg-auth');
+  // ?demo=1 — показать кабинет без входа: сразу входим примером «ООО «Пример»» (для просмотра заказчиком)
+  if (params.get('demo') && !store.get('fg-auth', null)) signIn({ inn: '7801234567', company: 'ООО «Пример»' });
   const auth = store.get('fg-auth', null);
 
   // Реквизиты — как в шаблоне заявки: организация, ИНН/КПП, город и адрес доставки, контактное лицо, телефон, email
