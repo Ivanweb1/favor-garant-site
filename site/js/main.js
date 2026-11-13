@@ -764,6 +764,44 @@
 
   renderCart();
 
+  // Маска телефона +7 (___) ___-__-__ для всех полей type="tel" (сайт и кабинет).
+  // 8 или 7 в начале считаем кодом страны; при пустом поле после ухода фокуса префикс убираем.
+  const telDigits = (v) => {
+    let d = v.replace(/\D/g, '');
+    // «+7» в поле — код страны; вставленный номер из 11 цифр с 7/8 в начале — тоже
+    if (/^\s*\+7/.test(v) || (d.length === 11 && /^[78]/.test(d))) d = d.slice(1);
+    return d.slice(0, 10);
+  };
+  const telFormat = (v) => {
+    const d = telDigits(v);
+    let out = '+7';
+    // разделитель ставим только перед следующей цифрой — тогда Backspace не «залипает» на скобке
+    if (d.length) out += ' (' + d.slice(0, 3);
+    if (d.length > 3) out += ') ' + d.slice(3, 6);
+    if (d.length > 6) out += '-' + d.slice(6, 8);
+    if (d.length > 8) out += '-' + d.slice(8, 10);
+    return out;
+  };
+  window.fgTelComplete = (v) => telDigits(v).length === 10;
+  document.addEventListener('input', (e) => {
+    const t = e.target;
+    if (!(t instanceof HTMLInputElement) || t.type !== 'tel') return;
+    if (e.inputType && e.inputType.startsWith('delete') && telDigits(t.value).length === 0) { t.value = ''; return; }
+    t.value = telFormat(t.value);
+  });
+  document.addEventListener('focusin', (e) => {
+    const t = e.target;
+    if (t instanceof HTMLInputElement && t.type === 'tel' && !t.value) t.value = '+7 (';
+  });
+  document.addEventListener('focusout', (e) => {
+    const t = e.target;
+    if (t instanceof HTMLInputElement && t.type === 'tel' && !telDigits(t.value).length) t.value = '';
+  });
+  // уже заполненные поля (профиль в кабинете подставляется скриптом) приводим к маске
+  const telFix = () => document.querySelectorAll('input[type="tel"]').forEach((t) => { if (t.value) t.value = telFormat(t.value); });
+  telFix();
+  window.addEventListener('load', telFix);
+
   // Формы: проверка обязательных полей. Отправки на сервер в прототипе нет.
   // У форм кабинета (data-flow: вход, регистрация, корзина) своя логика — в js/lk.js
   document.querySelectorAll('form.form:not([data-flow])').forEach((form) => {
@@ -775,7 +813,8 @@
       form.querySelectorAll('.field__input').forEach((input) => {
         // email проверяем ещё и на формат
         const filled = input.value.trim().length > 0;
-        const ok = (!input.required || filled) && (input.type !== 'email' || !filled || input.checkValidity());
+        const ok = (!input.required || filled) && (input.type !== 'email' || !filled || input.checkValidity())
+          && (input.type !== 'tel' || !filled || window.fgTelComplete(input.value));
         input.classList.toggle('is-invalid', !ok);
         if (!ok && valid) input.focus();
         valid = valid && ok;

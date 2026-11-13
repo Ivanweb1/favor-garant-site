@@ -40,7 +40,7 @@
   // прототип: при входе по ИНН без регистрации в этом браузере подставляем пример профиля
   const DEMO_PROFILE = {
     company: 'ООО «Пример»', inn: '7801234567', kpp: '780101001', city: 'Санкт-Петербург', address: 'ул. Примерная, д. 1',
-    person: 'Иванов Иван Иванович', phone: '+7 900 000-00-00', email: 'zakaz@example.ru',
+    person: 'Иванов Иван Иванович', phone: '+7 (900) 000-00-00', email: 'zakaz@example.ru',
   };
   const setProfile = (data) => {
     store.set('fg-profile', data);
@@ -106,7 +106,7 @@
       else if (v && input.type === 'email' && !input.checkValidity()) err = 'Проверьте адрес: например, name@company.ru';
       else if (v && 'inn' in input.dataset && !/^(\d{10}|\d{12})$/.test(v)) err = 'ИНН — 10 цифр у организации или 12 у ИП';
       else if (v && 'kpp' in input.dataset && !/^\d{9}$/.test(v)) err = 'КПП — 9 цифр';
-      else if (v && input.type === 'tel' && v.replace(/\D/g, '').length < 10) err = 'Проверьте номер телефона';
+      else if (v && input.type === 'tel' && (window.fgTelComplete ? !window.fgTelComplete(v) : v.replace(/\D/g, '').length < 11)) err = 'Номер — 10 цифр после +7';
       else if (v && 'pass' in input.dataset && v.length < 8) err = 'Пароль — не меньше 8 символов';
       else if (v && input.dataset.match && v !== form.querySelector(input.dataset.match).value) err = 'Пароли не совпадают';
       setError(input, err);
