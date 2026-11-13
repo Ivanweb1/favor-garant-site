@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap&subset=cyrillic" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=20261112l">
+  <link rel="stylesheet" href="css/styles.css?v=20261113a">
 </head>
 <body>
 
@@ -319,17 +319,17 @@
               <label class="check">
               <input class="check__input" type="checkbox" name="consent" required>
               <span class="check__box"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
-              <span class="check__text">Даю <a href="privacy.html" target="_blank">согласие на&nbsp;обработку персональных данных</a><span class="field__error" aria-live="polite"></span></span>
+              <span class="check__text">Даю <a href="privacy.html" target="_blank" rel="noopener">согласие на&nbsp;обработку персональных данных</a><span class="field__error" aria-live="polite"></span></span>
             </label>
               <label class="check">
               <input class="check__input" type="checkbox" name="offer" required>
               <span class="check__box"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
-              <span class="check__text">Принимаю условия <a href="privacy.html" target="_blank">оферты</a><span class="field__error" aria-live="polite"></span></span>
+              <span class="check__text">Принимаю условия <a href="privacy.html" target="_blank" rel="noopener">оферты</a><span class="field__error" aria-live="polite"></span></span>
             </label>
             </div>
             <div class="form__bottom">
               <button class="btn btn--primary" type="submit">Продолжить</button>
-              <p class="form__note">Уже есть кабинет? <a href="login.html" data-keep-next>Войти</a>. Данные обрабатываем по&nbsp;<a href="privacy.html">Политике обработки персональных данных</a>.</p>
+              <p class="form__note">Уже есть кабинет? <a href="login.html" data-keep-next>Войти</a>. Данные обрабатываем по&nbsp;<a href="privacy.html" target="_blank" rel="noopener">Политике обработки персональных данных</a>.</p>
             </div>
           </form>
         </section>
@@ -434,9 +434,21 @@
             <div class="form__bottom">
               <button class="btn btn--primary" type="submit">Сохранить и&nbsp;продолжить</button>
               <button class="btn btn--outline" type="button" data-skip>Пропустить</button>
-              <p class="form__note">Данные контактного лица обрабатываем по&nbsp;<a href="privacy.html">Политике обработки персональных данных</a>.</p>
+              <p class="form__note">Данные контактного лица обрабатываем по&nbsp;<a href="privacy.html" target="_blank" rel="noopener">Политике обработки персональных данных</a>.</p>
             </div>
           </form>
+        </section>
+
+        <section data-screen="consignee-done" hidden>
+          <div class="form auth__center">
+            <span class="auth__icon" aria-hidden="true"><svg width="30" height="30" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+            <p class="auth__title">Грузополучатель добавлен</p>
+            <p class="auth__sub" style="margin-top: 0"><b data-consignee-name></b> сохранён в&nbsp;кабинете&nbsp;— его можно выбрать при оформлении заявки. Можно перейти в&nbsp;кабинет или добавить ещё одного грузополучателя.</p>
+            <div class="auth__actions">
+              <a class="btn btn--primary" href="account.html">Перейти в&nbsp;кабинет</a>
+              <button class="btn btn--outline" type="button" data-add-more>Добавить ещё</button>
+            </div>
+          </div>
         </section>
       </div>
     </div>
@@ -527,7 +539,7 @@
 </footer>
 
 
-<script src="js/lk.js?v=20261112n"></script>
-<script src="js/main.js?v=20261112l"></script>
+<script src="js/lk.js?v=20261113a"></script>
+<script src="js/main.js?v=20261113a"></script>
 </body>
 </html>

@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap&subset=cyrillic" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=20261112l">
+  <link rel="stylesheet" href="css/styles.css?v=20261113a">
 </head>
 <body>
 
@@ -292,47 +292,16 @@
               <div class="org-form__actions">
                 <button class="lk-link" type="button" data-org-cancel style="border: 0; background: none; font: inherit; font-size: 14px; cursor: pointer">Отменить</button>
               </div>
-              <p class="auth__legal">Добавление организации не&nbsp;открывает ей доступ к&nbsp;вашему кабинету. <a href="privacy.html">Политика обработки персональных данных</a>.</p>
+              <p class="auth__legal">Добавление организации не&nbsp;открывает ей доступ к&nbsp;вашему кабинету. <a href="privacy.html" target="_blank" rel="noopener">Политика обработки персональных данных</a>.</p>
             </div>
           </fieldset>
           <fieldset class="ostep" data-org-role="consignee">
             <legend class="visually-hidden">Грузополучатель</legend>
             <div class="ostep__head">
               <p class="ostep__title" aria-hidden="true"><span class="ostep__num">2</span>Грузополучатель</p>
-              <button class="org-edit" type="button">Изменить реквизиты</button>
             </div>
-            <p class="ostep__text">Организация, которая принимает товар. По&nbsp;умолчанию&nbsp;— ваша.</p>
+            <p class="ostep__text">Организация, которая принимает товар. По&nbsp;умолчанию&nbsp;— ваша, можно выбрать из&nbsp;грузополучателей, сохранённых в&nbsp;<a class="lk-link" href="account.html#orgs">кабинете</a>.</p>
             <div class="orgs" role="radiogroup" aria-label="Грузополучатель"></div>
-            <div class="org-form" hidden>
-              <p class="org-form__title"></p>
-              <label class="field">
-            <span class="field__label">Название компании <span class="field__req" aria-hidden="true">*</span></span>
-            <input class="field__input" type="text" name="consignee_company" autocomplete="off" required data-req="company">
-            <span class="field__error" aria-live="polite"></span>
-          </label>
-              <div class="form__row">
-                <label class="field">
-            <span class="field__label">ИНН <span class="field__req" aria-hidden="true">*</span></span>
-            <input class="field__input" type="text" name="consignee_inn" autocomplete="off" required inputmode="numeric" maxlength="12" data-inn data-req="inn">
-            <span class="field__error" aria-live="polite"></span>
-          </label>
-                <label class="field">
-            <span class="field__label">КПП</span>
-            <input class="field__input" type="text" name="consignee_kpp" autocomplete="off" inputmode="numeric" maxlength="9" data-kpp data-req="kpp">
-            <span class="field__hint">Если есть</span>
-            <span class="field__error" aria-live="polite"></span>
-          </label>
-              </div>
-              <label class="check" data-save-org>
-              <input class="check__input" type="checkbox" name="consignee_save" checked>
-              <span class="check__box"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
-              <span class="check__text">Сохранить в&nbsp;кабинете, чтобы выбирать в&nbsp;следующих заявках</span>
-            </label>
-              <div class="org-form__actions">
-                <button class="lk-link" type="button" data-org-cancel style="border: 0; background: none; font: inherit; font-size: 14px; cursor: pointer">Отменить</button>
-              </div>
-              <p class="auth__legal">Добавление организации не&nbsp;открывает ей доступ к&nbsp;вашему кабинету. <a href="privacy.html">Политика обработки персональных данных</a>.</p>
-            </div>
           </fieldset>
 
             <fieldset class="ostep">
@@ -404,7 +373,7 @@
             <label class="check">
               <input class="check__input" type="checkbox" name="consent" required form="order-form">
               <span class="check__box"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
-              <span class="check__text">Даю <a href="privacy.html" target="_blank">согласие на&nbsp;обработку персональных данных</a> и&nbsp;ознакомлен с&nbsp;<a href="privacy.html">Политикой обработки персональных данных</a><span class="field__error" aria-live="polite"></span></span>
+              <span class="check__text">Даю <a href="privacy.html" target="_blank" rel="noopener">согласие на&nbsp;обработку персональных данных</a> и&nbsp;ознакомлен с&nbsp;<a href="privacy.html" target="_blank" rel="noopener">Политикой обработки персональных данных</a><span class="field__error" aria-live="polite"></span></span>
             </label>
             <p class="osum__pay">Счёт и&nbsp;оплата&nbsp;— вне сайта, после проверки заявки менеджером.</p>
           </aside>
@@ -521,7 +490,7 @@
 </footer>
 
 
-<script src="js/lk.js?v=20261112n"></script>
-<script src="js/main.js?v=20261112l"></script>
+<script src="js/lk.js?v=20261113a"></script>
+<script src="js/main.js?v=20261113a"></script>
 </body>
 </html>

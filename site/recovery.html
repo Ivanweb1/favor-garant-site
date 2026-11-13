@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap&subset=cyrillic" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=20261112l">
+  <link rel="stylesheet" href="css/styles.css?v=20261113a">
 </head>
 <body>
 
@@ -260,7 +260,7 @@
           </label>
             <button class="btn btn--primary btn--block" type="submit">Получить ссылку</button>
             <div class="auth__links"><a class="lk-link" href="login.html" data-keep-next>Вернуться ко&nbsp;входу</a></div>
-            <p class="auth__legal">Мы&nbsp;обрабатываем данные по&nbsp;<a href="privacy.html">Политике обработки персональных данных</a>.</p>
+            <p class="auth__legal">Мы&nbsp;обрабатываем данные по&nbsp;<a href="privacy.html" target="_blank" rel="noopener">Политике обработки персональных данных</a>.</p>
           </form>
         </section>
 
@@ -293,7 +293,7 @@
             <span class="field__error" aria-live="polite"></span>
           </div>
             <button class="btn btn--primary btn--block" type="submit">Сохранить пароль</button>
-            <p class="auth__legal">Мы&nbsp;обрабатываем данные по&nbsp;<a href="privacy.html">Политике обработки персональных данных</a>.</p>
+            <p class="auth__legal">Мы&nbsp;обрабатываем данные по&nbsp;<a href="privacy.html" target="_blank" rel="noopener">Политике обработки персональных данных</a>.</p>
           </form>
         </section>
 
@@ -319,27 +319,15 @@
         <section data-screen="invite" hidden>
           <div class="auth__head">
             <h1 class="h2 duo"><span>Активация</span><span class="duo__second">кабинета</span></h1>
-            <p class="auth__lead">Менеджер создал кабинет для вашей организации. Проверьте данные и&nbsp;задайте пароль.</p>
+            <p class="auth__lead">Менеджер создал кабинет для вашей организации. Введите ИНН и&nbsp;задайте пароль&nbsp;— по&nbsp;ним будете входить в&nbsp;кабинет.</p>
           </div>
           <form class="form" data-flow="recovery" data-step="invite" novalidate>
-            <!-- прототип: данные приглашения — пример -->
+            <!-- название и почту вводит менеджер при создании кабинета, ссылка приглашения уникальная — клиент указывает только ИНН и пароль -->
             <label class="field">
-            <span class="field__label">Организация</span>
-            <input class="field__input" type="text" name="company" value="ООО «Пример»" readonly>
+            <span class="field__label">ИНН <span class="field__req" aria-hidden="true">*</span></span>
+            <input class="field__input" type="text" name="inn" autocomplete="off" required inputmode="numeric" maxlength="12" data-inn>
             <span class="field__error" aria-live="polite"></span>
           </label>
-            <div class="form__row">
-              <label class="field">
-            <span class="field__label">ИНН</span>
-            <input class="field__input" type="text" name="inn" value="7801234567" readonly>
-            <span class="field__error" aria-live="polite"></span>
-          </label>
-              <label class="field">
-            <span class="field__label">Email</span>
-            <input class="field__input" type="email" name="email" value="zakaz@example.ru" readonly>
-            <span class="field__error" aria-live="polite"></span>
-          </label>
-            </div>
             <div class="field">
             <label class="field__label" for="ipass1">Пароль <span class="field__req" aria-hidden="true">*</span></label>
             <div class="pass"><input class="field__input" id="ipass1" type="password" name="ipass1" autocomplete="new-password" required data-pass><button class="pass__toggle" type="button" aria-pressed="false" aria-label="Показать пароль"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/><path class="pass__slash" d="M4 4l16 16"/></svg></button></div>
@@ -355,11 +343,11 @@
               <label class="check">
               <input class="check__input" type="checkbox" name="consent" required>
               <span class="check__box"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
-              <span class="check__text">Даю <a href="privacy.html" target="_blank">согласие на&nbsp;обработку персональных данных</a><span class="field__error" aria-live="polite"></span></span>
+              <span class="check__text">Даю <a href="privacy.html" target="_blank" rel="noopener">согласие на&nbsp;обработку персональных данных</a><span class="field__error" aria-live="polite"></span></span>
             </label>
             </div>
             <button class="btn btn--primary btn--block" type="submit">Активировать и&nbsp;войти</button>
-            <p class="auth__legal">Если данные неверны&nbsp;— позвоните менеджеру: <a href="tel:+78126402227">8 (812) 640-222-7</a>. <a href="privacy.html">Политика обработки персональных данных</a>.</p>
+            <p class="auth__legal">Есть вопросы&nbsp;— позвоните менеджеру: <a href="tel:+78126402227">8 (812) 640-222-7</a>. <a href="privacy.html" target="_blank" rel="noopener">Политика обработки персональных данных</a>.</p>
           </form>
         </section>
       </div>
@@ -451,7 +439,7 @@
 </footer>
 
 
-<script src="js/lk.js?v=20261112n"></script>
-<script src="js/main.js?v=20261112l"></script>
+<script src="js/lk.js?v=20261113a"></script>
+<script src="js/main.js?v=20261113a"></script>
 </body>
 </html>

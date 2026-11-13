@@ -214,7 +214,7 @@ page('login.html', 'Вход в личный кабинет', 'Вход в ли�
 
 # ---------- Восстановление доступа + активация по приглашению (ТЗ, экран 2) ----------
 
-legal = f'<p class="auth__legal">Мы&nbsp;обрабатываем данные по&nbsp;<a href="{POLICY}">Политике обработки персональных данных</a>.</p>'
+legal = f'<p class="auth__legal">Мы&nbsp;обрабатываем данные по&nbsp;<a href="{POLICY}" target="_blank" rel="noopener">Политике обработки персональных данных</a>.</p>'
 
 recovery = f'''      <div class="auth" data-page="recovery">
         <section data-screen="email">
@@ -276,22 +276,18 @@ recovery = f'''      <div class="auth" data-page="recovery">
         <section data-screen="invite" hidden>
           <div class="auth__head">
             <h1 class="h2 duo"><span>Активация</span><span class="duo__second">кабинета</span></h1>
-            <p class="auth__lead">Менеджер создал кабинет для вашей организации. Проверьте данные и&nbsp;задайте пароль.</p>
+            <p class="auth__lead">Менеджер создал кабинет для вашей организации. Введите ИНН и&nbsp;задайте пароль&nbsp;— по&nbsp;ним будете входить в&nbsp;кабинет.</p>
           </div>
           <form class="form" data-flow="recovery" data-step="invite" novalidate>
-            <!-- прототип: данные приглашения — пример -->
-            {field('Организация', 'company', req=False, extra=' readonly', value='ООО «Пример»')}
-            <div class="form__row">
-              {field('ИНН', 'inn', req=False, extra=' readonly', value='7801234567')}
-              {field('Email', 'email', kind='email', req=False, extra=' readonly', value='zakaz@example.ru')}
-            </div>
+            <!-- название и почту вводит менеджер при создании кабинета, ссылка приглашения уникальная — клиент указывает только ИНН и пароль -->
+            {field('ИНН', 'inn', auto='off', extra=' inputmode="numeric" maxlength="12" data-inn')}
             {password('Пароль', 'ipass1', hint='Не меньше 8 символов')}
             {password('Повторите пароль', 'ipass2', extra=' data-match="#ipass1"')}
             <div class="checks-list">
-              {check('consent', f'Даю <a href="{CONSENT}" target="_blank">согласие на&nbsp;обработку персональных данных</a>')}
+              {check('consent', f'Даю <a href="{CONSENT}" target="_blank" rel="noopener">согласие на&nbsp;обработку персональных данных</a>')}
             </div>
             <button class="btn btn--primary btn--block" type="submit">Активировать и&nbsp;войти</button>
-            <p class="auth__legal">Если данные неверны&nbsp;— позвоните менеджеру: <a href="{PHONE_HREF}">{PHONE}</a>. <a href="{POLICY}">Политика обработки персональных данных</a>.</p>
+            <p class="auth__legal">Есть вопросы&nbsp;— позвоните менеджеру: <a href="{PHONE_HREF}">{PHONE}</a>. <a href="{POLICY}" target="_blank" rel="noopener">Политика обработки персональных данных</a>.</p>
           </form>
         </section>
       </div>'''
@@ -323,12 +319,12 @@ register = f'''      <div class="auth auth--wide" data-page="register">
             </div>
             <!-- две отдельные галочки, обе изначально пустые: согласие на ПД не объединяем с офертой -->
             <div class="checks-list">
-              {check('consent', f'Даю <a href="{CONSENT}" target="_blank">согласие на&nbsp;обработку персональных данных</a>')}
-              {check('offer', f'Принимаю условия <a href="{OFFER}" target="_blank">оферты</a>')}
+              {check('consent', f'Даю <a href="{CONSENT}" target="_blank" rel="noopener">согласие на&nbsp;обработку персональных данных</a>')}
+              {check('offer', f'Принимаю условия <a href="{OFFER}" target="_blank" rel="noopener">оферты</a>')}
             </div>
             <div class="form__bottom">
               <button class="btn btn--primary" type="submit">Продолжить</button>
-              <p class="form__note">Уже есть кабинет? <a href="login.html" data-keep-next>Войти</a>. Данные обрабатываем по&nbsp;<a href="{POLICY}">Политике обработки персональных данных</a>.</p>
+              <p class="form__note">Уже есть кабинет? <a href="login.html" data-keep-next>Войти</a>. Данные обрабатываем по&nbsp;<a href="{POLICY}" target="_blank" rel="noopener">Политике обработки персональных данных</a>.</p>
             </div>
           </form>
         </section>
@@ -377,9 +373,21 @@ register = f'''      <div class="auth auth--wide" data-page="register">
             <div class="form__bottom">
               <button class="btn btn--primary" type="submit">Сохранить и&nbsp;продолжить</button>
               <button class="btn btn--outline" type="button" data-skip>Пропустить</button>
-              <p class="form__note">Данные контактного лица обрабатываем по&nbsp;<a href="{POLICY}">Политике обработки персональных данных</a>.</p>
+              <p class="form__note">Данные контактного лица обрабатываем по&nbsp;<a href="{POLICY}" target="_blank" rel="noopener">Политике обработки персональных данных</a>.</p>
             </div>
           </form>
+        </section>
+
+        <section data-screen="consignee-done" hidden>
+          <div class="form auth__center">
+            <span class="auth__icon" aria-hidden="true">{CHECK}</span>
+            <p class="auth__title">Грузополучатель добавлен</p>
+            <p class="auth__sub" style="margin-top: 0"><b data-consignee-name></b> сохранён в&nbsp;кабинете&nbsp;— его можно выбрать при оформлении заявки. Можно перейти в&nbsp;кабинет или добавить ещё одного грузополучателя.</p>
+            <div class="auth__actions">
+              <a class="btn btn--primary" href="account.html">Перейти в&nbsp;кабинет</a>
+              <button class="btn btn--outline" type="button" data-add-more>Добавить ещё</button>
+            </div>
+          </div>
         </section>
       </div>'''
 
@@ -397,8 +405,19 @@ def opt_check(attr, name, text, checked=False):
             </label>'''
 
 
-def org_step(num, role, title, text):
+def org_step(num, role, title, text, editable=True):
     p = role
+    if not editable:
+        # грузополучатель (правка клиента 13.11): в заявке только выбор из своей организации и сохранённых в кабинете,
+        # «Изменить реквизиты» и «Добавить» нет
+        return f'''          <fieldset class="ostep" data-org-role="{role}">
+            <legend class="visually-hidden">{title}</legend>
+            <div class="ostep__head">
+              <p class="ostep__title" aria-hidden="true"><span class="ostep__num">{num}</span>{title}</p>
+            </div>
+            <p class="ostep__text">{text}</p>
+            <div class="orgs" role="radiogroup" aria-label="{title}"></div>
+          </fieldset>'''
     return f'''          <fieldset class="ostep" data-org-role="{role}">
             <legend class="visually-hidden">{title}</legend>
             <div class="ostep__head">
@@ -418,7 +437,7 @@ def org_step(num, role, title, text):
               <div class="org-form__actions">
                 <button class="lk-link" type="button" data-org-cancel style="border: 0; background: none; font: inherit; font-size: 14px; cursor: pointer">Отменить</button>
               </div>
-              <p class="auth__legal">Добавление организации не&nbsp;открывает ей доступ к&nbsp;вашему кабинету. <a href="{POLICY}">Политика обработки персональных данных</a>.</p>
+              <p class="auth__legal">Добавление организации не&nbsp;открывает ей доступ к&nbsp;вашему кабинету. <a href="{POLICY}" target="_blank" rel="noopener">Политика обработки персональных данных</a>.</p>
             </div>
           </fieldset>'''
 
@@ -434,7 +453,7 @@ order = f'''      <div class="page-head">
         <div class="checkout2" data-screen="form" hidden>
           <form class="checkout2__form" id="order-form" data-flow="order" novalidate>
 {org_step(1, 'payer', 'Плательщик', 'По&nbsp;умолчанию&nbsp;— ваша организация. Можно выбрать другую из&nbsp;сохранённых или добавить новую.')}
-{org_step(2, 'consignee', 'Грузополучатель', 'Организация, которая принимает товар. По&nbsp;умолчанию&nbsp;— ваша.')}
+{org_step(2, 'consignee', 'Грузополучатель', 'Организация, которая принимает товар. По&nbsp;умолчанию&nbsp;— ваша, можно выбрать из&nbsp;грузополучателей, сохранённых в&nbsp;<a class="lk-link" href="account.html#orgs">кабинете</a>.', editable=False)}
 
             <fieldset class="ostep">
               <legend class="visually-hidden">Способ получения</legend>
@@ -478,7 +497,7 @@ order = f'''      <div class="page-head">
             </div>
             <div class="notice notice--warn" data-send-error hidden role="alert" tabindex="-1"><span><b>Не&nbsp;удалось отправить заявку.</b> Данные сохранены&nbsp;— проверьте соединение и&nbsp;отправьте ещё раз. Если не&nbsp;получится, позвоните: <a class="lk-link" href="{PHONE_HREF}">{PHONE}</a>.</span></div>
             <button class="btn btn--primary btn--block" type="submit" form="order-form" data-submit>Отправить заявку</button>
-            {check('consent', f'Даю <a href="{CONSENT}" target="_blank">согласие на&nbsp;обработку персональных данных</a> и&nbsp;ознакомлен с&nbsp;<a href="{POLICY}">Политикой обработки персональных данных</a>', attrs=' form="order-form"')}
+            {check('consent', f'Даю <a href="{CONSENT}" target="_blank" rel="noopener">согласие на&nbsp;обработку персональных данных</a> и&nbsp;ознакомлен с&nbsp;<a href="{POLICY}" target="_blank" rel="noopener">Политикой обработки персональных данных</a>', attrs=' form="order-form"')}
             <p class="osum__pay">Счёт и&nbsp;оплата&nbsp;— вне сайта, после проверки заявки менеджером.</p>
           </aside>
         </div>
@@ -637,7 +656,7 @@ account = f'''      <div class="page-head">
             </fieldset>
             <div class="ostep acc-save">
               <button class="btn btn--primary" type="submit" data-save disabled>Сохранить изменения</button>
-              <p class="form__note">Изменения применятся к&nbsp;новым заявкам, реквизиты отправленных заявок останутся прежними. Данные обрабатываем по&nbsp;<a href="{POLICY}">Политике обработки персональных данных</a>.</p>
+              <p class="form__note">Изменения применятся к&nbsp;новым заявкам, реквизиты отправленных заявок останутся прежними. Данные обрабатываем по&nbsp;<a href="{POLICY}" target="_blank" rel="noopener">Политике обработки персональных данных</a>.</p>
             </div>
           </form>
 
@@ -675,7 +694,7 @@ account = f'''      <div class="page-head">
             <div class="form__bottom">
               <button class="btn btn--primary" type="submit">Сохранить</button>
               <button class="btn btn--outline" type="button" data-modal-close>Отмена</button>
-              <p class="form__note">Организация не&nbsp;получит доступ к&nbsp;вашему кабинету. Данные контактного лица обрабатываем по&nbsp;<a href="{POLICY}">Политике обработки персональных данных</a>.</p>
+              <p class="form__note">Организация не&nbsp;получит доступ к&nbsp;вашему кабинету. Данные контактного лица обрабатываем по&nbsp;<a href="{POLICY}" target="_blank" rel="noopener">Политике обработки персональных данных</a>.</p>
             </div>
           </form>
         </div>

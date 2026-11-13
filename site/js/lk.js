@@ -299,7 +299,8 @@
         if (!validate(form)) return;
         await fakeRequest($('[type="submit"]', form));
         if (form.dataset.step === 'invite') {
-          setProfile({ ...DEMO_PROFILE, company: form.company.value, inn: form.inn.value, email: form.email.value });
+          // название и почту завёл менеджер (в макете — из демо-профиля), клиент ввёл ИНН
+          setProfile({ ...DEMO_PROFILE, inn: form.inn.value.trim() });
           location.href = nextUrl();
         } else show(recPage, 'done');
       });
@@ -313,7 +314,7 @@
     const steps = $$('.steps li', regPage);
     const go = (name) => {
       show(regPage, name);
-      const i = ['data', 'confirm', 'password', 'consignee', 'consignee-form'].indexOf(name);
+      const i = ['data', 'confirm', 'password', 'consignee', 'consignee-form', 'consignee-done'].indexOf(name);
       const n = Math.min(i, 3);
       steps.forEach((li, k) => { li.classList.toggle('is-done', k < n); li.classList.toggle('is-current', k === n); if (k === n) li.setAttribute('aria-current', 'step'); else li.removeAttribute('aria-current'); });
       steps[0].parentElement.dataset.label = `Шаг ${n + 1} из ${steps.length} · ${steps[n].textContent.trim()}`;
@@ -355,11 +356,23 @@
     $$('[data-skip]', regPage).forEach((b) => b.addEventListener('click', finish));
     $('form[data-step="consignee"]', regPage).addEventListener('submit', async (e) => {
       e.preventDefault();
-      if (!validate(e.currentTarget)) return;
-      await fakeRequest($('[type="submit"]', e.currentTarget));
+      // форму берём до await: после ожидания e.currentTarget уже null (из-за этого раньше кнопка «молчала»)
+      const form = e.currentTarget;
+      if (!validate(form)) return;
+      await fakeRequest($('[type="submit"]', form));
       // грузополучатель — только запись в справочнике кабинета, свой кабинет ему не создаётся
-      store.set('fg-orgs', [{ id: `o${Date.now()}`, role: 'consignee', ...readReq(e.currentTarget) }]);
-      finish();
+      const org = { id: `o${Date.now()}`, role: 'consignee', ...readReq(form) };
+      store.set('fg-orgs', [...store.get('fg-orgs', []), org]);
+      $('[data-consignee-name]', regPage).textContent = org.company;
+      go('consignee-done');
+    });
+    // «Добавить ещё» — пустая форма грузополучателя
+    $('[data-add-more]', regPage).addEventListener('click', () => {
+      const f = $('form[data-step="consignee"]', regPage);
+      f.reset();
+      $$('input', f).forEach((i) => setError(i, ''));
+      go('consignee-form');
+      $('input', f).focus();
     });
   }
 
@@ -429,6 +442,7 @@
         input.addEventListener('change', () => { state[role] = o.id; closeOrgForm(role); syncAddress(); });
         wrap.appendChild(label);
       });
+      if (!$('.org-form', boxOf(role))) return; // грузополучателя в заявке не добавляют — только выбор
       const add = document.createElement('button');
       add.type = 'button';
       add.className = 'org org--add';
@@ -456,11 +470,13 @@
     }
     function closeOrgForm(role) {
       const box = boxOf(role);
+      if (!$('.org-form', box)) return;
       $('.org-form', box).hidden = true;
       $('.org-edit', box).hidden = false;
     }
     ['payer', 'consignee'].forEach((role) => {
       const box = boxOf(role);
+      if (!$('.org-form', box)) { renderOrgs(role); return; }
       $('.org-edit', box).addEventListener('click', () => openOrgForm(role, 'edit'));
       $('[data-org-cancel]', box).addEventListener('click', () => {
         if (state[role] === 'new') state[role] = 'own';
@@ -527,7 +543,7 @@
       if (params.get('fail') && !form.dataset.failed) { form.dataset.failed = '1'; sendError.hidden = false; sendError.focus(); return; }
       const pick = (role) => {
         const panel = $('.org-form', boxOf(role));
-        if (panel.hidden) return orgById(role, state[role]);
+        if (!panel || panel.hidden) return orgById(role, state[role]);
         const data = panelData(panel);
         if (state[role] === 'new' && $('[data-save-org] input', panel).checked) orgs.push({ id: `o${Date.now()}${role}`, role, ...data });
         return data;
@@ -818,7 +834,7 @@
     const orgForm = $('form', modal);
     let editing = null; // { role, id } — id нет у новой записи
     const save = () => store.set('fg-orgs', orgs);
-    const ICON_EDIT = '<svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16zM13.5 6.5l4 4"/></svg>';
+    // правку реквизитов в справочниках клиент попросил пока убрать (13.11): только добавление и удаление
     const ICON_DEL = '<svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/></svg>';
 
     const renderDir = (role) => {
@@ -831,19 +847,17 @@
         const row = document.createElement('article');
         row.className = 'orgrow';
         row.innerHTML = '<p class="orgrow__name"></p><p class="orgrow__meta"></p>'
-          + `<div class="orgrow__actions"><button class="icon-btn" type="button" data-edit>${ICON_EDIT}</button><button class="icon-btn" type="button" data-del>${ICON_DEL}</button></div>`;
+          + `<div class="orgrow__actions"><button class="icon-btn" type="button" data-del>${ICON_DEL}</button></div>`;
         $('.orgrow__name', row).textContent = o.company;
         const meta = $('.orgrow__meta', row);
         [[`ИНН ${o.inn}`, o.kpp && `КПП ${o.kpp}`].filter(Boolean).join(' · '), [o.city, o.address].filter(Boolean).join(', '), [o.person, o.phone].filter(Boolean).join(', ')]
           .filter(Boolean).forEach((t) => { const s = document.createElement('span'); s.textContent = t; meta.appendChild(s); });
-        $('[data-edit]', row).setAttribute('aria-label', `Изменить: ${o.company}`);
         $('[data-del]', row).setAttribute('aria-label', `Удалить: ${o.company}`);
-        $('[data-edit]', row).addEventListener('click', () => openOrg(role, o));
         $('[data-del]', row).addEventListener('click', () => {
           if ($('.orgrow__confirm', row)) return;
           const c = document.createElement('div');
           c.className = 'orgrow__confirm';
-          c.innerHTML = '<span>Удалить из&nbsp;справочника? В&nbsp;отправленных заявках она останется.</span>'
+          c.innerHTML = '<span>Удалить из&nbsp;справочника?</span>'
             + '<button class="btn btn--danger" type="button">Удалить</button><button class="btn btn--outline" type="button">Отмена</button>';
           const [yes, no] = $$('button', c);
           yes.addEventListener('click', () => { orgs = orgs.filter((x) => x.id !== o.id); save(); renderDir(role); say('Организация удалена'); });
