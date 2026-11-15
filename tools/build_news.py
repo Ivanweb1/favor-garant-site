@@ -266,6 +266,7 @@ top = f'''  <!-- 1. Новости и блог: четыре статьи со �
           </div>
         </div>
         <div class="filters feed__tags" role="group" aria-label="Рубрики">{tags}</div>
+        <h2 class="visually-hidden">Лента новостей</h2>
         <div class="news news--feed" data-feed-list>
 {cards}
         </div>

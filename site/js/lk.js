@@ -311,7 +311,7 @@
 
   const regPage = $('[data-page="register"]');
   if (regPage) {
-    const steps = $$('.steps li', regPage);
+    const steps = $$('.reg-steps li', regPage);
     const go = (name) => {
       show(regPage, name);
       const i = ['data', 'confirm', 'password', 'consignee', 'consignee-form', 'consignee-done'].indexOf(name);

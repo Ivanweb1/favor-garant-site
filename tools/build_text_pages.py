@@ -97,8 +97,10 @@ def siblings_block(sib, current, bg):
         text = f'{ic}<span class="sibling__label">{nbsp(label)}</span>'
         if label == current:
             tiles.append(f'<span class="sibling" aria-current="page">{text}</span>')
-        else:  # страницы ещё нет — плитка активная, ссылка-заглушка
-            tiles.append(f'<a class="sibling" href="{href or "#"}">{text}</a>')
+        elif href:
+            tiles.append(f'<a class="sibling" href="{href}">{text}</a>')
+        else:  # страницы ещё нет — плитка без ссылки, но с тем же видом и ховером
+            tiles.append(f'<span class="sibling">{text}</span>')
     return f'''  <section class="section{bg}" id="related">
     <div class="container">
       <div class="page-head">
@@ -927,7 +929,8 @@ def legal_page(file, name, h1, sections, desc, note_text=''):
   </section>
 
 '''
-    tail = TAIL[TAIL.index('</main>'):]
+    # формы заявки на юридических страницах нет — кнопка в подвале ведёт на форму в контактах
+    tail = TAIL[TAIL.index('</main>'):].replace('href="#request-form"', 'href="contacts.html#request-form"')
     write(file, page_head(name, desc, '') + '\n' + main + tail)
 
 

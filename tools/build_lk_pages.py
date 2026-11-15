@@ -302,7 +302,7 @@ register = f'''      <div class="auth auth--wide" data-page="register">
           <h1 class="h2 duo"><span>Регистрация</span><span class="duo__second">организации</span></h1>
           <p class="auth__lead">Кабинет открывается на&nbsp;ИНН. В&nbsp;нём видны цены, оформление заявок и&nbsp;история заказов.</p>
         </div>
-        <ol class="steps" aria-label="Шаги регистрации">
+        <ol class="reg-steps" aria-label="Шаги регистрации">
           <li><span>Данные организации</span></li>
           <li><span>Подтверждение почты</span></li>
           <li><span>Пароль</span></li>
