@@ -1531,7 +1531,7 @@ html.has-modal { overflow: hidden; }
   .hero__aside { max-width: 620px; }
   .usp { grid-template-columns: repeat(2, 1fr); }
   .usp__item { min-height: 200px; padding: 24px; }
-  .usp__item::before, .usp__item::after { content: none; }
+  .usp__item::before, .usp__item::after, .usp__item + .usp__item::before { content: none; }
   .usp__item:nth-child(odd) { padding-left: 0; }
   .usp__item:nth-child(even) { border-left: 1px solid var(--line); }
   .usp__item:nth-child(even) { padding-right: 0; }
