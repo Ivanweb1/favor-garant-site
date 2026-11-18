@@ -158,7 +158,24 @@
     let current = 0;
     let timer;
 
-    gallery.style.setProperty('--slide-time', SLIDE_TIME + 'ms');
+    const canPlayVideo = () => window.matchMedia('(min-width: 768px)').matches
+      && !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      && !(navigator.connection && navigator.connection.saveData);
+    const slideTime = (i) => Number(slides[i].dataset.time) || SLIDE_TIME;
+    slides.forEach((slide) => slide.querySelectorAll('video').forEach((v) => { v.muted = true; }));
+
+    // первый экран: фото должно быть видно минимум на 80% — CSS берёт высоту блока с заголовком
+    const hero = gallery.closest('.hero');
+    const heroTop = hero && hero.querySelector('.hero__top');
+    if (heroTop) {
+      const setHeroTop = () => {
+        const top = heroTop.getBoundingClientRect().bottom - hero.getBoundingClientRect().top;
+        hero.style.setProperty('--hero-top', Math.round(top) + 'px');
+      };
+      setHeroTop();
+      window.addEventListener('resize', setHeroTop);
+      if (document.fonts) document.fonts.ready.then(setHeroTop);
+    }
     const bars = slides.map(() => {
       const bar = document.createElement('span');
       bar.className = 'gallery__bar';
@@ -172,12 +189,25 @@
       slides.forEach((slide, i) => {
         slide.classList.toggle('is-active', i === current);
         // подгружаем следующий слайд заранее
-        if (i === (current + 1) % slides.length) slide.querySelector('img').loading = 'eager';
+        const img = slide.querySelector('img');
+        if (img && i === (current + 1) % slides.length) img.loading = 'eager';
+        // видео-слайд: играет, только пока он на экране; на телефоне и при «меньше движения» — заставка
+        const video = slide.querySelector('video');
+        if (video) {
+          if (i === current && canPlayVideo()) {
+            if (!video.getAttribute('src')) video.src = video.dataset.src;
+            video.currentTime = 0;
+            video.play().catch(() => {});
+          } else {
+            video.pause();
+          }
+        }
       });
       bars.forEach((bar, i) => {
         bar.classList.remove('is-active');
         bar.classList.toggle('is-done', i < current);
       });
+      gallery.style.setProperty('--slide-time', slideTime(current) + 'ms');
       void bars[current].offsetWidth; // перезапуск анимации полоски
       if (autoplay) bars[current].classList.add('is-active');
       captionText.textContent = slides[current].dataset.caption;
@@ -188,7 +218,7 @@
     function schedule() {
       clearTimeout(timer);
       if (!autoplay || gallery.classList.contains('is-paused')) return;
-      timer = setTimeout(() => show(current + 1), SLIDE_TIME);
+      timer = setTimeout(() => show(current + 1), slideTime(current));
     }
 
     gallery.querySelector('.gallery__btn--prev').addEventListener('click', () => show(current - 1));

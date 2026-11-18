@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap&subset=cyrillic" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=20261113b">
+  <link rel="stylesheet" href="css/styles.css?v=20261118">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -91,6 +91,7 @@
         <li><a class="mega__cat" href="#catalog" data-cat="custom"><img src="img/icons/line-custom.svg" alt="" width="40" height="22"><span>Нестандартные конструкции</span></a></li>
         <li><a class="mega__cat" href="#catalog" data-cat="maf"><img src="img/icons/line-maf.svg" alt="" width="40" height="22"><span>Малые архитектурные формы</span></a></li>
         <li><a class="mega__cat" href="#catalog" data-cat="nav"><img src="img/icons/line-navigation.svg" alt="" width="40" height="22"><span>Навигация</span></a></li>
+        <li><a class="mega__cat" href="#catalog" data-cat="complex"><img src="img/icons/line-complex.svg" alt="" width="40" height="22"><span>Комплексное решение для благоустройства</span></a></li>
         <li><a class="mega__cat" href="parts.html" data-cat="parts"><img src="img/icons/line-parts.svg" alt="" width="40" height="22"><span>Комплектующие</span></a></li>
       </ul>
       <div class="mega__panel" data-panel="pav">
@@ -205,6 +206,14 @@
         </div>
         <img class="mega__photo" style="--pos: 50% 50%" src="img/photos/17-cat-navigation.jpg" alt="" loading="lazy" width="1400" height="1050">
       </div>
+      <div class="mega__panel" data-panel="complex" hidden>
+        <div class="mega__info">
+          <p class="mega__title">Комплексное решение для благоустройства</p>
+          <p class="mega__text">Благоустройство территории под ключ: проект, производство и&nbsp;монтаж остановок, навигации, МАФ и&nbsp;освещения в&nbsp;едином стиле.</p>
+          <a class="btn btn--outline" href="#catalog">Смотреть раздел</a>
+        </div>
+        <img class="mega__photo" style="--pos: 50% 50%" src="img/projects/skver-cover.jpg" alt="" loading="lazy" width="1310" height="1015">
+      </div>
       <div class="mega__panel" data-panel="parts" hidden>
         <div class="mega__info">
           <p class="mega__title">Комплектующие</p>
@@ -235,6 +244,7 @@
         <li><a href="#catalog">Нестандартные конструкции</a></li>
         <li><a href="#catalog">Малые архитектурные формы</a></li>
         <li><a href="#catalog">Навигация</a></li>
+        <li><a href="#catalog">Комплексное решение для благоустройства</a></li>
         <li><a href="parts.html">Комплектующие</a></li>
       </ul>
       <ul class="mobile-menu__list mobile-menu__list--main">
@@ -275,7 +285,8 @@
         <p class="hero__lead">Проектируем, производим и монтируем остановочные павильоны, рекламные конструкции, навигацию и&nbsp;малые архитектурные формы. Работаем по всей России.</p>
         <div class="hero__actions">
           <a class="btn btn--primary" href="#request-form">Рассчитать стоимость</a>
-          <a class="link-arrow" href="#catalog">Каталог продукции</a>
+          <!-- кнопка по просьбе генерального директора (правки 18.11): переливается и пульсирует -->
+          <a class="btn btn--sensation" href="news.html"><span aria-hidden="true">🍑</span> СЕНСАЦИЯ 18+ <span aria-hidden="true">🍓</span></a>
         </div>
         <p class="hero__note">Расчёт по&nbsp;эскизу, чертежу или техническому заданию</p>
       </div>
@@ -289,6 +300,10 @@
         </figure>
         <figure class="gallery__slide" data-caption="Резка металла на ЧПУ" data-href="#services" style="--pos: 52% 50%">
           <img src="img/photos/42-slide-production.jpg" alt="Резка металла на станке с ЧПУ в цехе" width="1916" height="821" loading="lazy">
+        </figure>
+        <!-- Видео-слайд: data-src — ролик, poster — заставка (видна на телефоне), data-time — сколько показывать, мс -->
+        <figure class="gallery__slide" data-caption="Стела «Усть-Канский район», Республика Алтай" data-href="#about" data-time="12000" style="--pos: 50% 50%">
+          <video data-src="video/fg-altay-stele.mp4" poster="video/fg-altay-stele.jpg" muted loop playsinline preload="none" aria-label="Стела «Усть-Канский район», Республика Алтай"></video>
         </figure>
         <figure class="gallery__slide" data-caption="Въездная стела «Гатчина»" data-href="#works" style="--pos: 50% 50%">
           <img src="img/photos/43-slide-stele-gatchina.jpg" alt="Въездная стела «Гатчина — город воинской славы»" width="1916" height="821" loading="lazy">
@@ -560,9 +575,10 @@
           <p class="route__text">Участвуем в&nbsp;программах благоустройства городов России и&nbsp;в&nbsp;федеральной программе «Формирование комфортной городской среды».</p>
           <ul class="route__links">
             <li><a href="#catalog">Остановочные павильоны</a></li>
-            <li><a href="services.html#montage">Монтаж остановочных павильонов</a></li>
+            <li><a href="expertise-bidding.html">Документация для участия в&nbsp;торгах</a></li>
             <li><a href="#catalog">Навигация и&nbsp;стелы</a></li>
             <li><a href="#catalog">Малые архитектурные формы</a></li>
+            <li><a href="#catalog">Комплексное решение для благоустройства</a></li>
           </ul>
           <a class="btn btn--light route__cta" href="#request-form">Обсудить проект</a>
         </div>
@@ -575,6 +591,7 @@
             <li><a href="services.html#design">Дизайн-бюро</a></li>
             <li><a href="#services">Документация для согласования</a></li>
             <li><a href="#services">Экспертиза проектов</a></li>
+            <li><a href="#catalog">Комплексное решение для благоустройства</a></li>
           </ul>
           <a class="btn btn--light route__cta" href="#request-form">Отправить эскиз</a>
         </div>
@@ -584,9 +601,10 @@
           <p class="route__text">Изготовим рекламные и&nbsp;нестандартные конструкции, подготовим документы для торгов и&nbsp;согласования размещения.</p>
           <ul class="route__links">
             <li><a href="#catalog">Рекламные щиты и&nbsp;тумбы</a></li>
-            <li><a href="#services">Документация для участия в&nbsp;торгах</a></li>
+            <li><a href="services.html#montage">Монтаж остановочных павильонов</a></li>
             <li><a href="#services">Расчёт коридора безопасности</a></li>
             <li><a href="#services">Ремонт и&nbsp;модернизация конструкций</a></li>
+            <li><a href="#catalog">Комплексное решение для благоустройства</a></li>
           </ul>
           <a class="btn btn--light route__cta" href="#request-form">Запросить расчёт</a>
         </div>
@@ -807,7 +825,7 @@
     <div class="container">
       <div class="cta-band">
         <div class="cta-band__text">
-          <h2 class="cta-band__title">Получите быстрый расчёт стоимости вашего проекта</h2>
+          <h2 class="cta-band__title">Быстрый расчёт стоимости вашего проекта</h2>
           <p class="cta-band__lead">Специалисты оперативно рассчитают стоимость, сроки производства и&nbsp;организуют доставку.</p>
           <div class="cta-band__actions">
             <a class="btn btn--light" href="#request-form">Запросить расчёт</a>
@@ -885,9 +903,20 @@
             <span class="duo__second">и&nbsp;события</span>
           </h2>
         </div>
-        <a class="btn btn--outline section-head__link" href="news.html">Все новости</a>
+        <div class="section-head__side">
+          <div class="slider-nav" data-slider="news-track">
+            <button class="slider-nav__btn" type="button" data-dir="-1" aria-label="Предыдущая новость">
+              <svg class="arr arr--prev" width="10" height="11" viewBox="0 0 13 14" aria-hidden="true"><path d="M.74.68l11 12M11.74 12.68V1.84M11.74 12.68H1.88" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+            </button>
+            <button class="slider-nav__btn" type="button" data-dir="1" aria-label="Следующая новость">
+              <svg class="arr arr--next" width="10" height="11" viewBox="0 0 13 14" aria-hidden="true"><path d="M.74.68l11 12M11.74 12.68V1.84M11.74 12.68H1.88" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+            </button>
+          </div>
+          <a class="btn btn--outline section-head__link" href="news.html">Все новости</a>
+        </div>
       </div>
-      <div class="news">
+      <!-- Карусель новостей: две карточки в кадре, листается стрелками и свайпом -->
+      <div class="news news--slider" id="news-track">
         <a class="news__card" href="news.html">
           <div class="news__media"><img src="img/news/50-news-transport-reform.jpg" alt="Троллейбус у нового остановочного павильона в Санкт-Петербурге" loading="lazy" width="900" height="900"></div>
           <div class="news__body">
@@ -909,6 +938,54 @@
             <div class="news__foot">
               <span class="link-arrow">Читать</span>
               <span class="news__time"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.25"/><path d="M8 4.5V8l2.5 1.5"/></svg>5 мин чтения</span>
+            </div>
+          </div>
+        </a>
+        <a class="news__card" href="news-rnp.html">
+          <div class="news__media"><img src="img/news/52-news-rnp.jpg" alt="Свидетельство о внесении ООО «ФАВОР-ГАРАНТ» в Реестр надёжных партнёров" loading="lazy" width="1200" height="930"></div>
+          <div class="news__body">
+            <span class="news__tag">Компания</span>
+            <h3 class="news__title">ООО&nbsp;«ФАВОР-ГАРАНТ» внесено в&nbsp;Реестр надёжных партнёров</h3>
+            <p class="news__text">Компания официально включена в&nbsp;Реестр надёжных партнёров Торгово-промышленной палаты РФ.</p>
+            <div class="news__foot">
+              <span class="link-arrow">Читать</span>
+              <span class="news__time"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.25"/><path d="M8 4.5V8l2.5 1.5"/></svg>1&nbsp;мин чтения</span>
+            </div>
+          </div>
+        </a>
+        <a class="news__card" href="news-award.html">
+          <div class="news__media"><img src="img/news/53-news-award.jpg" alt="Команда «ФАВОР-ГАРАНТ» с благодарственным письмом" loading="lazy" width="1200" height="930"></div>
+          <div class="news__body">
+            <span class="news__tag">Компания</span>
+            <h3 class="news__title">«ФАВОР-ГАРАНТ» удостоена награды и&nbsp;расширяет производство</h3>
+            <p class="news__text">Руководство РЦК вручило команде благодарственное письмо за&nbsp;профессионализм и&nbsp;вовлечённость.</p>
+            <div class="news__foot">
+              <span class="link-arrow">Читать</span>
+              <span class="news__time"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.25"/><path d="M8 4.5V8l2.5 1.5"/></svg>1&nbsp;мин чтения</span>
+            </div>
+          </div>
+        </a>
+        <a class="news__card" href="news-temirkanov.html">
+          <div class="news__media"><img src="img/news/54-news-temirkanov.jpg" alt="Площадь имени Юрия Темирканова в Петербурге" loading="lazy" width="1200" height="930"></div>
+          <div class="news__body">
+            <span class="news__tag">Проекты</span>
+            <h3 class="news__title">Площадь имени Юрия Темирканова появилась в&nbsp;Петербурге</h3>
+            <p class="news__text">Изготовили и&nbsp;установили информационный стенд с&nbsp;табличкой для новой площади.</p>
+            <div class="news__foot">
+              <span class="link-arrow">Читать</span>
+              <span class="news__time"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.25"/><path d="M8 4.5V8l2.5 1.5"/></svg>1&nbsp;мин чтения</span>
+            </div>
+          </div>
+        </a>
+        <a class="news__card" href="news-maf-park.html">
+          <div class="news__media"><img src="img/news/55-news-maf-park.jpg" alt="Малые архитектурные формы в парке" loading="lazy" width="1200" height="930"></div>
+          <div class="news__body">
+            <span class="news__tag">Блог</span>
+            <h3 class="news__title">Организация пространства в&nbsp;парке с&nbsp;помощью МАФ</h3>
+            <p class="news__text">Как малые архитектурные формы меняют восприятие городского пространства.</p>
+            <div class="news__foot">
+              <span class="link-arrow">Читать</span>
+              <span class="news__time"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.25"/><path d="M8 4.5V8l2.5 1.5"/></svg>1&nbsp;мин чтения</span>
             </div>
           </div>
         </a>
@@ -1075,6 +1152,6 @@
   </div>
 </footer>
 
-<script src="js/main.js?v=20261113b"></script>
+<script src="js/main.js?v=20261118"></script>
 </body>
 </html>
