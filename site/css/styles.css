@@ -2630,3 +2630,8 @@ a.news__kind:hover { opacity: .8; }
 @media (prefers-reduced-motion: reduce) {
   .btn--sensation, .btn--sensation::after { animation: none; }
 }
+/* на телефоне обе кнопки первого экрана — во всю ширину */
+@media (max-width: 720px) {
+  .hero__actions { gap: 12px; }
+  .hero__actions .btn { flex: 1 1 100%; }
+}
