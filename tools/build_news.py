@@ -185,7 +185,7 @@ for i, (slug, date, title, cover, alt, body) in enumerate(ARTICLES):
     others = sorted((a for a in ARTICLES if a[0] != slug), key=lambda a: -len(set(META[a[0]][1]) & set(tags)))
     others = '\n'.join(card(*a, text=False) for a in others[:3])
     related = ''.join(f'<li><a class="link-arrow" href="{h}">{n}</a></li>' for n, h in RELATED[slug])
-    # соседние статьи по дате: ARTICLES идут от новых к старым
+    # соседние статьи по дате больше не выводим: есть «Читайте также» (блог) и «Новости по теме» (новость)
     newer = ARTICLES[i - 1] if i > 0 else None
     older = ARTICLES[i + 1] if i + 1 < len(ARTICLES) else None
     pager = ''
@@ -265,7 +265,6 @@ for i, (slug, date, title, cover, alt, body) in enumerate(ARTICLES):
           <p class="article__related-title">По теме</p>
           <ul>{related}</ul>
         </aside>
-        <nav class="article-nav" aria-label="Соседние материалы">{pager}</nav>
       </div>
     </article>
   </section>
