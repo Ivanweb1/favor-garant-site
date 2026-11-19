@@ -2823,3 +2823,7 @@ a.chip { display: inline-flex; align-items: center; text-decoration: none; }
 .pgallery__main.is-photo > img { object-fit: cover; }
 /* заголовок карточки — одной фразой и на телефоне: «Остановочный / павильон Атлант» в две строки */
 .pinfo h1.duo > span { display: inline; }
+/* SEO-текст категории: заголовок слева, текст справа одной колонкой */
+.seo-block { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: 24px clamp(32px, 5vw, 80px); align-items: start; }
+.seo-block .h2 { margin: 0; }
+@media (max-width: 900px) { .seo-block { grid-template-columns: 1fr; } }
