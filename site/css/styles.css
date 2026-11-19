@@ -2764,3 +2764,13 @@ a.chip { display: inline-flex; align-items: center; text-decoration: none; }
   /* на узком экране колонка сбоку уходит под текст: новости по теме полезнее после статьи */
   .tdoc--news .tdoc__aside { order: 2; }
 }
+
+/* шапка «Дополнительное оборудование к остановке»: заголовок и текст выровнены по верху, текст шире — без «лесенки» */
+/* колонки — как у фото и карточки ниже, текст начинается ровно над карточкой */
+.page-head--equip { grid-template-columns: minmax(0, 2.2fr) minmax(0, 1fr); align-items: start; column-gap: 20px; }
+.page-head--equip .page-head__aside { gap: 18px; padding-top: 6px; }
+.page-head--equip .page-head__text { max-width: none; font-size: 15px; }
+@media (max-width: 900px) {
+  .page-head--equip { grid-template-columns: 1fr; row-gap: 16px; }
+  .page-head--equip .page-head__aside { padding-top: 0; }
+}
