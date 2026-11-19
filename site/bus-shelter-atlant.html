@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap&subset=cyrillic" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=20261119b">
+  <link rel="stylesheet" href="css/styles.css?v=20261119d">
 </head>
 <body>
 
@@ -272,7 +272,7 @@
           </div>
         </div>
         <div class="pinfo">
-          <h1 class="h2 duo"><span>Атлант</span></h1>
+          <h1 class="h2 duo"><span>Остановочный павильон</span> <span class="duo__second">Атлант</span></h1>
           <p class="pinfo__lead">Модульный павильон с&nbsp;увеличенным просветом между каркасом и&nbsp;крышей&nbsp;— для информационной панели с&nbsp;названием остановки и&nbsp;маршрутами транспорта.</p>
           <div class="pinfo__configs">
             <p class="pinfo__label">Комплектация</p>
@@ -293,6 +293,18 @@
           </dl>
           <!-- Цена «от» за базовую комплектацию (правки 19.11). 000 000 — заглушка: цифру даст клиент -->
           <p class="pinfo__price"><span class="pinfo__price-from">от</span> 000&nbsp;000&nbsp;₽ <span class="pinfo__price-note">за&nbsp;базовую комплектацию</span></p>
+          <!-- Условия цены (ТЗ сеошников, обязательно раскрыть). «уточняется» — данные клиента, заполнить перед запуском -->
+          <details class="pinfo__terms">
+            <summary>Что входит в&nbsp;цену</summary>
+            <dl class="terms">
+              <div><dt>Базовая стоимость</dt><dd>Каркас, крыша, ветрозащитные панели, скамья, крепёж</dd></div>
+              <div><dt>Цена указана</dt><dd>За&nbsp;один павильон <span class="terms__tbd">тираж — уточняется</span></dd></div>
+              <div><dt>НДС</dt><dd><span class="terms__tbd">уточняется</span></dd></div>
+              <div><dt>Доставка, монтаж, основание, подключение электрики</dt><dd><span class="terms__tbd">уточняется</span></dd></div>
+              <div><dt>Рассчитывается отдельно</dt><dd>Дополнительное оборудование: табло, лайтпостер, подсветка, камеры и&nbsp;др.</dd></div>
+              <div><dt>Срок производства</dt><dd><span class="terms__tbd">уточняется</span></dd></div>
+            </dl>
+          </details>
           <div class="pinfo__actions">
             <button class="btn btn--primary" type="button" data-modal-open="request-modal">Запросить стоимость</button>
             <a class="link-arrow" href="index.html#services">Монтаж под ключ</a>
@@ -474,7 +486,7 @@
     </div>
   </section>
 
-  <section class="section">
+  <section class="section section--light">
     <div class="container">
       <div class="page-head page-head--hotspots">
         <div>
@@ -566,7 +578,7 @@
     </div>
   </section>
 
-  <section class="section section--light">
+  <section class="section">
     <div class="container project-wrap">
       <div class="section-head">
         <div class="project-head">
@@ -604,7 +616,66 @@
     </div>
   </section>
 
-  <section class="section">
+  <!-- Описание модели (SEO-текст) и документы (ТЗ сеошников). Документы выводятся при наличии файла; href="#" — заглушки до файлов клиента -->
+  <section class="section section--light" id="description">
+    <div class="container model-about">
+      <div class="model-about__text">
+        <h2 class="h2 duo duo--inline">
+          <span>О&nbsp;модели</span>
+          <span class="duo__second">«Атлант»</span>
+        </h2>
+        <div class="seo-text seo-text--single">
+          <p>«Атлант»&nbsp;— модульный остановочный павильон с&nbsp;увеличенным просветом между каркасом и&nbsp;крышей. В&nbsp;просвет устанавливается информационная панель с&nbsp;названием остановки и&nbsp;маршрутами транспорта.</p>
+          <p>Крыша&nbsp;— изогнутая, из&nbsp;монолитного или сотового поликарбоната. Ветрозащитные панели выполняются из&nbsp;триплекса, калёного стекла 6&nbsp;или 8&nbsp;мм или сетки-ПВЛ; боковые панели стандартного размера можно заменить лайтпостерами без изменения конструкции.</p>
+          <p>Модель выпускается в&nbsp;базовой комплектации, с&nbsp;лайтпостером, в&nbsp;версии SMART с&nbsp;электронным табло прибытия, а&nbsp;также в&nbsp;удлинённых полузакрытых версиях 6&nbsp;и&nbsp;10&nbsp;м с&nbsp;фронтальными панелями, лайтпостером и&nbsp;пилоном.</p>
+        </div>
+      </div>
+      <aside class="model-about__docs" aria-labelledby="docs-title">
+        <h3 class="model-about__docs-title" id="docs-title">Документы</h3>
+        <ul class="mdocs">
+            <li><a class="mdoc" href="#"><span class="mdoc__type" aria-hidden="true">PDF</span><span class="mdoc__body"><span class="mdoc__title">Карточка модели</span><span class="mdoc__note">Габариты, материалы, комплектации, опции и фотографии</span></span></a></li>
+            <li><a class="mdoc" href="#"><span class="mdoc__type" aria-hidden="true">PDF</span><span class="mdoc__body"><span class="mdoc__title">Общий чертёж</span><span class="mdoc__note">Виды, размеры и основные узлы</span></span></a></li>
+            <li><a class="mdoc" href="#"><span class="mdoc__type" aria-hidden="true">PDF</span><span class="mdoc__body"><span class="mdoc__title">Спецификация базовой комплектации</span></span></a></li>
+            <li><a class="mdoc" href="#"><span class="mdoc__type" aria-hidden="true">PDF</span><span class="mdoc__body"><span class="mdoc__title">Схема монтажа</span><span class="mdoc__note">Требования к основанию</span></span></a></li>
+            <li><a class="mdoc" href="#"><span class="mdoc__type" aria-hidden="true">PDF</span><span class="mdoc__body"><span class="mdoc__title">Паспорт изделия</span><span class="mdoc__note">Рекомендации по эксплуатации</span></span></a></li>
+            <li><a class="mdoc" href="#"><span class="mdoc__type" aria-hidden="true">PDF</span><span class="mdoc__body"><span class="mdoc__title">Сертификаты и декларации</span><span class="mdoc__note">Протоколы испытаний</span></span></a></li>
+            <li><a class="mdoc" href="#"><span class="mdoc__type" aria-hidden="true">ZIP</span><span class="mdoc__body"><span class="mdoc__title">Комплект для проектировщика</span><span class="mdoc__note">Чертежи и 3D-модель</span></span></a></li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <!-- FAQ модели: сразу после описания, необязательный -->
+  <section class="section" id="faq">
+    <div class="container">
+      <div class="page-head">
+        <h2 class="h2 duo duo--inline">
+          <span>Вопросы</span>
+          <span class="duo__second">и&nbsp;ответы</span>
+        </h2>
+      </div>
+      <div class="faq">
+        <details class="faq__item">
+          <summary class="faq__q">Какие комплектации доступны?</summary>
+          <p class="faq__a">Базовая, с&nbsp;лайтпостером, SMART с&nbsp;электронным табло прибытия, а&nbsp;также удлинённые версии 6&nbsp;и&nbsp;10&nbsp;м с&nbsp;фронтальными панелями.</p>
+        </details>
+        <details class="faq__item">
+          <summary class="faq__q">Можно ли добавить оборудование к&nbsp;павильону?</summary>
+          <p class="faq__a">Да. Табло прибытия, лайтпостер, табличку с&nbsp;названием, подсветку, Wi-Fi, камеры, кнопку экстренного вызова, модуль звукового дублирования и&nbsp;USB-зарядку можно встроить в&nbsp;базовую конструкцию. Добавьте нужное к&nbsp;заявке&nbsp;— менеджер рассчитает стоимость.</p>
+        </details>
+        <details class="faq__item">
+          <summary class="faq__q">Из&nbsp;каких материалов крыша и&nbsp;панели?</summary>
+          <p class="faq__a">Крыша&nbsp;— монолитный или сотовый поликарбонат. Ветрозащитные панели&nbsp;— триплекс, калёное стекло 6&nbsp;или 8&nbsp;мм или сетка-ПВЛ. Скамья&nbsp;— деревянный брус с&nbsp;антисептической пропиткой.</p>
+        </details>
+        <details class="faq__item">
+          <summary class="faq__q">Выполняете ли монтаж?</summary>
+          <p class="faq__a">Да, устанавливаем павильоны под ключ или контролируем монтаж на&nbsp;объекте (шеф-монтаж).</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--light">
     <div class="container">
       <div class="page-head">
         <div>
@@ -663,7 +734,7 @@
   </section>
 
   <!-- 8. Заявка -->
-  <section class="section section--light" id="request">
+  <section class="section" id="request">
     <div class="container request">
       <div class="request__info">
         <p class="eyebrow">Заявка</p>

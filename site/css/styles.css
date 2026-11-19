@@ -2705,3 +2705,32 @@ a.chip { display: inline-flex; align-items: center; text-decoration: none; }
   .pfilter__range { grid-template-columns: 1fr 1fr; width: 100%; }
   .pfilter__reset { margin-left: 0; }
 }
+
+/* ===== Карточка товара по ТЗ сеошников: условия цены, описание, документы ===== */
+.pinfo__terms { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.pinfo__terms summary { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 0; font-size: 14px; font-weight: 600; color: var(--navy); cursor: pointer; list-style: none; }
+.pinfo__terms summary::-webkit-details-marker { display: none; }
+.pinfo__terms summary::after { content: "+"; font-size: 20px; font-weight: 400; line-height: 1; transition: transform .2s ease; }
+.pinfo__terms[open] summary::after { transform: rotate(45deg); }
+.terms { display: grid; gap: 0; padding-bottom: 8px; }
+.terms > div { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: 16px; padding: 10px 0; border-top: 1px dashed var(--line); font-size: 13px; line-height: 1.5; }
+.terms dt { color: var(--muted); }
+.terms dd { color: var(--ink); }
+.terms__tbd { display: inline-block; padding: 1px 8px; border-radius: 999px; background: var(--field); font-size: 12px; color: var(--grey); }
+.model-about { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 40px 64px; align-items: start; }
+.model-about__text .h2 { margin-bottom: var(--head-gap); }
+.seo-text--single { columns: auto; max-width: 720px; }
+.model-about__docs { padding: 28px; border-radius: var(--radius); background: var(--white); }
+.model-about__docs-title { margin-bottom: 14px; font-size: 20px; font-weight: 700; color: var(--navy); }
+.mdocs { display: grid; margin: 0; padding: 0; list-style: none; }
+.mdoc { display: flex; align-items: center; gap: 14px; padding: 12px 0; border-top: 1px solid var(--line); text-decoration: none; }
+.mdocs li:first-child .mdoc { border-top: 0; }
+.mdoc__type { flex: none; display: grid; place-items: center; width: 40px; height: 44px; border-radius: 8px; background: var(--tint); font-size: 11px; font-weight: 700; color: var(--navy); }
+.mdoc__body { display: grid; gap: 2px; }
+.mdoc__title { font-size: 14px; font-weight: 600; line-height: 1.35; color: var(--navy); transition: color .2s ease; }
+.mdoc__note { font-size: 12px; line-height: 1.4; color: var(--muted); }
+.mdoc:hover .mdoc__title { color: var(--navy-hover); text-decoration: underline; text-underline-offset: 2px; }
+@media (max-width: 900px) {
+  .model-about { grid-template-columns: 1fr; }
+  .model-about__docs { padding: 22px; }
+}
