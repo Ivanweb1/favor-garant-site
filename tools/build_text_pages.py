@@ -118,6 +118,96 @@ def siblings_block(sib, current, bg):
 '''
 
 
+# ---------- блоки шаблона услуги по ТЗ сеошников (SEO-шаблоны FG-03) ----------
+# Порядок: шапка → цены → наши работы → примеры деталей → SEO-текст → FAQ → форма → направления → адрес производства.
+# Каждый блок необязательный: нет данных в словаре страницы — блок не выводится (пустые блоки не публикуем).
+
+CUT_PARTS = re.search(r'      <div class="cut-parts">.*?</ul>\s*</div>\s*</div>', shell, re.S).group(0)
+CONTACTS = (SITE / 'contacts.html').read_text(encoding='utf-8')
+PRODUCTION = re.search(r'        <article class="place" id="production">.*?</article>', CONTACTS, re.S).group(0)
+
+
+def head2(first, second, text=''):
+    t = f'\n        <p class="page-head__text">{nbsp(text)}</p>' if text else ''
+    return f'''      <div class="page-head">
+        <h2 class="h2 duo duo--inline">
+          <span>{nbsp(first)}</span>
+          <span class="duo__second">{nbsp(second)}</span>
+        </h2>{t}
+      </div>'''
+
+
+def prices_block(pr, bg):
+    """Таблица цен: только <table>, единица измерения — в заголовке. Значения и толщины — из прайса клиента."""
+    head = ''.join(f'<th scope="col">{c}</th>' for c in pr['cols'])
+    rows = ''.join(f'<tr><th scope="row">{t}</th>' + ''.join(f'<td>{v}</td>' for v in vals) + '</tr>' for t, *vals in pr['rows'])
+    pdf = f'\n      <a class="link-arrow price-table__pdf" href="{pr["pdf"]}" target="_blank" rel="noopener">Полный прайс-лист, PDF</a>' if pr.get('pdf') else ''
+    return f'''  <section class="section{bg}" id="prices">
+    <div class="container">
+{head2(*pr['title'], pr.get('text', ''))}
+      <!-- {pr['comment']} -->
+      <div class="tdoc__table-wrap price-table" style="--cols: {len(pr['cols'])}">
+        <table class="tdoc__table">
+          <caption class="visually-hidden">{pr['title'][0]} {pr['title'][1]}</caption>
+          <thead><tr><th scope="col">Толщина, мм</th>{head}</tr></thead>
+          <tbody>{rows}</tbody>
+        </table>
+      </div>{pdf}
+    </div>
+  </section>
+
+'''
+
+
+def works_block(items, bg):
+    cards = ''.join(work_card(i, *w) for i, w in enumerate(items, 1))
+    return f'''  <section class="section{bg}" id="works">
+    <div class="container">
+      <div class="page-head">
+        <h2 class="h2 duo duo--inline">
+          <span>Наши</span>
+          <span class="duo__second">работы</span>
+        </h2>
+        <a class="btn btn--outline section-head__link" href="portfolio.html">Все работы</a>
+      </div>
+      <!-- только собственные фото изделий; материал, толщину и тираж пишем в карточке, когда клиент их подтвердит -->
+      <div class="works-grid works-grid--others">{cards}
+      </div>
+    </div>
+  </section>
+
+'''
+
+
+def parts_block(bg):
+    strip = CUT_PARTS.replace('<div class="cut-parts">', '<div class="cut-parts cut-parts--flush">', 1)
+    strip = re.sub(r'\s*<p class="cut-parts__label">.*?</p>', '', strip, count=1)
+    return f'''  <section class="section{bg}" id="examples">
+    <div class="container">
+{head2('Примеры деталей', 'после лазерной резки')}
+    </div>
+    <!-- лента взята со страницы «Услуги» (металлообработка): бесконечная прокрутка -->
+    <div class="container">
+{strip}
+    </div>
+  </section>
+
+'''
+
+
+def address_block(bg):
+    return f'''  <section class="section{bg}" id="address">
+    <div class="container">
+{head2('Адрес', 'производства')}
+      <div class="places places--single">
+{PRODUCTION.replace('<h2 class="place__title">', '<h3 class="place__title">').replace('</h2>', '</h3>')}
+      </div>
+    </div>
+  </section>
+
+'''
+
+
 def text_page(p):
     first, second = p['h1']
     w, h = size(p['photo'][0])
@@ -129,7 +219,23 @@ def text_page(p):
     body = '\n'.join(f'<section id="{sid}">\n<h2>{nbsp(t)}</h2>\n{nbsp(html.strip())}\n</section>' for sid, t, html in p['sections'])
     cta_title, cta_text, cta_btn = p['cta']
 
-    blocks = []  # секции после текста, фон чередуется: текст белый, дальше светлый, белый...
+    # секции между шапкой и текстом (цены, работы, детали): фон чередуется с белого, текст продолжает чередование
+    pre = []
+    if p.get('prices'):
+        pre.append(lambda bg: prices_block(p['prices'], bg))
+    if p.get('works'):
+        pre.append(lambda bg: works_block(p['works'], bg))
+    if p.get('parts'):
+        pre.append(parts_block)
+    before = ''
+    light = False
+    for b in pre:
+        before += b(' section--light' if light else '')
+        light = not light
+    content_bg = ' section--light' if light else ''
+    light = not light
+
+    blocks = []  # секции после текста, фон продолжает чередование
     if p.get('faq'):
         items = ''.join(f'''
         <details class="faq__item">
@@ -150,13 +256,24 @@ def text_page(p):
   </section>
 
 ''')
+    # «Направления» и «Адрес» у шаблона с новыми блоками идут после формы заявки (порядок из ТЗ сеошников)
+    seo_order = bool(pre or p.get('address'))
+    tail_blocks = []
     if p.get('siblings'):
-        blocks.append(lambda bg: siblings_block(p['siblings'], p['crumbs'][-1][0], bg))
+        sib = lambda bg: siblings_block(p['siblings'], p['crumbs'][-1][0], bg)
+        (tail_blocks if seo_order else blocks).append(sib)
+    if p.get('address'):
+        tail_blocks.append(address_block)
 
     after = ''
-    light = True
     for b in blocks:
         after += b(' section--light' if light else '')
+        light = not light
+    request_light = light
+    light = not light
+    after_form = ''
+    for b in tail_blocks:
+        after_form += b(' section--light' if light else '')
         light = not light
 
     main = f'''  <!-- Текстовая страница: собрано tools/build_text_pages.py — правки вносить в скрипт -->
@@ -181,7 +298,7 @@ def text_page(p):
     </div>
   </section>
 
-  <section class="section" id="content">
+{before}  <section class="section{content_bg}" id="content">
     <div class="container tdoc">
       <aside class="tdoc__aside">
         <nav class="toc" aria-label="Содержание страницы">
@@ -202,7 +319,10 @@ def text_page(p):
   </section>
 
 {after}'''
-    write(p['file'], page_head(p['title'], p['desc'], p.get('nav', 'services.html')) + '\n' + main + page_tail(light))
+    tail = page_tail(request_light)
+    if after_form:
+        tail = tail.replace('</main>', after_form.rstrip('\n') + '\n\n</main>', 1)
+    write(p['file'], page_head(p['title'], p['desc'], p.get('nav', 'services.html')) + '\n' + main + tail)
 
 
 # ---------- услуги металлообработки ----------
@@ -281,6 +401,26 @@ SERVICES = [dict(
         ('Сколько стоит резка?', 'Стоимость зависит от толщины металла, длины реза, сложности контура и тиража. Пришлите чертёж через форму ниже — технолог рассчитает цену и сроки.'),
     ],
     siblings=METAL,
+    # Цены: страница материала — одна колонка (латунь). На общей странице «Лазерная резка металла» колонки:
+    # cols=['Чёрная сталь', 'Нержавеющая сталь', 'Алюминий']. Толщины показывают структуру, цифры 000 — заглушки до прайса клиента.
+    prices=dict(
+        title=('Цены на лазерную резку латуни,', 'руб./пог. м'),
+        text='Цена за погонный метр реза. Итоговую стоимость технолог рассчитывает по чертежу: учитывает тираж, количество врезок и сложность контура.',
+        cols=['Латунь'],
+        rows=[(t, '000') for t in ['0,5', '1', '1,5', '2', '3', '4', '5', '6']],
+        comment='Значения и перечень толщин — из прайса клиента. Ссылку на PDF-прайс (ключ pdf) добавлять только при опубликованном файле',
+    ),
+    # Наши работы: собственные фото изделий ФАВОР-ГАРАНТ, где есть детали лазерной резки. Материал, толщину и тираж — после подтверждения клиентом
+    works=[
+        ('img/news/54-news-temirkanov.jpg', 'Информационный стенд на площади имени Юрия Темирканова', 'nav', ['Навигация', 'Санкт-Петербург'],
+         'Информационный стенд с табличкой', 'Стенд для площади имени Юрия Темирканова.', 'news-temirkanov.html'),
+        ('img/projects/skver-2.jpg', 'Информационный пилон в Сквере финансистов', 'nav', ['Навигация', 'Санкт-Петербург'],
+         'Информационный пилон', 'Пилон индивидуального дизайна для Сквера финансистов.', 'project-skver-finansistov.html'),
+        ('img/photos/31-work-stele-gatchina-2.jpg', 'Въездная стела «Гатчина — город воинской славы»', 'nav', ['Навигация', 'Гатчина'],
+         'Въездная стела «Гатчина»', 'Стела на въезде в город с гербами.', 'portfolio.html'),
+    ],
+    parts=True,
+    address=True,
 )]
 
 

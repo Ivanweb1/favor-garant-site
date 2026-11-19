@@ -2656,3 +2656,19 @@ a.news__kind:hover { opacity: .8; }
 @media (max-width: 767px) {
   .page-head__side { width: 100%; justify-content: space-between; }
 }
+
+/* ===== Шаблон услуги по ТЗ сеошников: цены, примеры деталей, адрес производства ===== */
+.price-table { max-width: calc(260px + var(--cols, 1) * 220px); background: var(--white); }
+.price-table tbody th { background: none; font-size: 15px; font-weight: 600; color: var(--navy); border-bottom: 1px solid var(--line); }
+.price-table tbody tr:last-child th { border-bottom: 0; }
+.price-table td { font-variant-numeric: tabular-nums; }
+.price-table .tdoc__table td:first-child { font-weight: 400; color: var(--ink); }
+.price-table__pdf { margin-top: 20px; }
+.cut-parts--flush { margin-top: 0; }
+.places--single { grid-template-columns: 1fr; }
+@media (min-width: 900px) {
+  .places--single .place { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); background: var(--white); }
+  .places--single .place__map { aspect-ratio: auto; min-height: 340px; }
+  .places--single .place__body { justify-content: center; padding: 36px 40px; }
+}
+.section--light .tdoc__table-wrap { background: var(--white); }
