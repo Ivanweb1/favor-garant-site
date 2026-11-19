@@ -220,17 +220,20 @@ for i, (slug, date, title, cover, alt, body) in enumerate(ARTICLES):
         same.sort(key=lambda a: -len(set(META[a[0]][1]) & set(tags)))
         blog = [a for a in ARTICLES if META[a[0]][0] == 'blog']
         mini = lambda a: f'<li><a class="aside-news__link" href="news-{a[0]}.html"><time datetime="{a[1][6:]}-{a[1][3:5]}-{a[1][:2]}">{a[1]}</time><span>{nbsp(a[2])}</span></a></li>'
+        # одна новость по теме и одна статья блога в одной карточке — колонка помещается в закреп на ноутбуке
         aside = f'''
         <div class="aside-news">
-          <p class="toc__title">Новости по&nbsp;теме</p>
-          <ul>{"".join(mini(a) for a in same[:3])}</ul>
-          <a class="link-arrow" href="news.html?type=news">Все новости</a>
-        </div>''' + (f'''
-        <div class="aside-news aside-news--blog">
-          <p class="toc__title">Из&nbsp;блога</p>
-          <ul>{"".join(mini(a) for a in blog[:3])}</ul>
-          <a class="link-arrow" href="news.html?type=blog">Все статьи блога</a>
-        </div>''' if blog else '')
+          <div class="aside-news__group">
+            <p class="toc__title">Новости по&nbsp;теме</p>
+            <ul>{"".join(mini(a) for a in same[:1])}</ul>
+            <a class="link-arrow" href="news.html?type=news">Все новости</a>
+          </div>''' + (f'''
+          <div class="aside-news__group">
+            <p class="toc__title">Из&nbsp;блога</p>
+            <ul>{"".join(mini(a) for a in blog[:1])}</ul>
+            <a class="link-arrow" href="news.html?type=blog">Все статьи блога</a>
+          </div>''' if blog else '') + '''
+        </div>'''
     schema = 'BlogPosting' if kind == 'blog' else 'NewsArticle'
     ld = f'''<script type="application/ld+json">{{"@context":"https://schema.org","@type":"{schema}","headline":"{title.replace('"', '&quot;')}","datePublished":"{y}-{m}-{d}","image":"img/news/{cover}.jpg","author":{{"@type":"Organization","name":"ООО «ФАВОР-ГАРАНТ»"}},"publisher":{{"@type":"Organization","name":"ООО «ФАВОР-ГАРАНТ»"}}}}</script>'''
     page_head = page_head.replace('</head>', f'  {ld}\n</head>', 1)
