@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap&subset=cyrillic" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=20261119h">
+  <link rel="stylesheet" href="css/styles.css?v=20261119k">
 </head>
 <body>
 
@@ -291,8 +291,15 @@
             <div><dt>Ветрозащитные панели</dt><dd>Триплекс, калёное стекло 6&nbsp;или 8&nbsp;мм, сетка-ПВЛ</dd></div>
             <div><dt>Скамья</dt><dd>Деревянный брус с&nbsp;антисептической пропиткой</dd></div>
           </dl>
-          <!-- Цена «от» за базовую комплектацию (правки 19.11). 000 000 — заглушка: цифру даст клиент -->
-          <p class="pinfo__price"><span class="pinfo__price-from">от</span> 000&nbsp;000&nbsp;₽ <span class="pinfo__price-note">за&nbsp;базовую комплектацию</span></p>
+          <!-- цена и кнопка в одну строку — первый экран карточки помещается без прокрутки -->
+          <div class="pinfo__buy">
+            <!-- Цена «от» за базовую комплектацию (правки 19.11). 000 000 — заглушка: цифру даст клиент -->
+            <p class="pinfo__price"><span class="pinfo__price-from">от</span> 000&nbsp;000&nbsp;₽ <span class="pinfo__price-note">за&nbsp;базовую комплектацию</span></p>
+            <div class="pinfo__actions">
+              <button class="btn btn--primary" type="button" data-modal-open="request-modal">Запросить стоимость</button>
+              <a class="link-arrow" href="index.html#services">Монтаж под ключ</a>
+            </div>
+          </div>
           <!-- Условия цены (ТЗ сеошников, обязательно раскрыть). «уточняется» — данные клиента, заполнить перед запуском -->
           <details class="pinfo__terms">
             <summary>Что входит в&nbsp;цену</summary>
@@ -305,10 +312,6 @@
               <div><dt>Срок производства</dt><dd><span class="terms__tbd">уточняется</span></dd></div>
             </dl>
           </details>
-          <div class="pinfo__actions">
-            <button class="btn btn--primary" type="button" data-modal-open="request-modal">Запросить стоимость</button>
-            <a class="link-arrow" href="index.html#services">Монтаж под ключ</a>
-          </div>
         </div>
       </div>
     </div>
