@@ -2707,12 +2707,7 @@ a.chip { display: inline-flex; align-items: center; text-decoration: none; }
 }
 
 /* ===== Карточка товара по ТЗ сеошников: условия цены, описание, документы ===== */
-.pinfo__terms { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-.pinfo__terms summary { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 0; font-size: 14px; font-weight: 600; color: var(--navy); cursor: pointer; list-style: none; }
-.pinfo__terms summary::-webkit-details-marker { display: none; }
-.pinfo__terms summary::after { content: "+"; font-size: 20px; font-weight: 400; line-height: 1; transition: transform .2s ease; }
-.pinfo__terms[open] summary::after { transform: rotate(45deg); }
-.terms { display: grid; gap: 0; padding-bottom: 8px; }
+.terms { display: grid; gap: 0; margin: 0; }
 .terms > div { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: 16px; padding: 10px 0; border-top: 1px dashed var(--line); font-size: 13px; line-height: 1.5; }
 .terms dt { color: var(--muted); }
 .terms dd { color: var(--ink); }
@@ -2775,56 +2770,52 @@ a.chip { display: inline-flex; align-items: center; text-decoration: none; }
   .page-head--equip .page-head__aside { padding-top: 0; }
 }
 
-/* ===== Карточка товара: компактный первый экран (цена и кнопка видны без прокрутки) ===== */
-.pinfo__buy { display: grid; gap: 14px; }
+/* ===== Карточка товара: первый экран ===== */
+/* Правая колонка: заголовок → описание → комплектации → характеристики → блок покупки.
+   Галерея слева тянется по высоте правой колонки (≥1081px). */
+.product { align-items: start; }
+
+/* характеристики — простым списком: подпись слева, значение справа */
+.specs > div { padding: 10px 0; }
+.specs dd { font-weight: 500; color: var(--ink); }
+
+/* блок покупки — белая карточка */
+.pinfo__buy { display: grid; gap: 14px; padding: 18px 20px; border-radius: var(--radius); background: var(--white); }
+.pinfo__buy-main { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px 20px; }
+.pinfo__buy .pinfo__price { display: grid; grid-template-columns: auto auto; justify-content: start; align-items: baseline; column-gap: 8px; row-gap: 2px; white-space: nowrap; font-size: 26px; }
+.pinfo__buy .pinfo__price-note { grid-column: 1 / -1; font-size: 12px; }
+.pinfo__buy-extra { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 20px; padding-top: 12px; border-top: 1px solid var(--line); }
+.pinfo__buy-extra .link-arrow { font-size: 14px; }
+/* «Что входит в цену»: ссылка с плюсом, по клику — панель поверх страницы */
+.pinfo__terms { position: relative; }
+.pinfo__terms summary { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; color: var(--navy); cursor: pointer; list-style: none; }
+.pinfo__terms summary::-webkit-details-marker { display: none; }
+.pinfo__terms summary::after { content: "+"; display: grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; background: var(--tint); font-size: 15px; font-weight: 500; line-height: 1; transition: transform .2s ease; }
+.pinfo__terms[open] summary::after { transform: rotate(45deg); }
+.pinfo__terms summary:hover { color: var(--navy-hover); }
+.pinfo__terms-panel { margin-top: 12px; }
+.terms > div { padding: 9px 0; }
+.terms > div:first-child { border-top: 0; }
+
 @media (min-width: 1081px) {
-  .product { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); align-items: start; }
-  /* миниатюры — узкой колонкой слева от фото */
-  .pgallery { grid-template-columns: 76px minmax(0, 1fr); align-items: start; gap: 12px; }
-  .pgallery__thumbs { grid-row: 1; grid-column: 1; grid-template-columns: 1fr; gap: 10px; }
-  .pgallery__main { grid-column: 2; }
-  .pinfo { gap: 12px; }
+  .product { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); align-items: stretch; }
+  /* миниатюры — узкой колонкой слева от фото; фото тянется по высоте правой колонки */
+  .pgallery { grid-template-columns: 76px minmax(0, 1fr); grid-template-rows: minmax(0, 1fr); align-items: stretch; gap: 12px; }
+  .pgallery__thumbs { grid-row: 1; grid-column: 1; grid-template-columns: 1fr; align-content: start; gap: 10px; }
+  .pgallery__main { grid-column: 2; min-height: 360px; }
+  .pgallery__main > img { position: absolute; inset: 0; width: 100%; height: 100%; aspect-ratio: auto; object-fit: contain; }
+  .pinfo { gap: 14px; }
   .pinfo h1.h2 { font-size: clamp(24px, 2vw, 34px); line-height: 1.15; }
   .pinfo h1.duo > span { display: inline; }
-  .pinfo__lead { font-size: 15px; line-height: 1.5; }
+  .pinfo__lead { font-size: 15px; line-height: 1.55; }
   .pinfo__configs { gap: 8px; }
   .filters--configs .chip { padding: 6px 14px; font-size: 13px; }
   .pinfo__config-desc { min-height: 0; font-size: 13px; }
-  .specs > div { grid-template-columns: minmax(0, 1fr) minmax(0, 1.8fr); padding: 8px 0; font-size: 13px; }
-  .pinfo__buy { grid-template-columns: auto 1fr; align-items: center; gap: 16px 24px; margin-top: 4px; }
-  .pinfo__buy .pinfo__actions { justify-content: flex-end; gap: 12px 20px; margin-top: 0; padding-top: 0; }
-  .pinfo__price { font-size: 26px; }
-  .pinfo__terms summary { padding: 10px 0; }
-}
-/* раскрытие «Что входит в цену» не растягивает галерею слева */
-.product { align-items: start; }
-.pgallery { align-content: start; align-items: start; }
-
-/* ===== Карточка товара: галерея и правая колонка одной высоты ===== */
-@media (min-width: 1081px) {
-  .product { align-items: stretch; row-gap: 0; }
-  /* галерея тянется по высоте колонки с описанием; «Что входит в цену» — отдельной строкой, её раскрытие галерею не меняет */
-  .product > .pgallery { grid-row: 1; align-self: stretch; grid-template-rows: minmax(0, 1fr); align-content: stretch; align-items: stretch; }
-  .pgallery__thumbs { align-content: start; }
-  .pgallery__main { min-height: 360px; }
-  .pgallery__main > img { position: absolute; inset: 0; width: 100%; height: 100%; aspect-ratio: auto; object-fit: cover; }
-  .product > .pinfo { grid-row: 1; grid-column: 2; }
-  .product > .pinfo__terms { grid-row: 2; grid-column: 2; margin-top: 12px; }
-  /* характеристики — сеткой 2 × 2: подпись над значением */
-  .specs { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 24px; border-top: 0; }
-  .specs > div { display: grid; grid-template-columns: 1fr; gap: 2px; padding: 9px 0; border-top: 1px solid var(--line); border-bottom: 0; font-size: 13px; }
-  .specs dt { font-size: 12px; }
-  .specs dd { line-height: 1.35; }
-  /* цена, кнопка и «Монтаж под ключ» — в одну строку */
-  .pinfo__buy { display: flex; flex-wrap: nowrap; align-items: center; justify-content: space-between; gap: 16px; margin-top: auto; padding-top: 14px; border-top: 1px solid var(--line); }
-  .pinfo__buy .pinfo__price { display: grid; grid-template-columns: auto auto; justify-content: start; align-items: baseline; column-gap: 8px; row-gap: 2px; flex: none; white-space: nowrap; font-size: 24px; }
-  .pinfo__buy .pinfo__price-note { grid-column: 1 / -1; }
-  .pinfo__buy .btn { padding-inline: 22px; }
-  .pinfo__buy .pinfo__actions { flex-wrap: nowrap; justify-content: flex-start; gap: 18px; }
-  .pinfo__buy .pinfo__actions { min-width: 0; }
-  .pinfo__buy .link-arrow { font-size: 14px; }
-  .pinfo__price-note { font-size: 12px; }
+  .specs > div { grid-template-columns: minmax(0, 1fr) minmax(0, 1.9fr); padding: 8px 0; font-size: 13px; }
+  .pinfo__buy { margin-top: auto; }
+  /* панель условий — поверх страницы, высота колонки не меняется */
+  .pinfo__terms-panel { position: absolute; left: -20px; top: calc(100% + 14px); z-index: 20; width: min(560px, calc(100vw - 48px)); margin: 0; padding: 8px 20px; border-radius: var(--radius); background: var(--white); box-shadow: 0 18px 48px rgba(23, 22, 43, .16); }
 }
 @media (max-width: 1080px) {
-  .product > .pinfo__terms { margin-top: -18px; }
+  .pinfo__buy .btn { flex: 1 1 220px; }
 }
