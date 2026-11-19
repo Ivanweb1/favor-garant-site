@@ -2635,3 +2635,24 @@ a.news__kind:hover { opacity: .8; }
   .hero__actions { gap: 12px; }
   .hero__actions .btn { flex: 1 1 100%; }
 }
+
+/* ===== Правки 19.11: цена «от», «Добавить к заявке», доп. оборудование ===== */
+.pinfo__price { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; font-size: clamp(24px, 2.4vw, 30px); font-weight: 700; line-height: 1.2; color: var(--navy); }
+.pinfo__price-from { font-size: .6em; font-weight: 500; color: var(--muted); }
+.pinfo__price-note { flex-basis: 100%; font-size: 13px; font-weight: 500; color: var(--muted); }
+/* шапка блока: ссылка «Посмотреть все» рядом со стрелками слайдера */
+.page-head__side { display: flex; flex: none; align-items: center; gap: 16px; }
+.page-head__aside { display: grid; gap: 16px; justify-items: start; }
+/* поле «Дополнительное оборудование» в форме заявки */
+.extras { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.extras[hidden], .extras__empty[hidden] { display: none; }
+.extras__item { display: inline-flex; align-items: center; gap: 8px; padding: 7px 8px 7px 14px; border-radius: 999px; background: var(--tint); font-size: 14px; font-weight: 500; color: var(--navy); }
+.extras__remove { display: grid; place-items: center; width: 22px; height: 22px; padding: 0; border: 0; border-radius: 50%; background: transparent; color: inherit; cursor: pointer; }
+.extras__remove:hover { background: rgba(42, 37, 96, .12); }
+.extras__remove svg { fill: none; stroke: currentColor; stroke-width: 2; }
+.extras__empty { padding: 12px 14px; border-radius: var(--radius-sm); background: var(--field); font-size: 14px; color: var(--muted); }
+.extras__empty a { color: var(--navy); text-decoration: underline; text-underline-offset: 2px; }
+.tile__cart svg path[d^="M12 5"] { stroke-width: 2; }
+@media (max-width: 767px) {
+  .page-head__side { width: 100%; justify-content: space-between; }
+}

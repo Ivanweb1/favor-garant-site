@@ -446,10 +446,18 @@
         chips.forEach((c) => c.setAttribute('aria-pressed', String(c === chip)));
         const tag = chip.dataset.filter;
         grid.querySelectorAll('[data-tags]').forEach((card) => {
-          card.hidden = tag !== 'all' && !card.dataset.tags.split(' ').includes(tag);
+          // data-own — подраздел (доп. оборудование): в «Все» не входит, виден только по своему чипу
+          card.hidden = tag === 'all' ? card.hasAttribute('data-own') : !card.dataset.tags.split(' ').includes(tag);
         });
       });
     });
+    // переход по ссылке вида bus-shelters.html#equipment открывает нужный подраздел
+    const openFromHash = () => {
+      const chip = location.hash && chips.find((c) => c.id === location.hash.slice(1));
+      if (chip) chip.click();
+    };
+    openFromHash();
+    window.addEventListener('hashchange', openFromHash);
   });
 
   // Карточка модели: галерея со стрелками и счётчиком, чипы комплектаций, просмотр на весь экран
@@ -580,6 +588,57 @@
       document.querySelectorAll('[data-config-img]').forEach((el) => { el.src = chip.dataset.full; });
     });
   });
+
+  // Доп. оборудование к заявке (прототип): кнопки «Добавить к заявке» складывают модули в поле
+  // «Дополнительное оборудование» формы заявки. Выбор хранится в браузере и общий для каталога и карточки модели.
+  const EXTRAS_KEY = 'fg-request-extras';
+  let extras = [];
+  try { extras = JSON.parse(localStorage.getItem(EXTRAS_KEY)) || []; } catch (e) { /* без хранилища */ }
+  const extraName = (id) => {
+    const btn = document.querySelector(`[data-request-add="${id}"]`);
+    const title = btn && btn.closest('.tile') && btn.closest('.tile').querySelector('.tile__title');
+    return title ? title.textContent.replace(/\s+/g, ' ').trim() : id;
+  };
+  // имена запоминаем вместе с id, чтобы список был понятен и на странице, где этой карточки нет
+  extras = extras.filter((x) => x && x.id).map((x) => ({ id: x.id, name: x.name || extraName(x.id) }));
+  const saveExtras = () => { try { localStorage.setItem(EXTRAS_KEY, JSON.stringify(extras)); } catch (e) { /* без хранилища */ } };
+  function renderExtras() {
+    document.querySelectorAll('[data-request-add]').forEach((btn) => {
+      const added = extras.some((x) => x.id === btn.dataset.requestAdd);
+      btn.setAttribute('aria-pressed', String(added));
+      btn.querySelector('span').textContent = added ? 'В заявке' : 'Добавить к заявке';
+    });
+    document.querySelectorAll('[data-extras]').forEach((field) => {
+      const list = field.querySelector('.extras');
+      list.innerHTML = '';
+      extras.forEach((x) => {
+        const li = document.createElement('li');
+        li.className = 'extras__item';
+        li.innerHTML = '<span></span><button class="extras__remove" type="button"><svg width="10" height="10" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 2l12 12M14 2L2 14"/></svg></button>';
+        li.querySelector('span').textContent = x.name;
+        li.querySelector('button').setAttribute('aria-label', `Убрать «${x.name}» из заявки`);
+        li.querySelector('button').addEventListener('click', () => {
+          extras = extras.filter((y) => y.id !== x.id);
+          saveExtras();
+          renderExtras();
+        });
+        list.appendChild(li);
+      });
+      list.hidden = !extras.length;
+      field.querySelector('.extras__empty').hidden = extras.length > 0;
+      field.querySelector('input[name="extras"]').value = extras.map((x) => x.name).join('; ');
+    });
+  }
+  document.querySelectorAll('[data-request-add]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const id = btn.dataset.requestAdd;
+      if (extras.some((x) => x.id === id)) extras = extras.filter((x) => x.id !== id);
+      else extras.push({ id, name: extraName(id) });
+      saveExtras();
+      renderExtras();
+    });
+  });
+  renderExtras();
 
   // Корзина комплектующих (прототип): хранится в браузере как { id: количество }, счётчик в шапке общий для всех страниц
   const CART_KEY = 'fg-cart';
