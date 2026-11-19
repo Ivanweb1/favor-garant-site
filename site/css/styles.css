@@ -2821,3 +2821,5 @@ a.chip { display: inline-flex; align-items: center; text-decoration: none; }
 }
 /* фото на объекте — на всю рамку галереи (рендер комплектации остаётся целиком) */
 .pgallery__main.is-photo > img { object-fit: cover; }
+/* заголовок карточки — одной фразой и на телефоне: «Остановочный / павильон Атлант» в две строки */
+.pinfo h1.duo > span { display: inline; }
