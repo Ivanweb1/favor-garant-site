@@ -437,24 +437,62 @@
     update();
   });
 
-  // Каталог: фильтр моделей по чипам (data-tags у карточки)
+  // Каталог: подразделы (чипы) и фильтр по параметрам (data-tags, data-dims, data-props у карточки).
+  // Чипы могут быть ссылками на подразделы (<a href="…#closed">) — в макете ссылка фильтрует на месте,
+  // на сайте это отдельные URL подкатегорий.
   document.querySelectorAll('.filters[data-target]').forEach((bar) => {
     const grid = document.getElementById(bar.dataset.target);
     const chips = [...bar.querySelectorAll('.chip')];
+    const form = document.querySelector(`.pfilter[data-for="${bar.dataset.target}"]`);
+    const empty = grid.parentElement.querySelector('.pfilter__empty');
+    let tag = 'all';
+    const mark = (chip) => chips.forEach((c) => {
+      const on = c === chip;
+      if (c.tagName === 'A') { if (on) c.setAttribute('aria-current', 'true'); else c.removeAttribute('aria-current'); }
+      else c.setAttribute('aria-pressed', String(on));
+    });
+    const num = (name) => { const v = form && form.elements[name].value.trim(); return v === '' || v == null ? null : Number(v); };
+    function apply() {
+      // параметры относятся к павильонам: в подразделе доп. оборудования панель прячем
+      const own = chips.find((c) => c.dataset.filter === tag)?.hasAttribute('data-own');
+      if (form) form.hidden = !!own;
+      const props = form ? [...form.querySelectorAll('input[type="checkbox"]:checked')].map((i) => i.value) : [];
+      let shown = 0;
+      grid.querySelectorAll('[data-tags]').forEach((card) => {
+        // data-own — подраздел (доп. оборудование): в «Все» не входит, виден только по своему чипу
+        let ok = tag === 'all' ? !card.hasAttribute('data-own') : card.dataset.tags.split(' ').includes(tag);
+        if (ok && form && !own && card.dataset.dims) {
+          const [l, h, w] = card.dataset.dims.split(' ').map(Number);
+          const fits = (v, k) => (num(k + '-from') == null || v >= num(k + '-from')) && (num(k + '-to') == null || v <= num(k + '-to'));
+          const have = (card.dataset.props || '').split(' ');
+          ok = fits(l, 'len') && fits(w, 'wid') && fits(h, 'hgt') && props.every((p) => have.includes(p));
+        }
+        card.hidden = !ok;
+        if (ok) shown += 1;
+      });
+      if (empty) empty.hidden = shown > 0;
+    }
     chips.forEach((chip) => {
-      chip.addEventListener('click', () => {
-        chips.forEach((c) => c.setAttribute('aria-pressed', String(c === chip)));
-        const tag = chip.dataset.filter;
-        grid.querySelectorAll('[data-tags]').forEach((card) => {
-          // data-own — подраздел (доп. оборудование): в «Все» не входит, виден только по своему чипу
-          card.hidden = tag === 'all' ? card.hasAttribute('data-own') : !card.dataset.tags.split(' ').includes(tag);
-        });
+      chip.addEventListener('click', (e) => {
+        if (chip.tagName === 'A') {
+          e.preventDefault();
+          history.replaceState(null, '', chip.dataset.filter === 'all' ? location.pathname : '#' + chip.dataset.filter);
+        }
+        tag = chip.dataset.filter;
+        mark(chip);
+        apply();
       });
     });
+    if (form) {
+      form.addEventListener('input', apply);
+      form.addEventListener('reset', () => setTimeout(apply));
+    }
+    if (empty) empty.querySelector('button').addEventListener('click', () => { if (form) form.reset(); chips[0].click(); });
     // переход по ссылке вида bus-shelters.html#equipment открывает нужный подраздел
     const openFromHash = () => {
-      const chip = location.hash && chips.find((c) => c.id === location.hash.slice(1));
-      if (chip) chip.click();
+      const key = location.hash.slice(1);
+      const chip = key && chips.find((c) => c.dataset.filter === key || c.id === key);
+      if (chip) { tag = chip.dataset.filter; mark(chip); apply(); }
     };
     openFromHash();
     window.addEventListener('hashchange', openFromHash);

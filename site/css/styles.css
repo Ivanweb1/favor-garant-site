@@ -2672,3 +2672,36 @@ a.news__kind:hover { opacity: .8; }
   .places--single .place__body { justify-content: center; padding: 36px 40px; }
 }
 .section--light .tdoc__table-wrap { background: var(--white); }
+
+/* ===== Категория каталога по ТЗ сеошников: подразделы-ссылки, фильтр по параметрам, цена, SEO-текст ===== */
+a.chip { display: inline-flex; align-items: center; text-decoration: none; }
+.chip[aria-current="true"] { border-color: var(--navy); background: var(--navy); color: var(--white); }
+.chip[aria-current="true"]:hover { background: var(--navy-hover); }
+.pfilter-wrap { margin: 16px 0 28px; }
+.pfilter__toggle { display: inline-flex; align-items: center; gap: 10px; padding: 10px 18px; border: 1px solid var(--line); border-radius: 999px; background: var(--white); font-size: 14px; font-weight: 600; color: var(--navy); cursor: pointer; list-style: none; }
+.pfilter__toggle::-webkit-details-marker { display: none; }
+.pfilter__toggle::before { content: ""; width: 16px; height: 12px; background: linear-gradient(currentColor 0 0) 0 0 / 100% 2px no-repeat, linear-gradient(currentColor 0 0) 3px 5px / 10px 2px no-repeat, linear-gradient(currentColor 0 0) 6px 10px / 4px 2px no-repeat; }
+.pfilter__toggle:hover { background: var(--tint); }
+.pfilter-wrap[open] .pfilter__toggle { border-color: var(--navy); }
+.pfilter { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 20px 28px; margin-top: 14px; padding: 24px 28px; border-radius: var(--radius); background: var(--white); }
+.pfilter[hidden] { display: none; }
+.pfilter fieldset { min-width: 0; margin: 0; padding: 0; border: 0; }
+.pfilter__label { margin-bottom: 8px; padding: 0; font-size: 13px; font-weight: 500; color: var(--muted); }
+.pfilter__range { display: grid; grid-template-columns: repeat(2, 104px); gap: 0 8px; }
+.pfilter__range legend { grid-column: 1 / -1; }
+.pfilter__range .field__input { min-height: 44px; padding: 0 12px; }
+.pfilter__checks { display: grid; gap: 10px; }
+.pfilter__reset { margin-left: auto; align-self: center; background: none; border: 0; padding: 0; font: inherit; font-size: 14px; cursor: pointer; }
+.pfilter__empty { padding: 28px; border-radius: var(--radius); background: var(--white); color: var(--muted); }
+.pfilter__empty[hidden] { display: none; }
+.pfilter__empty .link-arrow { margin-left: 8px; background: none; border: 0; padding: 0; font: inherit; cursor: pointer; }
+.tile__price { margin-top: auto; padding-top: 12px; font-size: 20px; font-weight: 700; line-height: 1.2; color: var(--navy); }
+.tile__price span { font-size: 13px; font-weight: 500; color: var(--muted); }
+.tile__price + .tile__foot { margin-top: 10px; }
+.seo-text { max-width: 860px; columns: 2 380px; column-gap: 48px; font-size: 16px; line-height: 1.7; color: var(--ink); }
+.seo-text p { margin: 0 0 1em; break-inside: avoid; }
+@media (max-width: 767px) {
+  .pfilter { padding: 20px; }
+  .pfilter__range { grid-template-columns: 1fr 1fr; width: 100%; }
+  .pfilter__reset { margin-left: 0; }
+}
