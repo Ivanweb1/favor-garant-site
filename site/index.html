@@ -12,6 +12,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap&subset=cyrillic" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css?v=20261118d">
+  <!-- первый слайд галереи — видео: заставка грузится сразу -->
+  <link rel="preload" as="image" href="video/fg-altay-stele.jpg" fetchpriority="high">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -295,15 +297,15 @@
     <div class="gallery" aria-roledescription="карусель" aria-label="Наши конструкции в городе">
       <div class="gallery__track">
         <!-- Кадры иллюстрируют акценты брифа (п. 04), а подпись называет объект: тезисы раскрыты в полосе преимуществ ниже -->
-        <figure class="gallery__slide is-active" data-caption="Остановочный павильон «Городской»" data-href="#catalog" style="--pos: 50% 45%">
-          <img src="img/photos/40-slide-pavilion.jpg" alt="Остановочный павильон «Городской» на улице Санкт-Петербурга" width="1916" height="821" fetchpriority="high">
+        <!-- Видео-слайд первым (правки 19.11): data-src — ролик, poster — заставка (видна на телефоне), data-time — сколько показывать, мс -->
+        <figure class="gallery__slide is-active" data-caption="Стела «Усть-Канский район», Республика Алтай" data-href="#about" data-time="12000" style="--pos: 50% 50%">
+          <video data-src="video/fg-altay-stele.mp4" poster="video/fg-altay-stele.jpg" muted loop playsinline preload="none" aria-label="Стела «Усть-Канский район», Республика Алтай"></video>
+        </figure>
+        <figure class="gallery__slide" data-caption="Остановочный павильон «Городской»" data-href="#catalog" style="--pos: 50% 45%">
+          <img src="img/photos/40-slide-pavilion.jpg" alt="Остановочный павильон «Городской» на улице Санкт-Петербурга" width="1916" height="821">
         </figure>
         <figure class="gallery__slide" data-caption="Резка металла на ЧПУ" data-href="#services" style="--pos: 52% 50%">
           <img src="img/photos/42-slide-production.jpg" alt="Резка металла на станке с ЧПУ в цехе" width="1916" height="821" loading="lazy">
-        </figure>
-        <!-- Видео-слайд: data-src — ролик, poster — заставка (видна на телефоне), data-time — сколько показывать, мс -->
-        <figure class="gallery__slide" data-caption="Стела «Усть-Канский район», Республика Алтай" data-href="#about" data-time="12000" style="--pos: 50% 50%">
-          <video data-src="video/fg-altay-stele.mp4" poster="video/fg-altay-stele.jpg" muted loop playsinline preload="none" aria-label="Стела «Усть-Канский район», Республика Алтай"></video>
         </figure>
         <figure class="gallery__slide" data-caption="Въездная стела «Гатчина»" data-href="#works" style="--pos: 50% 50%">
           <img src="img/photos/43-slide-stele-gatchina.jpg" alt="Въездная стела «Гатчина — город воинской славы»" width="1916" height="821" loading="lazy">
@@ -314,8 +316,8 @@
       </div>
 
       <div class="gallery__ui container">
-        <a class="gallery__caption" href="#catalog">
-          <span class="gallery__caption-text">Остановочный павильон «Городской»</span>
+        <a class="gallery__caption" href="#about">
+          <span class="gallery__caption-text">Стела «Усть-Канский район», Республика Алтай</span>
         </a>
         <div class="gallery__controls">
           <button class="gallery__btn gallery__btn--prev" type="button" aria-label="Предыдущее фото">
