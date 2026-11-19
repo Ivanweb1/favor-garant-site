@@ -419,6 +419,15 @@
               <span class="showcase__icon"><img src="img/icons/line-navigation.svg" alt="" width="36" height="20"></span>
               <span class="showcase__name">Навигация</span>
             </button>
+            <!-- правки 19.11: два раздела, как в меню «Продукция» -->
+            <button class="showcase__tab" type="button" role="tab" id="cat-tab-complex" aria-controls="cat-panel-complex" aria-selected="false" tabindex="-1">
+              <span class="showcase__icon"><img src="img/icons/line-complex.svg" alt="" width="36" height="20"></span>
+              <span class="showcase__name">Комплексное решение для&nbsp;благоустройства</span>
+            </button>
+            <button class="showcase__tab" type="button" role="tab" id="cat-tab-parts" aria-controls="cat-panel-parts" aria-selected="false" tabindex="-1">
+              <span class="showcase__icon"><img src="img/icons/line-parts.svg" alt="" width="36" height="20"></span>
+              <span class="showcase__name">Комплектующие</span>
+            </button>
           </div>
         </div>
         <div class="showcase__panel" role="tabpanel" id="cat-panel-pav" aria-labelledby="cat-tab-pav">
@@ -551,6 +560,36 @@
             </ul>
             <div class="card__actions">
               <a class="btn btn--primary" href="#catalog">Смотреть раздел</a>
+            </div>
+          </div>
+        </div>
+        <div class="showcase__panel" role="tabpanel" id="cat-panel-complex" aria-labelledby="cat-tab-complex" hidden>
+          <a class="showcase__media" href="#catalog" tabindex="-1"><img src="img/projects/skver-cover.jpg" style="--pos: 50% 55%" alt="Благоустроенный сквер с информационным пилоном" loading="lazy" width="1310" height="1015"></a>
+          <div class="showcase__body">
+            <h3 class="showcase__title">Комплексное решение для&nbsp;благоустройства</h3>
+            <p class="showcase__text">Благоустройство территории под ключ: проект, производство и&nbsp;монтаж остановок, навигации, МАФ и&nbsp;освещения в&nbsp;едином стиле.</p>
+            <ul class="card__models">
+              <li><a href="bus-shelters.html">Остановочные павильоны</a></li>
+              <li><a href="#catalog">Навигация</a></li>
+              <li><a href="#catalog">Малые архитектурные формы</a></li>
+            </ul>
+            <div class="card__actions">
+              <a class="btn btn--primary" href="#catalog">Смотреть раздел</a>
+            </div>
+          </div>
+        </div>
+        <div class="showcase__panel" role="tabpanel" id="cat-panel-parts" aria-labelledby="cat-tab-parts" hidden>
+          <a class="showcase__media" href="parts.html" tabindex="-1"><img src="img/photos/21-prod-metalworking.jpg" style="--pos: 50% 55%" alt="Изготовление деталей на станке с ЧПУ" loading="lazy" width="1400" height="1050"></a>
+          <div class="showcase__body">
+            <h3 class="showcase__title">Комплектующие</h3>
+            <p class="showcase__text">Запасные части и&nbsp;комплектующие для конструкций&nbsp;— можно заказать онлайн и&nbsp;положить в&nbsp;корзину.</p>
+            <ul class="card__models">
+              <li><a href="parts.html#pav">Остановки</a></li>
+              <li><a href="parts.html#tri">Тривижны</a></li>
+              <li><a href="parts.html#anchor">Анкеры</a></li>
+            </ul>
+            <div class="card__actions">
+              <a class="btn btn--primary" href="parts.html">Смотреть раздел</a>
             </div>
           </div>
         </div>
