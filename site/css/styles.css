@@ -2855,3 +2855,25 @@ a.chip { display: inline-flex; align-items: center; text-decoration: none; }
 .catalog-bar .filters { gap: 8px; }
 .catalog-bar .pfilter__toggle { padding-inline: 16px; }
 .catalog-bar .chip__num { margin-left: 5px; }
+
+/* блок цен на странице услуги: слева заголовок, пояснение и кнопка, справа таблица */
+.price-block { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); gap: 32px clamp(32px, 6vw, 96px); align-items: start; }
+.price-block__head { display: grid; justify-items: start; gap: 20px; }
+.price-block__head .h2 { margin: 0; }
+.price-block__text { max-width: 440px; font-size: 16px; line-height: 1.6; color: var(--muted); }
+.price-block .price-table { max-width: none; }
+.price-block .price-table th:first-child, .price-block .price-table td:first-child { width: 50%; }
+.price-block .price-table tbody th, .price-block .price-table td { padding-top: 13px; padding-bottom: 13px; }
+@media (max-width: 900px) { .price-block { grid-template-columns: 1fr; } }
+
+/* текст страницы на светло-сером фоне: серые плашки внутри становятся белыми карточками, иначе сливаются с фоном */
+.section--light .toc,
+.section--light .tdoc__point,
+.section--light .article__note,
+.section--light .article__related,
+.section--light .aside-news { background: var(--white); }
+/* «Как проходит заказ» — карточками одинаковой высоты, как «Преимущества» */
+.tdoc__steps li { padding: 20px 22px; border-radius: var(--radius-sm); background: var(--light); }
+.section--light .tdoc__steps li { background: var(--white); }
+.tdoc__steps li b { color: var(--navy); }
+.tdoc .article__body .tdoc__steps { gap: 16px; }

@@ -276,36 +276,54 @@
   </section>
 
   <section class="section" id="prices">
-    <div class="container">
-      <div class="page-head">
-        <h2 class="h2 duo duo--inline">
+    <div class="container price-block">
+      <div class="price-block__head">
+        <h2 class="h2 duo">
           <span>Цены на&nbsp;лазерную резку латуни,</span>
           <span class="duo__second">руб./пог. м</span>
         </h2>
-        <p class="page-head__text">Цена за&nbsp;погонный метр реза. Итоговую стоимость технолог рассчитывает по&nbsp;чертежу: учитывает тираж, количество врезок и&nbsp;сложность контура.</p>
+          <p class="price-block__text">Цена за&nbsp;погонный метр реза. Итоговую стоимость технолог рассчитывает по&nbsp;чертежу: учитывает тираж, количество врезок и&nbsp;сложность контура.</p>
+        <a class="btn btn--primary" href="#request-form">Рассчитать по&nbsp;чертежу</a>
       </div>
-      <!-- Значения и перечень толщин — из прайса клиента. Ссылку на PDF-прайс (ключ pdf) добавлять только при опубликованном файле -->
-      <div class="tdoc__table-wrap price-table" style="--cols: 1">
-        <table class="tdoc__table">
-          <caption class="visually-hidden">Цены на лазерную резку латуни, руб./пог. м</caption>
-          <thead><tr><th scope="col">Толщина, мм</th><th scope="col">Латунь</th></tr></thead>
-          <tbody><tr><th scope="row">0,5</th><td>000</td></tr><tr><th scope="row">1</th><td>000</td></tr><tr><th scope="row">1,5</th><td>000</td></tr><tr><th scope="row">2</th><td>000</td></tr><tr><th scope="row">3</th><td>000</td></tr><tr><th scope="row">4</th><td>000</td></tr><tr><th scope="row">5</th><td>000</td></tr><tr><th scope="row">6</th><td>000</td></tr></tbody>
-        </table>
+      <div class="price-block__table">
+        <!-- Значения и перечень толщин — из прайса клиента. Ссылку на PDF-прайс (ключ pdf) добавлять только при опубликованном файле -->
+        <div class="tdoc__table-wrap price-table" style="--cols: 1">
+          <table class="tdoc__table">
+            <caption class="visually-hidden">Цены на лазерную резку латуни, руб./пог. м</caption>
+            <thead><tr><th scope="col">Толщина, мм</th><th scope="col">Латунь</th></tr></thead>
+            <tbody><tr><th scope="row">0,5</th><td>000</td></tr><tr><th scope="row">1</th><td>000</td></tr><tr><th scope="row">1,5</th><td>000</td></tr><tr><th scope="row">2</th><td>000</td></tr><tr><th scope="row">3</th><td>000</td></tr><tr><th scope="row">4</th><td>000</td></tr><tr><th scope="row">5</th><td>000</td></tr><tr><th scope="row">6</th><td>000</td></tr></tbody>
+          </table>
+        </div>
       </div>
     </div>
   </section>
 
   <section class="section section--light" id="works">
     <div class="container">
-      <div class="page-head">
-        <h2 class="h2 duo duo--inline">
-          <span>Наши</span>
-          <span class="duo__second">работы</span>
-        </h2>
-        <a class="btn btn--outline section-head__link" href="portfolio.html">Все работы</a>
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Наши работы</p>
+          <h2 class="h2 duo">
+            <span>Изделия</span>
+            <span class="duo__second">с&nbsp;деталями лазерной резки</span>
+          </h2>
+        </div>
+        <div class="section-head__side">
+          <div class="works__nav">
+            <button class="works__btn works__btn--prev" type="button" aria-label="Предыдущая работа">
+              <svg class="arr arr--prev" width="10" height="11" viewBox="0 0 13 14" aria-hidden="true"><path d="M.74.68l11 12M11.74 12.68V1.84M11.74 12.68H1.88" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+            </button>
+            <button class="works__btn works__btn--next" type="button" aria-label="Следующая работа">
+              <svg class="arr arr--next" width="10" height="11" viewBox="0 0 13 14" aria-hidden="true"><path d="M.74.68l11 12M11.74 12.68V1.84M11.74 12.68H1.88" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+            </button>
+          </div>
+          <a class="btn btn--outline section-head__link" href="portfolio.html">Все работы</a>
+        </div>
       </div>
-      <!-- только собственные фото изделий; материал, толщину и тираж пишем в карточке, когда клиент их подтвердит -->
-      <div class="works-grid works-grid--others">
+    </div>
+    <!-- только собственные фото изделий; материал, толщину и тираж пишем в карточке, когда клиент их подтвердит -->
+    <div class="works" aria-roledescription="карусель" aria-label="Наши работы">
+      <div class="works__track" tabindex="0">
         <a class="work" href="news-temirkanov.html" data-tags="nav">
           <div class="work__media">
             <img class="work__img" src="img/news/54-news-temirkanov.jpg" alt="Информационный стенд на площади имени Юрия Темирканова" loading="lazy" width="1200" height="930">
@@ -348,8 +366,37 @@
             <p class="work__text">Стела на&nbsp;въезде в&nbsp;город с&nbsp;гербами.</p>
           </div>
         </a>
+        <a class="work" href="portfolio.html" data-tags="nav">
+          <div class="work__media">
+            <img class="work__img" src="img/photos/32-work-stele-ponsse.jpg" alt="Монтаж бренд-стелы PONSSE" loading="lazy" width="1400" height="935">
+            <div class="work__top">
+              <span class="work__num">04</span>
+              <ul class="tags"><li>Навигация</li><li>Бренд-стела</li></ul>
+            </div>
+            <span class="work__go" aria-hidden="true"></span>
+          </div>
+          <div class="work__body">
+            <h3 class="work__title">Бренд-стела PONSSE</h3>
+            <p class="work__text">Изготовление и&nbsp;монтаж стелы бренда.</p>
+          </div>
+        </a>
+        <a class="work" href="portfolio.html" data-tags="nav">
+          <div class="work__media">
+            <img class="work__img" src="img/photos/33-work-pylon-smart.jpg" alt="Информационный пилон SMART" loading="lazy" width="1400" height="933">
+            <div class="work__top">
+              <span class="work__num">05</span>
+              <ul class="tags"><li>Навигация</li><li>Пилон</li></ul>
+            </div>
+            <span class="work__go" aria-hidden="true"></span>
+          </div>
+          <div class="work__body">
+            <h3 class="work__title">Информационный пилон SMART</h3>
+            <p class="work__text">Пилон с&nbsp;картой и&nbsp;электронным табло.</p>
+          </div>
+        </a>
       </div>
     </div>
+    <div class="container works__dots" aria-label="Работы"></div>
   </section>
 
   <section class="section" id="examples">

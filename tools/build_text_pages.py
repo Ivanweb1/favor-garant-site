@@ -141,18 +141,28 @@ def prices_block(pr, bg):
     """Таблица цен: только <table>, единица измерения — в заголовке. Значения и толщины — из прайса клиента."""
     head = ''.join(f'<th scope="col">{c}</th>' for c in pr['cols'])
     rows = ''.join(f'<tr><th scope="row">{t}</th>' + ''.join(f'<td>{v}</td>' for v in vals) + '</tr>' for t, *vals in pr['rows'])
-    pdf = f'\n      <a class="link-arrow price-table__pdf" href="{pr["pdf"]}" target="_blank" rel="noopener">Полный прайс-лист, PDF</a>' if pr.get('pdf') else ''
+    pdf = f'\n          <a class="link-arrow price-table__pdf" href="{pr["pdf"]}" target="_blank" rel="noopener">Полный прайс-лист, PDF</a>' if pr.get('pdf') else ''
+    text = f'\n          <p class="price-block__text">{nbsp(pr["text"])}</p>' if pr.get('text') else ''
+    # слева заголовок, пояснение и кнопка расчёта; справа таблица на всю ширину колонки
     return f'''  <section class="section{bg}" id="prices">
-    <div class="container">
-{head2(*pr['title'], pr.get('text', ''))}
-      <!-- {pr['comment']} -->
-      <div class="tdoc__table-wrap price-table" style="--cols: {len(pr['cols'])}">
-        <table class="tdoc__table">
-          <caption class="visually-hidden">{pr['title'][0]} {pr['title'][1]}</caption>
-          <thead><tr><th scope="col">Толщина, мм</th>{head}</tr></thead>
-          <tbody>{rows}</tbody>
-        </table>
-      </div>{pdf}
+    <div class="container price-block">
+      <div class="price-block__head">
+        <h2 class="h2 duo">
+          <span>{nbsp(pr['title'][0])}</span>
+          <span class="duo__second">{nbsp(pr['title'][1])}</span>
+        </h2>{text}
+        <a class="btn btn--primary" href="#request-form">Рассчитать по&nbsp;чертежу</a>
+      </div>
+      <div class="price-block__table">
+        <!-- {pr['comment']} -->
+        <div class="tdoc__table-wrap price-table" style="--cols: {len(pr['cols'])}">
+          <table class="tdoc__table">
+            <caption class="visually-hidden">{pr['title'][0]} {pr['title'][1]}</caption>
+            <thead><tr><th scope="col">Толщина, мм</th>{head}</tr></thead>
+            <tbody>{rows}</tbody>
+          </table>
+        </div>{pdf}
+      </div>
     </div>
   </section>
 
@@ -160,20 +170,38 @@ def prices_block(pr, bg):
 
 
 def works_block(items, bg):
+    """«Наши работы» — тот же слайдер, что на главной: подпись, заголовок, стрелки, «Все работы», лента за правый край."""
     cards = ''.join(work_card(i, *w) for i, w in enumerate(items, 1))
+    arrow = '<svg class="arr arr--{d}" width="10" height="11" viewBox="0 0 13 14" aria-hidden="true"><path d="M.74.68l11 12M11.74 12.68V1.84M11.74 12.68H1.88" fill="none" stroke="currentColor" stroke-width="2"/></svg>'
     return f'''  <section class="section{bg}" id="works">
     <div class="container">
-      <div class="page-head">
-        <h2 class="h2 duo duo--inline">
-          <span>Наши</span>
-          <span class="duo__second">работы</span>
-        </h2>
-        <a class="btn btn--outline section-head__link" href="portfolio.html">Все работы</a>
-      </div>
-      <!-- только собственные фото изделий; материал, толщину и тираж пишем в карточке, когда клиент их подтвердит -->
-      <div class="works-grid works-grid--others">{cards}
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Наши работы</p>
+          <h2 class="h2 duo">
+            <span>Изделия</span>
+            <span class="duo__second">с&nbsp;деталями лазерной резки</span>
+          </h2>
+        </div>
+        <div class="section-head__side">
+          <div class="works__nav">
+            <button class="works__btn works__btn--prev" type="button" aria-label="Предыдущая работа">
+              {arrow.format(d='prev')}
+            </button>
+            <button class="works__btn works__btn--next" type="button" aria-label="Следующая работа">
+              {arrow.format(d='next')}
+            </button>
+          </div>
+          <a class="btn btn--outline section-head__link" href="portfolio.html">Все работы</a>
+        </div>
       </div>
     </div>
+    <!-- только собственные фото изделий; материал, толщину и тираж пишем в карточке, когда клиент их подтвердит -->
+    <div class="works" aria-roledescription="карусель" aria-label="Наши работы">
+      <div class="works__track" tabindex="0">{cards}
+      </div>
+    </div>
+    <div class="container works__dots" aria-label="Работы"></div>
   </section>
 
 '''
@@ -418,6 +446,10 @@ SERVICES = [dict(
          'Информационный пилон', 'Пилон индивидуального дизайна для Сквера финансистов.', 'project-skver-finansistov.html'),
         ('img/photos/31-work-stele-gatchina-2.jpg', 'Въездная стела «Гатчина — город воинской славы»', 'nav', ['Навигация', 'Гатчина'],
          'Въездная стела «Гатчина»', 'Стела на въезде в город с гербами.', 'portfolio.html'),
+        ('img/photos/32-work-stele-ponsse.jpg', 'Монтаж бренд-стелы PONSSE', 'nav', ['Навигация', 'Бренд-стела'],
+         'Бренд-стела PONSSE', 'Изготовление и монтаж стелы бренда.', 'portfolio.html'),
+        ('img/photos/33-work-pylon-smart.jpg', 'Информационный пилон SMART', 'nav', ['Навигация', 'Пилон'],
+         'Информационный пилон SMART', 'Пилон с картой и электронным табло.', 'portfolio.html'),
     ],
     parts=True,
     address=True,
