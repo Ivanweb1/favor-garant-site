@@ -2893,3 +2893,14 @@ a.chip { display: inline-flex; align-items: center; text-decoration: none; }
 }
 /* фото в тексте статьи: еле заметный контур — у картинок с белым фоном видна граница на белой странице */
 .article__figure { border: 1px solid rgba(42, 37, 96, .1); }
+
+/* «По теме» и соседние материалы внутри текста статьи — без отступа списка и подчёркивания ссылок текста */
+.article__body .article__related ul { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.article__body .article__related li::marker { content: none; }
+.article__body .article__related a { display: inline-flex; align-items: center; gap: 8px; min-height: 38px; padding: 0 16px; border-radius: 999px; background: var(--white); font-size: 14px; font-weight: 500; text-decoration: none; transition: background-color .2s ease, color .2s ease; }
+.article__body .article__related a:hover { background: var(--tint); }
+.section--light .article__body .article__related a { background: var(--light); }
+.article__body .article-nav__link { text-decoration: none; }
+.article__body .article-nav__link:hover { color: var(--navy); }
+.article-nav__link--next { justify-items: end; }
+@media (max-width: 720px) { .article-nav__link--next { justify-items: start; } }
