@@ -242,6 +242,7 @@ for i, (slug, date, title, cover, alt, body) in enumerate(ARTICLES):
         <div class="lead-hero__body">
           <p class="news__meta"><a class="news__kind news__kind--{kind}" href="news.html?type={kind}">{TYPES[kind]}</a><time class="article__date" datetime="{y}-{m}-{d}">{date}</time><span class="news__time">{CLOCK}{read_min(body)}&nbsp;мин чтения</span></p>
           <h1 class="lead-hero__title lead-hero__title--article">{nbsp(title)}</h1>{lead}
+          <ul class="article-tags" aria-label="Рубрики">{''.join(f'<li><a href="news.html?tag={k}">{TAGS[k]}</a></li>' for k in tags)}</ul>
         </div>
         <div class="lead-hero__media"><img src="img/news/{cover}.jpg" alt="{alt}" width="1200" height="930"></div>
       </header>

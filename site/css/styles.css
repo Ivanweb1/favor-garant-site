@@ -2877,3 +2877,19 @@ a.chip { display: inline-flex; align-items: center; text-decoration: none; }
 .section--light .tdoc__steps li { background: var(--white); }
 .tdoc__steps li b { color: var(--navy); }
 .tdoc .article__body .tdoc__steps { gap: 16px; }
+
+/* шапка статьи: колонка текста по высоте обложки — мета сверху, заголовок посередине, рубрики снизу */
+.lead-hero--article { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); align-items: stretch; }
+.lead-hero--article .lead-hero__body { display: flex; flex-direction: column; justify-content: space-between; gap: 24px; padding: 4px 0; }
+.lead-hero--article .lead-hero__title--article { margin: auto 0; }
+.article-tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.article-tags a { display: inline-flex; align-items: center; min-height: 34px; padding: 0 14px; border-radius: 999px; background: var(--white); font-size: 13px; font-weight: 500; color: var(--navy); transition: background-color .2s ease; }
+.article-tags a:hover { background: var(--tint); }
+@media (max-width: 1080px) {
+  .lead-hero--article { grid-template-columns: 1fr; }
+  .lead-hero--article .lead-hero__body { gap: 16px; }
+  .lead-hero--article .lead-hero__title--article { margin: 0; }
+  .lead-hero--article .lead-hero__media { aspect-ratio: 1200 / 930; }
+}
+/* фото в тексте статьи: еле заметный контур — у картинок с белым фоном видна граница на белой странице */
+.article__figure { border: 1px solid rgba(42, 37, 96, .1); }
