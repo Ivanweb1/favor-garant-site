@@ -2843,7 +2843,9 @@ a.chip { display: inline-flex; align-items: center; text-decoration: none; }
 .pfilter__chk:has(input:focus-visible) { outline: 2px solid var(--navy); outline-offset: 2px; }
 .pfilter__result { display: flex; align-items: center; gap: 20px; min-height: 40px; }
 .pfilter__count { font-size: 14px; font-weight: 600; color: var(--navy); white-space: nowrap; }
-.pfilter__reset { background: none; border: 0; padding: 0; font: inherit; font-size: 14px; cursor: pointer; }
+.pfilter__reset { display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 18px; border: 1px solid rgba(42, 37, 96, .35); border-radius: 999px; background: var(--white); font: inherit; font-size: 14px; font-weight: 600; color: var(--navy); cursor: pointer; transition: background-color .2s ease, border-color .2s ease; }
+.pfilter__reset svg { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+.pfilter__reset:hover { border-color: var(--navy); background: var(--tint); }
 @media (max-width: 900px) {
   .pfilter { padding: 20px; }
   .pfilter__ranges { grid-template-columns: 1fr; }
