@@ -56,13 +56,17 @@ ARTICLES = [
     ('maf-park', '15.11.2024', 'Проекты благоустройства: организация пространства в парке с помощью МАФ', '55-news-maf-park',
      'Малые архитектурные формы в парке', '''
 <p class="article__lead">Современные города всё больше стремятся к созданию комфортной и эстетически привлекательной городской среды. Элементы малых архитектурных форм (МАФ) не только функциональны, но и способны значительно изменить восприятие городского пространства.</p>
+<h2>Роль МАФ в&nbsp;парке</h2>
 <p>Малые архитектурные формы играют важную роль в проектировании парков, превращая дикие зелёные зоны в организованные места, где хочется проводить время.</p>
 <p>МАФы делают парк более удобным для посетителей, обеспечивая необходимую инфраструктуру для отдыха и развлечений.</p>
 [[tild3734-3562-4637-a133-376564613862/_-3.jpg|59-news-maf-park-1|Малые архитектурные формы в парке]]
+<h2>Навигация</h2>
 <p><strong>Навигация</strong> — важный аспект организации паркового пространства. Умело интегрированные указатели помогают легко находить нужные объекты: будь то детская площадка или выход из парка. Использование указателей в едином дизайне создаёт фирменный стиль парка, подчёркивая его уникальность и поддерживая визуальную гармонию.</p>
 [[tild3661-6436-4162-b636-343138643765/_-2.jpg|60-news-maf-park-2|Навигационные указатели в парке]]
+<h2>Дизайнерские стелы</h2>
 <p><strong>Дизайнерские стелы</strong> — это ещё один способ сделать парк более привлекательным. Стелы могут нести историческую или культурную информацию о месте, тем самым обогащая опыт посещения. Помимо своей практической функции, стелы становятся арт-объектами.</p>
 [[tild3932-6335-4338-b966-326662376265/_-1.jpg|61-news-maf-park-3|Дизайнерская стела в парке]]
+<h2>Итог</h2>
 <p class="article__note">МАФы играют незаменимую роль в организации пространства парков, делая их более удобными, интересными и привлекательными для всех категорий населения. Это пример того, как даже небольшие архитектурные решения могут существенно повлиять на качество городской жизни.</p>
 '''),
 ]
@@ -189,29 +193,85 @@ for i, (slug, date, title, cover, alt, body) in enumerate(ARTICLES):
         pager += f'<a class="article-nav__link article-nav__link--prev" href="news-{older[0]}.html"><span>Предыдущая</span>{nbsp(older[2])}</a>'
     if newer:
         pager += f'<a class="article-nav__link article-nav__link--next" href="news-{newer[0]}.html"><span>Следующая</span>{nbsp(newer[2])}</a>'
-    main = f'''  <!-- Статья: текст и фото со старой страницы новости, собрано tools/build_news.py — правки вносить в скрипт -->
-  <section class="section page-top">
+    # Два шаблона (ТЗ сеошников): статья блога и новость. Оба — по образцу страницы услуги (текст + колонка сбоку).
+    #   блог:    сбоку оглавление по подзаголовкам, внизу «Читайте также», разметка BlogPosting;
+    #   новость: сбоку «Новости по теме» и «Из блога» вместо оглавления, разметка NewsArticle.
+    html_body = nbsp(figures(body)).strip()
+    parts = re.split(r'(?=<h2>)', html_body)
+    sections, toc = [], []
+    for n, part in enumerate(p for p in parts if p.strip()):
+        hm = re.match(r'<h2>(.*?)</h2>', part)
+        sid = f's{n + 1}' if hm else 'intro'
+        if hm:
+            toc.append(f'<a href="#{sid}">{hm.group(1)}</a>')
+        sections.append(f'<section id="{sid}">\n{part.strip()}\n</section>')
+    # анонс в шапке — только если он не повторяет начало текста статьи
+    plain = lambda t: re.sub(r'\s+', ' ', re.sub(r'<[^>]+>|&nbsp;', ' ', t)).strip()
+    dup = DESCR[slug] and plain(DESCR[slug])[:60] in plain(body)
+    lead = f'\n          <p class="lead-hero__text">{DESCR[slug]}</p>' if DESCR[slug] and not dup else ''
+    if kind == 'blog':
+        aside = f'''
+        <nav class="toc" aria-label="Содержание статьи">
+          <p class="toc__title">Содержание</p>
+          {"".join(toc)}
+        </nav>'''
+    else:
+        same = [a for a in ARTICLES if a[0] != slug and META[a[0]][0] == 'news']
+        same.sort(key=lambda a: -len(set(META[a[0]][1]) & set(tags)))
+        blog = [a for a in ARTICLES if META[a[0]][0] == 'blog']
+        mini = lambda a: f'<li><a class="aside-news__link" href="news-{a[0]}.html"><time datetime="{a[1][6:]}-{a[1][3:5]}-{a[1][:2]}">{a[1]}</time><span>{nbsp(a[2])}</span></a></li>'
+        aside = f'''
+        <div class="aside-news">
+          <p class="toc__title">Новости по&nbsp;теме</p>
+          <ul>{"".join(mini(a) for a in same[:3])}</ul>
+          <a class="link-arrow" href="news.html?type=news">Все новости</a>
+        </div>''' + (f'''
+        <div class="aside-news aside-news--blog">
+          <p class="toc__title">Из&nbsp;блога</p>
+          <ul>{"".join(mini(a) for a in blog[:3])}</ul>
+          <a class="link-arrow" href="news.html?type=blog">Все статьи блога</a>
+        </div>''' if blog else '')
+    schema = 'BlogPosting' if kind == 'blog' else 'NewsArticle'
+    ld = f'''<script type="application/ld+json">{{"@context":"https://schema.org","@type":"{schema}","headline":"{title.replace('"', '&quot;')}","datePublished":"{y}-{m}-{d}","image":"img/news/{cover}.jpg","author":{{"@type":"Organization","name":"ООО «ФАВОР-ГАРАНТ»"}},"publisher":{{"@type":"Organization","name":"ООО «ФАВОР-ГАРАНТ»"}}}}</script>'''
+    page_head = page_head.replace('</head>', f'  {ld}\n</head>', 1)
+    main = f'''  <!-- {"Статья блога" if kind == "blog" else "Новость"}: шаблон по образцу страницы услуги, собрано tools/build_news.py — правки вносить в скрипт -->
+  <section class="section section--light page-top">
     <div class="container">
       <ol class="crumbs" aria-label="Навигация по сайту"><li><a href="index.html">Главная</a></li><li><a href="news.html">Новости и&nbsp;блог</a></li><li><a href="news.html?type={kind}">{TYPES[kind]}</a></li><li><span aria-current="page">{nbsp(title)}</span></li></ol>
-      <article class="article">
-        <header class="article__head">
+      <header class="lead-hero lead-hero--article">
+        <div class="lead-hero__body">
           <p class="news__meta"><a class="news__kind news__kind--{kind}" href="news.html?type={kind}">{TYPES[kind]}</a><time class="article__date" datetime="{y}-{m}-{d}">{date}</time><span class="news__time">{CLOCK}{read_min(body)}&nbsp;мин чтения</span></p>
-          <h1 class="article__title">{nbsp(title)}</h1>
-        </header>
-        <figure class="article__cover"><img src="img/news/{cover}.jpg" alt="{alt}" width="1200" height="930"></figure>
-        <div class="article__body">
-{nbsp(figures(body)).strip()}
+          <h1 class="lead-hero__title lead-hero__title--article">{nbsp(title)}</h1>{lead}
         </div>
+        <div class="lead-hero__media"><img src="img/news/{cover}.jpg" alt="{alt}" width="1200" height="930"></div>
+      </header>
+    </div>
+  </section>
+
+  <section class="section" id="content">
+    <article class="container tdoc tdoc--{kind}">
+      <aside class="tdoc__aside">{aside}
+        <div class="tdoc__cta">
+          <p class="tdoc__cta-title">Обсудить проект</p>
+          <p class="tdoc__cta-text">Рассчитаем стоимость и&nbsp;сроки по&nbsp;вашей задаче.</p>
+          <a class="tdoc__cta-phone" href="tel:+78003332227">8 (800) 333-222-7</a>
+          <a class="btn btn--light" href="#request-form">Оставить заявку</a>
+        </div>
+      </aside>
+      <div class="article__body">
+{chr(10).join(sections)}
         <aside class="article__related" aria-label="По теме">
           <p class="article__related-title">По теме</p>
           <ul>{related}</ul>
         </aside>
-        <nav class="article-nav" aria-label="Соседние статьи">{pager}</nav>
-      </article>
-    </div>
+        <nav class="article-nav" aria-label="Соседние материалы">{pager}</nav>
+      </div>
+    </article>
   </section>
 
-  <!-- Читайте также: статьи с общими рубриками -->
+'''
+    if kind == 'blog':
+        main += f'''  <!-- Читайте также: статьи с общими рубриками -->
   <section class="section section--light">
     <div class="container">
       <div class="section-head">
@@ -229,8 +289,8 @@ for i, (slug, date, title, cover, alt, body) in enumerate(ARTICLES):
   </section>
 
 '''
-    # заявка на светлом фоне сразу после светлого «Читайте также» — переводим её на белый
-    page_tail = tail.replace('<section class="section section--light" id="request">', '<section class="section" id="request">', 1)
+    # фон заявки чередуется: после светлого «Читайте также» — белый, после белого текста новости — светлый
+    page_tail = tail if kind == 'news' else tail.replace('<section class="section section--light" id="request">', '<section class="section" id="request">', 1)
     (SITE / f'news-{slug}.html').write_text(page_head + '\n' + main + page_tail, encoding='utf-8', newline='')
     print('ok', f'news-{slug}.html')
 

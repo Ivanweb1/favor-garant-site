@@ -2734,3 +2734,23 @@ a.chip { display: inline-flex; align-items: center; text-decoration: none; }
   .model-about { grid-template-columns: 1fr; }
   .model-about__docs { padding: 22px; }
 }
+
+/* ===== Шаблоны статьи блога и новости (ТЗ сеошников): по образцу страницы услуги ===== */
+.lead-hero--article { align-items: stretch; }
+.lead-hero--article .lead-hero__body { display: grid; align-content: center; gap: 18px; }
+.lead-hero__title--article { color: var(--navy); font-size: clamp(28px, 3vw, 42px); line-height: 1.15; }
+.tdoc .article__body > .article__related { margin-top: clamp(36px, 4vw, 52px); }
+.tdoc .article__body > .article-nav { margin-top: 28px; }
+.tdoc .article__body > section { gap: 18px; }
+.aside-news { display: grid; gap: 4px; padding: 24px; border-radius: var(--radius); background: var(--light); }
+.aside-news ul { display: grid; margin: 0 0 10px; padding: 0; list-style: none; }
+.aside-news__link { display: grid; gap: 4px; padding: 12px 0; border-top: 1px solid var(--line); text-decoration: none; }
+.aside-news li:first-child .aside-news__link { border-top: 0; padding-top: 4px; }
+.aside-news__link time { font-size: 12px; font-weight: 500; color: var(--grey); }
+.aside-news__link span { font-size: 14px; font-weight: 600; line-height: 1.4; color: var(--navy); transition: color .2s ease; }
+.aside-news__link:hover span { color: var(--navy-hover); text-decoration: underline; text-underline-offset: 2px; }
+.aside-news .link-arrow { font-size: 14px; }
+@media (max-width: 1080px) {
+  /* на узком экране колонка сбоку уходит под текст: новости по теме полезнее после статьи */
+  .tdoc--news .tdoc__aside { order: 2; }
+}
