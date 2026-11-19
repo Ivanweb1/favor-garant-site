@@ -2799,3 +2799,32 @@ a.chip { display: inline-flex; align-items: center; text-decoration: none; }
 /* раскрытие «Что входит в цену» не растягивает галерею слева */
 .product { align-items: start; }
 .pgallery { align-content: start; align-items: start; }
+
+/* ===== Карточка товара: галерея и правая колонка одной высоты ===== */
+@media (min-width: 1081px) {
+  .product { align-items: stretch; row-gap: 0; }
+  /* галерея тянется по высоте колонки с описанием; «Что входит в цену» — отдельной строкой, её раскрытие галерею не меняет */
+  .product > .pgallery { grid-row: 1; align-self: stretch; grid-template-rows: minmax(0, 1fr); align-content: stretch; align-items: stretch; }
+  .pgallery__thumbs { align-content: start; }
+  .pgallery__main { min-height: 360px; }
+  .pgallery__main > img { position: absolute; inset: 0; width: 100%; height: 100%; aspect-ratio: auto; object-fit: cover; }
+  .product > .pinfo { grid-row: 1; grid-column: 2; }
+  .product > .pinfo__terms { grid-row: 2; grid-column: 2; margin-top: 12px; }
+  /* характеристики — сеткой 2 × 2: подпись над значением */
+  .specs { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 24px; border-top: 0; }
+  .specs > div { display: grid; grid-template-columns: 1fr; gap: 2px; padding: 9px 0; border-top: 1px solid var(--line); border-bottom: 0; font-size: 13px; }
+  .specs dt { font-size: 12px; }
+  .specs dd { line-height: 1.35; }
+  /* цена, кнопка и «Монтаж под ключ» — в одну строку */
+  .pinfo__buy { display: flex; flex-wrap: nowrap; align-items: center; justify-content: space-between; gap: 16px; margin-top: auto; padding-top: 14px; border-top: 1px solid var(--line); }
+  .pinfo__buy .pinfo__price { display: grid; grid-template-columns: auto auto; justify-content: start; align-items: baseline; column-gap: 8px; row-gap: 2px; flex: none; white-space: nowrap; font-size: 24px; }
+  .pinfo__buy .pinfo__price-note { grid-column: 1 / -1; }
+  .pinfo__buy .btn { padding-inline: 22px; }
+  .pinfo__buy .pinfo__actions { flex-wrap: nowrap; justify-content: flex-start; gap: 18px; }
+  .pinfo__buy .pinfo__actions { min-width: 0; }
+  .pinfo__buy .link-arrow { font-size: 14px; }
+  .pinfo__price-note { font-size: 12px; }
+}
+@media (max-width: 1080px) {
+  .product > .pinfo__terms { margin-top: -18px; }
+}
