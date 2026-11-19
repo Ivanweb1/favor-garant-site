@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap&subset=cyrillic" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=20261119u">
+  <link rel="stylesheet" href="css/styles.css?v=20261119y">
 </head>
 <body>
 
@@ -264,6 +264,8 @@
         </div>
         <p class="page-head__text">Комфортные зоны ожидания: от&nbsp;компактных модульных павильонов до&nbsp;закрытых и&nbsp;SMART, под ваш регион.</p>
       </div>
+      <!-- строка каталога: подразделы слева, кнопка фильтра справа; панель фильтра открывается под строкой -->
+      <div class="catalog-bar">
       <nav class="filters" data-target="shelters" aria-label="Подразделы: тип павильона">
         <a class="chip" href="bus-shelters.html" data-filter="all" aria-current="true">Все<span class="chip__num">15</span></a>
         <a class="chip" href="bus-shelters.html#modular" data-filter="modular">Модульные<span class="chip__num">7</span></a>
@@ -275,35 +277,50 @@
         <!-- Подразделы — ссылки (ТЗ сеошников): на сайте это URL подкатегорий, напр. /catalog/ostanovochnye-pavilony/zakrytye/. «Доп. оборудование» в «Все» не входит -->
         <a class="chip" href="bus-shelters.html#equipment" data-filter="equipment" data-own>Доп.&nbsp;оборудование<span class="chip__num">10</span></a>
       </nav>
+        <button class="pfilter__toggle" type="button" aria-expanded="false" aria-controls="pfilter" aria-label="Подобрать по параметрам">Фильтр</button>
+      </div>
       <!-- Фильтр по параметрам (ТЗ сеошников): на сайте — стандартный умный фильтр 1С-Битрикс по свойствам товара.
            Габариты взяты из карточек; «Рекламный блок» отмечен у SMART-моделей, «Стойка» и «ГОСТ» — нужны данные клиента по моделям -->
-      <details class="pfilter-wrap">
-        <summary class="pfilter__toggle">Подобрать по&nbsp;параметрам</summary>
-        <form class="pfilter" data-for="shelters" aria-label="Фильтр по параметрам">
+        <form class="pfilter" id="pfilter" data-for="shelters" aria-label="Фильтр по параметрам">
+          <div class="pfilter__ranges">
           <fieldset class="pfilter__range">
             <legend class="pfilter__label">Длина, мм</legend>
-            <input class="field__input" type="number" name="len-from" placeholder="от 3700" min="0" step="10" inputmode="numeric" aria-label="Длина от, мм">
-            <input class="field__input" type="number" name="len-to" placeholder="до 6000" min="0" step="10" inputmode="numeric" aria-label="Длина до, мм">
+            <div class="pfilter__inputs">
+              <input class="field__input" type="number" name="len-from" placeholder="от 3700" min="0" step="10" inputmode="numeric" aria-label="Длина от, мм">
+              <span class="pfilter__dash" aria-hidden="true">—</span>
+              <input class="field__input" type="number" name="len-to" placeholder="до 6000" min="0" step="10" inputmode="numeric" aria-label="Длина до, мм">
+            </div>
           </fieldset>
           <fieldset class="pfilter__range">
             <legend class="pfilter__label">Ширина, мм</legend>
-            <input class="field__input" type="number" name="wid-from" placeholder="от 1300" min="0" step="10" inputmode="numeric" aria-label="Ширина от, мм">
-            <input class="field__input" type="number" name="wid-to" placeholder="до 1800" min="0" step="10" inputmode="numeric" aria-label="Ширина до, мм">
+            <div class="pfilter__inputs">
+              <input class="field__input" type="number" name="wid-from" placeholder="от 1300" min="0" step="10" inputmode="numeric" aria-label="Ширина от, мм">
+              <span class="pfilter__dash" aria-hidden="true">—</span>
+              <input class="field__input" type="number" name="wid-to" placeholder="до 1800" min="0" step="10" inputmode="numeric" aria-label="Ширина до, мм">
+            </div>
           </fieldset>
           <fieldset class="pfilter__range">
             <legend class="pfilter__label">Высота, мм</legend>
-            <input class="field__input" type="number" name="hgt-from" placeholder="от 2380" min="0" step="10" inputmode="numeric" aria-label="Высота от, мм">
-            <input class="field__input" type="number" name="hgt-to" placeholder="до 2770" min="0" step="10" inputmode="numeric" aria-label="Высота до, мм">
+            <div class="pfilter__inputs">
+              <input class="field__input" type="number" name="hgt-from" placeholder="от 2380" min="0" step="10" inputmode="numeric" aria-label="Высота от, мм">
+              <span class="pfilter__dash" aria-hidden="true">—</span>
+              <input class="field__input" type="number" name="hgt-to" placeholder="до 2770" min="0" step="10" inputmode="numeric" aria-label="Высота до, мм">
+            </div>
           </fieldset>
-          <fieldset class="pfilter__checks">
-            <legend class="pfilter__label">Оснащение</legend>
-            <label class="check"><input class="check__input" type="checkbox" name="props" value="ad"><span class="check__box"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span class="check__text">Рекламный блок</span></label>
-            <label class="check"><input class="check__input" type="checkbox" name="props" value="sign"><span class="check__box"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span class="check__text">Стойка под дорожный знак</span></label>
-            <label class="check"><input class="check__input" type="checkbox" name="props" value="gost"><span class="check__box"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span class="check__text">Соответствие ГОСТ</span></label>
-          </fieldset>
-          <button class="link-arrow pfilter__reset" type="reset">Сбросить</button>
+          </div>
+          <div class="pfilter__bottom">
+            <fieldset class="pfilter__checks">
+              <legend class="pfilter__label">Оснащение</legend>
+              <label class="pfilter__chk"><input type="checkbox" name="props" value="ad"><span>Рекламный блок</span></label>
+              <label class="pfilter__chk"><input type="checkbox" name="props" value="sign"><span>Стойка под дорожный знак</span></label>
+              <label class="pfilter__chk"><input type="checkbox" name="props" value="gost"><span>Соответствие ГОСТ</span></label>
+            </fieldset>
+            <div class="pfilter__result">
+              <span class="pfilter__count" aria-live="polite"></span>
+              <button class="link-arrow pfilter__reset" type="reset">Сбросить</button>
+            </div>
+          </div>
         </form>
-      </details>
       <div class="cards cards--models" id="shelters">
         <article class="tile tile--model" data-tags="modular" data-dims="4996 2500 1645" data-props="">
           <div class="tile__media tile__media--render"><span class="tile__tags"><span class="tile__count">Модульный</span></span><img src="img/catalog/shelter-elegant.jpg" alt="Остановочный павильон «Элегант»" loading="lazy" width="960" height="720"><img class="tile__photo" src="img/catalog/shelter-elegant-photo.jpg" alt="" loading="lazy" width="960" height="720"></div>
@@ -1005,6 +1022,6 @@
   </div>
 </footer>
 
-<script src="js/main.js?v=20261119b"></script>
+<script src="js/main.js?v=20261119e"></script>
 </body>
 </html>

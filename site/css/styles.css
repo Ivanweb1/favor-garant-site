@@ -2677,21 +2677,12 @@ a.news__kind:hover { opacity: .8; }
 a.chip { display: inline-flex; align-items: center; text-decoration: none; }
 .chip[aria-current="true"] { border-color: var(--navy); background: var(--navy); color: var(--white); }
 .chip[aria-current="true"]:hover { background: var(--navy-hover); }
-.pfilter-wrap { margin: 16px 0 28px; }
-.pfilter__toggle { display: inline-flex; align-items: center; gap: 10px; padding: 10px 18px; border: 1px solid var(--line); border-radius: 999px; background: var(--white); font-size: 14px; font-weight: 600; color: var(--navy); cursor: pointer; list-style: none; }
-.pfilter__toggle::-webkit-details-marker { display: none; }
+.pfilter__toggle { flex: none; display: inline-flex; font-family: inherit; align-items: center; gap: 10px; padding: 10px 18px; border: 1px solid var(--line); border-radius: 999px; background: var(--white); font-size: 14px; font-weight: 600; color: var(--navy); cursor: pointer; list-style: none; }
 .pfilter__toggle::before { content: ""; width: 16px; height: 12px; background: linear-gradient(currentColor 0 0) 0 0 / 100% 2px no-repeat, linear-gradient(currentColor 0 0) 3px 5px / 10px 2px no-repeat, linear-gradient(currentColor 0 0) 6px 10px / 4px 2px no-repeat; }
 .pfilter__toggle:hover { background: var(--tint); }
-.pfilter-wrap[open] .pfilter__toggle { border-color: var(--navy); }
-.pfilter { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 20px 28px; margin-top: 14px; padding: 24px 28px; border-radius: var(--radius); background: var(--white); }
+.pfilter__toggle[aria-expanded="true"] { border-color: var(--navy); }
+.pfilter__toggle[hidden] { display: none; }
 .pfilter[hidden] { display: none; }
-.pfilter fieldset { min-width: 0; margin: 0; padding: 0; border: 0; }
-.pfilter__label { margin-bottom: 8px; padding: 0; font-size: 13px; font-weight: 500; color: var(--muted); }
-.pfilter__range { display: grid; grid-template-columns: repeat(2, 104px); gap: 0 8px; }
-.pfilter__range legend { grid-column: 1 / -1; }
-.pfilter__range .field__input { min-height: 44px; padding: 0 12px; }
-.pfilter__checks { display: grid; gap: 10px; }
-.pfilter__reset { margin-left: auto; align-self: center; background: none; border: 0; padding: 0; font: inherit; font-size: 14px; cursor: pointer; }
 .pfilter__empty { padding: 28px; border-radius: var(--radius); background: var(--white); color: var(--muted); }
 .pfilter__empty[hidden] { display: none; }
 .pfilter__empty .link-arrow { margin-left: 8px; background: none; border: 0; padding: 0; font: inherit; cursor: pointer; }
@@ -2700,11 +2691,6 @@ a.chip { display: inline-flex; align-items: center; text-decoration: none; }
 .tile__price + .tile__foot { margin-top: 10px; }
 .seo-text { max-width: 860px; columns: 2 380px; column-gap: 48px; font-size: 16px; line-height: 1.7; color: var(--ink); }
 .seo-text p { margin: 0 0 1em; break-inside: avoid; }
-@media (max-width: 767px) {
-  .pfilter { padding: 20px; }
-  .pfilter__range { grid-template-columns: 1fr 1fr; width: 100%; }
-  .pfilter__reset { margin-left: 0; }
-}
 
 /* ===== Карточка товара по ТЗ сеошников: условия цены, описание, документы ===== */
 .terms { display: grid; gap: 0; margin: 0; }
@@ -2827,3 +2813,43 @@ a.chip { display: inline-flex; align-items: center; text-decoration: none; }
 .seo-block { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: 24px clamp(32px, 5vw, 80px); align-items: start; }
 .seo-block .h2 { margin: 0; }
 @media (max-width: 900px) { .seo-block { grid-template-columns: 1fr; } }
+
+/* строка каталога: подразделы слева, «Подобрать по параметрам» справа */
+.catalog-bar { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 28px; }
+.catalog-bar .filters { margin-bottom: 0; }
+.pfilter:not(.is-open) { display: none; }
+@media (max-width: 1080px) {
+  .catalog-bar { flex-direction: column; align-items: stretch; gap: 12px; margin-bottom: 20px; }
+  .catalog-bar .filters { margin-bottom: 0; }
+  .catalog-bar .pfilter__toggle { align-self: flex-start; }
+}
+
+/* панель фильтра: сверху габариты тремя колонками, снизу оснащение «таблетками», счётчик и сброс */
+.pfilter { display: grid; gap: 20px; margin: -12px 0 28px; padding: 24px 28px; border-radius: var(--radius); background: var(--white); }
+.pfilter[hidden] { display: none; }
+.pfilter fieldset { min-width: 0; margin: 0; padding: 0; border: 0; }
+.pfilter__label { margin-bottom: 8px; padding: 0; font-size: 13px; font-weight: 500; color: var(--muted); }
+.pfilter__ranges { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px 28px; }
+.pfilter__inputs { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: center; gap: 8px; }
+.pfilter__inputs .field__input { min-height: 44px; padding: 0 14px; }
+.pfilter__dash { color: var(--grey); }
+.pfilter__bottom { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px 28px; padding-top: 20px; border-top: 1px solid var(--line); }
+.pfilter__checks { display: flex; flex-wrap: wrap; gap: 8px; }
+.pfilter__checks legend { width: 100%; }
+.pfilter__chk { position: relative; display: inline-flex; align-items: center; min-height: 40px; padding: 0 16px; border: 1px solid var(--line); border-radius: 999px; font-size: 14px; font-weight: 500; color: var(--navy); cursor: pointer; transition: background-color .2s ease, border-color .2s ease, color .2s ease; }
+.pfilter__chk input { position: absolute; inset: 0; margin: 0; opacity: 0; cursor: pointer; }
+.pfilter__chk:hover { background: var(--tint); }
+.pfilter__chk:has(input:checked) { border-color: var(--navy); background: var(--navy); color: var(--white); }
+.pfilter__chk:has(input:focus-visible) { outline: 2px solid var(--navy); outline-offset: 2px; }
+.pfilter__result { display: flex; align-items: center; gap: 20px; min-height: 40px; }
+.pfilter__count { font-size: 14px; font-weight: 600; color: var(--navy); white-space: nowrap; }
+.pfilter__reset { background: none; border: 0; padding: 0; font: inherit; font-size: 14px; cursor: pointer; }
+@media (max-width: 900px) {
+  .pfilter { padding: 20px; }
+  .pfilter__ranges { grid-template-columns: 1fr; }
+  .pfilter__result { width: 100%; justify-content: space-between; }
+}
+.catalog-bar .chip { padding-inline: 13px; }
+.catalog-bar .filters { gap: 8px; }
+.catalog-bar .pfilter__toggle { padding-inline: 16px; }
+.catalog-bar .chip__num { margin-left: 5px; }

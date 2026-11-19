@@ -444,6 +444,7 @@
     const grid = document.getElementById(bar.dataset.target);
     const chips = [...bar.querySelectorAll('.chip')];
     const form = document.querySelector(`.pfilter[data-for="${bar.dataset.target}"]`);
+    const toggle = form && document.querySelector(`.pfilter__toggle[aria-controls="${form.id}"]`);
     const empty = grid.parentElement.querySelector('.pfilter__empty');
     let tag = 'all';
     const mark = (chip) => chips.forEach((c) => {
@@ -456,6 +457,7 @@
       // параметры относятся к павильонам: в подразделе доп. оборудования панель прячем
       const own = chips.find((c) => c.dataset.filter === tag)?.hasAttribute('data-own');
       if (form) form.hidden = !!own;
+      if (toggle) toggle.hidden = !!own;
       const props = form ? [...form.querySelectorAll('input[type="checkbox"]:checked')].map((i) => i.value) : [];
       let shown = 0;
       grid.querySelectorAll('[data-tags]').forEach((card) => {
@@ -471,6 +473,8 @@
         if (ok) shown += 1;
       });
       if (empty) empty.hidden = shown > 0;
+      const count = form && form.querySelector('.pfilter__count');
+      if (count) count.textContent = `Найдено: ${shown} ${shown % 10 === 1 && shown % 100 !== 11 ? 'модель' : [2, 3, 4].includes(shown % 10) && ![12, 13, 14].includes(shown % 100) ? 'модели' : 'моделей'}`;
     }
     chips.forEach((chip) => {
       chip.addEventListener('click', (e) => {
@@ -483,11 +487,18 @@
         apply();
       });
     });
+    // кнопка «Подобрать по параметрам» в строке подразделов открывает панель под строкой
+    if (toggle) toggle.addEventListener('click', () => {
+      const open = toggle.getAttribute('aria-expanded') !== 'true';
+      toggle.setAttribute('aria-expanded', String(open));
+      form.classList.toggle('is-open', open);
+    });
     if (form) {
       form.addEventListener('input', apply);
       form.addEventListener('reset', () => setTimeout(apply));
     }
     if (empty) empty.querySelector('button').addEventListener('click', () => { if (form) form.reset(); chips[0].click(); });
+    apply(); // счётчик «Найдено: …» сразу при загрузке
     // переход по ссылке вида bus-shelters.html#equipment открывает нужный подраздел
     const openFromHash = () => {
       const key = location.hash.slice(1);
