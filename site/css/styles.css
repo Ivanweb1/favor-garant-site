@@ -2819,3 +2819,5 @@ a.chip { display: inline-flex; align-items: center; text-decoration: none; }
 @media (max-width: 1080px) {
   .pinfo__buy .btn { flex: 1 1 220px; }
 }
+/* фото на объекте — на всю рамку галереи (рендер комплектации остаётся целиком) */
+.pgallery__main.is-photo > img { object-fit: cover; }

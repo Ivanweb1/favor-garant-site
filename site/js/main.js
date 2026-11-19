@@ -511,6 +511,8 @@
       index = (i + slides.length) % slides.length;
       main.src = slides[index].src;
       main.alt = slides[index].alt;
+      // фото на объекте (data-photo) заполняют рамку целиком, рендер комплектации на белом показываем полностью
+      main.parentElement.classList.toggle('is-photo', thumbs[index].hasAttribute('data-photo'));
       counter.textContent = (index + 1) + ' / ' + slides.length;
       thumbs.forEach((t, n) => t.setAttribute('aria-pressed', String(n === index)));
     }
