@@ -1072,6 +1072,21 @@
     if (document.fonts) document.fonts.ready.then(fitWorkTags);
   }
 
+  // Боковая колонка текстовой страницы закреплена сверху. Если она выше экрана — закрепляем по нижнему краю:
+  // колонка прокручивается вместе со страницей, пока её низ не покажется, и дальше стоит на месте.
+  document.querySelectorAll('.tdoc__aside').forEach((aside) => {
+    const fit = () => {
+      aside.style.top = '';
+      if (getComputedStyle(aside).position !== 'sticky') return;
+      const top = parseFloat(getComputedStyle(aside).top) || 0;
+      const free = window.innerHeight - top - 24;
+      if (aside.offsetHeight > free) aside.style.top = (window.innerHeight - aside.offsetHeight - 24) + 'px';
+    };
+    fit();
+    window.addEventListener('resize', fit);
+    if (document.fonts) document.fonts.ready.then(fit);
+  });
+
   // Текстовая страница: подсветка текущего раздела в содержании
   const tocLinks = [...document.querySelectorAll('.toc a[href^="#"]')];
   if (tocLinks.length && 'IntersectionObserver' in window) {
