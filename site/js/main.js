@@ -1154,3 +1154,44 @@
     });
   });
 })();
+
+// Документы модели: показываем первые N (data-visible), остальные — по кнопке «Показать все документы»
+(() => {
+  document.querySelectorAll('.mdocs[data-visible]').forEach((list) => {
+    const limit = parseInt(list.dataset.visible, 10) || 4;
+    const items = Array.from(list.children);
+    const btn = list.id && document.querySelector(`.mdocs-toggle[aria-controls="${list.id}"]`);
+    if (!btn || items.length <= limit) return;
+    items.slice(limit).forEach((li) => li.classList.add('is-extra'));
+    const label = `Показать все документы (${items.length})`;
+    btn.textContent = label;
+    btn.hidden = false;
+    btn.addEventListener('click', () => {
+      const open = list.classList.toggle('is-expanded');
+      btn.setAttribute('aria-expanded', String(open));
+      btn.textContent = open ? 'Свернуть' : label;
+    });
+  });
+})();
+
+// Подсказка «?»: на тач-экранах открывается тапом, закрывается тапом мимо или Esc
+(() => {
+  const tips = document.querySelectorAll('.qtip');
+  if (!tips.length) return;
+  const closeAll = (except) => tips.forEach((t) => {
+    if (t === except) return;
+    t.classList.remove('is-open');
+    t.querySelector('.qtip__btn').setAttribute('aria-expanded', 'false');
+  });
+  tips.forEach((tip) => {
+    const btn = tip.querySelector('.qtip__btn');
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const open = tip.classList.toggle('is-open');
+      btn.setAttribute('aria-expanded', String(open));
+      closeAll(tip);
+    });
+  });
+  document.addEventListener('click', () => closeAll());
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeAll(); });
+})();

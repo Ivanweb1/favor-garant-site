@@ -296,7 +296,7 @@
                «уточняется» — данные клиента, заполнить перед запуском -->
           <div class="pinfo__buy">
             <div class="pinfo__buy-main">
-              <p class="pinfo__price"><span class="pinfo__price-from">от</span> 000&nbsp;000&nbsp;₽ <span class="pinfo__price-note">за&nbsp;базовую комплектацию</span></p>
+              <p class="pinfo__price"><span class="pinfo__price-from">от</span> 000&nbsp;000&nbsp;₽ <span class="pinfo__price-note">за&nbsp;базовую комплектацию<span class="qtip"><button class="qtip__btn" type="button" aria-label="Что такое базовая комплектация" aria-describedby="price-tip" aria-expanded="false">?</button><span class="qtip__text" id="price-tip" role="tooltip">Текст подсказки уточняется у&nbsp;клиента. Пока: каркас, крыша, ветрозащитные панели, скамья и&nbsp;крепёж; дополнительное оборудование рассчитывается отдельно.</span></span></span></p>
               <button class="btn btn--primary" type="button" data-modal-open="request-modal">Запросить стоимость</button>
             </div>
             <div class="pinfo__buy-extra">
@@ -504,7 +504,7 @@
         </div>
         <div class="page-head__aside">
         <p class="page-head__text">Дополнительные модули встраиваются в&nbsp;базовую конструкцию: стандартный павильон превращается в&nbsp;комплекс с&nbsp;информированием, связью и&nbsp;мониторингом, совместимый со&nbsp;стратегией «Умного города».</p>
-        <a class="link-arrow" href="bus-shelters.html#equipment">Всё дополнительное оборудование</a>
+        <a class="btn btn--outline page-head__btn" href="bus-shelters.html#equipment">Посмотреть все</a>
         </div>
       </div>
       <div class="hotspots">
@@ -639,7 +639,8 @@
       </div>
       <aside class="model-about__docs" aria-labelledby="docs-title">
         <h3 class="model-about__docs-title" id="docs-title">Документы</h3>
-        <ul class="mdocs">
+        <!-- До 20 документов: первые 4 видны сразу, остальные раскрываются кнопкой (js/main.js, data-visible) -->
+        <ul class="mdocs" id="model-docs" data-visible="4">
             <li><a class="mdoc" href="#"><span class="mdoc__type" aria-hidden="true">PDF</span><span class="mdoc__body"><span class="mdoc__title">Карточка модели</span><span class="mdoc__note">Габариты, материалы, комплектации, опции и фотографии</span></span></a></li>
             <li><a class="mdoc" href="#"><span class="mdoc__type" aria-hidden="true">PDF</span><span class="mdoc__body"><span class="mdoc__title">Общий чертёж</span><span class="mdoc__note">Виды, размеры и основные узлы</span></span></a></li>
             <li><a class="mdoc" href="#"><span class="mdoc__type" aria-hidden="true">PDF</span><span class="mdoc__body"><span class="mdoc__title">Спецификация базовой комплектации</span></span></a></li>
@@ -647,7 +648,12 @@
             <li><a class="mdoc" href="#"><span class="mdoc__type" aria-hidden="true">PDF</span><span class="mdoc__body"><span class="mdoc__title">Паспорт изделия</span><span class="mdoc__note">Рекомендации по эксплуатации</span></span></a></li>
             <li><a class="mdoc" href="#"><span class="mdoc__type" aria-hidden="true">PDF</span><span class="mdoc__body"><span class="mdoc__title">Сертификаты и декларации</span><span class="mdoc__note">Протоколы испытаний</span></span></a></li>
             <li><a class="mdoc" href="#"><span class="mdoc__type" aria-hidden="true">ZIP</span><span class="mdoc__body"><span class="mdoc__title">Комплект для проектировщика</span><span class="mdoc__note">Чертежи и 3D-модель</span></span></a></li>
+            <li><a class="mdoc" href="#"><span class="mdoc__type" aria-hidden="true">PDF</span><span class="mdoc__body"><span class="mdoc__title">Инструкция по&nbsp;монтажу</span><span class="mdoc__note">Порядок сборки и&nbsp;установки</span></span></a></li>
+            <li><a class="mdoc" href="#"><span class="mdoc__type" aria-hidden="true">PDF</span><span class="mdoc__body"><span class="mdoc__title">Технические условия</span></span></a></li>
+            <li><a class="mdoc" href="#"><span class="mdoc__type" aria-hidden="true">PDF</span><span class="mdoc__body"><span class="mdoc__title">Гарантийные обязательства</span><span class="mdoc__note">Сроки и&nbsp;условия гарантии</span></span></a></li>
+            <li><a class="mdoc" href="#"><span class="mdoc__type" aria-hidden="true">DOC</span><span class="mdoc__body"><span class="mdoc__title">Опросный лист</span><span class="mdoc__note">Для расчёта индивидуальной комплектации</span></span></a></li>
         </ul>
+        <button class="mdocs-toggle" type="button" aria-controls="model-docs" aria-expanded="false" hidden>Показать все документы</button>
       </aside>
     </div>
   </section>
