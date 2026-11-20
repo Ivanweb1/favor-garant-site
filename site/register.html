@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap&subset=cyrillic" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=20261120g">
+  <link rel="stylesheet" href="css/styles.css?v=20261120h">
 </head>
 <body>
 
@@ -259,7 +259,7 @@
       <div class="auth auth--wide" data-page="register">
         <div class="auth__head">
           <h1 class="h2 duo"><span>Регистрация</span><span class="duo__second">организации</span></h1>
-          <p class="auth__lead">Кабинет открывается на&nbsp;ИНН. В&nbsp;нём видны цены, оформление заявок и&nbsp;история заказов.</p>
+          <p class="auth__lead">Кабинет открывается на&nbsp;ИНН организации, входить в&nbsp;него вы&nbsp;будете по&nbsp;email. В&nbsp;кабинете видны цены, оформление заявок и&nbsp;история заказов.</p>
         </div>
         <ol class="reg-steps" aria-label="Шаги регистрации">
           <li><span>Данные организации</span></li>
@@ -315,7 +315,7 @@
           <label class="field">
             <span class="field__label">Email для связи <span class="field__req" aria-hidden="true">*</span></span>
             <input class="field__input" type="email" name="email" autocomplete="email" required>
-            <span class="field__hint">На&nbsp;него придёт письмо для подтверждения</span>
+            <span class="field__hint">Это логин для входа. На&nbsp;него придёт письмо для подтверждения</span>
             <span class="field__error" aria-live="polite"></span>
           </label>
         </div>
@@ -360,7 +360,7 @@
         <section data-screen="password" hidden>
           <form class="form" data-flow="register" data-step="password" novalidate>
             <p class="auth__title">Почта подтверждена. Задайте пароль</p>
-            <p class="auth__sub">Входить в&nbsp;кабинет будете по&nbsp;ИНН и&nbsp;этому паролю.</p>
+            <p class="auth__sub">Входить в&nbsp;кабинет будете по&nbsp;email <b data-email></b> и&nbsp;этому паролю.</p>
             <div class="form__row">
               <div class="field">
             <label class="field__label" for="rpass1">Пароль <span class="field__req" aria-hidden="true">*</span></label>
@@ -380,7 +380,7 @@
 
         <section data-screen="consignee" hidden>
           <div class="form">
-            <p class="auth__title">Кабинет создан. Добавить грузополучателя?</p>
+            <p class="auth__title">Кабинет создан. Добавить грузополучателя?<span class="qtip"><button class="qtip__btn" type="button" aria-label="Кто такой грузополучатель" aria-describedby="tip-consignee-1" aria-expanded="false">?</button><span class="qtip__text" id="tip-consignee-1" role="tooltip">Текст уточняется</span></span></p>
             <p class="auth__sub">Если товар принимает другая организация, добавьте её&nbsp;— при оформлении заявки останется только выбрать. Кабинет для грузополучателя не&nbsp;создаётся. Шаг можно пропустить и&nbsp;вернуться к&nbsp;нему в&nbsp;кабинете.</p>
             <div class="auth__actions">
               <button class="btn btn--primary" type="button" data-go="consignee-form">Добавить</button>
@@ -391,7 +391,7 @@
 
         <section data-screen="consignee-form" hidden>
           <form class="form" data-flow="register" data-step="consignee" novalidate>
-            <p class="auth__title">Грузополучатель</p>
+            <p class="auth__title">Грузополучатель<span class="qtip"><button class="qtip__btn" type="button" aria-label="Кто такой грузополучатель" aria-describedby="tip-consignee-2" aria-expanded="false">?</button><span class="qtip__text" id="tip-consignee-2" role="tooltip">Текст уточняется</span></span></p>
             <p class="auth__sub">Реквизиты, как в&nbsp;заявке. Доступа к&nbsp;вашему кабинету у&nbsp;грузополучателя не&nbsp;будет.</p>
             <div class="form__row">
           <label class="field">
@@ -549,7 +549,7 @@
 </footer>
 
 
-<script src="js/lk.js?v=20261118d"></script>
-<script src="js/main.js?v=20261120e"></script>
+<script src="js/lk.js?v=20261120f"></script>
+<script src="js/main.js?v=20261120f"></script>
 </body>
 </html>

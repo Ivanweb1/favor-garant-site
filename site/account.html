@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap&subset=cyrillic" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=20261120g">
+  <link rel="stylesheet" href="css/styles.css?v=20261120h">
 </head>
 <body>
 
@@ -279,6 +279,7 @@
             <div>
               <h2 class="acc__title">Мои заказы</h2>
               <p class="acc__lead">Заявки вашей организации. Откройте заказ, чтобы посмотреть состав, получателя и&nbsp;трек-номер.</p>
+              <p class="vat-note">Все цены указаны с&nbsp;НДС&nbsp;22%.</p>
             </div>
             <div class="olist"></div>
             <div class="cart__main empty" data-orders-empty hidden>
@@ -314,8 +315,8 @@
               </div>
               <div class="ostep">
                 <dl class="oinfo">
-                  <div><dt>Плательщик</dt><dd data-o="payer"></dd></div>
-                  <div><dt>Грузополучатель</dt><dd data-o="consignee"></dd></div>
+                  <div><dt>Плательщик<span class="qtip"><button class="qtip__btn" type="button" aria-label="Кто такой плательщик" aria-describedby="tip-payer-5" aria-expanded="false">?</button><span class="qtip__text" id="tip-payer-5" role="tooltip">Текст уточняется</span></span></dt><dd data-o="payer"></dd></div>
+                  <div><dt>Грузополучатель<span class="qtip"><button class="qtip__btn" type="button" aria-label="Кто такой грузополучатель" aria-describedby="tip-consignee-6" aria-expanded="false">?</button><span class="qtip__text" id="tip-consignee-6" role="tooltip">Текст уточняется</span></span></dt><dd data-o="consignee"></dd></div>
                   <div><dt>Способ получения</dt><dd data-o="receive"></dd></div>
                   <div data-o="track-row" hidden><dt>Трек-номер</dt><dd class="track"><span class="track__num" data-o="track"></span><a class="lk-link" data-o="track-link" href="#" target="_blank" rel="noopener">Отследить</a></dd></div>
                   <div><dt>Контактное лицо</dt><dd data-o="contact"></dd></div>
@@ -391,7 +392,7 @@
                 <label class="field">
             <span class="field__label">Email <span class="field__req" aria-hidden="true">*</span></span>
             <input class="field__input" type="email" name="email" autocomplete="email" required>
-            <span class="field__hint">На&nbsp;него приходят письма о&nbsp;заявках и&nbsp;восстановлении пароля</span>
+            <span class="field__hint">Логин для входа в&nbsp;кабинет. На&nbsp;него приходят письма о&nbsp;заявках и&nbsp;восстановлении пароля</span>
             <span class="field__error" aria-live="polite"></span>
           </label>
               </div>
@@ -409,7 +410,7 @@
             </div>
             <div class="ostep" data-dir="consignee">
               <div class="dir__head">
-                <p class="ostep__title">Грузополучатели</p>
+                <p class="ostep__title">Грузополучатели<span class="qtip"><button class="qtip__btn" type="button" aria-label="Кто такой грузополучатель" aria-describedby="tip-consignee-7" aria-expanded="false">?</button><span class="qtip__text" id="tip-consignee-7" role="tooltip">Текст уточняется</span></span></p>
                 <button class="btn btn--outline" type="button" data-add="consignee">Добавить грузополучателя</button>
               </div>
               <div class="dir__list"></div>
@@ -417,7 +418,7 @@
             </div>
             <div class="ostep" data-dir="payer">
               <div class="dir__head">
-                <p class="ostep__title">Плательщики</p>
+                <p class="ostep__title">Плательщики<span class="qtip"><button class="qtip__btn" type="button" aria-label="Кто такой плательщик" aria-describedby="tip-payer-8" aria-expanded="false">?</button><span class="qtip__text" id="tip-payer-8" role="tooltip">Текст уточняется</span></span></p>
                 <button class="btn btn--outline" type="button" data-add="payer">Добавить плательщика</button>
               </div>
               <div class="dir__list"></div>
@@ -591,7 +592,7 @@
 </footer>
 
 
-<script src="js/lk.js?v=20261118d"></script>
-<script src="js/main.js?v=20261120e"></script>
+<script src="js/lk.js?v=20261120f"></script>
+<script src="js/main.js?v=20261120f"></script>
 </body>
 </html>

@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap&subset=cyrillic" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=20261120g">
+  <link rel="stylesheet" href="css/styles.css?v=20261120h">
 </head>
 <body>
 
@@ -269,7 +269,7 @@
           <fieldset class="ostep" data-org-role="payer">
             <legend class="visually-hidden">Плательщик</legend>
             <div class="ostep__head">
-              <p class="ostep__title" aria-hidden="true"><span class="ostep__num">1</span>Плательщик</p>
+              <p class="ostep__title"><span class="ostep__title-text" aria-hidden="true"><span class="ostep__num">1</span>Плательщик</span><span class="qtip"><button class="qtip__btn" type="button" aria-label="Кто такой плательщик" aria-describedby="tip-payer-3" aria-expanded="false">?</button><span class="qtip__text" id="tip-payer-3" role="tooltip">Текст уточняется</span></span></p>
               <button class="org-edit" type="button">Изменить реквизиты</button>
             </div>
             <p class="ostep__text">По&nbsp;умолчанию&nbsp;— ваша организация. Можно выбрать другую из&nbsp;сохранённых или добавить новую.</p>
@@ -308,7 +308,7 @@
           <fieldset class="ostep" data-org-role="consignee">
             <legend class="visually-hidden">Грузополучатель</legend>
             <div class="ostep__head">
-              <p class="ostep__title" aria-hidden="true"><span class="ostep__num">2</span>Грузополучатель</p>
+              <p class="ostep__title"><span class="ostep__title-text" aria-hidden="true"><span class="ostep__num">2</span>Грузополучатель</span><span class="qtip"><button class="qtip__btn" type="button" aria-label="Кто такой грузополучатель" aria-describedby="tip-consignee-4" aria-expanded="false">?</button><span class="qtip__text" id="tip-consignee-4" role="tooltip">Текст уточняется</span></span></p>
             </div>
             <p class="ostep__text">Организация, которая принимает товар. По&nbsp;умолчанию&nbsp;— ваша, можно выбрать из&nbsp;грузополучателей, сохранённых в&nbsp;<a class="lk-link" href="account.html#orgs">кабинете</a>.</p>
             <div class="orgs" role="radiogroup" aria-label="Грузополучатель"></div>
@@ -374,6 +374,7 @@
             </div>
             <ul class="osum__list"></ul>
             <p class="osum__total"><span data-osum-count></span><b data-osum-total></b></p>
+            <p class="vat-note">Все цены указаны с&nbsp;НДС&nbsp;22%.</p>
             <div class="osum__extra">
               <p data-osum-note class="osum__note"><b>Описание:</b> <span></span></p>
               <p data-osum-files><b>Файлы:</b> <span></span></p>
@@ -500,7 +501,7 @@
 </footer>
 
 
-<script src="js/lk.js?v=20261118d"></script>
-<script src="js/main.js?v=20261120e"></script>
+<script src="js/lk.js?v=20261120f"></script>
+<script src="js/main.js?v=20261120f"></script>
 </body>
 </html>

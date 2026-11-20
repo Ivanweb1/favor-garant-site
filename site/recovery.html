@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap&subset=cyrillic" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=20261120g">
+  <link rel="stylesheet" href="css/styles.css?v=20261120h">
 </head>
 <body>
 
@@ -260,7 +260,7 @@
         <section data-screen="email">
           <div class="auth__head">
             <h1 class="h2 duo"><span>Восстановление</span><span class="duo__second">доступа</span></h1>
-            <p class="auth__lead">Укажите email, который указан в&nbsp;кабинете. Пришлём ссылку для нового пароля.</p>
+            <p class="auth__lead">Укажите email, по&nbsp;которому входите в&nbsp;кабинет. Пришлём ссылку для нового пароля.</p>
           </div>
           <form class="form" data-flow="recovery" data-step="email" novalidate>
             <label class="field">
@@ -329,13 +329,15 @@
         <section data-screen="invite" hidden>
           <div class="auth__head">
             <h1 class="h2 duo"><span>Активация</span><span class="duo__second">кабинета</span></h1>
-            <p class="auth__lead">Менеджер создал кабинет для вашей организации. Введите ИНН и&nbsp;задайте пароль&nbsp;— по&nbsp;ним будете входить в&nbsp;кабинет.</p>
+            <p class="auth__lead">Менеджер создал кабинет для вашей организации. Логин&nbsp;— ваш email, осталось задать пароль.</p>
           </div>
           <form class="form" data-flow="recovery" data-step="invite" novalidate>
-            <!-- название и почту вводит менеджер при создании кабинета, ссылка приглашения уникальная — клиент указывает только ИНН и пароль -->
+            <!-- название, ИНН и почту вводит менеджер при создании кабинета, ссылка приглашения уникальная — клиент задаёт только пароль.
+                 Email в макете — из демо-профиля, на сайте подставит сервер -->
             <label class="field">
-            <span class="field__label">ИНН <span class="field__req" aria-hidden="true">*</span></span>
-            <input class="field__input" type="text" name="inn" autocomplete="off" required inputmode="numeric" maxlength="12" data-inn>
+            <span class="field__label">Email для входа</span>
+            <input class="field__input" type="email" name="email" autocomplete="username" value="zakaz@example.ru" readonly>
+            <span class="field__hint">Указал менеджер. Сменить можно в&nbsp;кабинете, в&nbsp;разделе «Моя организация»</span>
             <span class="field__error" aria-live="polite"></span>
           </label>
             <div class="field">
@@ -449,7 +451,7 @@
 </footer>
 
 
-<script src="js/lk.js?v=20261118d"></script>
-<script src="js/main.js?v=20261120e"></script>
+<script src="js/lk.js?v=20261120f"></script>
+<script src="js/main.js?v=20261120f"></script>
 </body>
 </html>

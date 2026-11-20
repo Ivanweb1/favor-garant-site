@@ -33,6 +33,27 @@ CLOCK = '<svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true"><cir
 CHECK = '<svg width="30" height="30" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>'
 
 
+# Подсказки «?» у плательщика и грузополучателя (правка клиента 20.11). Тексты — черновик, финальные пришлёт клиент.
+TIPS = {
+    'payer': 'Текст уточняется',
+    'consignee': 'Текст уточняется',
+}
+TIP_LABEL = {'payer': 'Кто такой плательщик', 'consignee': 'Кто такой грузополучатель'}
+_tip_n = [0]
+
+
+def qtip(role):
+    """Значок «?» с подсказкой; стили .qtip и открытие тапом — в styles.css и main.js."""
+    _tip_n[0] += 1
+    tid = f'tip-{role}-{_tip_n[0]}'
+    return (f'<span class="qtip"><button class="qtip__btn" type="button" aria-label="{TIP_LABEL[role]}" aria-describedby="{tid}" aria-expanded="false">?</button>'
+            f'<span class="qtip__text" id="{tid}" role="tooltip">{TIPS[role]}</span></span>')
+
+
+# Цены в корзине, заявке и заказах — с НДС 22% (правка клиента 20.11)
+VAT = '<p class="vat-note">Все цены указаны с&nbsp;НДС&nbsp;22%.</p>'
+
+
 def field(label, name, kind='text', req=True, auto='', hint='', extra='', value=''):
     star = ' <span class="field__req" aria-hidden="true">*</span>' if req else ''
     attrs = f' type="{kind}" name="{name}"'
@@ -140,6 +161,7 @@ cart = f'''      <div class="page-head page-head--cart">
               <span class="cart__total" data-cart-count></span>
               <span class="cart__total" data-cart-total></span>
             </div>
+            <div data-for="auth" hidden>{VAT}</div>
           </div>
 
           <aside class="cart__side" aria-label="Дополнение к заявке">
@@ -196,8 +218,9 @@ login = f'''      <div class="auth" data-page="login">
             <p class="auth__lead">Для организаций и&nbsp;ИП. После входа видны цены комплектующих и&nbsp;оформление заявки.</p>
           </div>
           <form class="form" data-flow="login" novalidate>
-            <div class="notice notice--warn" data-form-error hidden role="alert"><span><b>Неверный ИНН или пароль.</b> Проверьте данные или <a class="lk-link" href="recovery.html" data-keep-next>восстановите пароль</a>.</span></div>
-            {field('ИНН', 'inn', auto='username', extra=' inputmode="numeric" maxlength="12" data-inn')}
+            <div class="notice notice--warn" data-form-error hidden role="alert"><span><b>Неверный email или пароль.</b> Проверьте данные или <a class="lk-link" href="recovery.html" data-keep-next>восстановите пароль</a>.</span></div>
+            <!-- Логин — email (правка клиента 20.11); ИНН остаётся идентификатором организации -->
+            {field('Email', 'email', kind='email', auto='username', extra=' placeholder="name@company.ru"')}
             {password('Пароль', 'password', auto='current-password', extra='')}
             <div class="auth__links">
               <a class="lk-link" href="recovery.html" data-keep-next>Забыли пароль?</a>
@@ -209,7 +232,7 @@ login = f'''      <div class="auth" data-page="login">
 
       </div>'''
 
-page('login.html', 'Вход в личный кабинет', 'Вход в личный кабинет ФАВОР-ГАРАНТ по ИНН и паролю.', [('Вход', '')], login)
+page('login.html', 'Вход в личный кабинет', 'Вход в личный кабинет ФАВОР-ГАРАНТ по email и паролю.', [('Вход', '')], login)
 
 
 # ---------- Восстановление доступа + активация по приглашению (ТЗ, экран 2) ----------
@@ -220,7 +243,7 @@ recovery = f'''      <div class="auth" data-page="recovery">
         <section data-screen="email">
           <div class="auth__head">
             <h1 class="h2 duo"><span>Восстановление</span><span class="duo__second">доступа</span></h1>
-            <p class="auth__lead">Укажите email, который указан в&nbsp;кабинете. Пришлём ссылку для нового пароля.</p>
+            <p class="auth__lead">Укажите email, по&nbsp;которому входите в&nbsp;кабинет. Пришлём ссылку для нового пароля.</p>
           </div>
           <form class="form" data-flow="recovery" data-step="email" novalidate>
             {field('Email', 'email', kind='email', auto='email')}
@@ -276,11 +299,12 @@ recovery = f'''      <div class="auth" data-page="recovery">
         <section data-screen="invite" hidden>
           <div class="auth__head">
             <h1 class="h2 duo"><span>Активация</span><span class="duo__second">кабинета</span></h1>
-            <p class="auth__lead">Менеджер создал кабинет для вашей организации. Введите ИНН и&nbsp;задайте пароль&nbsp;— по&nbsp;ним будете входить в&nbsp;кабинет.</p>
+            <p class="auth__lead">Менеджер создал кабинет для вашей организации. Логин&nbsp;— ваш email, осталось задать пароль.</p>
           </div>
           <form class="form" data-flow="recovery" data-step="invite" novalidate>
-            <!-- название и почту вводит менеджер при создании кабинета, ссылка приглашения уникальная — клиент указывает только ИНН и пароль -->
-            {field('ИНН', 'inn', auto='off', extra=' inputmode="numeric" maxlength="12" data-inn')}
+            <!-- название, ИНН и почту вводит менеджер при создании кабинета, ссылка приглашения уникальная — клиент задаёт только пароль.
+                 Email в макете — из демо-профиля, на сайте подставит сервер -->
+            {field('Email для входа', 'email', kind='email', req=False, auto='username', extra=' readonly', value='zakaz@example.ru', hint='Указал менеджер. Сменить можно в&nbsp;кабинете, в&nbsp;разделе «Моя организация»')}
             {password('Пароль', 'ipass1', hint='Не меньше 8 символов')}
             {password('Повторите пароль', 'ipass2', extra=' data-match="#ipass1"')}
             <div class="checks-list">
@@ -300,7 +324,7 @@ page('recovery.html', 'Восстановление доступа', 'Восст
 register = f'''      <div class="auth auth--wide" data-page="register">
         <div class="auth__head">
           <h1 class="h2 duo"><span>Регистрация</span><span class="duo__second">организации</span></h1>
-          <p class="auth__lead">Кабинет открывается на&nbsp;ИНН. В&nbsp;нём видны цены, оформление заявок и&nbsp;история заказов.</p>
+          <p class="auth__lead">Кабинет открывается на&nbsp;ИНН организации, входить в&nbsp;него вы&nbsp;будете по&nbsp;email. В&nbsp;кабинете видны цены, оформление заявок и&nbsp;история заказов.</p>
         </div>
         <ol class="reg-steps" aria-label="Шаги регистрации">
           <li><span>Данные организации</span></li>
@@ -311,7 +335,7 @@ register = f'''      <div class="auth auth--wide" data-page="register">
 
         <section data-screen="data">
           <form class="form" data-flow="register" data-step="data" novalidate>
-            {requisites('На&nbsp;него придёт письмо для подтверждения')}
+            {requisites('Это логин для входа. На&nbsp;него придёт письмо для подтверждения')}
             <div class="notice notice--warn" data-inn-taken hidden role="alert">
               <span><b>Кабинет с&nbsp;этим ИНН уже есть.</b> Войдите или восстановите пароль. Если вы&nbsp;не&nbsp;регистрировались&nbsp;— позвоните нам: <a class="lk-link" href="{PHONE_HREF}">{PHONE}</a>, разберёмся.
                 <span class="notice__actions"><a class="lk-link" href="login.html" data-keep-next>Войти</a><a class="lk-link" href="recovery.html" data-keep-next>Восстановить пароль</a></span>
@@ -345,7 +369,7 @@ register = f'''      <div class="auth auth--wide" data-page="register">
         <section data-screen="password" hidden>
           <form class="form" data-flow="register" data-step="password" novalidate>
             <p class="auth__title">Почта подтверждена. Задайте пароль</p>
-            <p class="auth__sub">Входить в&nbsp;кабинет будете по&nbsp;ИНН и&nbsp;этому паролю.</p>
+            <p class="auth__sub">Входить в&nbsp;кабинет будете по&nbsp;email <b data-email></b> и&nbsp;этому паролю.</p>
             <div class="form__row">
               {password('Пароль', 'rpass1', hint='Не меньше 8 символов')}
               {password('Повторите пароль', 'rpass2', extra=' data-match="#rpass1"')}
@@ -356,7 +380,7 @@ register = f'''      <div class="auth auth--wide" data-page="register">
 
         <section data-screen="consignee" hidden>
           <div class="form">
-            <p class="auth__title">Кабинет создан. Добавить грузополучателя?</p>
+            <p class="auth__title">Кабинет создан. Добавить грузополучателя?{qtip('consignee')}</p>
             <p class="auth__sub">Если товар принимает другая организация, добавьте её&nbsp;— при оформлении заявки останется только выбрать. Кабинет для грузополучателя не&nbsp;создаётся. Шаг можно пропустить и&nbsp;вернуться к&nbsp;нему в&nbsp;кабинете.</p>
             <div class="auth__actions">
               <button class="btn btn--primary" type="button" data-go="consignee-form">Добавить</button>
@@ -367,7 +391,7 @@ register = f'''      <div class="auth auth--wide" data-page="register">
 
         <section data-screen="consignee-form" hidden>
           <form class="form" data-flow="register" data-step="consignee" novalidate>
-            <p class="auth__title">Грузополучатель</p>
+            <p class="auth__title">Грузополучатель{qtip('consignee')}</p>
             <p class="auth__sub">Реквизиты, как в&nbsp;заявке. Доступа к&nbsp;вашему кабинету у&nbsp;грузополучателя не&nbsp;будет.</p>
             {requisites()}
             <div class="form__bottom">
@@ -413,7 +437,7 @@ def org_step(num, role, title, text, editable=True):
         return f'''          <fieldset class="ostep" data-org-role="{role}">
             <legend class="visually-hidden">{title}</legend>
             <div class="ostep__head">
-              <p class="ostep__title" aria-hidden="true"><span class="ostep__num">{num}</span>{title}</p>
+              <p class="ostep__title"><span class="ostep__title-text" aria-hidden="true"><span class="ostep__num">{num}</span>{title}</span>{qtip(role)}</p>
             </div>
             <p class="ostep__text">{text}</p>
             <div class="orgs" role="radiogroup" aria-label="{title}"></div>
@@ -421,7 +445,7 @@ def org_step(num, role, title, text, editable=True):
     return f'''          <fieldset class="ostep" data-org-role="{role}">
             <legend class="visually-hidden">{title}</legend>
             <div class="ostep__head">
-              <p class="ostep__title" aria-hidden="true"><span class="ostep__num">{num}</span>{title}</p>
+              <p class="ostep__title"><span class="ostep__title-text" aria-hidden="true"><span class="ostep__num">{num}</span>{title}</span>{qtip(role)}</p>
               <button class="org-edit" type="button">Изменить реквизиты</button>
             </div>
             <p class="ostep__text">{text}</p>
@@ -491,6 +515,7 @@ order = f'''      <div class="page-head">
             </div>
             <ul class="osum__list"></ul>
             <p class="osum__total"><span data-osum-count></span><b data-osum-total></b></p>
+            {VAT}
             <div class="osum__extra">
               <p data-osum-note class="osum__note"><b>Описание:</b> <span></span></p>
               <p data-osum-files><b>Файлы:</b> <span></span></p>
@@ -541,7 +566,7 @@ ICON_OUT = '<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><
 def dir_group(role, title, add, empty):
     return f'''            <div class="ostep" data-dir="{role}">
               <div class="dir__head">
-                <p class="ostep__title">{title}</p>
+                <p class="ostep__title">{title}{qtip(role)}</p>
                 <button class="btn btn--outline" type="button" data-add="{role}">{add}</button>
               </div>
               <div class="dir__list"></div>
@@ -572,6 +597,7 @@ account = f'''      <div class="page-head">
             <div>
               <h2 class="acc__title">Мои заказы</h2>
               <p class="acc__lead">Заявки вашей организации. Откройте заказ, чтобы посмотреть состав, получателя и&nbsp;трек-номер.</p>
+              {VAT}
             </div>
             <div class="olist"></div>
             <div class="cart__main empty" data-orders-empty hidden>
@@ -607,8 +633,8 @@ account = f'''      <div class="page-head">
               </div>
               <div class="ostep">
                 <dl class="oinfo">
-                  <div><dt>Плательщик</dt><dd data-o="payer"></dd></div>
-                  <div><dt>Грузополучатель</dt><dd data-o="consignee"></dd></div>
+                  <div><dt>Плательщик{qtip('payer')}</dt><dd data-o="payer"></dd></div>
+                  <div><dt>Грузополучатель{qtip('consignee')}</dt><dd data-o="consignee"></dd></div>
                   <div><dt>Способ получения</dt><dd data-o="receive"></dd></div>
                   <div data-o="track-row" hidden><dt>Трек-номер</dt><dd class="track"><span class="track__num" data-o="track"></span><a class="lk-link" data-o="track-link" href="#" target="_blank" rel="noopener">Отследить</a></dd></div>
                   <div><dt>Контактное лицо</dt><dd data-o="contact"></dd></div>
@@ -651,7 +677,7 @@ account = f'''      <div class="page-head">
               {field('Ф. И. О.', 'person', auto='name')}
               <div class="form__row">
                 {field('Телефон', 'phone', kind='tel', auto='tel')}
-                {field('Email', 'email', kind='email', auto='email', hint='На&nbsp;него приходят письма о&nbsp;заявках и&nbsp;восстановлении пароля')}
+                {field('Email', 'email', kind='email', auto='email', hint='Логин для входа в&nbsp;кабинет. На&nbsp;него приходят письма о&nbsp;заявках и&nbsp;восстановлении пароля')}
               </div>
             </fieldset>
             <div class="ostep acc-save">

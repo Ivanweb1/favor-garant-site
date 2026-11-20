@@ -37,7 +37,7 @@
   // Реквизиты — как в шаблоне заявки: организация, ИНН/КПП, город и адрес доставки, контактное лицо, телефон, email
   const REQ = ['company', 'inn', 'kpp', 'city', 'address', 'person', 'phone', 'email'];
   const readReq = (form) => Object.fromEntries(REQ.filter((k) => form[k]).map((k) => [k, form[k].value.trim()]));
-  // прототип: при входе по ИНН без регистрации в этом браузере подставляем пример профиля
+  // прототип: при входе по email без регистрации в этом браузере подставляем пример профиля
   const DEMO_PROFILE = {
     company: 'ООО «Пример»', inn: '7801234567', kpp: '780101001', city: 'Санкт-Петербург', address: 'ул. Примерная, д. 1',
     person: 'Иванов Иван Иванович', phone: '+7 (900) 000-00-00', email: 'zakaz@example.ru',
@@ -257,8 +257,10 @@
       await fakeRequest($('[type="submit"]', form));
       // прототип: неверный пароль показываем, если он короче 8 символов
       if (form.password.value.length < 8) { err.hidden = false; form.password.focus(); return; }
+      // логин — email; ИНН остаётся идентификатором организации (в макете — из сохранённого или демо-профиля)
+      const login = form.email.value.trim().toLowerCase();
       const saved = store.get('fg-profile', null);
-      setProfile(saved && saved.inn === form.inn.value.trim() ? saved : { ...DEMO_PROFILE, inn: form.inn.value.trim() });
+      setProfile(saved && (saved.email || '').toLowerCase() === login ? saved : { ...DEMO_PROFILE, email: form.email.value.trim() });
       location.href = nextUrl();
     });
   }
@@ -299,8 +301,8 @@
         if (!validate(form)) return;
         await fakeRequest($('[type="submit"]', form));
         if (form.dataset.step === 'invite') {
-          // название и почту завёл менеджер (в макете — из демо-профиля), клиент ввёл ИНН
-          setProfile({ ...DEMO_PROFILE, inn: form.inn.value.trim() });
+          // название, ИНН и почту завёл менеджер (в макете — из демо-профиля), клиент задал только пароль
+          setProfile({ ...DEMO_PROFILE });
           location.href = nextUrl();
         } else show(recPage, 'done');
       });
@@ -322,6 +324,7 @@
     // ссылка подтверждения из письма: register.html?confirmed=1 — сразу шаг пароля
     let profile = (() => { try { return JSON.parse(sessionStorage.getItem('fg-reg')); } catch (_) { return null; } })() || DEMO_PROFILE;
     go(params.get('confirmed') ? 'password' : 'data');
+    $$('[data-email]', regPage).forEach((el) => { el.textContent = profile.email || ''; });
 
     // ИНН уже зарегистрирован (в макете занятым считается 7801234567) — подсказка войти или восстановить пароль
     const TAKEN = ['7801234567'];

@@ -6,12 +6,12 @@
   <!-- Прототип на GitHub Pages: не индексировать, чтобы не дублировать favor-garant.ru -->
   <meta name="robots" content="noindex, nofollow">
   <title>Вход в личный кабинет — ФАВОР-ГАРАНТ</title>
-  <meta name="description" content="Вход в личный кабинет ФАВОР-ГАРАНТ по ИНН и паролю.">
+  <meta name="description" content="Вход в личный кабинет ФАВОР-ГАРАНТ по email и паролю.">
   <link rel="icon" href="img/brand/logo-circle.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap&subset=cyrillic" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=20261120g">
+  <link rel="stylesheet" href="css/styles.css?v=20261120h">
 </head>
 <body>
 
@@ -263,10 +263,11 @@
             <p class="auth__lead">Для организаций и&nbsp;ИП. После входа видны цены комплектующих и&nbsp;оформление заявки.</p>
           </div>
           <form class="form" data-flow="login" novalidate>
-            <div class="notice notice--warn" data-form-error hidden role="alert"><span><b>Неверный ИНН или пароль.</b> Проверьте данные или <a class="lk-link" href="recovery.html" data-keep-next>восстановите пароль</a>.</span></div>
+            <div class="notice notice--warn" data-form-error hidden role="alert"><span><b>Неверный email или пароль.</b> Проверьте данные или <a class="lk-link" href="recovery.html" data-keep-next>восстановите пароль</a>.</span></div>
+            <!-- Логин — email (правка клиента 20.11); ИНН остаётся идентификатором организации -->
             <label class="field">
-            <span class="field__label">ИНН <span class="field__req" aria-hidden="true">*</span></span>
-            <input class="field__input" type="text" name="inn" autocomplete="username" required inputmode="numeric" maxlength="12" data-inn>
+            <span class="field__label">Email <span class="field__req" aria-hidden="true">*</span></span>
+            <input class="field__input" type="email" name="email" autocomplete="username" required placeholder="name@company.ru">
             <span class="field__error" aria-live="polite"></span>
           </label>
             <div class="field">
@@ -371,7 +372,7 @@
 </footer>
 
 
-<script src="js/lk.js?v=20261118d"></script>
-<script src="js/main.js?v=20261120e"></script>
+<script src="js/lk.js?v=20261120f"></script>
+<script src="js/main.js?v=20261120f"></script>
 </body>
 </html>

@@ -2273,6 +2273,14 @@ a.news__kind:hover { opacity: .8; }
 .ostep { display: grid; gap: 18px; min-width: 0; margin: 0; padding: clamp(20px, 3vw, 32px); border: 0; border-radius: var(--radius); background: var(--white); }
 .ostep__head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 16px; }
 .ostep__title { display: flex; align-items: center; gap: 12px; padding: 0; font-size: 19px; font-weight: 700; color: var(--navy); }
+.ostep__title-text { display: inline-flex; align-items: center; gap: 12px; }
+.ostep__title .qtip { margin-left: -4px; }
+.oinfo dt .qtip { margin-left: 4px; }
+.auth__title .qtip { margin-left: 8px; }
+/* «Все цены указаны с НДС 22%» — корзина, оформление заявки, список заказов */
+.vat-note { margin: 0; font-size: 13px; line-height: 1.45; color: var(--muted); }
+.cart__main .vat-note { padding-top: 8px; text-align: right; }
+.acc__lead + .vat-note { margin-top: 6px; }
 .ostep__num { display: grid; place-items: center; flex: none; width: 28px; height: 28px; border-radius: 50%; background: var(--light); font-size: 13px; font-weight: 700; color: var(--navy); }
 .ostep__text { margin-top: -8px; font-size: 13px; line-height: 1.55; color: var(--muted); }
 
@@ -2782,13 +2790,13 @@ a.chip { display: inline-flex; align-items: center; text-decoration: none; }
 .qtip { position: relative; display: inline-block; margin-left: 6px; vertical-align: middle; }
 .qtip__btn { display: grid; place-items: center; width: 18px; height: 18px; padding: 0; border: 0; border-radius: 50%; background: var(--tint); font: inherit; font-size: 11px; font-weight: 700; line-height: 1; color: var(--navy); cursor: help; transition: background-color .2s ease, color .2s ease; }
 .qtip__btn:hover, .qtip.is-open .qtip__btn { background: var(--navy); color: var(--white); }
-.qtip__text { position: absolute; left: 50%; bottom: calc(100% + 10px); z-index: 25; width: 260px; padding: 12px 14px; border-radius: var(--radius-sm); background: var(--navy); box-shadow: 0 12px 32px rgba(23, 22, 43, .2); font-size: 13px; font-weight: 500; line-height: 1.45; white-space: normal; color: var(--white); opacity: 0; visibility: hidden; transform: translate(-50%, 4px); transition: opacity .15s ease, transform .15s ease, visibility .15s; pointer-events: none; }
+.qtip__text { position: absolute; left: 50%; bottom: calc(100% + 10px); z-index: 25; width: max-content; max-width: 260px; padding: 12px 14px; border-radius: var(--radius-sm); background: var(--navy); box-shadow: 0 12px 32px rgba(23, 22, 43, .2); font-size: 13px; font-weight: 500; line-height: 1.45; white-space: normal; color: var(--white); opacity: 0; visibility: hidden; transform: translate(-50%, 4px); transition: opacity .15s ease, transform .15s ease, visibility .15s; pointer-events: none; }
 .qtip__text::after { content: ""; position: absolute; left: 50%; top: 100%; border: 6px solid transparent; border-top-color: var(--navy); transform: translateX(-50%); }
 .qtip:hover .qtip__text, .qtip__btn:focus-visible + .qtip__text, .qtip.is-open .qtip__text { opacity: 1; visibility: visible; transform: translate(-50%, 0); }
 @media (max-width: 560px) {
   /* на телефоне подсказка открывается от левого края значка, чтобы не уйти за экран */
-  .qtip__text { left: -120px; transform: translateY(4px); }
-  .qtip__text::after { left: 129px; transform: none; }
+  .qtip__text { left: -12px; transform: translateY(4px); }
+  .qtip__text::after { left: 15px; transform: none; }
   .qtip:hover .qtip__text, .qtip__btn:focus-visible + .qtip__text, .qtip.is-open .qtip__text { transform: none; }
 }
 .pinfo__buy-extra { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 20px; padding-top: 12px; border-top: 1px solid var(--line); }
