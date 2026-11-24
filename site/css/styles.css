@@ -2607,7 +2607,7 @@ a.news__kind:hover { opacity: .8; }
   .flow .tile__media img { aspect-ratio: 16 / 11; }
 }
 
-/* п. 3 — красная кнопка «СЕНСАЦИЯ 18+» на первом экране: переливается, пульсирует и подпрыгивает */
+/* п. 3 — красная кнопка «СЕНСАЦИЯ» на первом экране: переливается, пульсирует и подпрыгивает */
 .btn--sensation {
   position: relative; overflow: hidden; gap: 8px; border: 0; color: var(--white);
   background: linear-gradient(110deg, #CB0404 0%, #FF2E63 25%, #FF8A00 50%, #FF2E63 75%, #CB0404 100%);

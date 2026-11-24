@@ -291,30 +291,10 @@
             <div><dt>Ветрозащитные панели</dt><dd>Триплекс, калёное стекло 6&nbsp;или 8&nbsp;мм, сетка-ПВЛ</dd></div>
             <div><dt>Скамья</dt><dd>Деревянный брус с&nbsp;антисептической пропиткой</dd></div>
           </dl>
-          <!-- Блок покупки: цена «от» (000 000 — заглушка, цифру даст клиент) и кнопка; под ними — «Что входит в цену» и «Монтаж под ключ».
-               «Что входит в цену» (ТЗ сеошников, условия цены) открывается панелью поверх страницы — высота колонки и галереи не меняется.
-               «уточняется» — данные клиента, заполнить перед запуском -->
-          <div class="pinfo__buy">
-            <div class="pinfo__buy-main">
-              <p class="pinfo__price"><span class="pinfo__price-from">от</span> 000&nbsp;000&nbsp;₽ <span class="pinfo__price-note">за&nbsp;базовую комплектацию<span class="qtip"><button class="qtip__btn" type="button" aria-label="Что такое базовая комплектация" aria-describedby="price-tip" aria-expanded="false">?</button><span class="qtip__text" id="price-tip" role="tooltip">Текст уточняется</span></span></span></p>
-              <button class="btn btn--primary" type="button" data-modal-open="request-modal">Запросить стоимость</button>
-            </div>
-            <div class="pinfo__buy-extra">
-              <details class="pinfo__terms">
-                <summary>Что входит в&nbsp;цену</summary>
-                <div class="pinfo__terms-panel">
-                  <dl class="terms">
-                  <div><dt>Базовая стоимость</dt><dd>Каркас, крыша, ветрозащитные панели, скамья, крепёж</dd></div>
-                  <div><dt>Цена указана</dt><dd>За&nbsp;один павильон <span class="terms__tbd">тираж — уточняется</span></dd></div>
-                  <div><dt>НДС</dt><dd><span class="terms__tbd">уточняется</span></dd></div>
-                  <div><dt>Доставка, монтаж, основание, подключение электрики</dt><dd><span class="terms__tbd">уточняется</span></dd></div>
-                  <div><dt>Рассчитывается отдельно</dt><dd>Дополнительное оборудование: табло, лайтпостер, подсветка, камеры и&nbsp;др.</dd></div>
-                  <div><dt>Срок производства</dt><dd><span class="terms__tbd">уточняется</span></dd></div>
-                  </dl>
-                </div>
-              </details>
-              <a class="link-arrow" href="index.html#services">Монтаж под ключ</a>
-            </div>
+          <!-- Вариант без цены; макет с ценой и «Что входит в цену» сохранён в bus-shelter-atlant-price.html -->
+          <div class="pinfo__actions">
+            <button class="btn btn--primary" type="button" data-modal-open="request-modal">Рассчитать стоимость</button>
+            <a class="link-arrow" href="index.html#services">Монтаж под ключ</a>
           </div>
         </div>
       </div>
